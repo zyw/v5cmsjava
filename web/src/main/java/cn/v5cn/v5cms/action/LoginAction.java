@@ -57,7 +57,7 @@ public class LoginAction {
         }
         manager.setManagerPassword("");
         request.getSession().setAttribute(SystemConstant.SESSION_KEY,manager);
-        return "backstage/index";
+        return "redirect:/manager/index";
     }
 
     @RequestMapping(value="/captcha",method = RequestMethod.GET)

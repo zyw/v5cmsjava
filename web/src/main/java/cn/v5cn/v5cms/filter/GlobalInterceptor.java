@@ -20,7 +20,11 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter {
                            Object handler, ModelAndView modelAndView) throws Exception {
         if(modelAndView == null) return;
 
-        modelAndView.addObject(BASE_PATH,getBasePath(request));
-        modelAndView.addObject(CONTEXT_PATH,getContextPath(request));
+//        modelAndView.addObject(BASE_PATH,getBasePath(request));
+//        modelAndView.addObject(CONTEXT_PATH,getContextPath(request));
+//        modelAndView.getModel().put(BASE_PATH,getBasePath(request));
+//        modelAndView.getModel().put(CONTEXT_PATH,getContextPath(request));
+        request.setAttribute(BASE_PATH,getBasePath(request));
+        request.setAttribute(CONTEXT_PATH,getContextPath(request));
     }
 }

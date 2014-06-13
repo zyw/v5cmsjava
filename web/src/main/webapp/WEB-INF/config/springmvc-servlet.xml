@@ -11,6 +11,7 @@
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <context:component-scan base-package="cn.v5cn.v5cms"/>
     <mvc:annotation-driven/>
+
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
     <!--
@@ -27,7 +28,7 @@
             <bean class="cn.v5cn.v5cms.filter.GlobalInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
-    
+
     <bean id="freeMarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
         <property name="templateLoaderPath" value="/WEB-INF/ftls/"/>
         <property name="defaultEncoding" value="UTF-8" />
