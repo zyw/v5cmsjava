@@ -113,7 +113,8 @@ body.fixed .wrapper {
 }
 /* Content */
 .content {
-  padding: 20px 15px;
+    /*TODO padding: 20px 15px; 修改为下面*/
+  padding: 20px 30px;
   background: #f9f9f9;
 }
 /* Utility */

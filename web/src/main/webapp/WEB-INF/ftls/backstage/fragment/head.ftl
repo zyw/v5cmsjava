@@ -1,3 +1,4 @@
+<#import "/spring.ftl" as spring/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,13 +6,13 @@
     <title>V5CMS | 后台</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- bootstrap 3.0.2 -->
-    <link href="${basePath}/resources/backstage/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="<@spring.url '/resources/backstage/css/bootstrap.css'/>" rel="stylesheet" type="text/css" />
     <!-- font Awesome -->
-    <link href="${basePath}/resources/backstage/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="<@spring.url '/resources/backstage/css/font-awesome.min.css'/>" rel="stylesheet" type="text/css" />
     <!-- Ionicons -->
-    <link href="${basePath}/resources/backstage/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    <link href="<@spring.url '/resources/backstage/css/ionicons.min.css'/>" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
-    <link href="${basePath}/resources/backstage/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+    <link href="<@spring.url '/resources/backstage/css/AdminLTE.css'/>" rel="stylesheet" type="text/css" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -373,7 +374,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="pages/examples/invoice.html"><i class="fa fa-angle-double-right"></i> 站点设置</a></li>
+                        <li><a href="<@spring.url '/manager/siteInfo'/>"><i class="fa fa-angle-double-right"></i> 站点设置</a></li>
                         <li><a href="pages/examples/login.html"><i class="fa fa-angle-double-right"></i> 广告管理</a></li>
                         <li><a href="pages/examples/register.html"><i class="fa fa-angle-double-right"></i> 连接管理</a></li>
                         <!--
