@@ -42,16 +42,14 @@
                             <td>2014-02-22</td>
                             <td><a href="#">修改</a> <a href="#">删除</a></td>
                         </tr>
-                        </tbody>
-                        <tfoot>
                         <tr>
-                            <th>Rendering engine</th>
-                            <th>Browser</th>
-                            <th>Platform(s)</th>
-                            <th>Engine version</th>
-                            <th>CSS grade</th>
+                            <td>10005</td>
+                            <td>V5CMS</td>
+                            <td>正常</td>
+                            <td>2014-02-22</td>
+                            <td><a href="#">修改</a> <a href="#">删除</a></td>
                         </tr>
-                        </tfoot>
+                        </tbody>
                     </table>
                 </div>
                 <!-- /.box-body -->
@@ -66,6 +64,11 @@
 <#include "fragment/footer.ftl">
 <script type="text/javascript">
     $(function(){
-        $("#siteInfo").dataTable();
+        $("#siteInfo").dataTable({
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": false,
+            "bInfo": false
+        });
     });
 </script>

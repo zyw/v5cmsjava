@@ -9134,7 +9134,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sSortAscending": ": activate to sort column ascending",
+				"sSortAscending": ": 激活列升序进行排序",
 	
 				/**
 				 * ARIA label that is added to the table headers when the column may be
@@ -9155,7 +9155,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sSortDescending": ": activate to sort column descending"
+				"sSortDescending": ": 激活列降序进行排序"
 			},
 	
 			/**
@@ -9182,7 +9182,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sFirst": "First",
+				"sFirst": "首页",
 			
 			
 				/**
@@ -9203,7 +9203,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sLast": "Last",
+				"sLast": "尾页",
 			
 			
 				/**
@@ -9224,7 +9224,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sNext": "Next",
+				"sNext": "下一页",
 			
 			
 				/**
@@ -9245,7 +9245,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sPrevious": "Previous"
+				"sPrevious": "上一页"
 			},
 		
 			/**
@@ -9266,7 +9266,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sEmptyTable": "No data available in table",
+			"sEmptyTable": "没有可用的数据表",
 		
 		
 			/**
@@ -9287,8 +9287,8 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
-		
+			"sInfo": "显示 _START_ 到 _END_ 总共 _TOTAL_ 条",
+
 		
 			/**
 			 * Display information string for when the table is empty. Typically the 
@@ -9306,7 +9306,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoEmpty": "Showing 0 to 0 of 0 entries",
+			"sInfoEmpty": "显示 0 到 0 总共 0 条",
 		
 		
 			/**
@@ -9326,7 +9326,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoFiltered": "(filtered from _MAX_ total entries)",
+			"sInfoFiltered": "(对 _MAX_ 条数据进行过滤)",
 		
 		
 			/**
@@ -9481,7 +9481,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sSearch": "Search:",
+			"sSearch": "查询 : ",
 		
 		
 			/**
@@ -9524,7 +9524,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sZeroRecords": "No matching records found"
+			"sZeroRecords": "没有找到匹配的数据"
 		},
 	
 	

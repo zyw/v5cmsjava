@@ -26,7 +26,7 @@ create table site
 	siteDeputyTitle varchar(200)				comment '网站副标题',
 	siteKey			varchar(500)				comment '网站关键字',
 	siteDescribed	varchar(1000)				comment '网站描述',
-	createDate    varchar(50)         comment '创建时间'
+	createDate    datetime         comment '创建时间'
 	siteicp			varchar(100)				comment '网站备案号',
 	siteStatisticCode	varchar(3000)			comment '统计代码',
 	siteFooterInfo	varchar(3000)				comment '网站底部信息',
