@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class IndexAction {
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String index(){
+
         return "backstage/index";
     }
 }

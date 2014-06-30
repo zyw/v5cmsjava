@@ -12,7 +12,7 @@
     <context:component-scan base-package="cn.v5cn.v5cms"/>
     <mvc:annotation-driven/>
 
-    <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <mvc:resources mapping="/r/**" location="/WEB-INF/ftls/backstage/static/,/WEB-INF/ftls/front/"/>
 
     <!--
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

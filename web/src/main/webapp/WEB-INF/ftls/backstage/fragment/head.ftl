@@ -6,13 +6,15 @@
     <title>V5CMS | 后台</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- bootstrap 3.0.2 -->
-    <link href="<@spring.url '/resources/backstage/css/bootstrap.css'/>" rel="stylesheet" type="text/css" />
+    <link href="<@spring.url '/r/css/bootstrap.css'/>" rel="stylesheet" type="text/css"/>
     <!-- font Awesome -->
-    <link href="<@spring.url '/resources/backstage/css/font-awesome.min.css'/>" rel="stylesheet" type="text/css" />
+    <link href="<@spring.url '/r/css/font-awesome.min.css'/>" rel="stylesheet" type="text/css"/>
     <!-- Ionicons -->
-    <link href="<@spring.url '/resources/backstage/css/ionicons.min.css'/>" rel="stylesheet" type="text/css" />
+    <link href="<@spring.url '/r/css/ionicons.min.css'/>" rel="stylesheet" type="text/css"/>
+    <!-- DATA TABLES -->
+    <link href="<@spring.url '/r/css/dataTables.bootstrap.css'/>" rel="stylesheet" type="text/css"/>
     <!-- Theme style -->
-    <link href="<@spring.url '/resources/backstage/css/AdminLTE.css'/>" rel="stylesheet" type="text/css" />
+    <link href="<@spring.url '/r/css/AdminLTE.css'/>" rel="stylesheet" type="text/css"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,6 +39,7 @@
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
 </a>
+
 <div class="navbar-right">
 <ul class="nav navbar-nav">
 <!-- Messages: style can be found in dropdown.less-->
@@ -53,7 +56,7 @@
                 <li><!-- start message -->
                     <a href="#">
                         <div class="pull-left">
-                            <img src="${basePath}/resources/backstage/images/avatar5.png" class="img-circle" alt="User Image"/>
+                            <img src="<@spring.url '/r/images/avatar5.png'/>" class="img-circle" alt="User Image"/>
                         </div>
                         <h4>
                             支持团队
@@ -61,11 +64,12 @@
                         </h4>
                         <p>主题</p>
                     </a>
-                </li><!-- end message -->
+                </li>
+                <!-- end message -->
                 <li>
                     <a href="#">
                         <div class="pull-left">
-                            <img src="${basePath}/resources/backstage/images/avatar5.png" class="img-circle" alt="user image"/>
+                            <img src="<@spring.url '/r/images/avatar5.png'/>" class="img-circle" alt="user image"/>
                         </div>
                         <h4>
                             设计团队
@@ -77,7 +81,7 @@
                 <li>
                     <a href="#">
                         <div class="pull-left">
-                            <img src="${basePath}/resources/backstage/images/avatar5.png" class="img-circle" alt="user image"/>
+                            <img src="<@spring.url '/r/images/avatar5.png'/>" class="img-circle" alt="user image"/>
                         </div>
                         <h4>
                             开发
@@ -89,7 +93,7 @@
                 <li>
                     <a href="#">
                         <div class="pull-left">
-                            <img src="${basePath}/resources/backstage/images/avatar5.png" class="img-circle" alt="user image"/>
+                            <img src="<@spring.url '/r/images/avatar5.png'/>" class="img-circle" alt="user image"/>
                         </div>
                         <h4>
                             业务部门
@@ -101,7 +105,7 @@
                 <li>
                     <a href="#">
                         <div class="pull-left">
-                            <img src="${basePath}/resources/backstage/images/avatar5.png" class="img-circle" alt="user image"/>
+                            <img src="<@spring.url '/r/images/avatar5.png'/>" class="img-circle" alt="user image"/>
                         </div>
                         <h4>
                             审核部门
@@ -175,12 +179,14 @@
                             <small class="pull-right">20%</small>
                         </h3>
                         <div class="progress xs">
-                            <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
+                                 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
                                 <span class="sr-only">20% 完成</span>
                             </div>
                         </div>
                     </a>
-                </li><!-- end task item -->
+                </li>
+                <!-- end task item -->
                 <li><!-- Task item -->
                     <a href="#">
                         <h3>
@@ -188,12 +194,14 @@
                             <small class="pull-right">40%</small>
                         </h3>
                         <div class="progress xs">
-                            <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar"
+                                 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
                                 <span class="sr-only">40% 完成</span>
                             </div>
                         </div>
                     </a>
-                </li><!-- end task item -->
+                </li>
+                <!-- end task item -->
                 <li><!-- Task item -->
                     <a href="#">
                         <h3>
@@ -201,12 +209,14 @@
                             <small class="pull-right">60%</small>
                         </h3>
                         <div class="progress xs">
-                            <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar"
+                                 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
                                 <span class="sr-only">60% 完成</span>
                             </div>
                         </div>
                     </a>
-                </li><!-- end task item -->
+                </li>
+                <!-- end task item -->
                 <li><!-- Task item -->
                     <a href="#">
                         <h3>
@@ -214,12 +224,14 @@
                             <small class="pull-right">80%</small>
                         </h3>
                         <div class="progress xs">
-                            <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar"
+                                 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
                                 <span class="sr-only">80% 完成</span>
                             </div>
                         </div>
                     </a>
-                </li><!-- end task item -->
+                </li>
+                <!-- end task item -->
             </ul>
         </li>
         <li class="footer">
@@ -236,7 +248,8 @@
     <ul class="dropdown-menu">
         <!-- User image -->
         <li class="user-header bg-light-blue">
-            <img src="${basePath}/resources/backstage/images/avatar5.png" class="img-circle" alt="User Image" />
+            <img src="<@spring.url '/r/images/avatar5.png'/>" class="img-circle" alt="User Image"/>
+
             <p>
             ${managerKey.managerName} - 管理员
                 <small>${managerKey.managerEmail}</small>
@@ -290,7 +303,8 @@
                 <div class="input-group">
                     <input type="text" name="q" class="form-control" placeholder="查询..."/>
                             <span class="input-group-btn">
-                                <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+                                <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i
+                                        class="fa fa-search"></i></button>
                             </span>
                 </div>
             </form>
@@ -304,7 +318,8 @@
                 </li>
                 <li>
                     <a href="pages/widgets.html">
-                        <i class="glyphicon glyphicon-send"></i> <span>内容发布</span> <small class="badge pull-right bg-green">new</small>
+                        <i class="glyphicon glyphicon-send"></i> <span>内容发布</span>
+                        <small class="badge pull-right bg-green">new</small>
                     </a>
                 </li>
                 <li class="treeview">
@@ -316,7 +331,8 @@
                     <ul class="treeview-menu">
                         <li><a href="pages/charts/morris.html"><i class="fa fa-angle-double-right"></i> Morris</a></li>
                         <li><a href="pages/charts/flot.html"><i class="fa fa-angle-double-right"></i> Flot</a></li>
-                        <li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Inline charts</a></li>
+                        <li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Inline
+                            charts</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -339,8 +355,10 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="pages/forms/general.html"><i class="fa fa-angle-double-right"></i> General Elements</a></li>
-                        <li><a href="pages/forms/advanced.html"><i class="fa fa-angle-double-right"></i> Advanced Elements</a></li>
+                        <li><a href="pages/forms/general.html"><i class="fa fa-angle-double-right"></i> General Elements</a>
+                        </li>
+                        <li><a href="pages/forms/advanced.html"><i class="fa fa-angle-double-right"></i> Advanced
+                            Elements</a></li>
                         <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i> Editors</a></li>
                     </ul>
                 </li>
@@ -350,8 +368,10 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="pages/tables/simple.html"><i class="fa fa-angle-double-right"></i> Simple tables</a></li>
-                        <li><a href="pages/tables/data.html"><i class="fa fa-angle-double-right"></i> Data tables</a></li>
+                        <li><a href="pages/tables/simple.html"><i class="fa fa-angle-double-right"></i> Simple
+                            tables</a></li>
+                        <li><a href="pages/tables/data.html"><i class="fa fa-angle-double-right"></i> Data tables</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -374,9 +394,11 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="<@spring.url '/manager/siteInfo'/>"><i class="fa fa-angle-double-right"></i> 站点管理</a></li>
+                        <li><a href="<@spring.url '/manager/siteInfo'/>"><i class="fa fa-angle-double-right"></i>
+                            站点管理</a></li>
                         <li><a href="pages/examples/login.html"><i class="fa fa-angle-double-right"></i> 广告管理</a></li>
-                        <li><a href="pages/examples/register.html"><i class="fa fa-angle-double-right"></i> 连接管理</a></li>
+                        <li><a href="pages/examples/register.html"><i class="fa fa-angle-double-right"></i> 连接管理</a>
+                        </li>
                         <!--
                         <li><a href="pages/examples/lockscreen.html"><i class="fa fa-angle-double-right"></i> Lockscreen</a></li>
                         <li><a href="pages/examples/404.html"><i class="fa fa-angle-double-right"></i> 404 Error</a></li>
@@ -389,22 +411,3 @@
         </section>
         <!-- /.sidebar -->
     </aside>
-
-    <!-- Right side column. Contains the navbar and content of the page -->
-    <aside class="right-side">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                仪表盘
-                <small>Control panel</small>
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li class="active">仪表盘</li>
-            </ol>
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-            <!-- Small boxes (Stat box) -->
-            <div class="row">
