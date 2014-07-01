@@ -11,6 +11,6 @@ public class FrontIndexAction {
 
     @RequestMapping(value = {"/"})
     public String index(){
-        return "front";
+        return "front/default/index";
     }
 }

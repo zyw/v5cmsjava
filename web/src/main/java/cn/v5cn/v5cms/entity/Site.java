@@ -1,6 +1,7 @@
 package cn.v5cn.v5cms.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by ZYW on 2014/6/30.
@@ -11,7 +12,7 @@ public class Site implements Serializable {
     private String siteDeputyTitle;
     private String siteKey;
     private String siteDescribed;
-    private String createDate;
+    private Date createDate;
     private String siteicp;
     private String siteStatisticCode;
     private String siteFooterInfo;
@@ -58,11 +59,11 @@ public class Site implements Serializable {
         this.siteDescribed = siteDescribed;
     }
 
-    public String getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(String createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 

@@ -18,8 +18,14 @@
     <section class="content">
         <!-- Small boxes (Stat box) -->
         <div class="row">
-            <div class="box">
+            <div class="box box-danger">
                 <div class="box-header">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+                        <button class="btn btn-success btn-sm refresh-btn" data-toggle="tooltip" title="Reload">
+                            <i class="fa fa-refresh"></i> 添加站点</button>
+                    </div><!-- /. tools -->
+                    <i class="fa fa-table"></i>
                     <h3 class="box-title">站点信息表</h3>
                 </div>
                 <!-- /.box-header -->
@@ -36,17 +42,10 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td>10005</td>
-                            <td>V5CMS</td>
-                            <td>正常</td>
-                            <td>2014-02-22</td>
-                            <td><a href="#">修改</a> <a href="#">删除</a></td>
-                        </tr>
-                        <tr>
-                            <td>10005</td>
-                            <td>V5CMS</td>
-                            <td>正常</td>
-                            <td>2014-02-22</td>
+                            <td>${site.tbId}</td>
+                            <td>${site.siteName}</td>
+                            <td>${(site.isclosesite==1)?string("正常","关闭")}</td>
+                            <td>${site.createDate?string("yyyy-MM-dd")}</td>
                             <td><a href="#">修改</a> <a href="#">删除</a></td>
                         </tr>
                         </tbody>

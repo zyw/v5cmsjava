@@ -1,22 +1,26 @@
+<#import "/spring.ftl" as spring/>
+<!--
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+-->
+<!doctype html>
+<html lang="zh">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Common Skin Demo - 企互动</title>
-<link rel="stylesheet" href="css/content.css" type="text/css" />
-<link rel="stylesheet" href="css/menu.css" type="text/css" />
-<link rel="stylesheet" href="css/jquery.fancybox-1.3.4.css" type="text/css" />
-<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="<@spring.url '/r/default/css/content.css'/>" type="text/css" />
+<link rel="stylesheet" href="<@spring.url '/r/default/css/menu.css'/>" type="text/css" />
+<link rel="stylesheet" href="<@spring.url '/r/default/css/jquery.fancybox-1.3.4.css'/>" type="text/css" />
+<link rel="stylesheet" href="<@spring.url '/r/default/css/style.css'/>" type="text/css" />
 
-<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="js/superfish.js"></script>
-<script type="text/javascript" src="js/jquery.carouFredSel.js"></script>
-<script type="text/javascript" src="js/jquery.tools.min.js"></script>
-<script type="text/javascript" src="js/jquery.fancybox-1.3.4.pack.js"></script>
-<script type="text/javascript" src="js/custom.js"></script>
+<script type="text/javascript" src="<@spring.url '/r/default/js/jquery-1.7.2.min.js'/>"></script>
+<script type="text/javascript" src="<@spring.url '/r/default/js/superfish.js'/>"></script>
+<script type="text/javascript" src="<@spring.url '/r/default/js/jquery.carouFredSel.js'/>"></script>
+<script type="text/javascript" src="<@spring.url '/r/default/js/jquery.tools.min.js'/>"></script>
+<script type="text/javascript" src="<@spring.url '/r/default/js/jquery.fancybox-1.3.4.pack.js'/>"></script>
+<script type="text/javascript" src="<@spring.url '/r/default/js/custom.js'/>"></script>
 <!--[if IE 6]>
-	<script type="text/javascript" src="js/ie7.js"></script>
-	<script type="text/javascript" src="js/DD_belatedPNG.js"></script>	
+	<script type="text/javascript" src="<@spring.url '/r/default/js/ie7.js'/>"></script>
+	<script type="text/javascript" src="<@spring.url '/r/default/js/DD_belatedPNG.js'/>"></script>
 	<script type="text/javascript">
 		DD_belatedPNG.fix('.logo img, .Header img');
 	</script>
@@ -37,11 +41,17 @@
 					<div class="language-select float-right">	                	
 						<ul class="sf-menu">
 							<li>
-								<a href="#" class="first-level"><span class="language-ico" style="background-image:url(images/icon/zh-CN.png)">简体中文</span></a>
+								<a href="#" class="first-level"><span class="language-ico" style="background-image:url(<@spring.url '/r/default/images/icon/zh-CN.png'/>)">简体中文</span></a>
 								<ul>
-									<li><a href="#"><span class="language-ico" style="background-image:url(images/icon/zh-CN.png);">简体中文</span></a></li>
-									<li><a href="#"><span class="language-ico" style="background-image:url(images/icon/zh-HK.png);">繁体中文</span></a></li>
-									<li><a href="#"><span class="language-ico" style="background-image:url(images/icon/en-US.png);">English</span></a></li>							
+									<li><a href="#">
+                                        <span class="language-ico" style="background-image:url(<@spring.url '/r/default/images/icon/zh-CN.png'/>);">简体中文</span>
+                                    </a></li>
+									<li><a href="#">
+                                        <span class="language-ico" style="background-image:url(<@spring.url '/r/default/images/icon/zh-HK.png'/>);">繁体中文</span>
+                                    </a></li>
+									<li><a href="#">
+                                        <span class="language-ico" style="background-image:url(<@spring.url '/r/default/images/icon/en-US.png'/>);">English</span>
+                                    </a></li>
 								</ul>
 							</li>					
 						</ul>
@@ -59,7 +69,7 @@
 				<!-- S logo -->
 				<div class="logo">
 					<a href="index.ftl">
-                    	<img src="images/logo.png" alt="企互动" width="200" height="60" />
+                    	<img src="<@spring.url '/r/default/images/logo.png'/>" alt="企互动" width="200" height="60" />
                     </a>
 				</div>
 				<!-- E logo -->
@@ -151,7 +161,7 @@
 			                <div class="slideshow carousel clearfix">
 			                    <div id="slideshow-01">
 			                        <div class="carousel-item">
-			                            <a class="carousel-img" href="javascript:;" style="background:url(images/upload/banner-01.jpg) no-repeat top center;"></a>
+			                            <a class="carousel-img" href="javascript:;" style="background:url(<@spring.url '/r/default/images/upload/banner-01.jpg'/>) no-repeat top center;"></a>
                                         <div class="carousel-info">
                                         	<div class="carousel-info-inner">
 	                                        	<h4><a href="#">小米手机3 TD</a></h4>
@@ -160,7 +170,7 @@
                                         </div>
 			                        </div>		
 			                        <div class="carousel-item">
-			                            <a class="carousel-img" href="javascript:;" style="background:url(images/upload/banner-01.jpg) no-repeat top center;"></a>
+			                            <a class="carousel-img" href="javascript:;" style="background:url(<@spring.url '/r/default/images/upload/banner-01.jpg'/>) no-repeat top center;"></a>
                                         <div class="carousel-info">
                                         	<div class="carousel-info-inner">
 	                                        	<h4><a href="#">小米手机3 TD</a></h4>
@@ -233,7 +243,7 @@
                         	<div class="column">
 								<div class="col-4-1">
 									<div class="typo">
-										<a href="#"><img class="typo_img" src="images/upload/ico-01.png" style="width:40px; height:40px;" /></a>
+										<a href="#"><img class="typo_img" src="<@spring.url '/r/default/images/upload/ico-01.png'/>" style="width:40px; height:40px;" /></a>
 										<div class="typo_text">
 											<h5>CLEAN THEME</h5>
 										</div>
@@ -245,7 +255,7 @@
 								</div>
 								<div class="col-4-1">
 									<div class="typo">
-										<a href="#"><img class="typo_img" src="images/upload/ico-02.png" style="width:40px; height:40px;" /></a>
+										<a href="#"><img class="typo_img" src="<@spring.url '/r/default/images/upload/ico-02.png'/>" style="width:40px; height:40px;" /></a>
 										<div class="typo_text">
 											<h5>CLEAN THEME</h5>
 										</div>
@@ -257,7 +267,7 @@
 								</div>
 								<div class="col-4-1">
 									<div class="typo">
-										<a href="#"><img class="typo_img" src="images/upload/ico-03.png" style="width:40px; height:40px;" /></a>
+										<a href="#"><img class="typo_img" src="<@spring.url '/r/default/images/upload/ico-03.png'/>" style="width:40px; height:40px;" /></a>
 										<div class="typo_text">
 											<h5>CLEAN THEME</h5>
 										</div>
@@ -269,7 +279,7 @@
 								</div>
 								<div class="col-4-1 last">
 									<div class="typo">
-										<a href="#"><img class="typo_img" src="images/upload/ico-04.png" style="width:40px; height:40px;" /></a>
+										<a href="#"><img class="typo_img" src="<@spring.url '/r/default/images/upload/ico-04.png'/>" style="width:40px; height:40px;" /></a>
 										<div class="typo_text">
 											<h5>CLEAN THEME</h5>
 										</div>
@@ -302,7 +312,7 @@
             	<div class="mod-inner">
                 	<div class="mod-tit clearfix">
                     	<div class="mod-tit-group">
-                        	<h3 class="mod-tit-icon" style="background-image:url(images/upload/tit-ico-01.png);">最新产品</h3>                            
+                        	<h3 class="mod-tit-icon" style="background-image:url(<@spring.url '/r/default/images/upload/tit-ico-01.png'/>);">最新产品</h3>
                         </div>                    	
                         <a href="#" class="float-right mod-more"><span>更多</span></a>
                     </div>                    
@@ -311,35 +321,35 @@
                         <div class="scrollable carousel clearfix">
                             <ul id="scrollable-01" class="clearfix">
                                 <li>
-                                    <p><a href="products-detail.ftl"><img src="images/upload/latest_work01.jpg" alt="" width="230" height="167" /></a></p>
+                                    <p><a href="products-detail.ftl"><img src="<@spring.url '/r/default/images/upload/latest_work01.jpg'/>" alt="" width="230" height="167" /></a></p>
                                     <h4><a href="products-detail.ftl">商业照明节电系统</a></h4>
                                 </li>
                                 <li>
-                                    <p><a href="products-detail.ftl"><img src="images/upload/latest_work02.jpg" alt="" width="230" height="167" /></a></p>
+                                    <p><a href="products-detail.ftl"><img src="<@spring.url '/r/default/images/upload/latest_work02.jpg'/>" alt="" width="230" height="167" /></a></p>
                                     <h4><a href="products-detail.ftl">空气源热泵</a></h4>
                                 </li>
                                 <li>
-                                    <p><a href="products-detail.ftl"><img src="images/upload/latest_work03.jpg" alt="" width="230" height="167" /></a></p>
+                                    <p><a href="products-detail.ftl"><img src="<@spring.url '/r/default/images/upload/latest_work03.jpg'/>" alt="" width="230" height="167" /></a></p>
                                     <h4><a href="products-detail.ftl">空气源热泵</a></h4>
                                 </li>
                                 <li>
-                                    <p><a href="products-detail.ftl"><img src="images/upload/latest_work04.jpg" alt="" width="230" height="167" /></a></p>
+                                    <p><a href="products-detail.ftl"><img src="<@spring.url '/r/default/images/upload/latest_work04.jpg'/>" alt="" width="230" height="167" /></a></p>
                                     <h4><a href="products-detail.ftl">商业照明节电系统</a></h4>
                                 </li>
                                 <li>
-                                    <p><a href="products-detail.ftl"><img src="images/upload/latest_work01.jpg" alt="" width="230" height="167" /></a></p>
+                                    <p><a href="products-detail.ftl"><img src="<@spring.url '/r/default/images/upload/latest_work01.jpg'/>" alt="" width="230" height="167" /></a></p>
                                     <h4><a href="products-detail.ftl">商业照明节电系统</a></h4>
                                 </li>
                                 <li>
-                                    <p><a href="products-detail.ftl"><img src="images/upload/latest_work02.jpg" alt="" width="230" height="167" /></a></p>
+                                    <p><a href="products-detail.ftl"><img src="<@spring.url '/r/default/images/upload/latest_work02.jpg'/>" alt="" width="230" height="167" /></a></p>
                                     <h4><a href="products-detail.ftl">空气源热泵</a></h4>
                                 </li>
                                 <li>
-                                    <p><a href="products-detail.ftl"><img src="images/upload/latest_work03.jpg" alt="" width="230" height="167" /></a></p>
+                                    <p><a href="products-detail.ftl"><img src="<@spring.url '/r/default/images/upload/latest_work03.jpg'/>" alt="" width="230" height="167" /></a></p>
                                     <h4><a href="products-detail.ftl">空气源热泵</a></h4>
                                 </li>
                                 <li>
-                                    <p><a href="products-detail.ftl"><img src="images/upload/latest_work04.jpg" alt="" width="230" height="167" /></a></p>
+                                    <p><a href="products-detail.ftl"><img src="<@spring.url '/r/default/images/upload/latest_work04.jpg'/>" alt="" width="230" height="167" /></a></p>
                                     <h4><a href="products-detail.ftl">商业照明节电系统</a></h4>
                                 </li>
                             </ul>
@@ -378,7 +388,7 @@
 										<div class="mod-inner">
 											<div class="mod-tit clearfix">
 												<div class="mod-tit-group">
-		                                            <h3 class="mod-tit-icon" style="background-image:url(images/upload/tit-ico-02.png);">最新资讯</h3>
+		                                            <h3 class="mod-tit-icon" style="background-image:url(<@spring.url '/r/default/images/upload/tit-ico-02.png'/>);">最新资讯</h3>
 												</div>
 												<a href="news.ftl" class="mod-more mod-more-img"><span>更多</span></a>
 											</div>
@@ -387,7 +397,7 @@
                                                     <!-- S article-list-item -->
                                                     <li class="article-list-headlines">
                                                         <div class="typo">
-                                                            <a href="news-detail.ftl"><img src="images/upload/article-list-img.jpg" width="150" alt="" class="typo-img" /></a>
+                                                            <a href="news-detail.ftl"><img src="<@spring.url '/r/default/images/upload/article-list-img.jpg'/>" width="150" alt="" class="typo-img" /></a>
                                                             <div class="typo-text">
                                                                 <div class="article-title"><h3><a href="news-detail.ftl">互联网的扁平化设计之争</a></h3></div>
                                                                 <div class="article-summary">
@@ -416,7 +426,7 @@
 										<div class="mod-inner">
 											<div class="mod-tit clearfix">
 												<div class="mod-tit-group">
-													<h3 class="mod-tit-icon" style="background-image:url(images/upload/tit-ico-03.png);">最新案例</h3>
+													<h3 class="mod-tit-icon" style="background-image:url(<@spring.url '/r/default/images/upload/tit-ico-03.png'/>);">最新案例</h3>
 												</div>
 												<a href="products.ftl" class="mod-more"><span>更多</span></a>
 											</div>
@@ -425,7 +435,7 @@
                                                 <div class="responsive-carousel carousel clearfix">
 													<div id="responsive-01">
 														<div class="carousel-item">
-															<div class="carousel-img"><a href="#"><img src="images/upload/case-img-01.jpg" alt="" width="313" /></a></div>
+															<div class="carousel-img"><a href="#"><img src="<@spring.url '/r/default/images/upload/case-img-01.jpg'/>" alt="" width="313" /></a></div>
 															<div class="carousel-info">
                                                             	<div class="carousel-info-inner">
 																	<h4>小米手机</h4>
@@ -433,7 +443,7 @@
 															</div>
 														</div>
 														<div class="carousel-item">
-															<div class="carousel-img"><a href="#"><img src="images/upload/case-img-02.jpg" alt="" width="313" /></a></div>
+															<div class="carousel-img"><a href="#"><img src="<@spring.url '/r/default/images/upload/case-img-02.jpg'/>" alt="" width="313" /></a></div>
 															<div class="carousel-info">
                                                             	<div class="carousel-info-inner">
 																	<h4>小米电视</h4>
@@ -552,9 +562,9 @@
 			                                	<!-- S qhd-content-->
 			                                    <div class="qhd-content">
 			                                    	<p>
-				                                    	<a href="#" target="_blank"><img src="images/upload/ico-sina.gif" alt="新浪微博" title="点击关注新浪微博" /></a>&nbsp;&nbsp;
-				                                    	<a href="#" target="_blank"><img src="images/upload/ico-tx.gif" alt="腾讯微博" title="点击关注腾讯微博" /></a>&nbsp;&nbsp;
-				                                        <a href="#" target="_blank"><img src="images/upload/ico-douban.gif" alt="豆瓣" title="点击关注豆瓣"  /></a>&nbsp;&nbsp;
+				                                    	<a href="#" target="_blank"><img src="<@spring.url '/r/default/images/upload/ico-sina.gif'/>" alt="新浪微博" title="点击关注新浪微博" /></a>&nbsp;&nbsp;
+				                                    	<a href="#" target="_blank"><img src="<@spring.url '/r/default/images/upload/ico-tx.gif'/>" alt="腾讯微博" title="点击关注腾讯微博" /></a>&nbsp;&nbsp;
+				                                        <a href="#" target="_blank"><img src="<@spring.url '/r/default/images/upload/ico-douban.gif'/>" alt="豆瓣" title="点击关注豆瓣"  /></a>&nbsp;&nbsp;
 				                                    </p>
 			                                    </div>
 			                                    <!-- E qhd-content-->               
