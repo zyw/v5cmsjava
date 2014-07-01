@@ -23,7 +23,7 @@
                     <!-- tools box -->
                     <div class="pull-right box-tools">
                         <button class="btn btn-success btn-sm refresh-btn" data-toggle="tooltip" title="Reload">
-                            <i class="fa fa-refresh"></i> 添加站点</button>
+                            <i class="fa fa-plus"></i> 添加站点</button>
                     </div><!-- /. tools -->
                     <i class="fa fa-table"></i>
                     <h3 class="box-title">站点信息表</h3>
