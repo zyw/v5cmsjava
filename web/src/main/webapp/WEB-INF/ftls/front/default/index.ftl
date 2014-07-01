@@ -93,32 +93,32 @@
 								</ul>
                             </li>
                             <li class="">
-                                <a href="about.html">关于我们</a>
+                                <a href="about.ftl">关于我们</a>
                                 <ul>
-									<li><a href="about.html">公司简介</a></li>
-									<li><a href="about.html">公司荣誉</a></li>
-                                    <li><a href="about.html">发展历程</a></li>
-                                    <li><a href="about.html">团队介绍</a></li>
+									<li><a href="about.ftl">公司简介</a></li>
+									<li><a href="about.ftl">公司荣誉</a></li>
+                                    <li><a href="about.ftl">发展历程</a></li>
+                                    <li><a href="about.ftl">团队介绍</a></li>
 								</ul>					
                             </li>
                             <li class="">
-                                <a href="products.html">产品展示</a>					
+                                <a href="products.ftl">产品展示</a>
                             </li>
                             <li class="">
-                                <a href="showcase.html">工程案例 </a>
+                                <a href="showcase.ftl">工程案例 </a>
                             </li>
                             <li class="">
-                                <a href="news.html">资讯中心</a>
+                                <a href="news.ftl">资讯中心</a>
                                 <ul>
-									<li><a href="news.html">公司新闻</a></li>
-									<li><a href="news2.html">行业动态</a></li>
+									<li><a href="news.ftl">公司新闻</a></li>
+									<li><a href="news2.ftl">行业动态</a></li>
 								</ul>
                             </li>
                             <li class="">
-                                <a href="contact.html">联系我们</a>	
+                                <a href="contact.ftl">联系我们</a>
                                 <ul>
-									<li><a href="contact.html">联系方式</a></li>
-									<li><a href="message.html">在线留言</a></li>
+									<li><a href="contact.ftl">联系方式</a></li>
+									<li><a href="message.ftl">在线留言</a></li>
 								</ul>				
                             </li>
                         </ul>
@@ -311,36 +311,36 @@
                         <div class="scrollable carousel clearfix">
                             <ul id="scrollable-01" class="clearfix">
                                 <li>
-                                    <p><a href="products-detail.html"><img src="images/upload/latest_work01.jpg" alt="" width="230" height="167" /></a></p>
-                                    <h4><a href="products-detail.html">商业照明节电系统</a></h4>
+                                    <p><a href="products-detail.ftl"><img src="images/upload/latest_work01.jpg" alt="" width="230" height="167" /></a></p>
+                                    <h4><a href="products-detail.ftl">商业照明节电系统</a></h4>
                                 </li>
                                 <li>
-                                    <p><a href="products-detail.html"><img src="images/upload/latest_work02.jpg" alt="" width="230" height="167" /></a></p>
-                                    <h4><a href="products-detail.html">空气源热泵</a></h4>
+                                    <p><a href="products-detail.ftl"><img src="images/upload/latest_work02.jpg" alt="" width="230" height="167" /></a></p>
+                                    <h4><a href="products-detail.ftl">空气源热泵</a></h4>
                                 </li>
                                 <li>
-                                    <p><a href="products-detail.html"><img src="images/upload/latest_work03.jpg" alt="" width="230" height="167" /></a></p>
-                                    <h4><a href="products-detail.html">空气源热泵</a></h4>
+                                    <p><a href="products-detail.ftl"><img src="images/upload/latest_work03.jpg" alt="" width="230" height="167" /></a></p>
+                                    <h4><a href="products-detail.ftl">空气源热泵</a></h4>
                                 </li>
                                 <li>
-                                    <p><a href="products-detail.html"><img src="images/upload/latest_work04.jpg" alt="" width="230" height="167" /></a></p>
-                                    <h4><a href="products-detail.html">商业照明节电系统</a></h4>
+                                    <p><a href="products-detail.ftl"><img src="images/upload/latest_work04.jpg" alt="" width="230" height="167" /></a></p>
+                                    <h4><a href="products-detail.ftl">商业照明节电系统</a></h4>
                                 </li>
                                 <li>
-                                    <p><a href="products-detail.html"><img src="images/upload/latest_work01.jpg" alt="" width="230" height="167" /></a></p>
-                                    <h4><a href="products-detail.html">商业照明节电系统</a></h4>
+                                    <p><a href="products-detail.ftl"><img src="images/upload/latest_work01.jpg" alt="" width="230" height="167" /></a></p>
+                                    <h4><a href="products-detail.ftl">商业照明节电系统</a></h4>
                                 </li>
                                 <li>
-                                    <p><a href="products-detail.html"><img src="images/upload/latest_work02.jpg" alt="" width="230" height="167" /></a></p>
-                                    <h4><a href="products-detail.html">空气源热泵</a></h4>
+                                    <p><a href="products-detail.ftl"><img src="images/upload/latest_work02.jpg" alt="" width="230" height="167" /></a></p>
+                                    <h4><a href="products-detail.ftl">空气源热泵</a></h4>
                                 </li>
                                 <li>
-                                    <p><a href="products-detail.html"><img src="images/upload/latest_work03.jpg" alt="" width="230" height="167" /></a></p>
-                                    <h4><a href="products-detail.html">空气源热泵</a></h4>
+                                    <p><a href="products-detail.ftl"><img src="images/upload/latest_work03.jpg" alt="" width="230" height="167" /></a></p>
+                                    <h4><a href="products-detail.ftl">空气源热泵</a></h4>
                                 </li>
                                 <li>
-                                    <p><a href="products-detail.html"><img src="images/upload/latest_work04.jpg" alt="" width="230" height="167" /></a></p>
-                                    <h4><a href="products-detail.html">商业照明节电系统</a></h4>
+                                    <p><a href="products-detail.ftl"><img src="images/upload/latest_work04.jpg" alt="" width="230" height="167" /></a></p>
+                                    <h4><a href="products-detail.ftl">商业照明节电系统</a></h4>
                                 </li>
                             </ul>
                             <div class="carousel-direction">
@@ -380,16 +380,16 @@
 												<div class="mod-tit-group">
 		                                            <h3 class="mod-tit-icon" style="background-image:url(images/upload/tit-ico-02.png);">最新资讯</h3>
 												</div>
-												<a href="news.html" class="mod-more mod-more-img"><span>更多</span></a>
+												<a href="news.ftl" class="mod-more mod-more-img"><span>更多</span></a>
 											</div>
 											<div class="mod-content">
                                                 <ul class="article-list-row">
                                                     <!-- S article-list-item -->
                                                     <li class="article-list-headlines">
                                                         <div class="typo">
-                                                            <a href="news-detail.html"><img src="images/upload/article-list-img.jpg" width="150" alt="" class="typo-img" /></a>
+                                                            <a href="news-detail.ftl"><img src="images/upload/article-list-img.jpg" width="150" alt="" class="typo-img" /></a>
                                                             <div class="typo-text">
-                                                                <div class="article-title"><h3><a href="news-detail.html">互联网的扁平化设计之争</a></h3></div>
+                                                                <div class="article-title"><h3><a href="news-detail.ftl">互联网的扁平化设计之争</a></h3></div>
                                                                 <div class="article-summary">
                                                                     <div class="qhd-content">
                                                                         <p>不可否认，扁平设计目前是设计界的宠儿 它无处不在。不仅仅是扁平设计，现在也包括类扁平设计 关于这种风格的有效性与用途的争论如火如荼。这种极度时髦的设计风格在激发着每个人的观念...</p>
@@ -402,8 +402,8 @@
                                                         </div>
                                                     </li>
                                                     <!-- E article-list-item -->  	
-                                                    <li><span class="article-time float-right">2012-11-26</span><a href="news-detail.html">你的眼睛喜欢看什么？ </a></li>
-                                                    <li><span class="article-time float-right">2012-11-26</span><a href="news-detail.html">是否应该将iOS7设计风格融入你的应用？ </a></li>
+                                                    <li><span class="article-time float-right">2012-11-26</span><a href="news-detail.ftl">你的眼睛喜欢看什么？ </a></li>
+                                                    <li><span class="article-time float-right">2012-11-26</span><a href="news-detail.ftl">是否应该将iOS7设计风格融入你的应用？ </a></li>
                                                 </ul>
 											</div>                                      
 										</div>
@@ -418,7 +418,7 @@
 												<div class="mod-tit-group">
 													<h3 class="mod-tit-icon" style="background-image:url(images/upload/tit-ico-03.png);">最新案例</h3>
 												</div>
-												<a href="products.html" class="mod-more"><span>更多</span></a>
+												<a href="products.ftl" class="mod-more"><span>更多</span></a>
 											</div>
 											<div class="mod-content">
 												<!-- S responsive-carousel -->
@@ -498,7 +498,7 @@
 			                        	<div class="mod-inner">
 			                            	<div class="mod-tit clearfix">
 			                                	<div class="mod-tit-group"><h3>友情链接</h3></div>
-			                                    <a class="mod-more" href="friend-link.html"><span>更多</span></a>
+			                                    <a class="mod-more" href="friend-link.ftl"><span>更多</span></a>
 			                                </div>
 			                                <div class="mod-content">
 			                                	<div class="link-line clearfix">
@@ -591,7 +591,7 @@
 		                                    	<!-- S link-line-->
 												<div class="link-line">
 													<ul class="clearfix">
-														<li><a href="video.html">视频中心</a><span>-</span></li>
+														<li><a href="video.ftl">视频中心</a><span>-</span></li>
 														<li><a href="jobs.html">人才招聘</a><span>-</span></li>
 														<li><a href="#">在线留言 </a></li>											
 													</ul>
