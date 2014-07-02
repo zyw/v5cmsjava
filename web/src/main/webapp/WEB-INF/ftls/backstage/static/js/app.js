@@ -587,7 +587,6 @@ $(window).load(function() {
             var btn = $(this).children("a").first();
             var menu = $(this).children(".treeview-menu").first();
             var isActive = $(this).hasClass('active');
-
             //initialize already active menus
             if (isActive) {
                 menu.show();
@@ -596,6 +595,8 @@ $(window).load(function() {
             //Slide open or close the menu on link click
             btn.click(function(e) {
                 e.preventDefault();
+                isActive = btn.parent("li").hasClass('active');
+                console.log(isActive)
                 if (isActive) {
                     //Slide up to close menu
                     menu.slideUp();
@@ -623,6 +624,37 @@ $(window).load(function() {
     };
 
 
+}(jQuery));
+
+
+(function($){
+    "use strict";
+
+    $.fn.imitClick = function(){
+        return this.each(function(){
+            var btn = $(this).children("a").first();
+            var menu = $(this).children(".treeview-menu").first();
+
+            var isActive = $(this).hasClass('active');
+
+            //initialize already active menus
+            if (isActive) {
+                menu.show();
+                btn.children(".fa-angle-left").first().removeClass("fa-angle-left").addClass("fa-angle-down");
+            }
+
+            menu.slideDown();
+            isActive = true;
+            btn.children(".fa-angle-left").first().removeClass("fa-angle-left").addClass("fa-angle-down");
+            $(this).addClass("active");
+
+            /* Add margins to submenu elements to give it a tree look */
+            menu.find("li > a").each(function() {
+                var pad = parseInt($(this).css("margin-left")) + 10;
+                $(this).css({"margin-left": pad + "px"});
+            });
+        });
+    }
 }(jQuery));
 
 /*

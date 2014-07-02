@@ -22,7 +22,7 @@
                 <div class="box-header">
                     <!-- tools box -->
                     <div class="pull-right box-tools">
-                        <button class="btn btn-success btn-sm refresh-btn" data-toggle="tooltip" title="Reload">
+                        <button id="addSite" class="btn btn-success btn-sm" data-toggle="tooltip" title="添加站点">
                             <i class="fa fa-plus"></i> 添加站点</button>
                     </div><!-- /. tools -->
                     <i class="fa fa-table"></i>
@@ -69,5 +69,9 @@
             "bFilter": false,
             "bInfo": false
         });
+        $("#nav_siteSetting").imitClick();
+        $("#addSite").click(function(){
+            location.href="<@spring.url '/manager/addsite'/>";
+        })
     });
 </script>

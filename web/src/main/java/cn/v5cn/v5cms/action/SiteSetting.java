@@ -25,4 +25,9 @@ public class SiteSetting {
         model.addAttribute("site",result.get());
         return "backstage/siteInfo";
     }
+
+    @RequestMapping(value = "/addsite",method = RequestMethod.GET)
+    public String addSite(){
+        return "backstage/siteAdd";
+    }
 }

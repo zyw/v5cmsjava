@@ -388,14 +388,18 @@
                     </a>
                 </li>
                 -->
-                <li class="treeview">
+                <li class="treeview" id="nav_siteSetting">
                     <a href="#">
                         <i class="fa fa-wrench"></i> <span>站点设置</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="<@spring.url '/manager/siteInfo'/>"><i class="fa fa-angle-double-right"></i>
-                            站点管理</a></li>
+                        <li>
+                            <a href="<@spring.url '/manager/siteInfo'/>">
+                                <i class="fa fa-angle-double-right"></i>
+                                站点管理
+                            </a>
+                        </li>
                         <li><a href="pages/examples/login.html"><i class="fa fa-angle-double-right"></i> 广告管理</a></li>
                         <li><a href="pages/examples/register.html"><i class="fa fa-angle-double-right"></i> 连接管理</a>
                         </li>

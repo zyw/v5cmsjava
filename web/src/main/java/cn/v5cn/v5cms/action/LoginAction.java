@@ -38,13 +38,12 @@ public class LoginAction {
 
     @RequestMapping(value="/login",method = RequestMethod.POST)
     public String login(String loginName,String loginPwd,String captcha,HttpServletRequest request){
-        System.out.println("loginName = [" + loginName + "], loginPwd = [" + loginPwd + "], captcha = [" + captcha + "]");
 
-        String captchaSession = (String)request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        /*String captchaSession = (String)request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
         if(!captchaSession.equalsIgnoreCase(captcha)){
             request.setAttribute(SystemConstant.ERROR_MESSAGE,"验证码输入错误！");
             return "backstage/login";
-        }
+        }*/
         List<Manager> result = managerBiz.login(loginName);
         if(result==null || result.isEmpty()){
             request.setAttribute(SystemConstant.ERROR_MESSAGE,"用户不存在！");
