@@ -41,13 +41,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>${site.tbId}</td>
-                            <td>${site.siteName}</td>
-                            <td>${(site.isclosesite==1)?string("正常","关闭")}</td>
-                            <td>${site.createDate?string("yyyy-MM-dd")}</td>
-                            <td><a href="#">修改</a> <a href="#">删除</a></td>
-                        </tr>
+                        <#list sites as site>
+                            <tr>
+                                <td>${site.tbId}</td>
+                                <td>${site.siteName}</td>
+                                <td>${(site.isclosesite==1)?string("正常","关闭")}</td>
+                                <td>${site.createDate?string("yyyy-MM-dd")}</td>
+                                <td><a href="<@spring.url '/manager/addsite/${site.tbId}'/>">修改</a> <a href="#">删除</a></td>
+                            </tr>
+                        </#list>
                         </tbody>
                     </table>
                 </div>

@@ -626,37 +626,6 @@ $(window).load(function() {
 
 }(jQuery));
 
-
-(function($){
-    "use strict";
-
-    $.fn.imitClick = function(){
-        return this.each(function(){
-            var btn = $(this).children("a").first();
-            var menu = $(this).children(".treeview-menu").first();
-
-            var isActive = $(this).hasClass('active');
-
-            //initialize already active menus
-            if (isActive) {
-                menu.show();
-                btn.children(".fa-angle-left").first().removeClass("fa-angle-left").addClass("fa-angle-down");
-            }
-
-            menu.slideDown();
-            isActive = true;
-            btn.children(".fa-angle-left").first().removeClass("fa-angle-left").addClass("fa-angle-down");
-            $(this).addClass("active");
-
-            /* Add margins to submenu elements to give it a tree look */
-            menu.find("li > a").each(function() {
-                var pad = parseInt($(this).css("margin-left")) + 10;
-                $(this).css({"margin-left": pad + "px"});
-            });
-        });
-    }
-}(jQuery));
-
 /*
  * TODO LIST CUSTOM PLUGIN
  * -----------------------
@@ -1087,3 +1056,62 @@ $(window).load(function() {
         })
     }
 })(window.jQuery || window.Zepto);
+
+/********************************
+*************ZYW自定义************
+********************************/
+
+/**
+ * 跳转到子菜单页面打开左侧的子菜单
+ * */
+(function($){
+    "use strict";
+
+    $.fn.imitClick = function(){
+        return this.each(function(){
+            var btn = $(this).children("a").first();
+            var menu = $(this).children(".treeview-menu").first();
+
+            var isActive = $(this).hasClass('active');
+
+            //initialize already active menus
+            if (isActive) {
+                menu.show();
+                btn.children(".fa-angle-left").first().removeClass("fa-angle-left").addClass("fa-angle-down");
+            }
+
+            menu.slideDown();
+            isActive = true;
+            btn.children(".fa-angle-left").first().removeClass("fa-angle-left").addClass("fa-angle-down");
+            $(this).addClass("active");
+
+            /* Add margins to submenu elements to give it a tree look */
+            menu.find("li > a").each(function() {
+                var pad = parseInt($(this).css("margin-left")) + 10;
+                $(this).css({"margin-left": pad + "px"});
+            });
+        });
+    }
+}(jQuery));
+
+(function($){
+    $.fn.nonEmpty = function(options){
+        var value = this.val();
+        if(value != null && $.trim(value) !== "") return true;
+        // Render options
+        var settings = $.extend({
+            trigger: "hover ",
+            html:true,
+            content:"不能为空！",
+            container:'body',
+            template:'<div class="popover"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content" style="color: #FF0000"></div></div>'
+        }, options);
+        var iconHtml = "<span class='glyphicon glyphicon-remove form-control-feedback'></span>";
+        this.each(function(){
+            $(this).popover(settings);
+            $(this).parent().parent().addClass("has-error has-feedback");
+            $(this).after(iconHtml);
+        });
+        return false;
+    }
+}(jQuery));

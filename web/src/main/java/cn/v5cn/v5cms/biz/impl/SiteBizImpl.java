@@ -3,7 +3,7 @@ package cn.v5cn.v5cms.biz.impl;
 import cn.v5cn.v5cms.biz.SiteBiz;
 import cn.v5cn.v5cms.dao.SiteDao;
 import cn.v5cn.v5cms.entity.Site;
-import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class SiteBizImpl implements SiteBiz {
     private SiteDao siteDao;
 
     @Override
-    public Optional<Site> findSize() {
-        return siteDao.findSite();
+    public ImmutableList<Site> findSize(int siteId) {
+        return siteDao.findSite(siteId);
     }
 }

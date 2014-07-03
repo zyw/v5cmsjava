@@ -2,8 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.v5cn.v5cms.entity.Site">
-    <select id="selectSite" resultType="Site">
+    <select id="selectSite" resultType="Site" parameterType="int">
         select * from site
+        <if test="_parameter != -1">
+            where tbid=#{_parameter}
+        </if>
     </select>
 
 </mapper>

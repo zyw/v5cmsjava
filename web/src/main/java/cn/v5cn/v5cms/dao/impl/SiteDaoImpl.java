@@ -2,10 +2,12 @@ package cn.v5cn.v5cms.dao.impl;
 
 import cn.v5cn.v5cms.dao.SiteDao;
 import cn.v5cn.v5cms.entity.Site;
-import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableList;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Created by ZYW on 2014/6/30.
@@ -17,9 +19,9 @@ public class SiteDaoImpl implements SiteDao {
     private SqlSession sqlSession;
 
     @Override
-    public Optional<Site> findSite() {
-        Site result = sqlSession.selectOne(Site.class.getName()+".selectSite");
-        if(result != null) return Optional.of(result);
-        return Optional.absent();
+    public ImmutableList<Site> findSite(int siteId) {
+        List<Site> temp = sqlSession.selectList(Site.class.getName()+".selectSite",siteId);
+        ImmutableList<Site> result = ImmutableList.<Site>builder().addAll(temp).build();
+        return result;
     }
 }
