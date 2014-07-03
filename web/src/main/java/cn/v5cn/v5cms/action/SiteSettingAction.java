@@ -27,6 +27,12 @@ public class SiteSettingAction {
         return "backstage/siteInfo";
     }
 
+/*    @RequestMapping(value = "/sitelist",method = RequestMethod.GET)
+    @ResponseBody
+    public List<Site> siteList(){
+        return siteBiz.findSize(-1).asList();
+    }*/
+
     @RequestMapping(value = "/addsite",method = RequestMethod.GET)
     public String addSite(ModelMap model){
         model.addAttribute("site",new Site());

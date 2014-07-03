@@ -11,8 +11,7 @@
     <link href="<@spring.url '/r/css/font-awesome.min.css'/>" rel="stylesheet" type="text/css"/>
     <!-- Ionicons -->
     <link href="<@spring.url '/r/css/ionicons.min.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- DATA TABLES -->
-    <link href="<@spring.url '/r/css/dataTables.bootstrap.css'/>" rel="stylesheet" type="text/css"/>
+
     <!-- Theme style -->
     <link href="<@spring.url '/r/css/AdminLTE.css'/>" rel="stylesheet" type="text/css"/>
 

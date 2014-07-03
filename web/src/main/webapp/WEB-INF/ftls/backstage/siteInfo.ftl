@@ -30,7 +30,14 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive">
-                    <table id="siteInfo" class="table table-bordered table-hover">
+                    <table class="table table-hover table-bordered table-striped">
+                        <colgroup>
+                            <col class="col-xs-1">
+                            <col class="col-xs-2">
+                            <col class="col-xs-1">
+                            <col class="col-xs-2">
+                            <col class="col-xs-1">
+                        </colgroup>
                         <thead>
                         <tr>
                             <th>序号</th>
@@ -41,7 +48,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <#list sites as site>
+                        <#if sites?size != 0>
+                            <#list sites as site>
                             <tr>
                                 <td>${site.tbId}</td>
                                 <td>${site.siteName}</td>
@@ -49,7 +57,12 @@
                                 <td>${site.createDate?string("yyyy-MM-dd")}</td>
                                 <td><a href="<@spring.url '/manager/addsite/${site.tbId}'/>">修改</a> <a href="#">删除</a></td>
                             </tr>
-                        </#list>
+                            </#list>
+                        <#else>
+                            <tr>
+                                <td colspan="5"><h3>还没有站点数据！</h3></td>
+                            </tr>
+                        </#if>
                         </tbody>
                     </table>
                 </div>
@@ -65,12 +78,12 @@
 <#include "fragment/footer.ftl">
 <script type="text/javascript">
     $(function(){
-        $("#siteInfo").dataTable({
-            "bPaginate": false,
-            "bLengthChange": false,
-            "bFilter": false,
-            "bInfo": false
-        });
+//        $("#siteInfo").dataTable({
+//            "bPaginate": false,
+//            "bLengthChange": false,
+//            "bFilter": false,
+//            "bInfo": false
+//        });
         $("#nav_siteSetting").imitClick();
         $("#addSite").click(function(){
             location.href="<@spring.url '/manager/addsite'/>";
