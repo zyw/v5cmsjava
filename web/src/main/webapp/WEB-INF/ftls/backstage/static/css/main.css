@@ -4,3 +4,35 @@
     left: 50%;
     margin: 100px auto;
 }
+
+.icon-succeed{
+    background: url("img/succeed.png") no-repeat;
+    display: inline-block;
+    width:44px;
+    height: 44px;
+    vertical-align: middle;
+}
+
+.icon-error{
+    background: url("img/error.png") no-repeat;
+    display: inline-block;
+    width:44px;
+    height: 44px;
+    vertical-align: middle;
+}
+
+.icon-question{
+    background: url("img/question.png") no-repeat;
+    display: inline-block;
+    width:44px;
+    height: 44px;
+    vertical-align: middle;
+}
+
+.icon-warning{
+    background: url("img/warning.png") no-repeat;
+    display: inline-block;
+    width:44px;
+    height: 44px;
+    vertical-align: middle;
+}

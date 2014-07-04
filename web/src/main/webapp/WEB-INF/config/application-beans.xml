@@ -79,5 +79,11 @@
             </bean>
         </property>
     </bean>
-
+    <bean id="propertyConfigurer" class="cn.v5cn.v5cms.util.PropertyUtils">
+        <property name="locations">
+            <list>
+                <value>classpath:sys_constant.properties</value>
+            </list>
+        </property>
+    </bean>
 </beans>

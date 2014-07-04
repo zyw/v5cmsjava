@@ -24,4 +24,11 @@ public class SiteDaoImpl implements SiteDao {
         ImmutableList<Site> result = ImmutableList.<Site>builder().addAll(temp).build();
         return result;
     }
+
+    @Override
+    public ImmutableList<Site> findRunableSite(int isclosesite) {
+        List<Site> temp = sqlSession.selectList(Site.class.getName()+".selectRunableSite",isclosesite);
+        ImmutableList<Site> result = ImmutableList.<Site>builder().addAll(temp).build();
+        return result;
+    }
 }

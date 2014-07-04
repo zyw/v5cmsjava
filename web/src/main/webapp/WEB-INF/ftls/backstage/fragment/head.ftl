@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>V5CMS | 后台</title>
+    <title>${siteKey.siteName!"没有站点"} | 后台</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- bootstrap 3.0.2 -->
     <link href="<@spring.url '/r/css/bootstrap.css'/>" rel="stylesheet" type="text/css"/>
@@ -11,7 +11,8 @@
     <link href="<@spring.url '/r/css/font-awesome.min.css'/>" rel="stylesheet" type="text/css"/>
     <!-- Ionicons -->
     <link href="<@spring.url '/r/css/ionicons.min.css'/>" rel="stylesheet" type="text/css"/>
-
+    <!-- artDialog -->
+    <link href="<@spring.url '/r/css/ui-dialog.css'/>" rel="stylesheet" type="text/css"/>
     <!-- Theme style -->
     <link href="<@spring.url '/r/css/AdminLTE.css'/>" rel="stylesheet" type="text/css"/>
 
@@ -27,7 +28,7 @@
 <header class="header">
 <a href="index" class="logo">
     <!-- Add the class icon to your logo image or logo icon to add the margining -->
-    V5CMS
+    ${siteKey.siteName!"没有站点"}
 </a>
 <!-- Header Navbar: style can be found in header.less -->
 <nav class="navbar navbar-static-top" role="navigation">

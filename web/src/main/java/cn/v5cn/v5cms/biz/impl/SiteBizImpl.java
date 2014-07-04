@@ -20,4 +20,9 @@ public class SiteBizImpl implements SiteBiz {
     public ImmutableList<Site> findSize(int siteId) {
         return siteDao.findSite(siteId);
     }
+
+    @Override
+    public ImmutableList<Site> findRunableSite(int isclosesite) {
+        return siteDao.findRunableSite(isclosesite);
+    }
 }

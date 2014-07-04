@@ -33,7 +33,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form id="siteForm" class="form-horizontal" role="form" method="POST">
+                    <form id="siteForm" action="<@spring.url '/manager/ausite'/>" class="form-horizontal" role="form" method="POST">
                         <input type="hidden" value="${site.tbId!""}" name="tbId">
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">站点名称</label>
@@ -121,6 +121,19 @@
         $("#backSiteList").click(function(){
             location.href="<@spring.url '/manager/siteInfo'/>"
         });
+
+        $('#siteForm').ajaxForm({
+            dataType : 'json',
+            success : function(data) {
+                if(data.status){
+                    console.log(data.message)
+                    $.v5cms.modalDialog({content:data.message,ok:function(){
+                        location.href="<@spring.url '/manager/siteInfo'/>";
+                    }});
+                }
+            }
+        });
+
         $("#saveSiteForm").click(function(){
             var result = $("#siteName").nonEmpty({content:"网站名称不能为空！"});
             if(result) $("#siteForm").submit();

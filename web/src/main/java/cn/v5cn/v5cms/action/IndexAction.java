@@ -1,8 +1,15 @@
 package cn.v5cn.v5cms.action;
 
+import cn.v5cn.v5cms.biz.SiteBiz;
+import cn.v5cn.v5cms.entity.Site;
+import cn.v5cn.v5cms.util.SystemConstant;
+import com.google.common.collect.ImmutableList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by ZYW on 2014/5/30.
@@ -10,9 +17,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/manager")
 public class IndexAction {
-    @RequestMapping(value = "/index",method = RequestMethod.GET)
-    public String index(){
 
+    @Autowired
+    private SiteBiz siteBiz;
+
+    @RequestMapping(value = "/index",method = RequestMethod.GET)
+    public String index(HttpSession session){
+        ImmutableList<Site> resultBiz = siteBiz.findRunableSite(1);
+        Site temp = resultBiz.size() == 0 ? new Site(): resultBiz.get(0);
+        session.setAttribute(SystemConstant.SITE_SESSION_KEY,temp);
         return "backstage/index";
     }
 }

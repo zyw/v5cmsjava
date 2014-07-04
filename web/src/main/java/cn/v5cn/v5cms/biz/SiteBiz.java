@@ -8,4 +8,8 @@ import com.google.common.collect.ImmutableList;
  */
 public interface SiteBiz {
     ImmutableList<Site> findSize(int siteId);
+    /**
+     * 根据运行状态值查询站点
+     * */
+    ImmutableList<Site> findRunableSite(int isclosesite);
 }

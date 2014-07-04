@@ -1113,5 +1113,18 @@ $(window).load(function() {
             $(this).after(iconHtml);
         });
         return false;
-    }
+    };
+    $.v5cms = {
+        modalDialog:function(options){
+
+            var settings = $.extend({
+                title:"温馨提示",
+                content:"",
+                width:200,
+                okValue: '确定',
+                ok:function (){}
+            },options);
+            dialog(settings).showModal();
+        }
+    };
 }(jQuery));

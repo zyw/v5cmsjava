@@ -10,4 +10,6 @@ public class SystemConstant {
     public static final String ERROR_MESSAGE = "errorMessage";
 
     public static final String SESSION_KEY = "managerKey";
+
+    public static final String SITE_SESSION_KEY = "siteKey";
 }
