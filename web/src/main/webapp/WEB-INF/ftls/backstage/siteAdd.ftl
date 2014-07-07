@@ -126,8 +126,7 @@
             dataType : 'json',
             success : function(data) {
                 if(data.status){
-                    console.log(data.message)
-                    $.v5cms.modalDialog({content:data.message,ok:function(){
+                    $.v5cms.modalDialog({icon:"succeed",content:data.message,ok:function(){
                         location.href="<@spring.url '/manager/siteInfo'/>";
                     }});
                 }

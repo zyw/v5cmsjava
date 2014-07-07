@@ -1116,7 +1116,24 @@ $(window).load(function() {
     };
     $.v5cms = {
         modalDialog:function(options){
-
+            var icon = "";
+            switch(options.icon){
+                case "succeed":
+                    icon = "<span class='icon-succeed'></span> ";
+                    break;
+                case "error":
+                    icon = "<span class='icon-error'></span> ";
+                    break;
+                case "question":
+                    icon = "<span class='icon-question'></span> ";
+                    break;
+                case "warning":
+                    icon = "<span class='icon-warning'></span> ";
+                    break;
+                default :
+                    icon = "";
+            }
+            options.content = options.content ? icon + options.content : "";
             var settings = $.extend({
                 title:"温馨提示",
                 content:"",
