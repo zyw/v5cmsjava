@@ -52,7 +52,27 @@ public class SiteSettingAction {
     @ResponseBody
     @RequestMapping(value = "/ausite",method = RequestMethod.POST)
     public ImmutableMap<String,String> addUpdateSite(Site site){
-        System.out.println("site = [" + site.getSiteName() + "]");
-        return ImmutableMap.of("status","1","message",PropertyUtils.getValue("site.addsuccess.message").or(""));
+        if(site.getTbId() != 0){
+            int result = siteBiz.updateSite(site);
+            if(result > 0){
+                return ImmutableMap.of("status","1","message",PropertyUtils.getValue("site.updatesuccess.message").or(""));
+            }
+            return ImmutableMap.of("status","0","message",PropertyUtils.getValue("site.updatefailed.message").or(""));
+        }
+        int result = siteBiz.addSite(site);
+        if(result != 0){
+            return ImmutableMap.of("status","1","message",PropertyUtils.getValue("site.addsuccess.message").or(""));
+        }
+        return ImmutableMap.of("status","0","message",PropertyUtils.getValue("site.addfailed.message").or(""));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/deletesite/{siteId}",method = RequestMethod.GET)
+    public ImmutableMap<String,String> deleteSite(@PathVariable int siteId){
+        int result = siteBiz.deleteSite(siteId);
+        if(result > 0){
+            return ImmutableMap.of("status","1","message",PropertyUtils.getValue("site.deletesuccess.message").or(""));
+        }
+        return ImmutableMap.of("status","0","message",PropertyUtils.getValue("site.deletefailed.message").or(""));
     }
 }

@@ -84,7 +84,7 @@
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">底部信息</label>
                             <div class="col-sm-5">
-                                <textarea class="form-control" name="siteStatisticCode" id="siteStatisticCode" rows="3">${site.siteStatisticCode!""}</textarea>
+                                <textarea class="form-control" name="siteFooterInfo" id="siteFooterInfo" rows="3">${site.siteFooterInfo!""}</textarea>
                                 <span class="help-block">用于保存网站的底部信息，支持HTML。</span>
                             </div>
                         </div>
@@ -125,10 +125,12 @@
         $('#siteForm').ajaxForm({
             dataType : 'json',
             success : function(data) {
-                if(data.status){
-                    $.v5cms.modalDialog({icon:"succeed",content:data.message,ok:function(){
+                if(data.status == "1"){
+                    $.v5cms.tooltip({icon:"succeed",content:data.message},function(){
                         location.href="<@spring.url '/manager/siteInfo'/>";
-                    }});
+                    });
+                }else{
+                    $.v5cms.tooltip({icon:"error",content:data.message},function(){});
                 }
             }
         });

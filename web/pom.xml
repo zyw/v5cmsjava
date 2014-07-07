@@ -76,6 +76,10 @@
             <artifactId>guava</artifactId>
         </dependency>
         <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
@@ -83,11 +87,6 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
         </dependency>
-        <dependency>
-            <groupId>jstl</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>cn.v5cn.v5cms</groupId>
             <artifactId>common-utils</artifactId>

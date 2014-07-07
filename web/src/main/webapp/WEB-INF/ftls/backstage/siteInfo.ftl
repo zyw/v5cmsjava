@@ -55,7 +55,10 @@
                                 <td>${site.siteName}</td>
                                 <td>${(site.isclosesite==1)?string("正常","关闭")}</td>
                                 <td>${site.createDate?string("yyyy-MM-dd")}</td>
-                                <td><a href="<@spring.url '/manager/addsite/${site.tbId}'/>">修改</a> <a href="#">删除</a></td>
+                                <td>
+                                    <a href="<@spring.url '/manager/addsite/${site.tbId}'/>">修改</a>
+                                    <a href="javascript:;" class="deletesite" data-id="${site.tbId}">删除</a>
+                                </td>
                             </tr>
                             </#list>
                         <#else>
@@ -78,15 +81,26 @@
 <#include "fragment/footer.ftl">
 <script type="text/javascript">
     $(function(){
-//        $("#siteInfo").dataTable({
-//            "bPaginate": false,
-//            "bLengthChange": false,
-//            "bFilter": false,
-//            "bInfo": false
-//        });
         $("#nav_siteSetting").imitClick();
         $("#addSite").click(function(){
             location.href="<@spring.url '/manager/addsite'/>";
+        });
+        $(".deletesite").click(function(){
+            var tbId = $(this).attr("data-id");
+            $.v5cms.confirm({icon:"question",content:"您确定要删除站点信息吗？",ok:function(){
+                var url = "<@spring.url '/manager/deletesite/'/>" + tbId;
+                $.get(url,function(data){
+                    if(data.status == "1"){
+                        $.v5cms.tooltip({icon:"succeed","content":data.message},function(){
+                            location.reload();
+                        });
+                    }else{
+                        $.v5cms.tooltip({icon:"error","content":data.message},function(){
+                            location.reload();
+                        });
+                    }
+                },"json");
+            }});
         })
     });
 </script>

@@ -1114,32 +1114,67 @@ $(window).load(function() {
         });
         return false;
     };
+    function _iconHeader(options){
+        var icon = "";
+        switch(options.icon){
+            case "succeed":
+                icon = "<span class='icon-succeed'></span> ";
+                break;
+            case "error":
+                icon = "<span class='icon-error'></span> ";
+                break;
+            case "question":
+                icon = "<span class='icon-question'></span> ";
+                break;
+            case "warning":
+                icon = "<span class='icon-warning'></span> ";
+                break;
+            default :
+                icon = "";
+        }
+        return icon;
+    };
+    function _contentHeader(options){
+        var icon = _iconHeader(options);
+        options.content = options.content ? (icon + options.content) : "";
+        return options;
+    }
     $.v5cms = {
         modalDialog:function(options){
-            var icon = "";
-            switch(options.icon){
-                case "succeed":
-                    icon = "<span class='icon-succeed'></span> ";
-                    break;
-                case "error":
-                    icon = "<span class='icon-error'></span> ";
-                    break;
-                case "question":
-                    icon = "<span class='icon-question'></span> ";
-                    break;
-                case "warning":
-                    icon = "<span class='icon-warning'></span> ";
-                    break;
-                default :
-                    icon = "";
-            }
-            options.content = options.content ? icon + options.content : "";
+            options = _contentHeader(options);
             var settings = $.extend({
                 title:"温馨提示",
                 content:"",
                 width:200,
                 okValue: '确定',
                 ok:function (){}
+            },options);
+            dialog(settings).showModal();
+        },
+
+        tooltip:function(options,callback){
+            options = _contentHeader(options);
+            var settings = $.extend({
+                content:"",
+                timeout:700
+            },options);
+
+            var d = dialog(settings).show();
+            setTimeout(function(){
+                d.close().remove();
+                callback();
+            },settings.timeout)
+        },
+
+        confirm:function(options){
+            options = _contentHeader(options);
+            var settings = $.extend({
+                title: '温馨提示',
+                content: '',
+                okValue: '确定',
+                ok: function () {},
+                cancelValue: '取消',
+                cancel: function () {}
             },options);
             dialog(settings).showModal();
         }

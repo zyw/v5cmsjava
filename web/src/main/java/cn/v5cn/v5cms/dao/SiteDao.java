@@ -16,4 +16,16 @@ public interface SiteDao {
      * 根据运行状态值查询站点
      * */
     ImmutableList<Site> findRunableSite(int isclosesite);
+    /**
+     * 添加站点信息
+     * */
+    int addSite(Site site);
+    /**
+     * 修改站点信息
+     * */
+    int updateSite(Site site);
+    /**
+     * 删除站点信息
+     * */
+    int deleteSite(int siteId);
 }

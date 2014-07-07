@@ -1,9 +1,11 @@
+/**登录页面CSS**/
 .login-panel{
     width:400px;
     height: 280px;
     left: 50%;
     margin: 100px auto;
 }
+/**登录页面CSS 结束**/
 
 .icon-succeed{
     background: url("img/succeed.png") no-repeat;

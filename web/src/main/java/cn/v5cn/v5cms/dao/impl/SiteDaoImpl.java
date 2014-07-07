@@ -31,4 +31,24 @@ public class SiteDaoImpl implements SiteDao {
         ImmutableList<Site> result = ImmutableList.<Site>builder().addAll(temp).build();
         return result;
     }
+
+    @Override
+    public int addSite(Site site) {
+        int result =  sqlSession.insert(Site.class.getName() + ".addSite",site);
+
+        if(result > 0){
+            return site.getTbId();
+        }
+        return 0;
+    }
+
+    @Override
+    public int updateSite(Site site) {
+        return sqlSession.update(Site.class.getName() + ".updateSite",site);
+    }
+
+    @Override
+    public int deleteSite(int siteId) {
+        return sqlSession.update(Site.class.getName() + ".deleteSite",siteId);
+    }
 }

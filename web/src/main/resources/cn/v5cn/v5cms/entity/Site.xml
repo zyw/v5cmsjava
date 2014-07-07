@@ -11,4 +11,35 @@
     <select id="selectRunableSite" resultType="Site">
         select * from site where isclosesite = #{isclosesite}
     </select>
+
+    <insert id="addSite" parameterType="Site" useGeneratedKeys="true" keyProperty="tbId">
+        insert into site
+          (siteName,siteDeputyTitle,siteKey,siteDescribed,createDate,siteicp,
+          siteStatisticCode,siteFooterInfo,isclosesite)
+          values(
+          #{siteName},
+          #{siteDeputyTitle},
+          #{siteKey},
+          #{siteDescribed},
+          #{createDate},
+          #{siteicp},
+          #{siteStatisticCode},
+          #{siteFooterInfo},
+          #{isclosesite}
+        )
+    </insert>
+
+    <update id="updateSite" parameterType="Site">
+        update site set
+            siteName=#{siteName},siteDeputyTitle=#{siteDeputyTitle},
+            siteKey=#{siteKey},siteDescribed=#{siteDescribed},
+            siteicp=#{siteicp},siteStatisticCode=#{siteStatisticCode},
+            siteFooterInfo=#{siteFooterInfo},isclosesite=#{isclosesite}
+        where tbId=#{tbId}
+    </update>
+
+    <delete id="deleteSite" parameterType="_int">
+        delete from site where tbId=#{siteId}
+    </delete>
+
 </mapper>

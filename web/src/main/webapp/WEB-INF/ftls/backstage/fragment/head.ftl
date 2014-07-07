@@ -15,6 +15,8 @@
     <link href="<@spring.url '/r/css/ui-dialog.css'/>" rel="stylesheet" type="text/css"/>
     <!-- Theme style -->
     <link href="<@spring.url '/r/css/AdminLTE.css'/>" rel="stylesheet" type="text/css"/>
+    <!--custom CSS-->
+    <link href="<@spring.url '/r/css/main.css'/>" rel="stylesheet" type="text/css"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
