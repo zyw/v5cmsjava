@@ -47,7 +47,7 @@
             </props>
         </property>
     </bean>
-    <bean id="viewR" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+    <bean id="view" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="viewClass"
                   value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"></property>
         <property name="cache" value="false"/>
@@ -58,5 +58,15 @@
         <property name="exposeRequestAttributes" value="true" />
         <property name="exposeSessionAttributes" value="true" />
         <property name="exposeSpringMacroHelpers" value="true" />
+    </bean>
+    <!-- 配置国际化 -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="alwaysUseMessageFormat" value="true"/>
+    </bean>
+    <!-- 在代码中使用国际化的自定义类 -->
+    <bean id="messageSourceHelper" class="cn.v5cn.v5cms.util.MessageSourceHelper">
+        <property name="messageSource" ref="messageSource"/>
     </bean>
 </beans>

@@ -79,6 +79,7 @@
             </bean>
         </property>
     </bean>
+    <!--配置读取系统配置文件的Properites文件-->
     <bean id="propertyConfigurer" class="cn.v5cn.v5cms.util.PropertyUtils">
         <property name="locations">
             <list>
