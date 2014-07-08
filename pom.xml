@@ -139,7 +139,12 @@
                 <artifactId>logback-classic</artifactId>
                 <version>1.1.2</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.7</version>
+            </dependency>
+            <!-- 日志 结束 -->
             <dependency>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>servlet-api</artifactId>
