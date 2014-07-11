@@ -28,7 +28,7 @@ public class SiteBizImpl implements SiteBiz {
     }
 
     @Override
-    public int addSite(Site site) {
+    public Long addSite(Site site) {
         site.setCreateDate(DateTime.now().toDate());
         return siteDao.addSite(site);
     }

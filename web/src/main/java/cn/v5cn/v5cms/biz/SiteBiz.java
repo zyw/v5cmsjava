@@ -15,7 +15,7 @@ public interface SiteBiz {
     /**
      * 添加站点信息
      * */
-    int addSite(Site site);
+    Long addSite(Site site);
 
     /**
      * 修改站点信息

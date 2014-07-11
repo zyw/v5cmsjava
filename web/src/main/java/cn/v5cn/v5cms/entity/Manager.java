@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by ZYW on 2014/6/9.
  */
 public class Manager implements Serializable {
-    private int tbId;
+    private Long managerId;
     private String managerLoginname;
     private String managerPassword;
     private String managerName;
@@ -17,12 +17,12 @@ public class Manager implements Serializable {
     private String lastLoginTime;
     private String originalPic;
 
-    public int getTbId() {
-        return tbId;
+    public Long getManagerId() {
+        return managerId;
     }
 
-    public void setTbId(int tbId) {
-        this.tbId = tbId;
+    public void setManagerId(Long managerId) {
+        this.managerId = managerId;
     }
 
     public String getManagerLoginname() {
@@ -95,5 +95,21 @@ public class Manager implements Serializable {
 
     public void setOriginalPic(String originalPic) {
         this.originalPic = originalPic;
+    }
+
+    @Override
+    public String toString() {
+        return "Manager{" +
+                "managerId=" + managerId +
+                ", managerLoginname='" + managerLoginname + '\'' +
+                ", managerPassword='" + managerPassword + '\'' +
+                ", managerName='" + managerName + '\'' +
+                ", managerEmail='" + managerEmail + '\'' +
+                ", managerIP='" + managerIP + '\'' +
+                ", loginCount=" + loginCount +
+                ", mobilephone='" + mobilephone + '\'' +
+                ", lastLoginTime='" + lastLoginTime + '\'' +
+                ", originalPic='" + originalPic + '\'' +
+                '}';
     }
 }

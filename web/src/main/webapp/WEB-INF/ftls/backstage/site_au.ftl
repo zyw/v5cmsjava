@@ -34,7 +34,7 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <form id="siteForm" action="<@spring.url '/manager/ausite'/>" class="form-horizontal" role="form" method="POST">
-                        <input type="hidden" value="${site.tbId!""}" name="tbId">
+                        <input type="hidden" value="${site.siteId!""}" name="siteId">
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">站点名称</label>
                             <div class="col-sm-4">
@@ -119,7 +119,7 @@
     $(function(){
         $("#nav_siteSetting").imitClick();
         $("#backSiteList").click(function(){
-            location.href="<@spring.url '/manager/siteInfo'/>"
+            location.href="<@spring.url '/manager/siteList'/>"
         });
 
         $('#siteForm').ajaxForm({
@@ -127,7 +127,7 @@
             success : function(data) {
                 if(data.status == "1"){
                     $.v5cms.tooltip({icon:"succeed",content:data.message},function(){
-                        location.href="<@spring.url '/manager/siteInfo'/>";
+                        location.href="<@spring.url '/manager/siteList'/>";
                     });
                 }else{
                     $.v5cms.tooltip({icon:"error",content:data.message},function(){});

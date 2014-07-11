@@ -397,7 +397,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li>
-                            <a href="<@spring.url '/manager/siteInfo'/>">
+                            <a href="<@spring.url '/manager/siteList'/>">
                                 <i class="fa fa-angle-double-right"></i>
                                 站点管理
                             </a>

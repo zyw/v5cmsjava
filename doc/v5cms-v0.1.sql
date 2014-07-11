@@ -1,9 +1,9 @@
-create database 'v5blog';
+create database 'v5cms';
 
 --创建用户名
 create table manager
 (
-	tbId           int not null AUTO_INCREMENT,
+	managerId           BIGINT not null AUTO_INCREMENT,
 	managerLoginname    varchar(100) not null,
 	managerPassword     varchar(32) not null,
 	managerName         varchar(100) not null,
@@ -13,7 +13,7 @@ create table manager
 	mobilephone          varchar(11)							comment '移动电话',
 	lastLoginTime        datetime								comment '最后登录时间',
 	originalPic          varchar(200)							comment '头像',
-	primary key (tbId)
+	primary key (managerId)
 )ENGINE=MyISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
 
 alter table manager comment '用户表';
@@ -21,18 +21,18 @@ alter table manager comment '用户表';
 --创建site表
 create table site
 (
-	tbId			int not null AUTO_INCREMENT,
-	siteName		varchar(100) not null		comment '网站标题',
+	siteId			BIGINT not null AUTO_INCREMENT,
+	siteName		    varchar(100) not null		comment '网站标题',
 	siteDeputyTitle varchar(200)				comment '网站副标题',
-	siteKey			varchar(500)				comment '网站关键字',
-	siteDescribed	varchar(1000)				comment '网站描述',
-	createDate    datetime         comment '创建时间'
-	siteicp			varchar(100)				comment '网站备案号',
+	siteKey			    varchar(500)				comment '网站关键字',
+	siteDescribed	  varchar(1000)				comment '网站描述',
+	createDate      datetime            comment '创建时间',
+	siteicp			    varchar(100)				comment '网站备案号',
 	siteStatisticCode	varchar(3000)			comment '统计代码',
 	siteFooterInfo	varchar(3000)				comment '网站底部信息',
-	isclosesite		int 	default 0			comment '网站是否关闭 1 开启    0 关闭',
-	themeName		varchar(200) default 'default' 	comment '使用的网站主题名称',
-	primary key (tbId)
+	isclosesite		  int 	default 0			comment '网站是否关闭 1 开启    0 关闭',
+	themeName		    varchar(200) default 'default' 	comment '使用的网站主题名称',
+	primary key (siteId)
 )ENGINE=MyISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
 
 alter table site comment '网站信息表';
@@ -40,11 +40,11 @@ alter table site comment '网站信息表';
 --创建广告表
 create table adv
 (
-  tbId int not null AUTO_INCREMENT ,
+  advId BIGINT not null AUTO_INCREMENT ,
   advName varchar(100) not null     comment '广告名称',
   advCode varchar(3000)             comment '广告代码',
   advState int default 0            comment '广告状态',
-  primary key (tbId)
+  primary key (advId)
 )ENGINE=MyISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
 
 alter table adv comment '广告表';
@@ -52,13 +52,13 @@ alter table adv comment '广告表';
 --友情连接表
 create table link
 (
-  tbId int not null AUTO_INCREMENT ,
+  linkId    bigInt not null AUTO_INCREMENT ,
   linkName varchar(200) not null        comment '连接名称',
   link     varchar(1000) not null       comment '连接',
   linkPic  varchar(200)                 comment '连接图片',
   openType varchar(50)                  comment '打开方式',
   isstart  int         default 0        comment '是否启用，1：启用，0：不启用',
-  primary key (tbId)
+  primary key (linkId)
 )ENGINE=MyISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
 
 alter table adv comment '友情连接表';
@@ -66,13 +66,13 @@ alter table adv comment '友情连接表';
 --banner表
 create table banner
 (
-  tbId int not null AUTO_INCREMENT ,
+  bannerId bigInt not null AUTO_INCREMENT ,
   bannerName  varchar(200) not null      comment 'banner名称',
   bannerPic   varchar(1000) not null     comment 'banner图片',
   bannerds    int                        comment 'banner显示顺序',
   isstart     int  default 0             comment '是否启用，1：启用，0：不启用',
   bcontent    text                       comment '设置banner上显示的文本',
-  primary key (tbId)
+  primary key (bannerId)
 )ENGINE=MyISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
 
 alter table banner comment 'banner表';
@@ -80,7 +80,7 @@ alter table banner comment 'banner表';
 --栏目表
 create table cols
 (
-  tbId int not null AUTO_INCREMENT ,
+  colsId        bigInt not null AUTO_INCREMENT ,
   columnName    varchar(200) not null       comment '栏目名称',
   columnlht     varchar(200)                comment '栏目列表页头模板',
   columnlbt     varchar(200)                comment '栏目列表主体模板',
@@ -92,7 +92,7 @@ create table cols
   columnOutside varchar(1000)               comment '外链地址',
   columnpic     varchar(200)                comment '栏目图片',
   parentId      int       default 0         comment '父栏目ID',
-  primary key (tbId)
+  primary key (colsId)
 )ENGINE=MyISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
 
 alter table cols comment '栏目表';
@@ -101,10 +101,10 @@ alter table cols comment '栏目表';
 
 create table label
 (
-  tbId int not null AUTO_INCREMENT ,
+  labelId     bigInt not null AUTO_INCREMENT ,
   labelName     varchar(200)    not null    comment '标签名称',
   alias         varchar(200)                comment '标签别名',
-  primary key (tbId)
+  primary key (labelId)
 )ENGINE=MyISAM auto_increment=10000 default charset=utf8;
 
 alter table cols comment '文章标签表';
@@ -112,7 +112,7 @@ alter table cols comment '文章标签表';
 --创建内容表
 create table content
 (
-  tbId int not null AUTO_INCREMENT ,
+  contentId bigInt not null AUTO_INCREMENT ,
   columnId  int                     comment '所属栏目ID',
   cname varchar(500)    not null    comment '内容标题',
   cbody longtext                    comment '发布的内容',
@@ -125,7 +125,7 @@ create table content
   cpics     varchar(2000)           comment '与文章关联的图片，多个使用逗号分割',
   cattas    varchar(1000)           comment '文章中使用的附件，多个使用丢号分割',
   dispic    varchar(200)            comment '展示图',
-  primary key (tbId)
+  primary key (contentId)
 )ENGINE=MyISAM auto_increment=10000 default charset=utf8;
 
 alter table content comment '创建内容表';
@@ -133,10 +133,10 @@ alter table content comment '创建内容表';
 --文章标签表
 create table content_label
 (
-  tbId   int not null AUTO_INCREMENT ,
+  content_labelId   bigInt not null AUTO_INCREMENT ,
   contentId   int,
   labelId     int,
-  primary key (tbId)
+  primary key (content_labelId)
 )ENGINE=MyISAM auto_increment=10000 default charset=utf8;
 
 alter table content_label comment '文章标签中间表';
@@ -144,7 +144,7 @@ alter table content_label comment '文章标签中间表';
 --创建评语表
 create table comments
 (
-  tbId            int not null AUTO_INCREMENT,
+  commentsId      bigInt not null AUTO_INCREMENT,
   contentId       int not null                   comment '评语所属内容ID',
   commentAuthor   varchar(100) not null          comment '评论者姓名',
   email           varchar(100) not null          comment '评论者的Email地址',
@@ -154,7 +154,7 @@ create table comments
   commentDate     datetime                       comment '评语时间',
   commentApproved int     default 0              comment '评语是否批准 0:待审批，1:通过审批，2:垃圾评语',
   commentParent   int     default 0              comment '父评语ID',
-  primary key (tbId)
+  primary key (commentsId)
 )ENGINE=MyISAM auto_increment=10000 default charset=utf8;
 
 alter table comments comment '评语表';

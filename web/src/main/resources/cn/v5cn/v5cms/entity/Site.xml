@@ -5,14 +5,14 @@
     <select id="selectSite" resultType="Site">
         select * from site
         <if test="_parameter != -1">
-            where tbid=#{_parameter}
+            where siteid=#{_parameter}
         </if>
     </select>
     <select id="selectRunableSite" resultType="Site">
         select * from site where isclosesite = #{isclosesite}
     </select>
 
-    <insert id="addSite" parameterType="Site" useGeneratedKeys="true" keyProperty="tbId">
+    <insert id="addSite" parameterType="Site" useGeneratedKeys="true" keyProperty="siteId">
         insert into site
           (siteName,siteDeputyTitle,siteKey,siteDescribed,createDate,siteicp,
           siteStatisticCode,siteFooterInfo,isclosesite)
@@ -35,11 +35,11 @@
             siteKey=#{siteKey},siteDescribed=#{siteDescribed},
             siteicp=#{siteicp},siteStatisticCode=#{siteStatisticCode},
             siteFooterInfo=#{siteFooterInfo},isclosesite=#{isclosesite}
-        where tbId=#{tbId}
+        where siteId=#{siteId}
     </update>
 
     <delete id="deleteSite" parameterType="_int">
-        delete from site where tbId=#{siteId}
+        delete from site where siteId=#{siteId}
     </delete>
 
 </mapper>

@@ -51,13 +51,13 @@
                         <#if sites?size != 0>
                             <#list sites as site>
                             <tr>
-                                <td>${site.tbId}</td>
+                                <td>${site.siteId}</td>
                                 <td>${site.siteName}</td>
                                 <td>${(site.isclosesite==1)?string("正常","关闭")}</td>
                                 <td>${site.createDate?string("yyyy-MM-dd")}</td>
                                 <td>
-                                    <a href="<@spring.url '/manager/addsite/${site.tbId}'/>">修改</a>
-                                    <a href="javascript:;" class="deletesite" data-id="${site.tbId}">删除</a>
+                                    <a href="<@spring.url '/manager/updatesite/${site.siteId}'/>">修改</a>
+                                    <a href="javascript:;" class="deletesite" data-id="${site.siteId}">删除</a>
                                 </td>
                             </tr>
                             </#list>

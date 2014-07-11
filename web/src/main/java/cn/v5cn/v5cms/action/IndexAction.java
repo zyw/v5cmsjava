@@ -4,6 +4,8 @@ import cn.v5cn.v5cms.biz.SiteBiz;
 import cn.v5cn.v5cms.entity.Site;
 import cn.v5cn.v5cms.util.SystemConstant;
 import com.google.common.collect.ImmutableList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +19,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/manager")
 public class IndexAction {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(IndexAction.class);
     @Autowired
     private SiteBiz siteBiz;
 
@@ -26,6 +28,7 @@ public class IndexAction {
         ImmutableList<Site> resultBiz = siteBiz.findRunableSite(1);
         Site temp = resultBiz.size() == 0 ? new Site(): resultBiz.get(0);
         session.setAttribute(SystemConstant.SITE_SESSION_KEY,temp);
+        LOGGER.info("站点信息初始化成功！");
         return "backstage/index";
     }
 }

@@ -4,6 +4,8 @@ import cn.v5cn.v5cms.biz.SiteBiz;
 import cn.v5cn.v5cms.entity.Site;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,15 +22,17 @@ import static cn.v5cn.v5cms.util.MessageSourceHelper.getMessage;
 @Controller
 @RequestMapping("/manager")
 public class SiteSettingAction {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SiteSettingAction.class);
 
     @Autowired
     private SiteBiz siteBiz;
 
-    @RequestMapping(value = "/siteInfo",method = RequestMethod.GET)
+    @RequestMapping(value = "/siteList",method = RequestMethod.GET)
     public String siteInfo(ModelMap model){
         ImmutableList<Site> result = siteBiz.findSize(-1);
         model.addAttribute("sites",result);
-        return "backstage/siteInfo";
+        LOGGER.debug("获取站点列表，length:"+result.size());
+        return "backstage/site_list";
     }
 
 /*    @RequestMapping(value = "/sitelist",method = RequestMethod.GET)
@@ -40,28 +44,28 @@ public class SiteSettingAction {
     @RequestMapping(value = "/addsite",method = RequestMethod.GET)
     public String addSite(ModelMap model){
         model.addAttribute("site",new Site());
-        return "backstage/siteAdd";
+        return "backstage/site_au";
     }
 
-    @RequestMapping(value = "/addsite/{siteId}",method = RequestMethod.GET)
+    @RequestMapping(value = "/updatesite/{siteId}",method = RequestMethod.GET)
     public String updateSite(ModelMap model,@PathVariable Integer siteId){
         ImmutableList<Site> result = siteBiz.findSize(siteId);
         model.addAttribute("site",result.get(0));
-        return "backstage/siteAdd";
+        return "backstage/site_au";
     }
 
     @ResponseBody
     @RequestMapping(value = "/ausite",method = RequestMethod.POST)
     public ImmutableMap<String,String> addUpdateSite(Site site){
-        if(site.getTbId() != 0){
+        if(site.getSiteId() != null){
             int result = siteBiz.updateSite(site);
             if(result > 0){
                 return ImmutableMap.of("status","1","message", getMessage("site.updatesuccess.message"));
             }
             return ImmutableMap.of("status","0","message", getMessage("site.updatefailed.message"));
         }
-        int result = siteBiz.addSite(site);
-        if(result != 0){
+        Long result = siteBiz.addSite(site);
+        if(result != 0L){
             return ImmutableMap.of("status","1","message",getMessage("site.addsuccess.message"));
         }
         return ImmutableMap.of("status","0","message",getMessage("site.addfailed.message"));

@@ -7,7 +7,7 @@ import java.util.Date;
  * Created by ZYW on 2014/6/30.
  */
 public class Site implements Serializable {
-    private int tbId;
+    private Long siteId;
     private String siteName;
     private String siteDeputyTitle;
     private String siteKey;
@@ -19,12 +19,12 @@ public class Site implements Serializable {
     private int isclosesite;
     private String themeName;
 
-    public int getTbId() {
-        return tbId;
+    public Long getSiteId() {
+        return siteId;
     }
 
-    public void setTbId(int tbId) {
-        this.tbId = tbId;
+    public void setSiteId(Long siteId) {
+        this.siteId = siteId;
     }
 
     public String getSiteName() {
@@ -105,5 +105,22 @@ public class Site implements Serializable {
 
     public void setThemeName(String themeName) {
         this.themeName = themeName;
+    }
+
+    @Override
+    public String toString() {
+        return "Site{" +
+                "siteId=" + siteId +
+                ", siteName='" + siteName + '\'' +
+                ", siteDeputyTitle='" + siteDeputyTitle + '\'' +
+                ", siteKey='" + siteKey + '\'' +
+                ", siteDescribed='" + siteDescribed + '\'' +
+                ", createDate=" + createDate +
+                ", siteicp='" + siteicp + '\'' +
+                ", siteStatisticCode='" + siteStatisticCode + '\'' +
+                ", siteFooterInfo='" + siteFooterInfo + '\'' +
+                ", isclosesite=" + isclosesite +
+                ", themeName='" + themeName + '\'' +
+                '}';
     }
 }
