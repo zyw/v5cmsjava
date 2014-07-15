@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.v5cn.v5cms.entity.Manager">
-    <select id="selectLogin" resultType="Manager" parameterType="string">
-        select * from manager where managerLoginname=#{loginName}
-    </select>
-
-</mapper>

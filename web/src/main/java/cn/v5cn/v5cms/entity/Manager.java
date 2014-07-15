@@ -1,10 +1,13 @@
 package cn.v5cn.v5cms.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * Created by ZYW on 2014/6/9.
  */
+@Entity
+@Table
 public class Manager implements Serializable {
     private Long managerId;
     private String managerLoginname;
@@ -16,7 +19,8 @@ public class Manager implements Serializable {
     private String mobilephone;
     private String lastLoginTime;
     private String originalPic;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getManagerId() {
         return managerId;
     }

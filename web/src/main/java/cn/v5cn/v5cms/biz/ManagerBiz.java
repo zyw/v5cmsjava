@@ -8,5 +8,5 @@ import java.util.List;
  * Created by ZYW on 2014/6/10.
  */
 public interface ManagerBiz {
-    List<Manager> login(String loginName);
+    List<Manager> findByLoginName(String loginName);
 }

@@ -19,27 +19,27 @@ public class SiteBizImpl implements SiteBiz {
 
     @Override
     public ImmutableList<Site> findSize(int siteId) {
-        return siteDao.findSite(siteId);
+        return null;//siteDao.findSite(siteId);
     }
 
     @Override
     public ImmutableList<Site> findRunableSite(int isclosesite) {
-        return siteDao.findRunableSite(isclosesite);
+        return null;//siteDao.findRunableSite(isclosesite);
     }
 
     @Override
     public Long addSite(Site site) {
         site.setCreateDate(DateTime.now().toDate());
-        return siteDao.addSite(site);
+        return 0L;//siteDao.addSite(site);
     }
 
     @Override
     public int updateSite(Site site) {
-        return siteDao.updateSite(site);
+        return 0;//siteDao.updateSite(site);
     }
 
     @Override
     public int deleteSite(int siteId) {
-        return siteDao.deleteSite(siteId);
+        return 0;//siteDao.deleteSite(siteId);
     }
 }

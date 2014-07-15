@@ -16,7 +16,7 @@ public class ManagerBizImpl implements ManagerBiz {
     @Autowired
     private ManagerDao managerDao;
     @Override
-    public List<Manager> login(String loginName) {
-        return managerDao.login(loginName);
+    public List<Manager> findByLoginName(String loginName) {
+        return managerDao.findByLonginName(loginName);
     }
 }

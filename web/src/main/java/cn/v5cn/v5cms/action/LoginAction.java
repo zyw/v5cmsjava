@@ -51,7 +51,7 @@ public class LoginAction {
             LOGGER.warn("用户{}验证码输入错误！",loginName);
             return "backstage/login";
         }*/
-        List<Manager> result = managerBiz.login(loginName);
+        List<Manager> result = managerBiz.findByLoginName(loginName);
         if(result==null || result.isEmpty()){
             request.setAttribute(SystemConstant.ERROR_MESSAGE,getMessage("login.usernameerror.message"));
             LOGGER.warn("用户{}不存在！",loginName);

@@ -1,12 +1,16 @@
 package cn.v5cn.v5cms.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by ZYW on 2014/6/30.
  */
+@Entity
+@Table
 public class Site implements Serializable {
+
     private Long siteId;
     private String siteName;
     private String siteDeputyTitle;
@@ -18,7 +22,8 @@ public class Site implements Serializable {
     private String siteFooterInfo;
     private int isclosesite;
     private String themeName;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getSiteId() {
         return siteId;
     }
