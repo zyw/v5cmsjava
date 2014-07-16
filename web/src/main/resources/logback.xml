@@ -30,6 +30,7 @@
     </appender>
 
     <logger name="cn.v5cn.v5cms" level="DEBUGE" />
+    <logger name="log4j.logger.org.springframework.data" level="INFO"/>
 
     <root level="INFO">
         <!--<appender-ref ref="FILE"/>-->

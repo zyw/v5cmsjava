@@ -37,6 +37,7 @@ public class SiteBizImpl implements SiteBiz {
     @Override
     public Long addSite(Site site) {
         site.setCreateDate(DateTime.now().toDate());
+
         return siteDao.save(site).getSiteId();
     }
 
@@ -44,9 +45,10 @@ public class SiteBizImpl implements SiteBiz {
     @Override
     public Site updateSite(Site site) {
         Site s = siteDao.findOne(site.getSiteId());
-        s.setSiteName(site.getSiteName());
-        //siteDao.save(site);
-        return s;
+//        s.setSiteName(site.getSiteName());
+        site.setCreateDate(s.getCreateDate());
+        siteDao.save(site);
+        return site;
     }
 
     @Override
