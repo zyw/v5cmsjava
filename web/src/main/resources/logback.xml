@@ -31,7 +31,7 @@
 
     <logger name="cn.v5cn.v5cms" level="DEBUGE" />
 
-    <root level="DEBUGE">
+    <root level="INFO">
         <!--<appender-ref ref="FILE"/>-->
         <appender-ref ref="stdout"/>
     </root>

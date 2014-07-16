@@ -29,7 +29,7 @@ public class SiteSettingAction {
 
     @RequestMapping(value = "/siteList",method = RequestMethod.GET)
     public String siteInfo(ModelMap model){
-        ImmutableList<Site> result = siteBiz.findSize(-1);
+        ImmutableList<Site> result = siteBiz.finadAll();
         model.addAttribute("sites",result);
         LOGGER.debug("获取站点列表，length:"+result.size());
         return "backstage/site_list";
@@ -48,9 +48,9 @@ public class SiteSettingAction {
     }
 
     @RequestMapping(value = "/updatesite/{siteId}",method = RequestMethod.GET)
-    public String updateSite(ModelMap model,@PathVariable Integer siteId){
-        ImmutableList<Site> result = siteBiz.findSize(siteId);
-        model.addAttribute("site",result.get(0));
+    public String updateSite(ModelMap model,@PathVariable Long siteId){
+        Site result = siteBiz.findBySiteId(siteId);
+        model.addAttribute("site",result);
         return "backstage/site_au";
     }
 
@@ -58,11 +58,13 @@ public class SiteSettingAction {
     @RequestMapping(value = "/ausite",method = RequestMethod.POST)
     public ImmutableMap<String,String> addUpdateSite(Site site){
         if(site.getSiteId() != null){
-            int result = siteBiz.updateSite(site);
-            if(result > 0){
-                return ImmutableMap.of("status","1","message", getMessage("site.updatesuccess.message"));
+            try {
+                siteBiz.updateSite(site);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return ImmutableMap.of("status","0","message", getMessage("site.updatefailed.message"));
             }
-            return ImmutableMap.of("status","0","message", getMessage("site.updatefailed.message"));
+            return ImmutableMap.of("status","1","message", getMessage("site.updatesuccess.message"));
         }
         Long result = siteBiz.addSite(site);
         if(result != 0L){
@@ -73,11 +75,13 @@ public class SiteSettingAction {
 
     @ResponseBody
     @RequestMapping(value = "/deletesite/{siteId}",method = RequestMethod.GET)
-    public ImmutableMap<String,String> deleteSite(@PathVariable int siteId){
-        int result = siteBiz.deleteSite(siteId);
-        if(result > 0){
-            return ImmutableMap.of("status","1","message",getMessage("site.deletesuccess.message"));
+    public ImmutableMap<String,String> deleteSite(@PathVariable Long siteId){
+        try {
+            siteBiz.deleteSite(siteId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ImmutableMap.of("status","0","message",getMessage("site.deletefailed.message"));
         }
-        return ImmutableMap.of("status","0","message",getMessage("site.deletefailed.message"));
+        return ImmutableMap.of("status","1","message",getMessage("site.deletesuccess.message"));
     }
 }

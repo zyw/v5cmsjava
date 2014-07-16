@@ -18,13 +18,19 @@
        http://www.springframework.org/schema/util/spring-util.xsd">
     
     <context:annotation-config/>
-    <context:component-scan base-package="cn.v5cn.v5cms"/>
+    <context:component-scan base-package="cn.v5cn.v5cms">
+        <!--
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+        -->
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <context:property-placeholder file-encoding="UTF-8" location="WEB-INF/config/jdbc.properties"/>
 
     <util:properties id="proper" location="classpath:sys_constant.properties"/>
-
+    <!--
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
@@ -34,6 +40,13 @@
         <property name="maxActive" value="20"/>
         
         <property name="maxWait" value="60000"/>
+    </bean>
+-->
+    <bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="driverClass" value="${jdbc.driverClassName}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
     </bean>
 
     <bean id="entityManagerFactoryBean" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
@@ -49,10 +62,11 @@
     </bean>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
         <property name="entityManagerFactory" ref="entityManagerFactoryBean"/>
     </bean>
 
-    <jpa:repositories base-package="cn.v5cn.v5cms"
+    <jpa:repositories base-package="cn.v5cn.v5cms.dao"
                       entity-manager-factory-ref="entityManagerFactoryBean"
                       transaction-manager-ref="transactionManager"/>
 

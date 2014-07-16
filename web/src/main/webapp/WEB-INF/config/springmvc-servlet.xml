@@ -9,7 +9,13 @@
        http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-    <context:component-scan base-package="cn.v5cn.v5cms"/>
+    <context:component-scan base-package="cn.v5cn.v5cms">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <!--
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+        -->
+    </context:component-scan>
     <mvc:annotation-driven/>
 
     <mvc:resources mapping="/r/**" location="/WEB-INF/ftls/backstage/static/,/WEB-INF/ftls/front/"/>

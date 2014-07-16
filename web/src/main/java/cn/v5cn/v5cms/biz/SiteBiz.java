@@ -7,11 +7,13 @@ import com.google.common.collect.ImmutableList;
  * Created by ZYW on 2014/6/30.
  */
 public interface SiteBiz {
-    ImmutableList<Site> findSize(int siteId);
+    Site findBySiteId(Long siteId);
+
+    ImmutableList<Site> finadAll();
     /**
      * 根据运行状态值查询站点
      * */
-    ImmutableList<Site> findRunableSite(int isclosesite);
+    ImmutableList<Site> findByIsclosesite(int isclosesite);
     /**
      * 添加站点信息
      * */
@@ -20,10 +22,10 @@ public interface SiteBiz {
     /**
      * 修改站点信息
      * */
-    int updateSite(Site site);
+    Site updateSite(Site site);
 
     /**
      * 删除站点信息
      * */
-    int deleteSite(int siteId);
+    void deleteSite(Long siteId);
 }

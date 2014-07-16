@@ -8,9 +8,9 @@
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect" />
             <!-- 打印完整Sql所需要配置的url，会在原有url的jdbc:后面添加log4jdbc -->
-            <property name="hibernate.connection.url" value="jdbc:log4jdbc:mysql://localhost:3306/v5cms" />
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/v5cms" />
             <!-- 打印完整SQL所需要配置的driverClassName，这里配置的是log4j的jdbc -->
-            <property name="hibernate.connection.driver_class" value="net.sf.log4jdbc.DriverSpy" />
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
             <property name="hibernate.connection.username" value="root" />
             <property name="hibernate.connection.password" value="qwerty" />
             <property name="hibernate.show_sql" value="true"/>

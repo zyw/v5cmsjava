@@ -25,7 +25,7 @@ public class IndexAction {
 
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String index(HttpSession session){
-        ImmutableList<Site> resultBiz = siteBiz.findRunableSite(1);
+        ImmutableList<Site> resultBiz = siteBiz.findByIsclosesite(1);
         Site temp = resultBiz.size() == 0 ? new Site(): resultBiz.get(0);
         session.setAttribute(SystemConstant.SITE_SESSION_KEY,temp);
         LOGGER.info("站点信息初始化成功！");

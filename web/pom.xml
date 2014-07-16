@@ -99,8 +99,8 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
+            <groupId>com.jolbox</groupId>
+            <artifactId>bonecp</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.v5cn.v5cms</groupId>
@@ -123,7 +123,7 @@
             <artifactId>logback-core</artifactId>
         </dependency>-->
 
-        <!-- 打印完整执行的SQL语句所需要的jar包 -->
+        <!-- 打印完整执行的SQL语句所需要的jar包
         <dependency>
             <groupId>org.lazyluke</groupId>
             <artifactId>log4jdbc-remix</artifactId>
@@ -135,7 +135,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>ch.qos.logback</groupId>
