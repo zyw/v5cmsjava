@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Created by ZYW on 2014/6/30.
  */
+@Transactional
 @Service("siteBiz")
 public class SiteBizImpl implements SiteBiz {
 
@@ -41,14 +42,13 @@ public class SiteBizImpl implements SiteBiz {
         return siteDao.save(site).getSiteId();
     }
 
-    @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public Site updateSite(Site site) {
         Site s = siteDao.findOne(site.getSiteId());
-//        s.setSiteName(site.getSiteName());
-        site.setCreateDate(s.getCreateDate());
-        siteDao.save(site);
-        return site;
+        s.setSiteName(site.getSiteName());
+        //site.setCreateDate(s.getCreateDate());
+        //siteDao.save(site);
+        return s;
     }
 
     @Override

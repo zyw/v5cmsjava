@@ -9,13 +9,11 @@
        http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-    <context:component-scan base-package="cn.v5cn.v5cms">
+    <!-- use-default-filter默认是true改为false可以是注解到Service的事务起作用 -->
+    <context:component-scan base-package="cn.v5cn.v5cms" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-        <!--
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
-        -->
     </context:component-scan>
+
     <mvc:annotation-driven/>
 
     <mvc:resources mapping="/r/**" location="/WEB-INF/ftls/backstage/static/,/WEB-INF/ftls/front/"/>
@@ -27,14 +25,14 @@
         <property name="suffix" value=".jsp"/>
     </bean>
     -->
-    
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean class="cn.v5cn.v5cms.filter.GlobalInterceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors>
 
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10485760"/><!--10MB-->
+        <property name="defaultEncoding" value="UTF-8"/>
+
+    </bean>
+
+    <!-- 配置FreeMarker -->
     <bean id="freeMarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
         <property name="templateLoaderPath" value="/WEB-INF/ftls/"/>
         <property name="defaultEncoding" value="UTF-8" />
@@ -65,6 +63,8 @@
         <property name="exposeSessionAttributes" value="true" />
         <property name="exposeSpringMacroHelpers" value="true" />
     </bean>
+    <!-- ./配置FreeMarker -->
+
     <!-- 配置国际化 -->
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="messages"/>
@@ -75,4 +75,13 @@
     <bean id="messageSourceHelper" class="cn.v5cn.v5cms.util.MessageSourceHelper">
         <property name="messageSource" ref="messageSource"/>
     </bean>
+
+    <!-- 自定义拦截器interceptor -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="cn.v5cn.v5cms.filter.GlobalInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    <!-- ./自定义拦截器interceptor -->
 </beans>

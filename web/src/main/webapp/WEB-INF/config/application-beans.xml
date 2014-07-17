@@ -16,13 +16,8 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
        http://www.springframework.org/schema/util
        http://www.springframework.org/schema/util/spring-util.xsd">
-    
-    <context:annotation-config/>
+
     <context:component-scan base-package="cn.v5cn.v5cms">
-        <!--
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
-        -->
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
     <tx:annotation-driven transaction-manager="transactionManager"/>
@@ -71,9 +66,10 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="dataSource" ref="dataSource"/>
         <property name="entityManagerFactory" ref="entityManagerFactoryBean"/>
+        <property name="persistenceUnitName" value="cn.v5cn.v5cms"/>
     </bean>
 
-    <jpa:repositories base-package="cn.v5cn.v5cms.dao"
+    <jpa:repositories base-package="cn.v5cn.v5cms"
                       entity-manager-factory-ref="entityManagerFactoryBean"
                       transaction-manager-ref="transactionManager"/>
 

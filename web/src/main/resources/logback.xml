@@ -32,7 +32,7 @@
     <logger name="cn.v5cn.v5cms" level="DEBUGE" />
     <logger name="log4j.logger.org.springframework.data" level="INFO"/>
 
-    <root level="INFO">
+    <root level="DEBUGE">
         <!--<appender-ref ref="FILE"/>-->
         <appender-ref ref="stdout"/>
     </root>
