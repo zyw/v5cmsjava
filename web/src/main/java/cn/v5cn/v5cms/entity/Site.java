@@ -1,5 +1,7 @@
 package cn.v5cn.v5cms.entity;
 
+import cn.v5cn.v5cms.util.annotation.Ignore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -64,6 +66,7 @@ public class Site implements Serializable {
         this.siteDescribed = siteDescribed;
     }
 
+    @Ignore
     public Date getCreateDate() {
         return createDate;
     }

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.lang.reflect.InvocationTargetException;
+
 import static cn.v5cn.v5cms.util.MessageSourceHelper.getMessage;
 
 /**
@@ -60,8 +62,11 @@ public class SiteSettingAction {
         if(site.getSiteId() != null){
             try {
                 siteBiz.updateSite(site);
+            }catch(InvocationTargetException ie){
+                LOGGER.error("Site更新异常：{}",ie.getMessage());
+                return ImmutableMap.of("status","0","message", getMessage("site.updatefailed.message"));
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("Site更新异常：{}",e.getMessage());
                 return ImmutableMap.of("status","0","message", getMessage("site.updatefailed.message"));
             }
             return ImmutableMap.of("status","1","message", getMessage("site.updatesuccess.message"));

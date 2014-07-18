@@ -3,6 +3,8 @@ package cn.v5cn.v5cms.biz;
 import cn.v5cn.v5cms.entity.Site;
 import com.google.common.collect.ImmutableList;
 
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * Created by ZYW on 2014/6/30.
  */
@@ -22,7 +24,7 @@ public interface SiteBiz {
     /**
      * 修改站点信息
      * */
-    Site updateSite(Site site);
+    Site updateSite(Site site) throws InvocationTargetException, IllegalAccessException;
 
     /**
      * 删除站点信息

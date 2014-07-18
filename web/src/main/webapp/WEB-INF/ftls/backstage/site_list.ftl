@@ -24,6 +24,8 @@
                     <div class="pull-right box-tools">
                         <button id="addSite" class="btn btn-success btn-sm" data-toggle="tooltip" title="添加站点">
                             <i class="fa fa-plus"></i> 添加站点</button>
+                        <button id="siteBatchDelete" class="btn btn-warning btn-sm" data-toggle="tooltip" title="批量删除">
+                            <i class="fa fa-plus"></i> 批量删除</button>
                     </div><!-- /. tools -->
                     <i class="fa fa-table"></i>
                     <h3 class="box-title">站点信息表</h3>
@@ -34,12 +36,16 @@
                         <colgroup>
                             <col class="col-xs-1">
                             <col class="col-xs-2">
-                            <col class="col-xs-1">
+                            <col class="col-xs-3">
                             <col class="col-xs-2">
-                            <col class="col-xs-1">
+                            <col class="col-xs-2">
+                            <col class="col-xs-2">
                         </colgroup>
                         <thead>
                         <tr>
+                            <th class="td-center">
+                                <input type="checkbox" id="thcheckbox"/>
+                            </th>
                             <th>序号</th>
                             <th>名称</th>
                             <th>状态</th>
@@ -51,12 +57,18 @@
                         <#if sites?size != 0>
                             <#list sites as site>
                             <tr>
+                                <td class="td-center">
+                                    <input type="checkbox" class="table-cb" value="${site.siteId}"/>
+                                </td>
                                 <td>${site.siteId}</td>
                                 <td>${site.siteName}</td>
-                                <td>${(site.isclosesite==1)?string("正常","关闭")}</td>
+                                <td>
+                                    ${(site.isclosesite==1)?string("<small class='badge bg-green'>正常</small>",
+                                    "<small class='badge bg-red'>关闭</small>")}
+                                </td>
                                 <td>${site.createDate?string("yyyy-MM-dd")}</td>
                                 <td>
-                                    <a href="<@spring.url '/manager/updatesite/${site.siteId}'/>">修改</a>
+                                    <a href="<@spring.url '/manager/updatesite/${site.siteId}'/>">修改</a>&nbsp;&nbsp;
                                     <a href="javascript:;" class="deletesite" data-id="${site.siteId}">删除</a>
                                 </td>
                             </tr>
@@ -101,6 +113,30 @@
                     }
                 },"json");
             }});
-        })
+        });
+
+        $("#thcheckbox").on('ifChecked', function(event){
+            $('.table-cb').iCheck('check');
+        });
+        $("#thcheckbox").on('ifUnchecked', function(event){
+            $('.table-cb').iCheck('uncheck');
+        });
+
+        $("#siteBatchDelete").click(function(){
+            var $chs = $(":checkbox[checked=checked]");
+            if($chs.length == 0){
+                $.v5cms.modalDialog({icon:'warning',content:"您还没有选中要操作的数据项！",width:250});
+                return;
+            }
+            var siteIds = [];
+            for(var i=0;i<$chs.length;i++){
+                var v = $($chs[i]).val();
+                if(v == "on") continue;
+                siteIds.push(v);
+            }
+            $.v5cms.confirm({icon:"question",content:"您确定要删除所有站点信息吗？",width:250,ok:function(){
+
+            }});
+        });
     });
 </script>
