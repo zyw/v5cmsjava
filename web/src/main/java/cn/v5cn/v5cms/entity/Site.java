@@ -1,6 +1,7 @@
 package cn.v5cn.v5cms.entity;
 
 import cn.v5cn.v5cms.util.annotation.Ignore;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import java.util.Date;
 public class Site implements Serializable {
 
     private Long siteId;
+    @NotEmpty
     private String siteName;
     private String siteDeputyTitle;
     private String siteKey;

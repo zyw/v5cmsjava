@@ -402,7 +402,8 @@
                                 站点管理
                             </a>
                         </li>
-                        <li><a href="pages/examples/login.html"><i class="fa fa-angle-double-right"></i> 广告管理</a></li>
+                        <li><a href="<@spring.url '/manager/advposlist'/>"><i class="fa fa-angle-double-right"></i> 广告管理</a></li>
+                        <li><a href="<@spring.url '/manager/advposlist'/>"><i class="fa fa-angle-double-right"></i> 广告版位</a></li>
                         <li><a href="pages/examples/register.html"><i class="fa fa-angle-double-right"></i> 连接管理</a>
                         </li>
                         <!--

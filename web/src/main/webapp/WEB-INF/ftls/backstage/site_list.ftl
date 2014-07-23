@@ -69,7 +69,7 @@
                                 <td>${site.createDate?string("yyyy-MM-dd")}</td>
                                 <td>
                                     <a href="<@spring.url '/manager/updatesite/${site.siteId}'/>">修改</a>&nbsp;&nbsp;
-                                    <a href="javascript:;" class="deletesite" data-id="${site.siteId}">删除</a>
+                                    <a href="javascript:;" class="deletesite" data-siteid="${site.siteId}">删除</a>
                                 </td>
                             </tr>
                             </#list>
@@ -97,11 +97,11 @@
         $("#addSite").click(function(){
             location.href="<@spring.url '/manager/addsite'/>";
         });
-        $(".deletesite").click(function(){
-            var tbId = $(this).attr("data-id");
-            $.v5cms.confirm({icon:"question",content:"您确定要删除站点信息吗？",ok:function(){
-                var url = "<@spring.url '/manager/deletesite/'/>" + tbId;
-                $.get(url,function(data){
+
+        function deleteSites(siteIds) {
+            $.v5cms.confirm({icon:"question",content:"您确定要删除所有站点信息吗？",width:250,ok:function(){
+                var url = "<@spring.url '/manager/deletesite'/>";
+                $.post(url,{siteIds:siteIds},function(data){
                     if(data.status == "1"){
                         $.v5cms.tooltip({icon:"succeed","content":data.message},function(){
                             location.reload();
@@ -113,6 +113,11 @@
                     }
                 },"json");
             }});
+        }
+
+        $(".deletesite").click(function(){
+            var siteId = $(this).data("siteid");
+            deleteSites(siteId);
         });
 
         $("#thcheckbox").on('ifChecked', function(event){
@@ -134,9 +139,7 @@
                 if(v == "on") continue;
                 siteIds.push(v);
             }
-            $.v5cms.confirm({icon:"question",content:"您确定要删除所有站点信息吗？",width:250,ok:function(){
-
-            }});
+            deleteSites(siteIds.join());
         });
     });
 </script>

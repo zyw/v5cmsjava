@@ -29,5 +29,5 @@ public interface SiteBiz {
     /**
      * 删除站点信息
      * */
-    void deleteSite(Long siteId);
+    void deleteSite(Long[] siteIds);
 }

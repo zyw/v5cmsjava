@@ -11,9 +11,6 @@ import java.util.List;
  */
 @Repository("siteDao")
 public interface SiteDao extends JpaRepository<Site,Long> {
-//    Site save(Site site);
-//    Iterable<Site> findAll();
-//    void delete(Long id);
     /**
      * 根据站点ID查询站点。
      * */
@@ -22,9 +19,4 @@ public interface SiteDao extends JpaRepository<Site,Long> {
      * 根据运行状态值查询站点
      * */
     List<Site> findByIsclosesite(int isclosesite);
-//    /**
-//     * 修改站点信息
-//     * */
-//    @Transactional
-//    int update(Site site);
 }

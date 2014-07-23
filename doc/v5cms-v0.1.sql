@@ -1,6 +1,8 @@
 create database 'v5cms';
 
---创建用户名
+use 'v5cms'
+
+/**创建用户名**/
 create table manager
 (
 	managerId           BIGINT not null AUTO_INCREMENT,
@@ -18,7 +20,7 @@ create table manager
 
 alter table manager comment '用户表';
 
---创建site表
+/**创建site表**/
 create table site
 (
 	siteId			BIGINT not null AUTO_INCREMENT,
@@ -37,7 +39,7 @@ create table site
 
 alter table site comment '网站信息表';
 
---创建广告表
+/**创建广告表**/
 create table adv
 (
   advId BIGINT not null AUTO_INCREMENT ,
@@ -49,6 +51,15 @@ create table adv
 
 alter table adv comment '广告表';
 
+/**广告版位**/
+CREATE TABLE advPos(
+  advPosId BIGINT NOT NULL AUTO_INCREMENT,
+  advPosName VARCHAR(100) NOT NULL        COMMENT '版位名称',
+  advPosState INT DEFAULT 0               COMMENT '状态0:关闭，1:启用',
+  advPosDes VARCHAR(2000)                  COMMENT '描述',
+  PRIMARY KEY (advPosId)
+)ENGINE=MYISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
+ALTER TABLE advPos COMMENT '广告版位';
 --友情连接表
 create table link
 (
