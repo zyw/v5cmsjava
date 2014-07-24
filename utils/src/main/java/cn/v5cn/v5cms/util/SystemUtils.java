@@ -2,9 +2,13 @@ package cn.v5cn.v5cms.util;
 
 import cn.v5cn.v5cms.util.annotation.Ignore;
 import org.apache.commons.beanutils.BeanUtilsBean;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.beans.PropertyDescriptor;
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -26,21 +30,6 @@ public class SystemUtils {
             throw new IllegalArgumentException("No origin bean specified");
         }
 
-        // Copy the properties, converting as necessary
-//        if (orig instanceof DynaBean) {
-//            DynaProperty[] origDescriptors =
-//                    ((DynaBean) orig).getDynaClass().getDynaProperties();
-//            for (int i = 0; i < origDescriptors.length; i++) {
-//                String name = origDescriptors[i].getName();
-//                // Need to check isReadable() for WrapDynaBean
-//                // (see Jira issue# BEANUTILS-61)
-//                if (BEAN_UTILS_BEAN.getPropertyUtils().isReadable(orig, name) &&
-//                        BEAN_UTILS_BEAN.getPropertyUtils().isWriteable(dest, name)) {
-//                    Object value = ((DynaBean) orig).get(name);
-//                    BEAN_UTILS_BEAN.copyProperty(dest, name, value);
-//                }
-//            }
-//        } else
         if (orig instanceof Map) {
             @SuppressWarnings("unchecked")
             // Map properties are always of type <String, Object>
@@ -72,5 +61,27 @@ public class SystemUtils {
             }
         }
 
+    }
+
+    public static String getFileNameExt(String fileName){
+        if(fileName == null || StringUtils.isEmpty(fileName)){
+            throw new RuntimeException("参数fileName不能为空值！");
+        }
+        return "."+FilenameUtils.getExtension(fileName);
+    }
+
+    public static String timeFileName(String fileName){
+        String fileExt = getFileNameExt(fileName);
+        return new Date().getTime()+fileExt;
+    }
+    /**
+     * 判断目录是否存在，如果不存在就创建
+     * */
+    public static boolean isNotExistCreate(String filePath){
+        File f = new File(filePath);
+        if(!f.exists()){
+            return f.mkdirs();
+        }
+        return true;
     }
 }

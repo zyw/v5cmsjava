@@ -1,8 +1,7 @@
 package cn.v5cn.v5cms.action;
 
-import com.google.common.base.Splitter;
+import cn.v5cn.v5cms.util.SystemUtils;
 import com.google.common.collect.ImmutableMap;
-import org.joda.time.DateTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import static cn.v5cn.v5cms.util.MessageSourceHelper.getMessage;
 
@@ -42,15 +40,14 @@ public class AdvAction {
             return ImmutableMap.<String,Object>of("status","0","message",getMessage("global.uploadempty.message"));
         }
         String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/uploads/advfiles/");
-        String timeName = DateTime.now().getMillis()+"";
-        List<String> fileNames =  Splitter.on(".").splitToList(file.getOriginalFilename());
-        String fileExts = fileNames.get(fileNames.size()-1);
+        SystemUtils.isNotExistCreate(realPath);
+        String timeFileName = SystemUtils.timeFileName(file.getOriginalFilename());
         try {
-            file.transferTo(new File(realPath+"/"+timeName + "."+fileExts));
+            file.transferTo(new File(realPath+"/"+timeFileName));
         } catch (IOException e) {
             e.printStackTrace();
             return ImmutableMap.<String,Object>of("status","0","message",getMessage("adv.uploaderror.message"));
         }
-        return ImmutableMap.<String,Object>of("status","0","message",getMessage("adv.uploaderror.message"),"filePath","/r/advfiles/"+timeName + "."+fileExts);
+        return ImmutableMap.<String,Object>of("status","0","message",getMessage("adv.uploaderror.message"),"filePath","/r/advfiles/"+timeFileName);
     }
 }
