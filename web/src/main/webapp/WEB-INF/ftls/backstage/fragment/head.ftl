@@ -397,12 +397,12 @@
                     </a>
                     <ul class="treeview-menu">
                         <li>
-                            <a href="<@spring.url '/manager/siteList'/>">
+                            <a href="<@spring.url '/manager/sitelist'/>">
                                 <i class="fa fa-angle-double-right"></i>
                                 站点管理
                             </a>
                         </li>
-                        <li><a href="<@spring.url '/manager/advposlist'/>"><i class="fa fa-angle-double-right"></i> 广告管理</a></li>
+                        <li><a href="<@spring.url '/manager/advlist'/>"><i class="fa fa-angle-double-right"></i> 广告管理</a></li>
                         <li><a href="<@spring.url '/manager/advposlist'/>"><i class="fa fa-angle-double-right"></i> 广告版位</a></li>
                         <li><a href="pages/examples/register.html"><i class="fa fa-angle-double-right"></i> 连接管理</a>
                         </li>

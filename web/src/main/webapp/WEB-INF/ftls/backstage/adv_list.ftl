@@ -4,13 +4,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            广告版位
+            广告管理
             <small>Control panel</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
             <li>站点设置</li>
-            <li class="active">广告版位</li>
+            <li class="active">广告管理</li>
         </ol>
     </section>
 
@@ -22,13 +22,13 @@
                 <div class="box-header">
                     <!-- tools box -->
                     <div class="pull-right box-tools">
-                        <button id="addAdvPos" class="btn btn-success btn-sm" data-toggle="tooltip" title="添加版位">
-                            <i class="fa fa-plus"></i> 添加版位</button>
+                        <button id="addAdv" class="btn btn-success btn-sm" data-toggle="tooltip" title="添加广告">
+                            <i class="fa fa-plus"></i> 添加广告</button>
                         <button id="advPosBatchDelete" class="btn btn-warning btn-sm" data-toggle="tooltip" title="批量删除">
                             <i class="fa fa-plus"></i> 批量删除</button>
                     </div><!-- /. tools -->
                     <i class="fa fa-table"></i>
-                    <h3 class="box-title">版位列表</h3>
+                    <h3 class="box-title">广告列表</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive">
@@ -52,29 +52,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <#if advposs?size != 0>
-                            <#list advposs as advpos>
-                            <tr>
-                                <td class="td-center">
-                                    <input type="checkbox" class="table-cb" value="${advpos.advPosId}"/>
-                                </td>
-                                <td>${advpos.advPosId}</td>
-                                <td>${advpos.advPosName}</td>
-                                <td>
-                                ${(advpos.advPosState==1)?string("<small class='badge bg-green'>开启</small>",
-                                "<small class='badge bg-red'>关闭</small>")}
-                                </td>
-                                <td>
-                                    <a href="<@spring.url '/manager/advposaup/'/>${advpos.advPosId}">修改</a>&nbsp;&nbsp;
-                                    <a href="javascript:;" class="deleteAdvPos" data-advposid="${advpos.advPosId}">删除</a>
-                                </td>
-                            </tr>
-                            </#list>
-                        <#else>
-                        <tr>
-                            <td colspan="5"><h3>还没有站点数据！</h3></td>
-                        </tr>
-                        </#if>
+
                         </tbody>
                     </table>
                 </div>
@@ -109,8 +87,8 @@
             }});
         }
 
-        $("#addAdvPos").click(function(){
-            location.href="<@spring.url '/manager/advposaup'/>";
+        $("#addAdv").click(function(){
+            location.href="<@spring.url '/manager/advaup'/>";
         });
 
         $(".deleteAdvPos").click(function(){

@@ -16,7 +16,8 @@
 
     <mvc:annotation-driven/>
 
-    <mvc:resources mapping="/r/**" location="/WEB-INF/ftls/backstage/static/,/WEB-INF/ftls/front/"/>
+    <mvc:resources mapping="/r/**"
+                   location="/WEB-INF/ftls/backstage/static/,/WEB-INF/ftls/front/,/WEB-INF/uploads/"/>
 
     <!--
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

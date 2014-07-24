@@ -11,7 +11,7 @@
             <li><a href="<@spring.url '/manager/index'/>"><i class="fa fa-dashboard"></i> 首页</a></li>
             <li>站点设置</li>
             <li><a href="<@spring.url '/manager/advposlist'/>">广告版位</a></li>
-            <li class="active">添加版位</li>
+            <li class="active">${page_title!"添加版位"}</li>
         </ol>
     </section>
 
@@ -29,18 +29,18 @@
                             <i class="fa fa-mail-forward"></i> 返回</button>
                     </div><!-- /. tools -->
                     <i class="fa fa-globe"></i>
-                    <h3 class="box-title">添加版位</h3>
+                    <h3 class="box-title">${page_title!"添加版位"}</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <form id="advPosForm" action="<@spring.url '/manager/advposau'/>" class="form-horizontal" role="form" method="POST">
                         <input type="hidden" value="${advpos.advPosId!""}" name="advPosId">
                         <div class="form-group">
-                            <label for="dvPosName" class="col-sm-2 control-label">版位名称</label>
+                            <label for="dvPosName" class="col-sm-2 control-label">版位名称 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" name="advPosName" id="advPosName"
                                        placeholder="版位名称" value="${advpos.advPosName!""}">
-                                <span class="help-block"><span style="color: #ff0000">*</span> 设置版位的名称，方便日后管理。</span>
+                                <span class="help-block">设置版位的名称，方便日后管理。</span>
                             </div>
                         </div>
                         <div class="form-group">

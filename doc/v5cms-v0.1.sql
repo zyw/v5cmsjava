@@ -58,8 +58,8 @@ CREATE TABLE advPos(
   advPosState INT DEFAULT 0               COMMENT '状态0:关闭，1:启用',
   advPosDes VARCHAR(2000)                  COMMENT '描述',
   PRIMARY KEY (advPosId)
-)ENGINE=MYISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
-ALTER TABLE advPos COMMENT '广告版位';
+)ENGINE=MYISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8 COMMENT '广告版位';
+
 --友情连接表
 create table link
 (

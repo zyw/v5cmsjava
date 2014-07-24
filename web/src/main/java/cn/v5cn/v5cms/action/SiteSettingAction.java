@@ -35,7 +35,7 @@ public class SiteSettingAction {
     @Autowired
     private SiteBiz siteBiz;
 
-    @RequestMapping(value = "/siteList",method = RequestMethod.GET)
+    @RequestMapping(value = "/sitelist",method = RequestMethod.GET)
     public String siteInfo(ModelMap model){
         ImmutableList<Site> result = siteBiz.finadAll();
         model.addAttribute("sites",result);
@@ -59,6 +59,7 @@ public class SiteSettingAction {
     public String updateSite(ModelMap model,@PathVariable Long siteId){
         Site result = siteBiz.findBySiteId(siteId);
         model.addAttribute("site",result);
+        model.addAttribute("page_title",getMessage("site.updatepage.title"));
         return "backstage/site_au";
     }
 
@@ -74,6 +75,7 @@ public class SiteSettingAction {
             }
             return ImmutableMap.<String, Object>builder().putAll(errorMessage).build();
         }
+        //修改操作
         if(site.getSiteId() != null){
             try {
                 siteBiz.updateSite(site);
@@ -86,6 +88,7 @@ public class SiteSettingAction {
             }
             return ImmutableMap.<String, Object>of("status","1","message", getMessage("site.updatesuccess.message"));
         }
+        //新增操作
         Long result = siteBiz.addSite(site);
         if(result != 0L){
             return ImmutableMap.<String, Object>of("status","1","message",getMessage("site.addsuccess.message"));

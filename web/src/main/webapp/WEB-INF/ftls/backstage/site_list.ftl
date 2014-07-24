@@ -99,7 +99,7 @@
         });
 
         function deleteSites(siteIds) {
-            $.v5cms.confirm({icon:"question",content:"您确定要删除所有站点信息吗？",width:250,ok:function(){
+            $.v5cms.confirm({icon:"question",content:"您确定要删除站点信息吗，删除后将不能恢复？",width:350,ok:function(){
                 var url = "<@spring.url '/manager/deletesite'/>";
                 $.post(url,{siteIds:siteIds},function(data){
                     if(data.status == "1"){

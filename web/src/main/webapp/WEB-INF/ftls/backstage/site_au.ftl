@@ -10,8 +10,8 @@
         <ol class="breadcrumb">
             <li><a href="<@spring.url '/manager/index'/>"><i class="fa fa-dashboard"></i> 首页</a></li>
             <li>站点设置</li>
-            <li><a href="<@spring.url '/manager/siteInfo'/>">站点管理</a></li>
-            <li class="active">添加站点</li>
+            <li><a href="<@spring.url '/manager/sitelist'/>">站点管理</a></li>
+            <li class="active">${page_title!"添加站点"}</li>
         </ol>
     </section>
 
@@ -29,18 +29,18 @@
                             <i class="fa fa-mail-forward"></i> 返回</button>
                     </div><!-- /. tools -->
                     <i class="fa fa-globe"></i>
-                    <h3 class="box-title">添加站点</h3>
+                    <h3 class="box-title">${page_title!"添加站点"}</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <form id="siteForm" action="<@spring.url '/manager/ausite'/>" class="form-horizontal" role="form" method="POST">
                         <input type="hidden" value="${site.siteId!""}" name="siteId">
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 control-label">站点名称</label>
+                            <label for="inputEmail3" class="col-sm-2 control-label">站点名称 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" name="siteName" id="siteName"
                                        placeholder="站点名称" value="${site.siteName!""}">
-                                <span class="help-block"><span style="color: #ff0000">*</span> 设置站点的标题，显示到title标签中。</span>
+                                <span class="help-block">设置站点的标题，显示到title标签中。</span>
                             </div>
                         </div>
                         <div class="form-group">
