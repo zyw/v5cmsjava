@@ -1,7 +1,10 @@
 package cn.v5cn.v5cms.action;
 
+import cn.v5cn.v5cms.util.HttpUtils;
 import cn.v5cn.v5cms.util.SystemUtils;
 import com.google.common.collect.ImmutableMap;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +42,7 @@ public class AdvAction {
         if(file.isEmpty()){
             return ImmutableMap.<String,Object>of("status","0","message",getMessage("global.uploadempty.message"));
         }
-        String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/uploads/advfiles/");
+        String realPath = HttpUtils.getRealPath(request,"/WEB-INF/uploads/advfiles/");
         SystemUtils.isNotExistCreate(realPath);
         String timeFileName = SystemUtils.timeFileName(file.getOriginalFilename());
         try {
@@ -48,6 +51,19 @@ public class AdvAction {
             e.printStackTrace();
             return ImmutableMap.<String,Object>of("status","0","message",getMessage("adv.uploaderror.message"));
         }
-        return ImmutableMap.<String,Object>of("status","0","message",getMessage("adv.uploaderror.message"),"filePath","/r/advfiles/"+timeFileName);
+        return ImmutableMap.<String,Object>of("status","1","message",getMessage("adv.uploadsuccess.message"),
+                "filePath","/r/advfiles/"+timeFileName,"contentPath", HttpUtils.getBasePath(request));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/deleteadvimage",method = RequestMethod.POST)
+    public ImmutableMap<String,Object> deleteAdvImage(String image_path,HttpServletRequest request){
+        String fileName = FilenameUtils.getName(image_path);
+        String realPath = HttpUtils.getRealPath(request,"/WEB-INF/uploads/advfiles/");
+        boolean result = FileUtils.deleteQuietly(new File(realPath+"/"+fileName));
+        if(result){
+            return ImmutableMap.<String,Object>of("status","1","message",getMessage("adv.imagedeletesuccess.message"));
+        }
+        return ImmutableMap.<String,Object>of("status","0","message",getMessage("adv.imagedeletefailed.message"));
     }
 }

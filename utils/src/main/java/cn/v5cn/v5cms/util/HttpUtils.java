@@ -16,4 +16,9 @@ public class HttpUtils {
         String path = request.getContextPath();
         return path;
     }
+
+    public static String getRealPath(HttpServletRequest request,String basePath){
+        String realPath = request.getSession().getServletContext().getRealPath(basePath);
+        return realPath;
+    }
 }

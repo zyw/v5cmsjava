@@ -15,6 +15,7 @@
 <script src="<@spring.url '/r/js/webuploader.min.js'/>" type="text/javascript"></script>
 <!-- AdminLTE App -->
 <script src="<@spring.url '/r/js/app.js'/>" type="text/javascript"></script>
-
+<!-- holder -->
+<script src="<@spring.url '/r/js/holder.js'/>" type="text/javascript"></script>
 </body>
 </html>

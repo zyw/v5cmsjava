@@ -45,7 +45,7 @@
                         </div>
                         <div class="form-group">
                             <label for="advPosId" class="col-sm-2 control-label">广告版位 <span style="color: #ff0000">*</span></label>
-                            <div class="col-sm-5">
+                            <div class="col-sm-4">
                                 <input type="text" class="form-control" name="advPosId" id="advPosId"
                                        placeholder="广告版位" value="">
                                 <#--<span class="help-block">设置站点的副标题，可以显示成title | 副标题的形式。</span>-->
@@ -96,15 +96,65 @@
                                     <div class="tab-content no-padding">
                                         <!-- Morris chart - Sales -->
                                         <div class="chart tab-pane active" id="image-type" style="position: relative;">
-                                        <div class="form-group">
-                                            <label for="inputPassword3" class="col-sm-2 control-label">图片上传</label>
-                                            <div class="col-sm-5" style="padding: 5px 0;">
-                                                <div id="advImageUpload">图片上传</div>
-                                                <#--<input type="button" id="advImageUpload" class="btn btn-success" value="图片上传">-->
+                                            <div class="row">
+                                                <div class="col-sm-8">
+                                                    <div class="form-group" style="margin-bottom: 0px;">
+                                                        <label for="inputPassword3" class="col-sm-3 control-label">图片上传 <span style="color: #ff0000">*</span></label>
+                                                        <div class="col-sm-7" style="padding-top: 5px;">
+                                                            <input type="hidden" name="adv_image_url" id="adv_image_url">
+                                                            <div id="advImageUpload">图片上传</div>
+                                                        <#--<input type="button" id="advImageUpload" class="btn btn-success" value="图片上传">-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="inputPassword3" class="col-sm-3 control-label">图片宽高</label>
+                                                        <div class="col-sm-8">
+                                                            <label class="checkbox-inline col-xs-4" style="padding-left: 0px;">
+                                                                <input type="text" class="form-control" id="k" placeholder="宽">
+                                                            </label>
+                                                            <label class="checkbox-inline col-xs-4" style="padding-left: 0px;">
+                                                                <input type="text" class="form-control" id="g" placeholder="高">
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="inputPassword3" class="col-sm-3 control-label">连接地址</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control" placeholder="连接地址" value="http://">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="inputPassword3" class="col-sm-3 control-label">连接提示</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control" placeholder="连接提示">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" style="padding-bottom: 10px;">
+                                                        <label for="inputPassword3" class="col-sm-3 control-label">打开方式</label>
+                                                        <div class="col-sm-8">
+                                                            <label class="radio-inline" style="padding-left: 0px;">
+                                                                <input type="radio" name="openType" checked value="_blank"> 新窗口
+                                                            </label>
+                                                            <label class="radio-inline" style="padding-left: 0px;">
+                                                                <input type="radio" name="openType" value="_self"> 当前窗口
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4" style="padding-top: 20px;">
+                                                    <a href="javascript:;" class="thumbnail" style="width: 170px;margin-bottom: 5px;">
+                                                        <img id="adv_Image_display_img" data-src="<@spring.url '/r/js/holder.js'/>/170x180/text:广告图片" alt="广告">
+                                                    </a>
+                                                    <div style="padding-left: 65px;">
+                                                        <a href="javascript:;" id="delete_adv_image">删除</a>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="chart tab-pane" id="flash-type" style="position: relative;">
+
                                         </div>
-                                        <div class="chart tab-pane" id="flash-type" style="position: relative; height: 300px;"></div>
                                         <div class="chart tab-pane" id="text-type" style="position: relative; height: 300px;"></div>
                                         <div class="chart tab-pane" id="code-type" style="position: relative; height: 300px;"></div>
                                     </div>
@@ -179,7 +229,7 @@
             swf: "<@spring.url '/r/js/Uploader.swf'/>",
             auto: true,
             // 文件接收服务端。
-            server: '<@spring.url '/manager/advupload'/>',
+            server: '<@spring.url '/manager/advupload?tt='/>'+new Date().getTime(),
             // 选择文件的按钮。可选。
             // 内部根据当前运行是创建，可能是input元素，也可能是flash.
             pick: '#advImageUpload',
@@ -191,12 +241,44 @@
             }
         });
         uploadImage.on( 'uploadSuccess', function( file,response ) {
-            $( '#'+file.id ).find('p.state').text('已上传');
+            if(response.status == '0'){
+                $.v5cms.tooltip({icon:"error",content:response.message},function(){});
+                return;
+            }
+            $("#adv_image_url").val(response.filePath);
+            $("#adv_Image_display_img").attr("src",(response.contentPath+response.filePath));
         });
 
         uploadImage.on( 'uploadError', function( file,reason  ) {
-            $( '#'+file.id ).find('p.state').text('上传出错');
+            $.v5cms.tooltip({icon:"error",content:"上传图片出错！"},function(){});
         });
+        uploadImage.on("beforeFileQueued",function(file){
+            var temp = $("#adv_image_url").val();
+            if(temp != null && temp != ""){
+                $.v5cms.tooltip({icon:"error",content:"您已经上传了一张图片，请先删除在上传！",timeout:1000},function(){});
+                return false;
+            }
+            return true;
+        });
+
+        $("#delete_adv_image").click(function(){
+            var temp = $("#adv_image_url").val();
+            if(temp == null || temp == ""){
+                $.v5cms.tooltip({icon:"error",content:"没有图片片需要删除！",timeout:1000},function(){});
+                return;
+            }
+            $.post("<@spring.url '/manager/deleteadvimage'/>",{image_path:temp},function(data){
+                if(data.status == '0'){
+                    $.v5cms.tooltip({icon:"error",content:data.message},function(){});
+                    return;
+                }
+                $.v5cms.tooltip({icon:"succeed",content:data.message},function(){
+                    $("#adv_image_url").val("");
+                    Holder.run();
+                });
+            },'json');
+        });
+
         $('#siteForm').ajaxForm({
             dataType : 'json',
             success : function(data) {
