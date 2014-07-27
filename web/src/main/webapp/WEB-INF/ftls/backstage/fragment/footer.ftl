@@ -5,6 +5,8 @@
 <script src="<@spring.url '/r/js/jquery-1.8.3.min.js'/>" type="text/javascript"></script>
 <!-- daterangepicker -->
 <script src="<@spring.url '/r/js/daterangepicker.js'/>" type="text/javascript"></script>
+<!-- colorpicker -->
+<script src="<@spring.url '/r/js/bootstrap-colorpicker.min.js'/>" type="text/javascript"></script>
 <!-- Bootstrap -->
 <script src="<@spring.url '/r/js/bootstrap.min.js'/>" type="text/javascript"></script>
 <!-- form asynchron submit lib-->

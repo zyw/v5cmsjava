@@ -43,6 +43,7 @@ public class AdvAction {
             return ImmutableMap.<String,Object>of("status","0","message",getMessage("global.uploadempty.message"));
         }
         String realPath = HttpUtils.getRealPath(request,"/WEB-INF/uploads/advfiles/");
+
         SystemUtils.isNotExistCreate(realPath);
         String timeFileName = SystemUtils.timeFileName(file.getOriginalFilename());
         try {
@@ -59,7 +60,7 @@ public class AdvAction {
     @RequestMapping(value = "/deleteadvimage",method = RequestMethod.POST)
     public ImmutableMap<String,Object> deleteAdvImage(String image_path,HttpServletRequest request){
         String fileName = FilenameUtils.getName(image_path);
-        String realPath = HttpUtils.getRealPath(request,"/WEB-INF/uploads/advfiles/");
+        String realPath = HttpUtils.getRealPath(request, "/WEB-INF/uploads/advfiles/");
         boolean result = FileUtils.deleteQuietly(new File(realPath+"/"+fileName));
         if(result){
             return ImmutableMap.<String,Object>of("status","1","message",getMessage("adv.imagedeletesuccess.message"));

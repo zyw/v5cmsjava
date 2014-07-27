@@ -11,6 +11,8 @@
     <link href="<@spring.url '/r/css/font-awesome.min.css'/>" rel="stylesheet" type="text/css"/>
     <!-- Ionicons -->
     <link href="<@spring.url '/r/css/ionicons.min.css'/>" rel="stylesheet" type="text/css"/>
+    <!-- colorpicker -->
+    <link href="<@spring.url '/r/css/bootstrap-colorpicker.min.css'/>" rel="stylesheet" type="text/css"/>
     <!-- artDialog -->
     <link href="<@spring.url '/r/css/ui-dialog.css'/>" rel="stylesheet" type="text/css"/>
     <!-- Theme style -->

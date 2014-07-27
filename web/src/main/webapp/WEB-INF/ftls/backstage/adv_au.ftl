@@ -103,7 +103,6 @@
                                                         <div class="col-sm-7" style="padding-top: 5px;">
                                                             <input type="hidden" name="adv_image_url" id="adv_image_url">
                                                             <div id="advImageUpload">图片上传</div>
-                                                        <#--<input type="button" id="advImageUpload" class="btn btn-success" value="图片上传">-->
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -153,48 +152,83 @@
                                             </div>
                                         </div>
                                         <div class="chart tab-pane" id="flash-type" style="position: relative;">
-
+                                            <div class="form-group" style="margin-bottom: 5px;margin-top: 5px;">
+                                                <label for="inputPassword3" class="col-sm-2 control-label">Flash地址 <span style="color: #ff0000">*</span></label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="adv_flash_url" name="adv_flash_url" placeholder="Flash地址">
+                                                </div>
+                                            </div>
+                                            <div class="form-group" style="margin-bottom: 0px;">
+                                                <label for="inputPassword3" class="col-sm-2 control-label">Flash上传</label>
+                                                <div class="col-sm-7" style="padding-top: 5px;">
+                                                    <div id="advFlashUpload">Flash上传</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" style="padding-bottom: 20px;">
+                                                <label for="inputPassword3" class="col-sm-2 control-label">Flash宽高</label>
+                                                <div class="col-sm-8">
+                                                    <label class="checkbox-inline col-xs-4" style="padding-left: 0px;">
+                                                        <input type="text" class="form-control" placeholder="宽">
+                                                    </label>
+                                                    <label class="checkbox-inline col-xs-4" style="padding-left: 0px;">
+                                                        <input type="text" class="form-control" placeholder="高">
+                                                    </label>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="chart tab-pane" id="text-type" style="position: relative; height: 300px;"></div>
-                                        <div class="chart tab-pane" id="code-type" style="position: relative; height: 300px;"></div>
+                                        <div class="chart tab-pane" id="text-type" style="position: relative;">
+                                            <div class="form-group" style="margin-bottom: 5px;margin-top: 5px;">
+                                                <label for="inputPassword3" class="col-sm-2 control-label">文字内容 <span style="color: #ff0000">*</span></label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" placeholder="文字内容">
+                                                </div>
+                                            </div>
+                                            <div class="form-group" style="margin-bottom: 0px;">
+                                                <label for="inputPassword3" class="col-sm-2 control-label">文字地址</label>
+                                                <div class="col-sm-7" style="padding-top: 5px;">
+                                                    <input type="text" class="form-control" placeholder="文字内容" value="http://">
+                                                </div>
+                                            </div>
+                                            <div class="form-group" style="margin-bottom: 0px;">
+                                                <label for="inputPassword3" class="col-sm-2 control-label">文字颜色</label>
+                                                <div class="input-group text-color col-sm-7" style="padding-top: 5px;padding-left: 15px;">
+                                                    <input type="text" id="adv_text_color" name="adv_text_color" class="form-control" placeholder="文字颜色">
+                                                    <div class="input-group-addon">
+                                                        <i></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" style="margin-bottom: 0px;">
+                                                <label for="inputPassword3" class="col-sm-2 control-label">文字大小</label>
+                                                <div class="col-sm-7" style="padding-top: 5px;">
+                                                    <input type="text" class="form-control" placeholder="文字大小">
+                                                    <span class="help-block">使用px，如12px</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" style="padding-bottom: 10px;">
+                                                <label for="inputPassword3" class="col-sm-2 control-label">打开方式</label>
+                                                <div class="col-sm-8">
+                                                    <label class="radio-inline" style="padding-left: 0px;">
+                                                        <input type="radio" name="openType" checked value="_blank"> 新窗口
+                                                    </label>
+                                                    <label class="radio-inline" style="padding-left: 0px;">
+                                                        <input type="radio" name="openType" value="_self"> 当前窗口
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="chart tab-pane" id="code-type" style="position: relative;">
+                                            <div class="form-group">
+                                                <label for="inputPassword3" class="col-sm-2 control-label">广告代码</label>
+                                                <div class="col-sm-7">
+                                                    <textarea class="form-control" name="siteDescribed" id="siteDescribed" rows="5"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div><!-- /.nav-tabs-custom -->
                             </div>
                         </div>
-
-                        <#--<div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">统计代码</label>
-                            <div class="col-sm-8">
-                                <!-- Custom tabs (Charts with tabs)-->
-                                <#--<div class="nav-tabs-custom">
-                                    <input type="hidden" id="hidden_advType" name="advType" value="1">
-                                    <!-- Tabs within a box &ndash;&gt;
-                                    <ul class="nav nav-tabs" id="advType">
-                                        <li class="active">
-                                            <a href="#image-type" data-advtype="1" data-toggle="tab">图片</a>
-                                        </li>
-                                        <li><a href="#flash-type" data-advtype="2" data-toggle="tab">Flash</a></li>
-                                        <li><a href="#text-type" data-advtype="3" data-toggle="tab">文字</a></li>
-                                        <li><a href="#code-type" data-advtype="4" data-toggle="tab">代码</a></li>
-                                    </ul>
-                                    <div class="tab-content no-padding">
-                                        <!-- Morris chart - Sales &ndash;&gt;
-                                        <div class="chart tab-pane active" id="image-type" style="position: relative; height: 300px;"></div>
-                                        <div class="chart tab-pane" id="flash-type" style="position: relative; height: 300px;"></div>
-                                        <div class="chart tab-pane" id="text-type" style="position: relative; height: 300px;"></div>
-                                        <div class="chart tab-pane" id="code-type" style="position: relative; height: 300px;"></div>
-                                    </div>
-                                </div><!-- /.nav-tabs-custom &ndash;&gt;
-                            </div>
-                        </div>-->
-                        <#--<div class="form-group">-->
-                            <#--<label for="inputPassword3" class="col-sm-2 control-label">底部信息</label>-->
-                            <#--<div class="col-sm-5">-->
-                                <#--<textarea class="form-control" name="siteFooterInfo" id="siteFooterInfo" rows="3">${site.siteFooterInfo!""}</textarea>-->
-                                <#--<span class="help-block">用于保存网站的底部信息，支持HTML。</span>-->
-                            <#--</div>-->
-                        <#--</div>-->
-
                     </form>
                 </div>
                 <!-- /.box-body -->
@@ -223,6 +257,7 @@
             $("#hidden_advType").val(advType);
         });
 
+        //上传图片
         var uploadImage = WebUploader.create({
 
             // swf文件路径
@@ -278,6 +313,46 @@
                 });
             },'json');
         });
+
+        //上传Flash
+        var uploadFlash = WebUploader.create({
+
+            // swf文件路径
+            swf: "<@spring.url '/r/js/Uploader.swf'/>",
+            auto: true,
+            // 文件接收服务端。
+            server: '<@spring.url '/manager/advupload?tt='/>'+new Date().getTime(),
+            // 选择文件的按钮。可选。
+            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+            pick: '#advFlashUpload',
+
+            accept: {
+                title: 'Flash',
+                extensions: 'swf',
+                mimeTypes: 'application/x-shockwave-flash'
+            }
+        });
+        uploadFlash.on( 'uploadSuccess', function( file,response ) {
+            if(response.status == '0'){
+                $.v5cms.tooltip({icon:"error",content:response.message},function(){});
+                return;
+            }
+            $("#adv_flash_url").val(response.filePath);
+        });
+
+        uploadFlash.on( 'uploadError', function( file,reason  ) {
+            $.v5cms.tooltip({icon:"error",content:"上传Flash出错！"},function(){});
+        });
+        uploadFlash.on("beforeFileQueued",function(file){
+            var temp = $("#adv_flash_url").val();
+            if(temp != null && temp != ""){
+                $.v5cms.tooltip({icon:"error",content:"您已经上传了Flash，请先删除在上传！",timeout:1000},function(){});
+                return false;
+            }
+            return true;
+        });
+
+        $(".text-color").colorpicker();
 
         $('#siteForm').ajaxForm({
             dataType : 'json',

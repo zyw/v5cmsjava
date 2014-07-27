@@ -1649,7 +1649,7 @@ legend {
 label {
   display: inline-block;
   margin-bottom: 5px;
-  font-weight: bold;
+  font-weight:normal;
 }
 input[type="search"] {
   -webkit-box-sizing: border-box;
