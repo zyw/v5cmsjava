@@ -1,10 +1,17 @@
 package cn.v5cn.v5cms.action;
 
+import cn.v5cn.v5cms.biz.AdvBiz;
+import cn.v5cn.v5cms.biz.AdvPosBiz;
+import cn.v5cn.v5cms.entity.Adv;
+import cn.v5cn.v5cms.entity.AdvPos;
+import cn.v5cn.v5cms.entity.wrapper.AdvWrapper;
 import cn.v5cn.v5cms.util.HttpUtils;
 import cn.v5cn.v5cms.util.SystemUtils;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +32,11 @@ import static cn.v5cn.v5cms.util.MessageSourceHelper.getMessage;
 @RequestMapping("/manager")
 public class AdvAction {
 
+    @Autowired
+    private AdvPosBiz advPosBiz;
+    @Autowired
+    private AdvBiz advBiz;
+
     @RequestMapping(value = "/advlist",method = RequestMethod.GET)
     public String advList(){
         return "backstage/adv_list";
@@ -32,8 +44,17 @@ public class AdvAction {
 
     @RequestMapping(value = "/advaup",method = RequestMethod.GET)
     public String advPosaup(ModelMap model){
-        //model.addAttribute("advpos",new AdvPos());
+        ImmutableList<AdvPos> advposes = advPosBiz.finadAll();
+        model.addAttribute("aps",advposes);
+        model.addAttribute(new Adv());
         return "backstage/adv_au";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/advau",method = RequestMethod.POST)
+    public ImmutableMap<String,Object> advAU(AdvWrapper advWrapper){
+        System.out.println(advWrapper);
+        return ImmutableMap.of();
     }
 
     @ResponseBody
@@ -57,14 +78,17 @@ public class AdvAction {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/deleteadvimage",method = RequestMethod.POST)
-    public ImmutableMap<String,Object> deleteAdvImage(String image_path,HttpServletRequest request){
-        String fileName = FilenameUtils.getName(image_path);
+    @RequestMapping(value = "/deleteadvif",method = RequestMethod.POST)
+    public ImmutableMap<String,Object> deleteAdvImage(String if_path,HttpServletRequest request){
+        String fileExt = FilenameUtils.getExtension(if_path);
+        String fileName = FilenameUtils.getName(if_path);
         String realPath = HttpUtils.getRealPath(request, "/WEB-INF/uploads/advfiles/");
         boolean result = FileUtils.deleteQuietly(new File(realPath+"/"+fileName));
         if(result){
-            return ImmutableMap.<String,Object>of("status","1","message",getMessage("adv.imagedeletesuccess.message"));
+            String successMessage = "swf".equalsIgnoreCase(fileExt)?getMessage("adv.flashdeletesuccess.message"):getMessage("adv.imagedeletesuccess.message");
+            return ImmutableMap.<String,Object>of("status","1","message",successMessage);
         }
-        return ImmutableMap.<String,Object>of("status","0","message",getMessage("adv.imagedeletefailed.message"));
+        String failedMessage = "swf".equalsIgnoreCase(fileExt)?getMessage("adv.flashdeletefailed.message"):getMessage("adv.imagedeletefailed.message");
+        return ImmutableMap.<String,Object>of("status","0","message",failedMessage);
     }
 }

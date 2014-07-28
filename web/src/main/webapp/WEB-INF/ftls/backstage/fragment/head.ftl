@@ -17,6 +17,8 @@
     <link href="<@spring.url '/r/css/ui-dialog.css'/>" rel="stylesheet" type="text/css"/>
     <!-- Theme style -->
     <link href="<@spring.url '/r/css/AdminLTE.css'/>" rel="stylesheet" type="text/css"/>
+    <!-- bootstrap-chosen -->
+    <link href="<@spring.url '/r/css/bootstrap-chosen.min.css'/>" rel="stylesheet" type="text/css"/>
     <!--custom CSS-->
     <link href="<@spring.url '/r/css/main.css'/>" rel="stylesheet" type="text/css"/>
 

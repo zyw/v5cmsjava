@@ -23,7 +23,7 @@
                 <div class="box-header">
                     <!-- tools box -->
                     <div class="pull-right box-tools">
-                        <button id="saveSiteForm" class="btn btn-success btn-sm" data-toggle="tooltip" title="保存">
+                        <button id="saveAdvForm" class="btn btn-success btn-sm" data-toggle="tooltip" title="保存">
                             <i class="fa fa-save"></i> 保存</button>
                         <button id="backAdvList" class="btn btn-default btn-sm" data-toggle="tooltip" title="返回">
                             <i class="fa fa-mail-forward"></i> 返回</button>
@@ -33,12 +33,12 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form id="siteForm" action="<@spring.url '/manager/ausite'/>" class="form-horizontal" role="form" method="POST">
-                        <input type="hidden" value="" name="siteId">
+                    <form id="advForm" action="<@spring.url '/manager/advau'/>" class="form-horizontal" role="form" method="POST">
+                        <input type="hidden" name="adv.advId">
                         <div class="form-group">
                             <label for="advName" class="col-sm-2 control-label">广告名称 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" name="advName" id="advName"
+                                <input type="text" class="form-control" name="adv.advName" id="advName"
                                        placeholder="广告名称" value="">
                                 <span class="help-block">设置广告名称。</span>
                             </div>
@@ -46,16 +46,26 @@
                         <div class="form-group">
                             <label for="advPosId" class="col-sm-2 control-label">广告版位 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" name="advPosId" id="advPosId"
-                                       placeholder="广告版位" value="">
+                                <select data-placeholder="广告版位" class="form-control" id="advPosId" name="adv.advPosId">
+                                    <#if aps?size != 0>
+                                        <option value=""></option>
+                                        <#list aps as ap>
+                                            <option value="${ap.advPosId}">${ap.advPosName}</option>
+                                        </#list>
+                                    <#else>
+                                        <option value="-1">还没有版位信息</option>
+                                    </#if>
+                                </select>
                                 <#--<span class="help-block">设置站点的副标题，可以显示成title | 副标题的形式。</span>-->
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="advStartEndTime" class="col-sm-2 control-label">开始结束时间</label>
                             <div class="col-sm-4 input-group" style="padding-left: 15px;">
-                                <input type="text" class="form-control" name="advStartEndTime" id="advStartEndTime"
-                                       placeholder="开始结束时间" value="">
+                                <input type="text" class="form-control" id="advStartEndTime"
+                                       placeholder="开始结束时间" readonly>
+                                <input type="hidden" name="adv.advStartTime" id="advStartTime">
+                                <input type="hidden" name="adv.advEndTime" id="advEndTime">
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
@@ -64,7 +74,7 @@
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">启用 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-3">
-                                <select class="form-control" id="startUsing" name="startUsing">
+                                <select class="form-control" id="startUsing" name="adv.startUsing">
                                     <option value="1" selected>是</option>
                                     <option value="0">否</option>
                                 <#--<#if (site.isclosesite!0) == 1>
@@ -83,7 +93,7 @@
                             <div class="col-sm-8">
                                 <!-- Custom tabs (Charts with tabs)-->
                                 <div class="nav-tabs-custom">
-                                    <input type="hidden" id="hidden_advType" name="advType" value="1">
+                                    <input type="hidden" id="hidden_advType" name="adv.advType" value="1">
                                     <!-- Tabs within a box -->
                                     <ul class="nav nav-tabs" id="advType">
                                         <li class="active">
@@ -101,7 +111,7 @@
                                                     <div class="form-group" style="margin-bottom: 0px;">
                                                         <label for="inputPassword3" class="col-sm-3 control-label">图片上传 <span style="color: #ff0000">*</span></label>
                                                         <div class="col-sm-7" style="padding-top: 5px;">
-                                                            <input type="hidden" name="adv_image_url" id="adv_image_url">
+                                                            <input type="hidden" name="ati['typeInfo'].adv_image_url" id="adv_image_url">
                                                             <div id="advImageUpload">图片上传</div>
                                                         </div>
                                                     </div>
@@ -109,33 +119,33 @@
                                                         <label for="inputPassword3" class="col-sm-3 control-label">图片宽高</label>
                                                         <div class="col-sm-8">
                                                             <label class="checkbox-inline col-xs-4" style="padding-left: 0px;">
-                                                                <input type="text" class="form-control" id="k" placeholder="宽">
+                                                                <input type="text" class="form-control" name="ati['typeInfo'].adv_image_width" id="adv_image_width" placeholder="宽">
                                                             </label>
                                                             <label class="checkbox-inline col-xs-4" style="padding-left: 0px;">
-                                                                <input type="text" class="form-control" id="g" placeholder="高">
+                                                                <input type="text" class="form-control" name="ati['typeInfo'].adv_image_height" id="adv_image_height" placeholder="高">
                                                             </label>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="inputPassword3" class="col-sm-3 control-label">连接地址</label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control" placeholder="连接地址" value="http://">
+                                                            <input type="text" class="form-control" id="adv_image_link" name="ati['typeInfo'].adv_image_link" placeholder="连接地址" value="http://">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="inputPassword3" class="col-sm-3 control-label">连接提示</label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control" placeholder="连接提示">
+                                                            <input type="text" class="form-control" id="adv_image_title" name="ati['typeInfo'].adv_image_title" placeholder="连接提示">
                                                         </div>
                                                     </div>
                                                     <div class="form-group" style="padding-bottom: 10px;">
                                                         <label for="inputPassword3" class="col-sm-3 control-label">打开方式</label>
                                                         <div class="col-sm-8">
                                                             <label class="radio-inline" style="padding-left: 0px;">
-                                                                <input type="radio" name="openType" checked value="_blank"> 新窗口
+                                                                <input type="radio" name="ati['typeInfo'].adv_image_openType" checked value="_blank"> 新窗口
                                                             </label>
                                                             <label class="radio-inline" style="padding-left: 0px;">
-                                                                <input type="radio" name="openType" value="_self"> 当前窗口
+                                                                <input type="radio" name="adv_image_openType" value="_self"> 当前窗口
                                                             </label>
                                                         </div>
                                                     </div>
@@ -154,8 +164,13 @@
                                         <div class="chart tab-pane" id="flash-type" style="position: relative;">
                                             <div class="form-group" style="margin-bottom: 5px;margin-top: 5px;">
                                                 <label for="inputPassword3" class="col-sm-2 control-label">Flash地址 <span style="color: #ff0000">*</span></label>
-                                                <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="adv_flash_url" name="adv_flash_url" placeholder="Flash地址">
+                                                <div class="col-sm-5 input-group" style="padding-left: 15px;">
+                                                    <input type="text" class="form-control" id="adv_flash_url" name="ati['typeInfo'].adv_flash_url" placeholder="Flash地址">
+                                                    <span class="input-group-btn">
+                                                        <button id="delete_adv_flash" class="btn btn-default" type="button">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="form-group" style="margin-bottom: 0px;">
@@ -168,10 +183,10 @@
                                                 <label for="inputPassword3" class="col-sm-2 control-label">Flash宽高</label>
                                                 <div class="col-sm-8">
                                                     <label class="checkbox-inline col-xs-4" style="padding-left: 0px;">
-                                                        <input type="text" class="form-control" placeholder="宽">
+                                                        <input type="text" class="form-control" id="adv_flash_width" name="ati['typeInfo'].adv_flash_width" placeholder="宽">
                                                     </label>
                                                     <label class="checkbox-inline col-xs-4" style="padding-left: 0px;">
-                                                        <input type="text" class="form-control" placeholder="高">
+                                                        <input type="text" class="form-control" id="adv_flash_height" name="ati['typeInfo'].adv_flash_height" placeholder="高">
                                                     </label>
                                                 </div>
                                             </div>
@@ -180,19 +195,19 @@
                                             <div class="form-group" style="margin-bottom: 5px;margin-top: 5px;">
                                                 <label for="inputPassword3" class="col-sm-2 control-label">文字内容 <span style="color: #ff0000">*</span></label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" placeholder="文字内容">
+                                                    <input type="text" class="form-control" id="adv_text_content" name="ati['typeInfo'].adv_text_content" placeholder="文字内容">
                                                 </div>
                                             </div>
                                             <div class="form-group" style="margin-bottom: 0px;">
                                                 <label for="inputPassword3" class="col-sm-2 control-label">文字地址</label>
                                                 <div class="col-sm-7" style="padding-top: 5px;">
-                                                    <input type="text" class="form-control" placeholder="文字内容" value="http://">
+                                                    <input type="text" class="form-control" id="adv_text_link" name="ati['typeInfo'].adv_text_link" placeholder="文字内容" value="http://">
                                                 </div>
                                             </div>
                                             <div class="form-group" style="margin-bottom: 0px;">
                                                 <label for="inputPassword3" class="col-sm-2 control-label">文字颜色</label>
-                                                <div class="input-group text-color col-sm-7" style="padding-top: 5px;padding-left: 15px;">
-                                                    <input type="text" id="adv_text_color" name="adv_text_color" class="form-control" placeholder="文字颜色">
+                                                <div class="input-group text-color col-sm-4" style="padding-top: 5px;padding-left: 15px;">
+                                                    <input type="text" id="adv_text_color" name="ati['typeInfo'].adv_text_color" class="form-control" placeholder="文字颜色">
                                                     <div class="input-group-addon">
                                                         <i></i>
                                                     </div>
@@ -200,8 +215,8 @@
                                             </div>
                                             <div class="form-group" style="margin-bottom: 0px;">
                                                 <label for="inputPassword3" class="col-sm-2 control-label">文字大小</label>
-                                                <div class="col-sm-7" style="padding-top: 5px;">
-                                                    <input type="text" class="form-control" placeholder="文字大小">
+                                                <div class="col-sm-4" style="padding-top: 5px;">
+                                                    <input type="text" class="form-control" id="adv_text_size" name="ati['typeInfo'].adv_text_size" placeholder="文字大小">
                                                     <span class="help-block">使用px，如12px</span>
                                                 </div>
                                             </div>
@@ -209,10 +224,10 @@
                                                 <label for="inputPassword3" class="col-sm-2 control-label">打开方式</label>
                                                 <div class="col-sm-8">
                                                     <label class="radio-inline" style="padding-left: 0px;">
-                                                        <input type="radio" name="openType" checked value="_blank"> 新窗口
+                                                        <input type="radio" name="ati['typeInfo'].adv_text_openType" checked value="_blank"> 新窗口
                                                     </label>
                                                     <label class="radio-inline" style="padding-left: 0px;">
-                                                        <input type="radio" name="openType" value="_self"> 当前窗口
+                                                        <input type="radio" name="ati['typeInfo'].adv_text_openType" value="_self"> 当前窗口
                                                     </label>
                                                 </div>
                                             </div>
@@ -221,7 +236,7 @@
                                             <div class="form-group">
                                                 <label for="inputPassword3" class="col-sm-2 control-label">广告代码</label>
                                                 <div class="col-sm-7">
-                                                    <textarea class="form-control" name="siteDescribed" id="siteDescribed" rows="5"></textarea>
+                                                    <textarea class="form-control" name="adv.advCode" id="advCode" rows="5"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -243,13 +258,43 @@
 <#include "fragment/footer.ftl">
 <script type="text/javascript">
     $(function(){
+
+        function deleteImageFlash(options){
+            var settings = $.extend({
+                resPath:"",
+                errMessage:"没有图片需要删除!",
+                sCallBack:function(){}
+            },options);
+            if(settings.resPath == null || settings.resPath == ""){
+                $.v5cms.tooltip({icon:"error",content:settings.errMessage,timeout:1000},function(){});
+                return;
+            }
+            $.post("<@spring.url '/manager/deleteadvif'/>",{if_path:settings.resPath},function(data){
+                if(data.status == '0'){
+                    $.v5cms.tooltip({icon:"error",content:data.message},function(){});
+                    return;
+                }
+                $.v5cms.tooltip({icon:"succeed",content:data.message},settings.sCallBack());
+            },'json');
+        }
+
         $("#nav_siteSetting").imitClick();
         $("#backAdvList").click(function(){
             location.href="<@spring.url '/manager/advlist'/>"
         });
-
+        //日期空间操作
         $("#advStartEndTime").daterangepicker({
             format: 'YYYY年MM月DD日',
+        });
+        $('#advStartEndTime').on('apply.daterangepicker', function(ev, picker) {
+            $("#advStartTime").val(picker.startDate.format('YYYY-MM-DD'));
+            $("#advEndTime").val(picker.endDate.format('YYYY-MM-DD'));
+
+        });
+        $('#advStartEndTime').on('cancel.daterangepicker', function(ev, picker) {
+            $("#advStartTime").val('');
+            $("#advEndTime").val('');
+            $("#advStartEndTime").val('');
         });
 
         $("#advType").on("shown.bs.tab",function(e){
@@ -298,20 +343,19 @@
 
         $("#delete_adv_image").click(function(){
             var temp = $("#adv_image_url").val();
-            if(temp == null || temp == ""){
-                $.v5cms.tooltip({icon:"error",content:"没有图片片需要删除！",timeout:1000},function(){});
-                return;
-            }
-            $.post("<@spring.url '/manager/deleteadvimage'/>",{image_path:temp},function(data){
-                if(data.status == '0'){
-                    $.v5cms.tooltip({icon:"error",content:data.message},function(){});
-                    return;
-                }
-                $.v5cms.tooltip({icon:"succeed",content:data.message},function(){
-                    $("#adv_image_url").val("");
-                    Holder.run();
-                });
-            },'json');
+            var options = {resPath:temp,sCallBack:function(){
+                $("#adv_image_url").val("");
+                Holder.run();
+            }};
+            deleteImageFlash(options);
+        });
+
+        $("#delete_adv_flash").click(function(){
+            var temp = $("#adv_flash_url").val();
+            var options = {resPath:temp,errMessage:"没有要删除的Flash!",sCallBack:function(){
+                $("#adv_flash_url").val("");
+            }};
+            deleteImageFlash(options);
         });
 
         //上传Flash
@@ -354,12 +398,15 @@
 
         $(".text-color").colorpicker();
 
-        $('#siteForm').ajaxForm({
+        $("#startUsing").chosen({disable_search_threshold: 10});
+        $("#advPosId").chosen();
+
+        $('#advForm').ajaxForm({
             dataType : 'json',
             success : function(data) {
                 if(data.status == "1"){
                     $.v5cms.tooltip({icon:"succeed",content:data.message},function(){
-                        location.href="<@spring.url '/manager/siteList'/>";
+                        location.href="<@spring.url '/manager/advlist'/>";
                     });
                 }else{
                     $.v5cms.tooltip({icon:"error",content:data.message},function(){});
@@ -367,9 +414,10 @@
             }
         });
 
-        $("#saveSiteForm").click(function(){
-            var result = $("#siteName").nonEmpty({content:"网站名称不能为空！"});
-            if(result) $("#siteForm").submit();
+        $("#saveAdvForm").click(function(){
+            var advNameVail = $("#advName").nonEmpty({content:"广告名称不能为空！"});
+            var advPosIdVail = $("#advPosId").nonEmpty({content:"广告版位不能为空！"});
+            if(advNameVail && advPosIdVail) $("#advForm").submit();
         });
     });
 </script>

@@ -11,6 +11,8 @@
 <script src="<@spring.url '/r/js/bootstrap.min.js'/>" type="text/javascript"></script>
 <!-- form asynchron submit lib-->
 <script src="<@spring.url '/r/js/jquery.form.js'/>" type="text/javascript"></script>
+<!-- chosen.jquery.js-->
+<script src="<@spring.url '/r/js/chosen.jquery.min.js'/>" type="text/javascript"></script>
 <!-- artDialog -->
 <script src="<@spring.url '/r/js/dialog-min.js'/>" type="text/javascript"></script>
 <!-- webuploader -->
