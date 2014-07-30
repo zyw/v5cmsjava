@@ -109,7 +109,7 @@ public class Adv implements Serializable {
         this.advTypeInfo = advTypeInfo;
     }
 
-    @ManyToOne
+    @ManyToOne(targetEntity = AdvPos.class)
     public AdvPos getAdvPos() {
         return advPos;
     }

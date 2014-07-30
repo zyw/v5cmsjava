@@ -15,12 +15,10 @@ import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,7 +42,9 @@ public class AdvAction {
     private AdvBiz advBiz;
 
     @RequestMapping(value = "/advlist",method = RequestMethod.GET)
-    public String advList(){
+    public String advList(@RequestParam(required=false) Adv adv,@RequestParam(value = "p",defaultValue = "0")int currPage,ModelMap modelMap){
+        Page<Adv> pageListAdv =  advBiz.findAdvByAdvNamePageable((adv == null ? (new Adv()):adv),currPage);
+        modelMap.addAttribute("advs",pageListAdv);
         return "backstage/adv_list";
     }
 
