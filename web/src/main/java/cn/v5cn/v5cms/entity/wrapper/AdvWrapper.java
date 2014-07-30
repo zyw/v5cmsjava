@@ -19,7 +19,6 @@ public class AdvWrapper implements Serializable {
     public void setAdv(Adv adv) {
         this.adv = adv;
     }
-
     public Map<String, Object> getAti() {
         return ati;
     }

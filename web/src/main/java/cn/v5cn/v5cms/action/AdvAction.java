@@ -7,13 +7,17 @@ import cn.v5cn.v5cms.entity.AdvPos;
 import cn.v5cn.v5cms.entity.wrapper.AdvWrapper;
 import cn.v5cn.v5cms.util.HttpUtils;
 import cn.v5cn.v5cms.util.SystemUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +35,8 @@ import static cn.v5cn.v5cms.util.MessageSourceHelper.getMessage;
 @Controller
 @RequestMapping("/manager")
 public class AdvAction {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(AdvAction.class);
 
     @Autowired
     private AdvPosBiz advPosBiz;
@@ -52,9 +58,17 @@ public class AdvAction {
 
     @ResponseBody
     @RequestMapping(value = "/advau",method = RequestMethod.POST)
-    public ImmutableMap<String,Object> advAU(AdvWrapper advWrapper){
+    public ImmutableMap<String,Object> advAU(@ModelAttribute("adv") AdvWrapper advWrapper){
         System.out.println(advWrapper);
-        return ImmutableMap.of();
+        LOGGER.info("添加广告信息，{}",advWrapper);
+        try {
+            Adv adv= advBiz.save(advWrapper);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            LOGGER.error("添加广告时转换JSON出错！{}",e.getMessage());
+            ImmutableMap.<String,Object>of("status","0","message",getMessage("adv.addfailed.message"));
+        }
+        return ImmutableMap.<String,Object>of("status","1","message",getMessage("adv.addsuccess.message"));
     }
 
     @ResponseBody

@@ -1,5 +1,7 @@
 package cn.v5cn.v5cms.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -13,13 +15,17 @@ public class Adv implements Serializable {
     private Long advId;
     private String advName;
     private Long advPosId;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date advStartTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date advEndTime;
     private int startUsing;         //1：启用 0：关闭
     private int advType;            //1: 图片，2：Flash，3：文本，4：代码
     private Date createDate;        //创建时间
     private String advCode;         //广告代码
     private String advTypeInfo;     //包含广告类型信息的JSON字符串
+
+    private AdvPos advPos;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -101,6 +107,15 @@ public class Adv implements Serializable {
 
     public void setAdvTypeInfo(String advTypeInfo) {
         this.advTypeInfo = advTypeInfo;
+    }
+
+    @ManyToOne
+    public AdvPos getAdvPos() {
+        return advPos;
+    }
+
+    public void setAdvPos(AdvPos advPos) {
+        this.advPos = advPos;
     }
 
     @Override

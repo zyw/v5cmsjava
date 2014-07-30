@@ -43,13 +43,17 @@ alter table site comment '网站信息表';
 create table adv
 (
   advId BIGINT not null AUTO_INCREMENT ,
-  advName varchar(100) not null     comment '广告名称',
+  advName varchar(200) not null     comment '广告名称',
+  advType int not null              comment '广告类型1:图片，2：Flash，3：文字，4：代码',
+  advPosId BIGINT not null          comment '广告版位ID',
   advCode varchar(3000)             comment '广告代码',
-  advState int default 0            comment '广告状态',
+  advStartTime datetime             comment '广告开始时间',
+  advEndTime   datetime             comment '广告结束时间',
+  createDate   datetime             comment '创建时间',
+  advTypeInfo  varchar(3000)        comment '广告类型信息JSON字符串',
+  startUsing int default 0            comment '广告状态1：启用，0：关闭',
   primary key (advId)
-)ENGINE=MyISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
-
-alter table adv comment '广告表';
+)ENGINE=MyISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8 comment '广告表';
 
 /**广告版位**/
 CREATE TABLE advPos(

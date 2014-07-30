@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("advDao")
 public interface AdvDao extends PagingAndSortingRepository<Adv,Long>{
+
 }

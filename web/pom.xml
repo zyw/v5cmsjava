@@ -130,12 +130,11 @@
             <artifactId>logback-core</artifactId>
         </dependency>-->
 
-        <!-- 打印完整执行的SQL语句所需要的jar包 -->
+        <!-- 打印完整执行的SQL语句所需要的jar包
         <dependency>
             <groupId>org.lazyluke</groupId>
             <artifactId>log4jdbc-remix</artifactId>
         </dependency>
-        <!---->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
@@ -143,7 +142,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-        </dependency>
+        </dependency>-->
         <!-- 打印完整SQL所需要的包 代码开发完成后可以注释调 -->
         <dependency>
              <groupId>ch.qos.logback</groupId>
