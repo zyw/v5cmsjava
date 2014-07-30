@@ -11,9 +11,16 @@ import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.Map;
 
 /**
@@ -45,6 +52,58 @@ public class AdvBizImpl implements AdvBiz {
         adv.setAdvTypeInfo(advTypeJson);
         adv.setCreateDate(DateTime.now().toDate());
         return advDao.save(adv);
+    }
+
+    @Override
+    public Page<Adv> findAdvByAdvNamePageable(Adv adv, Integer currPage) {
+        advDao.findAll(new Specification() {
+            @Override
+            public javax.persistence.criteria.Predicate toPredicate(Root root, CriteriaQuery query, CriteriaBuilder cb) {
+                return null;
+            }
+        }, new Pageable(){
+
+            @Override
+            public int getPageNumber() {
+                return 0;
+            }
+
+            @Override
+            public int getPageSize() {
+                return 0;
+            }
+
+            @Override
+            public int getOffset() {
+                return 0;
+            }
+
+            @Override
+            public Sort getSort() {
+                return null;
+            }
+
+            @Override
+            public Pageable next() {
+                return null;
+            }
+
+            @Override
+            public Pageable previousOrFirst() {
+                return null;
+            }
+
+            @Override
+            public Pageable first() {
+                return null;
+            }
+
+            @Override
+            public boolean hasPrevious() {
+                return false;
+            }
+        });
+        return null;
     }
 
     private Map<String,Object> filterMapKeys(Map<String, Object> reqMap,final String key) {
