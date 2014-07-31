@@ -4,9 +4,11 @@ import cn.v5cn.v5cms.util.annotation.Ignore;
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.Page;
 
 import java.beans.PropertyDescriptor;
 import java.io.File;
+import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.Map;
@@ -84,4 +86,40 @@ public class SystemUtils {
         }
         return true;
     }
-}
+
+    /**
+     * 分页字符串拼接
+     * */
+    public static <T extends Serializable> String pagination(Page<T> page,String href){
+        StringBuilder htmlSb = new StringBuilder("<ul class='pagination pagination-sm no-margin pull-right'>");
+        if(page.isFirst()){
+            htmlSb.append("<li class='disabled'><a>&laquo;</a></li>");
+        }else{
+            htmlSb.append("<li><a href='").append(href).append("'>&laquo;</a></li>");
+        }
+        int currPage = page.getNumber()+1;
+        int page_start = currPage - 2 > 0 ? currPage-2 : 1;
+        int page_end = page_start + 4 >= page.getTotalPages() ? page.getTotalPages() : page_start + 4;
+        if(page_start > 1){
+            htmlSb.append("<li><a>...</a></li>");
+        }
+        for(int i = page_start; i <= page_end; i++){
+            int pageIndex = i -1;
+            if(i == currPage){
+                htmlSb.append("<li class='disabled'><a>").append(i).append("</a></li>");
+            }else{
+                htmlSb.append("<li><a href='").append(href+"?p="+pageIndex).append("'>").append(i).append("</a></li>");
+            }
+        }
+        if(page_end < page.getTotalPages()){
+            htmlSb.append("<li><a>...</a></li>");
+        }
+        if(currPage == page.getTotalPages()) {
+            htmlSb.append("<li class='disabled'><a>&raquo;</a></li>");
+        }else{
+            htmlSb.append("<li><a href='").append(href+"?p="+(page.getTotalPages()-1)).append("'>&raquo;</a></li>");
+        }
+        htmlSb.append("</ul>");
+        return htmlSb.toString();
+    }
+ }

@@ -72,7 +72,7 @@
                             </#list>
                         <#else>
                         <tr>
-                            <td colspan="5"><h3>还没有站点数据！</h3></td>
+                            <td colspan="5"><h3>还没有版位数据！</h3></td>
                         </tr>
                         </#if>
                         </tbody>

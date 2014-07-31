@@ -46,7 +46,7 @@
                         <div class="form-group">
                             <label for="advPosId" class="col-sm-2 control-label">广告版位 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-4">
-                                <select data-placeholder="广告版位" class="form-control" id="advPosId" name="adv.advPosId">
+                                <select data-placeholder="广告版位" class="form-control" id="advPosId" name="adv.advPos.advPosId">
                                     <#if aps?size != 0>
                                         <option value=""></option>
                                         <#list aps as ap>

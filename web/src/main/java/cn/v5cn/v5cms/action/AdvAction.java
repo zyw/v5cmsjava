@@ -42,9 +42,12 @@ public class AdvAction {
     private AdvBiz advBiz;
 
     @RequestMapping(value = "/advlist",method = RequestMethod.GET)
-    public String advList(@RequestParam(required=false) Adv adv,@RequestParam(value = "p",defaultValue = "0")int currPage,ModelMap modelMap){
+    public String advList(@RequestParam(required=false) Adv adv,
+                          @RequestParam(value = "p",defaultValue = "0")int currPage,
+                          ModelMap modelMap,HttpServletRequest request){
         Page<Adv> pageListAdv =  advBiz.findAdvByAdvNamePageable((adv == null ? (new Adv()):adv),currPage);
         modelMap.addAttribute("advs",pageListAdv);
+        modelMap.addAttribute("pagination",SystemUtils.pagination(pageListAdv,HttpUtils.getBasePath(request)+"/manager/advlist"));
         return "backstage/adv_list";
     }
 

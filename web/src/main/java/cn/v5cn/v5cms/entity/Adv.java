@@ -14,7 +14,7 @@ import java.util.Date;
 public class Adv implements Serializable {
     private Long advId;
     private String advName;
-    private Long advPosId;
+//    private Long advPosId;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date advStartTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -45,13 +45,13 @@ public class Adv implements Serializable {
         this.advName = advName;
     }
 
-    public Long getAdvPosId() {
-        return advPosId;
-    }
-
-    public void setAdvPosId(Long advPosId) {
-        this.advPosId = advPosId;
-    }
+//    public Long getAdvPosId() {
+//        return advPosId;
+//    }
+//
+//    public void setAdvPosId(Long advPosId) {
+//        this.advPosId = advPosId;
+//    }
 
     public Date getAdvStartTime() {
         return advStartTime;
@@ -109,7 +109,8 @@ public class Adv implements Serializable {
         this.advTypeInfo = advTypeInfo;
     }
 
-    @ManyToOne(targetEntity = AdvPos.class)
+    @ManyToOne()
+    @JoinColumn(name = "advPosId")
     public AdvPos getAdvPos() {
         return advPos;
     }
@@ -123,7 +124,7 @@ public class Adv implements Serializable {
         return "Adv{" +
                 "advId=" + advId +
                 ", advName='" + advName + '\'' +
-                ", advPosId=" + advPosId +
+//                ", advPosId=" + advPosId +
                 ", advStartTime=" + advStartTime +
                 ", advEndTime=" + advEndTime +
                 ", startUsing=" + startUsing +

@@ -35,9 +35,11 @@
                     <table class="table table-hover table-bordered table-striped">
                         <colgroup>
                             <col class="col-xs-1">
-                            <col class="col-xs-2">
+                            <col class="col-xs-1">
                             <col class="col-xs-3">
-                            <col class="col-xs-2">
+                            <col class="col-xs-3">
+                            <col class="col-xs-1">
+                            <col class="col-xs-1">
                             <col class="col-xs-2">
                         </colgroup>
                         <thead>
@@ -47,16 +49,59 @@
                             </th>
                             <th>序号</th>
                             <th>名称</th>
+                            <th>版位</th>
+                            <th>类型</th>
                             <th>状态</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-
+                        <#if advs.content?size != 0>
+                            <#list advs.content as adv>
+                            <tr>
+                                <td class="td-center">
+                                    <input type="checkbox" class="table-cb" value="${adv.advId}"/>
+                                </td>
+                                <td>${adv.advId}</td>
+                                <td>${adv.advName}</td>
+                                <td>${adv.advPos.advPosName}</td>
+                                <td>
+                                    <#switch adv.advType>
+                                        <#case 1>
+                                            图片
+                                            <#break>
+                                        <#case 2>
+                                            Flash
+                                            <#break>
+                                        <#case 3>
+                                            文字
+                                            <#break>
+                                        <#default>
+                                            代码
+                                    </#switch>
+                                </td>
+                                <td>
+                                ${(adv.startUsing==1)?string("<small class='badge bg-green'>开启</small>",
+                                "<small class='badge bg-red'>关闭</small>")}
+                                </td>
+                                <td>
+                                    <a href="<@spring.url '/manager/advposaup/'/>${adv.advId}">修改</a>&nbsp;&nbsp;
+                                    <a href="javascript:;" class="deleteAdv" data-advposid="${adv.advId}">删除</a>
+                                </td>
+                            </tr>
+                            </#list>
+                        <#else>
+                        <tr>
+                            <td colspan="7"><h3>还没有广告数据！</h3></td>
+                        </tr>
+                        </#if>
                         </tbody>
                     </table>
                 </div>
                 <!-- /.box-body -->
+                <div class="box-footer clearfix">
+                    ${pagination}
+                </div>
             </div>
             <!-- /.box -->
         </div>
