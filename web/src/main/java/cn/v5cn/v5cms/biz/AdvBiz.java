@@ -11,4 +11,5 @@ import org.springframework.data.domain.Page;
 public interface AdvBiz {
     Adv save(AdvWrapper advWrapper) throws JsonProcessingException;
     Page<Adv> findAdvByAdvNamePageable(Adv adv,Integer currPage);
+    Adv findOne(Long advId);
 }

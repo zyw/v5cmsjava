@@ -43,6 +43,12 @@
     text-align: center;
 }
 
+.v5-text-align{
+    text-align: right;
+    line-height: 30px;
+    padding-right: 0px;
+}
+
 /*baidu webuploader css **/
 .webuploader-container {
     position: relative;
@@ -71,7 +77,6 @@
     opacity: 0.6;
     pointer-events:none;
 }
-
 
 /*!
  * Stylesheet for the Date Range Picker, for use with Bootstrap 3.x

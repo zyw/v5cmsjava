@@ -12,6 +12,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 
@@ -41,13 +43,27 @@ public class AdvAction {
     @Autowired
     private AdvBiz advBiz;
 
-    @RequestMapping(value = "/advlist",method = RequestMethod.GET)
-    public String advList(@RequestParam(required=false) Adv adv,
+    @RequestMapping(value = "/advlist",method = {RequestMethod.GET,RequestMethod.POST})
+    public String advList(@ModelAttribute Adv adv,
                           @RequestParam(value = "p",defaultValue = "0")int currPage,
                           ModelMap modelMap,HttpServletRequest request){
+
+        HttpSession session = request.getSession();
+        if("GET".equalsIgnoreCase(request.getMethod())){
+            adv = (Adv)session.getAttribute("search_adv");
+        }
+        if("POST".equalsIgnoreCase(request.getMethod())){
+            session.setAttribute("search_adv",null);
+            if(StringUtils.isNotBlank(adv.getAdvName()) || adv.getAdvPos().getAdvPosId() != null){
+                session.setAttribute("search_adv",adv);
+            }
+        }
         Page<Adv> pageListAdv =  advBiz.findAdvByAdvNamePageable((adv == null ? (new Adv()):adv),currPage);
         modelMap.addAttribute("advs",pageListAdv);
         modelMap.addAttribute("pagination",SystemUtils.pagination(pageListAdv,HttpUtils.getBasePath(request)+"/manager/advlist"));
+        ImmutableList<AdvPos> advposes = advPosBiz.finadAll();
+        modelMap.addAttribute("aps",advposes);
+
         return "backstage/adv_list";
     }
 
@@ -56,6 +72,14 @@ public class AdvAction {
         ImmutableList<AdvPos> advposes = advPosBiz.finadAll();
         model.addAttribute("aps",advposes);
         model.addAttribute(new Adv());
+        return "backstage/adv_au";
+    }
+
+    @RequestMapping(value = "/advaup/{advId}",method = RequestMethod.GET)
+    public String advPosaup(@PathVariable Long advId,ModelMap model){
+        ImmutableList<AdvPos> advposes = advPosBiz.finadAll();
+        model.addAttribute("aps",advposes);
+        model.addAttribute(advBiz.findOne(advId));
         return "backstage/adv_au";
     }
 

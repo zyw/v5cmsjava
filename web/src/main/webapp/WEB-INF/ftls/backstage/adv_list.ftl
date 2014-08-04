@@ -24,14 +24,50 @@
                     <div class="pull-right box-tools">
                         <button id="addAdv" class="btn btn-success btn-sm" data-toggle="tooltip" title="添加广告">
                             <i class="fa fa-plus"></i> 添加广告</button>
-                        <button id="advPosBatchDelete" class="btn btn-warning btn-sm" data-toggle="tooltip" title="批量删除">
+                        <button id="advBatchDelete" class="btn btn-warning btn-sm" data-toggle="tooltip" title="批量删除">
                             <i class="fa fa-plus"></i> 批量删除</button>
                     </div><!-- /. tools -->
                     <i class="fa fa-table"></i>
                     <h3 class="box-title">广告列表</h3>
-                </div>
-                <!-- /.box-header -->
+                </div><!-- /.box-header -->
                 <div class="box-body table-responsive">
+                    <div class="container-fluid" style="margin-bottom: 8px;">
+                        <form method="POST">
+                        <div class="col-xs-1 v5-text-align">
+                            <label>名称</label>
+                        </div>
+                        <div class="col-xs-3">
+                            <input type="text" class="form-control" name="advName"
+                                   value="<#if search_adv??>${search_adv.advName!""}</#if>"
+                                   id="advName" placeholder="名称">
+                        </div>
+                        <div class="col-xs-1 v5-text-align">
+                            <label>版位</label>
+                        </div>
+                        <div class="col-xs-3">
+                            <select data-placeholder="广告版位" class="form-control" id="advPosId" name="advPos.advPosId">
+                            <#if aps?size != 0>
+                                <option value=""></option>
+                                <#list aps as ap>
+                                    <#if search_adv?? && search_adv.advPos??  && search_adv.advPos.advPosId==ap.advPosId>
+                                        <option value="${ap.advPosId}" selected>${ap.advPosName}</option>
+                                    <#else>
+                                        <option value="${ap.advPosId}">${ap.advPosName}</option>
+                                    </#if>
+                                </#list>
+                            <#else>
+                                <option value="-1">还没有版位信息</option>
+                            </#if>
+                            </select>
+                        </div>
+                        <div class="col-xs-4">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fa fa-search"></i>
+                                查询
+                            </button>
+                        </div>
+                        </form>
+                    </div>
                     <table class="table table-hover table-bordered table-striped">
                         <colgroup>
                             <col class="col-xs-1">
@@ -85,8 +121,8 @@
                                 "<small class='badge bg-red'>关闭</small>")}
                                 </td>
                                 <td>
-                                    <a href="<@spring.url '/manager/advposaup/'/>${adv.advId}">修改</a>&nbsp;&nbsp;
-                                    <a href="javascript:;" class="deleteAdv" data-advposid="${adv.advId}">删除</a>
+                                    <a href="<@spring.url '/manager/advaup/'/>${adv.advId}">修改</a>&nbsp;&nbsp;
+                                    <a href="javascript:;" class="deleteAdv" data-advid="${adv.advId}">删除</a>
                                 </td>
                             </tr>
                             </#list>
@@ -97,25 +133,21 @@
                         </#if>
                         </tbody>
                     </table>
-                </div>
-                <!-- /.box-body -->
+                </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
                     ${pagination}
                 </div>
-            </div>
-            <!-- /.box -->
-        </div>
-        <!-- /.row -->
+            </div><!-- /.box -->
+        </div><!-- /.row -->
 
-    </section>
-    <!-- /.content -->
+    </section><!-- /.content -->
 </aside><!-- /.right-side -->
 <#include "fragment/footer.ftl">
 <script type="text/javascript">
     $(function(){
         $("#nav_siteSetting").imitClick();
-
-        function deleteAdvPoses(advPosIds) {
+        $("#advPosId").chosen({allow_single_deselect: true});
+        function deleteAdvs(advPosIds) {
             $.v5cms.confirm({icon:"question",content:"您确定要删除广告版位吗，删除后将不能恢复？",width:350,ok:function(){
                 var url = "<@spring.url '/manager/deleteadvpos'/>";
                 $.post(url,{advPosIds:advPosIds},function(data){
@@ -136,9 +168,9 @@
             location.href="<@spring.url '/manager/advaup'/>";
         });
 
-        $(".deleteAdvPos").click(function(){
-            var advPosId = $(this).data("advposid");
-            deleteAdvPoses(advPosId);
+        $(".deleteAdv").click(function(){
+            var advId = $(this).data("advid");
+            deleteAdvs(advId);
         });
         $("#thcheckbox").on('ifChecked', function(event){
             $('.table-cb').iCheck('check');
@@ -147,19 +179,19 @@
             $('.table-cb').iCheck('uncheck');
         });
 
-        $("#advPosBatchDelete").click(function(){
+        $("#advBatchDelete").click(function(){
             var $chs = $(":checkbox[checked=checked]");
             if($chs.length == 0){
                 $.v5cms.modalDialog({icon:'warning',content:"您还没有选中要操作的数据项！",width:250});
                 return;
             }
-            var advPosIds = [];
+            var advIds = [];
             for(var i=0;i<$chs.length;i++){
                 var v = $($chs[i]).val();
                 if(v == "on") continue;
-                advPosIds.push(v);
+                advIds.push(v);
             }
-            deleteAdvPoses(advPosIds.join());
+            deleteAdvs(advIds.join());
         });
 
     });

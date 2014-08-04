@@ -34,12 +34,12 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <form id="advForm" action="<@spring.url '/manager/advau'/>" class="form-horizontal" role="form" method="POST">
-                        <input type="hidden" name="advId">
+                        <input type="hidden" name="advId" value="${adv.advId!""}">
                         <div class="form-group">
                             <label for="advName" class="col-sm-2 control-label">广告名称 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" name="adv.advName" id="advName"
-                                       placeholder="广告名称" value="">
+                                       placeholder="广告名称" value="${adv.advName!""}">
                                 <span class="help-block">设置广告名称。</span>
                             </div>
                         </div>
@@ -50,7 +50,11 @@
                                     <#if aps?size != 0>
                                         <option value=""></option>
                                         <#list aps as ap>
-                                            <option value="${ap.advPosId}">${ap.advPosName}</option>
+                                            <#if adv?? && adv.advPos?? && adv.advPos.advPosId==ap.advPosId>
+                                                <option value="${ap.advPosId}" selected>${ap.advPosName}</option>
+                                            <#else>
+                                                <option value="${ap.advPosId}">${ap.advPosName}</option>
+                                            </#if>
                                         </#list>
                                     <#else>
                                         <option value="-1">还没有版位信息</option>
@@ -75,17 +79,14 @@
                             <label for="inputPassword3" class="col-sm-2 control-label">启用 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-3">
                                 <select class="form-control" id="startUsing" name="adv.startUsing">
-                                    <option value="1" selected>是</option>
-                                    <option value="0">否</option>
-                                <#--<#if (site.isclosesite!0) == 1>
-                                    <option value="1" selected>是</option>
-                                    <option value="0">否</option>
-                                <#else>
-                                    <option value="1">是</option>
-                                    <option value="0" selected>否</option>
-                                </#if>-->
+                                    <#if adv?? && adv.startUsing==1>
+                                        <option value="1" selected>开启</option>
+                                        <option value="0">关闭</option>
+                                    <#else>
+                                        <option value="1">开启</option>
+                                        <option value="0" selected>关闭</option>
+                                    </#if>
                                 </select>
-                                <#--<span class="help-block">用于设置网站的运行状态，运行或者停止。</span>-->
                             </div>
                         </div>
                         <div class="form-group">
@@ -93,7 +94,8 @@
                             <div class="col-sm-8">
                                 <!-- Custom tabs (Charts with tabs)-->
                                 <div class="nav-tabs-custom">
-                                    <input type="hidden" id="hidden_advType" name="adv.advType" value="1">
+                                    <input type="hidden" id="hidden_advType" name="adv.advType"
+                                           value="<#if adv.advType==0>1<#else>${adv.advType}</#if>">
                                     <!-- Tabs within a box -->
                                     <ul class="nav nav-tabs" id="advType">
                                         <li class="active">
@@ -296,7 +298,20 @@
             $("#advEndTime").val('');
             $("#advStartEndTime").val('');
         });
-
+        var at = $("#hidden_advType").val();
+        switch(at){
+            case "1":
+                $("#advType a[data-advType=1]").tab("show");
+                break;
+            case "2":
+                $("#advType a[data-advType=2]").tab("show");
+                break;
+            case "3":
+                $("#advType a[data-advType=3]").tab("show");
+                break;
+            default :
+                $("#advType a[data-advType=4]").tab("show");
+        }
         $("#advType").on("shown.bs.tab",function(e){
             var advType = $(e.target).data("advtype");
             $("#hidden_advType").val(advType);

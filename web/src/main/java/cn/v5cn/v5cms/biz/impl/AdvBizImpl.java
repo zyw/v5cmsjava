@@ -79,6 +79,11 @@ public class AdvBizImpl implements AdvBiz {
         }, new PageRequest(currPage,pageSize,new Sort(Sort.Direction.DESC,new String[]{"createDate"})));
     }
 
+    @Override
+    public Adv findOne(Long advId) {
+        return advDao.findOne(advId);
+    }
+
     private Map<String,Object> filterMapKeys(Map<String, Object> reqMap,final String key) {
         Map<String, Object> filterAfterMap = Maps.filterKeys(reqMap, new Predicate<String>() {
             @Override
