@@ -8,6 +8,7 @@ import cn.v5cn.v5cms.entity.wrapper.AdvWrapper;
 import cn.v5cn.v5cms.util.HttpUtils;
 import cn.v5cn.v5cms.util.SystemUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import org.apache.commons.io.FileUtils;
@@ -26,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 import static cn.v5cn.v5cms.util.MessageSourceHelper.getMessage;
 
@@ -79,7 +81,16 @@ public class AdvAction {
     public String advPosaup(@PathVariable Long advId,ModelMap model){
         ImmutableList<AdvPos> advposes = advPosBiz.finadAll();
         model.addAttribute("aps",advposes);
-        model.addAttribute(advBiz.findOne(advId));
+        Adv adv = advBiz.findOne(advId);
+        ObjectMapper jsonObj = new ObjectMapper();
+        Map<String,String> advTypeMap = null;
+        try {
+            advTypeMap = jsonObj.readValue(adv.getAdvTypeInfo(),Map.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        model.addAttribute(adv);
+        model.addAttribute("advTypes",advTypeMap);
         return "backstage/adv_au";
     }
 
