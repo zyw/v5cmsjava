@@ -1,5 +1,6 @@
 package cn.v5cn.v5cms.entity;
 
+import cn.v5cn.v5cms.util.annotation.Ignore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -14,7 +15,6 @@ import java.util.Date;
 public class Adv implements Serializable {
     private Long advId;
     private String advName;
-//    private Long advPosId;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date advStartTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -44,14 +44,6 @@ public class Adv implements Serializable {
     public void setAdvName(String advName) {
         this.advName = advName;
     }
-
-//    public Long getAdvPosId() {
-//        return advPosId;
-//    }
-//
-//    public void setAdvPosId(Long advPosId) {
-//        this.advPosId = advPosId;
-//    }
 
     public Date getAdvStartTime() {
         return advStartTime;
@@ -84,7 +76,7 @@ public class Adv implements Serializable {
     public void setAdvType(int advType) {
         this.advType = advType;
     }
-
+    @Ignore
     public Date getCreateDate() {
         return createDate;
     }

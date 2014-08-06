@@ -6,6 +6,7 @@ import cn.v5cn.v5cms.entity.Adv;
 import cn.v5cn.v5cms.entity.AdvPos;
 import cn.v5cn.v5cms.entity.wrapper.AdvWrapper;
 import cn.v5cn.v5cms.util.PropertyUtils;
+import cn.v5cn.v5cms.util.SystemUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Predicate;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
@@ -38,22 +40,36 @@ public class AdvBizImpl implements AdvBiz {
     @Transactional
     public Adv save(AdvWrapper advWrapper) throws JsonProcessingException {
         Adv adv = advWrapper.getAdv();
-        Map<String,Object> reqMap = advWrapper.getAti();
-        Map<String,Object> filterAfterMap = null;
-        if(adv.getAdvType() == 1){
-            filterAfterMap = filterMapKeys(reqMap,"adv_image_");
-        }else if(adv.getAdvType() == 2){
-            filterAfterMap = filterMapKeys(reqMap,"adv_flash_");
-        }else if(adv.getAdvType() == 3){
-            filterAfterMap = filterMapKeys(reqMap,"adv_text_");
-        }
-
-        ObjectMapper mapper = new ObjectMapper();
-        String advTypeJson = mapper.writeValueAsString(filterAfterMap);
+        String advTypeJson = advTypeJson(advWrapper.getAti(), adv.getAdvType());
 
         adv.setAdvTypeInfo(advTypeJson);
         adv.setCreateDate(DateTime.now().toDate());
         return advDao.save(adv);
+    }
+
+    @Override
+    @Transactional
+    public Adv update(AdvWrapper advWrapper) throws JsonProcessingException
+    ,IllegalAccessException, InvocationTargetException {
+        Adv fontAdv = advWrapper.getAdv();
+        String advTypeJson = advTypeJson(advWrapper.getAti(), fontAdv.getAdvType());
+        fontAdv.setAdvTypeInfo(advTypeJson);
+
+        Adv dbAdv = advDao.findOne(fontAdv.getAdvId());
+        SystemUtils.copyProperties(dbAdv,fontAdv);
+        return dbAdv;
+    }
+
+    @Override
+    public void deleteAdvs(Long[] advIds) {
+        List<Adv> advs = Lists.newArrayList();
+        Adv adv = null;
+        for(Long advId : advIds){
+            adv = new Adv();
+            adv.setAdvId(advId);
+            advs.add(adv);
+        }
+        advDao.delete(advs);
     }
 
     @Override
@@ -92,5 +108,18 @@ public class AdvBizImpl implements AdvBiz {
             }
         });
         return filterAfterMap;
+    }
+    private String advTypeJson(Map<String,Object> reqMap, int advType) throws JsonProcessingException {
+        Map<String,Object> filterAfterMap = null;
+        if(advType == 1){
+            filterAfterMap = filterMapKeys(reqMap,"adv_image_");
+        }else if(advType == 2){
+            filterAfterMap = filterMapKeys(reqMap,"adv_flash_");
+        }else if(advType == 3){
+            filterAfterMap = filterMapKeys(reqMap,"adv_text_");
+        }
+
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(filterAfterMap);
     }
 }

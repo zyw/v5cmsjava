@@ -11,6 +11,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -74,6 +75,7 @@ public class AdvAction {
         ImmutableList<AdvPos> advposes = advPosBiz.finadAll();
         model.addAttribute("aps",advposes);
         model.addAttribute(new Adv());
+        model.addAttribute("advTypes", Maps.newHashMap());
         return "backstage/adv_au";
     }
 
@@ -88,6 +90,7 @@ public class AdvAction {
             advTypeMap = jsonObj.readValue(adv.getAdvTypeInfo(),Map.class);
         } catch (IOException e) {
             e.printStackTrace();
+            LOGGER.error("JSON转换Map对象异常，异常消息{}",e.getMessage());
         }
         model.addAttribute(adv);
         model.addAttribute("advTypes",advTypeMap);
@@ -96,8 +99,32 @@ public class AdvAction {
 
     @ResponseBody
     @RequestMapping(value = "/advau",method = RequestMethod.POST)
-    public ImmutableMap<String,Object> advAU(@ModelAttribute("adv") AdvWrapper advWrapper){
-        System.out.println(advWrapper);
+    public ImmutableMap<String,Object> advAU(@ModelAttribute("adv") AdvWrapper advWrapper,HttpServletRequest request){
+        if(advWrapper.getAdv().getAdvId() != null){
+            String deleteFilePath = (String)request.getSession().getAttribute("adv_delete_file_real_path");
+            if(StringUtils.isNotBlank(deleteFilePath)){
+                String fileExt = FilenameUtils.getExtension(deleteFilePath);
+                boolean result = FileUtils.deleteQuietly(new File(deleteFilePath));
+                if(!result){
+                    String failedMessage = "swf".equalsIgnoreCase(fileExt)?getMessage("adv.flashdeletefailed.message"):getMessage("adv.imagedeletefailed.message");
+                    return ImmutableMap.<String,Object>of("status","0","message",failedMessage);
+                }
+            }
+            try {
+                advBiz.update(advWrapper);
+                return ImmutableMap.<String,Object>of("status","1","message",getMessage("adv.updatesuccess.message"));
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+                LOGGER.error("修改广告失败，{}",e.getMessage());
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+                LOGGER.error("修改广告失败，{}",e.getMessage());
+            } catch (Exception e) {
+                e.printStackTrace();
+                LOGGER.error("修改广告失败，{}",e.getMessage());
+            }
+            return ImmutableMap.<String,Object>of("status","0","message",getMessage("adv.updatefailed.message"));
+        }
         LOGGER.info("添加广告信息，{}",advWrapper);
         try {
             Adv adv= advBiz.save(advWrapper);
@@ -135,12 +162,15 @@ public class AdvAction {
         String fileExt = FilenameUtils.getExtension(if_path);
         String fileName = FilenameUtils.getName(if_path);
         String realPath = HttpUtils.getRealPath(request, "/WEB-INF/uploads/advfiles/");
-        boolean result = FileUtils.deleteQuietly(new File(realPath+"/"+fileName));
-        if(result){
-            String successMessage = "swf".equalsIgnoreCase(fileExt)?getMessage("adv.flashdeletesuccess.message"):getMessage("adv.imagedeletesuccess.message");
-            return ImmutableMap.<String,Object>of("status","1","message",successMessage);
-        }
-        String failedMessage = "swf".equalsIgnoreCase(fileExt)?getMessage("adv.flashdeletefailed.message"):getMessage("adv.imagedeletefailed.message");
-        return ImmutableMap.<String,Object>of("status","0","message",failedMessage);
+        request.getSession().setAttribute("adv_delete_file_real_path",realPath+"/"+fileName);
+//        boolean result = FileUtils.deleteQuietly(new File(realPath+"/"+fileName));
+//        if(result){
+//            String successMessage = "swf".equalsIgnoreCase(fileExt)?getMessage("adv.flashdeletesuccess.message"):getMessage("adv.imagedeletesuccess.message");
+//            return ImmutableMap.<String,Object>of("status","1","message",successMessage);
+//        }
+//        String failedMessage = "swf".equalsIgnoreCase(fileExt)?getMessage("adv.flashdeletefailed.message"):getMessage("adv.imagedeletefailed.message");
+//        return ImmutableMap.<String,Object>of("status","0","message",failedMessage);
+        String failedMessage = "swf".equalsIgnoreCase(fileExt)?getMessage("adv.flashdelete.before.message"):getMessage("adv.imagedelete.before.message");
+        return ImmutableMap.<String,Object>of("status","1","message",failedMessage);
     }
 }
