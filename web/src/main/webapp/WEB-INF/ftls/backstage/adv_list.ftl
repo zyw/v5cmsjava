@@ -18,7 +18,7 @@
     <section class="content">
         <!-- Small boxes (Stat box) -->
         <div class="row">
-            <div class="box box-danger">
+            <div class="box box-primary">
                 <div class="box-header">
                     <!-- tools box -->
                     <div class="pull-right box-tools">

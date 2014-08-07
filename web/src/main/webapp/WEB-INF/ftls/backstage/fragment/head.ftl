@@ -19,6 +19,8 @@
     <link href="<@spring.url '/r/css/AdminLTE.css'/>" rel="stylesheet" type="text/css"/>
     <!-- bootstrap-chosen -->
     <link href="<@spring.url '/r/css/bootstrap-chosen.min.css'/>" rel="stylesheet" type="text/css"/>
+    <!-- zTreeStyle.css -->
+    <link href="<@spring.url '/r/css/zTreeStyle.css'/>" rel="stylesheet" type="text/css"/>
     <!--custom CSS-->
     <link href="<@spring.url '/r/css/main.css'/>" rel="stylesheet" type="text/css"/>
 
@@ -341,7 +343,11 @@
                             charts</a></li>
                     </ul>
                 </li>
-                <li class="treeview">
+                <li>
+                    <a href="<@spring.url '/manager/collist'/>">
+                        <i class="fa fa-th-list"></i> <span>栏目管理</span>
+                    </a>
+                    <!--
                     <a href="#">
                         <i class="fa fa-th-list"></i>
                         <span>栏目管理</span>
@@ -354,6 +360,7 @@
                         <li><a href="pages/UI/sliders.html"><i class="fa fa-angle-double-right"></i> Sliders</a></li>
                         <li><a href="pages/UI/timeline.html"><i class="fa fa-angle-double-right"></i> Timeline</a></li>
                     </ul>
+                    -->
                 </li>
                 <li class="treeview">
                     <a href="#">
