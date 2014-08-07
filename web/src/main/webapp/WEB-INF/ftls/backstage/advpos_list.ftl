@@ -25,7 +25,7 @@
                         <button id="addAdvPos" class="btn btn-success btn-sm" data-toggle="tooltip" title="添加版位">
                             <i class="fa fa-plus"></i> 添加版位</button>
                         <button id="advPosBatchDelete" class="btn btn-warning btn-sm" data-toggle="tooltip" title="批量删除">
-                            <i class="fa fa-plus"></i> 批量删除</button>
+                            <i class="fa fa-trash-o"></i> 批量删除</button>
                     </div><!-- /. tools -->
                     <i class="fa fa-table"></i>
                     <h3 class="box-title">版位列表</h3>

@@ -25,7 +25,7 @@
                         <button id="addAdv" class="btn btn-success btn-sm" data-toggle="tooltip" title="添加广告">
                             <i class="fa fa-plus"></i> 添加广告</button>
                         <button id="advBatchDelete" class="btn btn-warning btn-sm" data-toggle="tooltip" title="批量删除">
-                            <i class="fa fa-plus"></i> 批量删除</button>
+                            <i class="fa fa-trash-o"></i> 批量删除</button>
                     </div><!-- /. tools -->
                     <i class="fa fa-table"></i>
                     <h3 class="box-title">广告列表</h3>

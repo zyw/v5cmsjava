@@ -21,7 +21,7 @@
                 <div class="box box-info">
                     <div class="box-header">
                         <!-- tools box -->
-                        <i class="fa fa-table"></i>
+                        <i class="fa fa-sitemap"></i>
                         <h3 class="box-title">栏目树</h3>
                     </div>
                     <!-- /.box-header -->
@@ -38,12 +38,11 @@
                             <button id="addColumn" class="btn btn-success btn-sm" data-toggle="tooltip" title="添加栏目">
                                 <i class="fa fa-plus"></i> 添加栏目</button>
                             <button id="columnBatchDelete" class="btn btn-warning btn-sm" data-toggle="tooltip" title="批量删除">
-                                <i class="fa fa-plus"></i> 批量删除</button>
+                                <i class="fa fa-trash-o"></i> 批量删除</button>
                         </div><!-- /. tools -->
                         <i class="fa fa-table"></i>
                         <h3 class="box-title">栏目列表</h3>
-                    </div>
-                    <!-- /.box-header -->
+                    </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
                         <table class="table table-hover table-bordered table-striped">
                             <colgroup>

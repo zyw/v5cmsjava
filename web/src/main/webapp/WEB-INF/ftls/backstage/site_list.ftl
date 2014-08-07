@@ -25,7 +25,7 @@
                         <button id="addSite" class="btn btn-success btn-sm" data-toggle="tooltip" title="添加站点">
                             <i class="fa fa-plus"></i> 添加站点</button>
                         <button id="siteBatchDelete" class="btn btn-warning btn-sm" data-toggle="tooltip" title="批量删除">
-                            <i class="fa fa-plus"></i> 批量删除</button>
+                            <i class="fa fa-trash-o"></i> 批量删除</button>
                     </div><!-- /. tools -->
                     <i class="fa fa-table"></i>
                     <h3 class="box-title">站点信息表</h3>

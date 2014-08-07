@@ -9,7 +9,7 @@
  * Global variables. If you change any of these vars, don't forget 
  * to change the values in the less files!
  */
-var left_side_width = 220; //Sidebar width in pixels
+var left_side_width = 190; //Sidebar width in pixels
 
 $(function() {
     "use strict";
