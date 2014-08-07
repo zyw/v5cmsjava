@@ -12,4 +12,6 @@ public class SystemConstant {
     public static final String SESSION_KEY = "managerKey";
 
     public static final String SITE_SESSION_KEY = "siteKey";
+
+    public static final String ADV_RES_PATH = "/WEB-INF/uploads/advfiles/";
 }

@@ -5,15 +5,21 @@ import cn.v5cn.v5cms.dao.AdvDao;
 import cn.v5cn.v5cms.entity.Adv;
 import cn.v5cn.v5cms.entity.AdvPos;
 import cn.v5cn.v5cms.entity.wrapper.AdvWrapper;
+import cn.v5cn.v5cms.util.HttpUtils;
 import cn.v5cn.v5cms.util.PropertyUtils;
+import cn.v5cn.v5cms.util.SystemConstant;
 import cn.v5cn.v5cms.util.SystemUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,6 +29,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.*;
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +41,8 @@ import java.util.Map;
  */
 @Service("advBiz")
 public class AdvBizImpl implements AdvBiz {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(AdvBizImpl.class);
 
     @Autowired
     private AdvDao advDao;
@@ -61,15 +72,39 @@ public class AdvBizImpl implements AdvBiz {
     }
 
     @Override
-    public void deleteAdvs(Long[] advIds) {
-        List<Adv> advs = Lists.newArrayList();
-        Adv adv = null;
-        for(Long advId : advIds){
-            adv = new Adv();
-            adv.setAdvId(advId);
-            advs.add(adv);
+    public void deleteAdvs(Long[] advIds,HttpServletRequest request) {
+        List<Adv> deleteAdvs = Lists.newArrayList(advDao.findAll(Lists.newArrayList(advIds)));
+        //删除图片或Flash资源
+        String realPath = HttpUtils.getRealPath(request, SystemConstant.ADV_RES_PATH);
+        ObjectMapper objectMapper = new ObjectMapper();
+        for(Adv adv : deleteAdvs){
+            if(adv.getAdvType() == 3 || adv.getAdvType() == 4){
+                continue;
+            }
+            try {
+                Map<String,String> advTypeInfo = objectMapper.readValue(adv.getAdvTypeInfo(),Map.class);
+                if(advTypeInfo.containsKey("adv_image_url") && StringUtils.isNotBlank(advTypeInfo.get("adv_image_url"))){
+                    String fileName = FilenameUtils.getName(advTypeInfo.get("adv_image_url"));
+                    boolean result = FileUtils.deleteQuietly(new File(realPath+"/"+fileName));
+                    if(!result){
+                        LOGGER.warn("删除图片资源失败，图片名称{}",fileName);
+                    }
+                }
+                if(advTypeInfo.containsKey("adv_flash_url") && StringUtils.isNotBlank(advTypeInfo.get("adv_flash_url"))){
+                    String fileName = FilenameUtils.getName(advTypeInfo.get("adv_flash_url"));
+                    boolean result = FileUtils.deleteQuietly(new File(realPath+fileName));
+                    if(!result){
+                        LOGGER.warn("删除Flash资源失败，Flash名称{}",fileName);
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                LOGGER.error("转换JSON字符串到Map异常{}",e.getMessage());
+                throw new RuntimeException("转换JSON字符串到Map异常",e);
+            }
         }
-        advDao.delete(advs);
+
+        advDao.delete(deleteAdvs);
     }
 
     @Override

@@ -15,10 +15,8 @@ import java.util.Date;
 public class Adv implements Serializable {
     private Long advId;
     private String advName;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date advStartTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date advEndTime;
+    private String advStartTime;
+    private String advEndTime;
     private int startUsing;         //1：启用 0：关闭
     private int advType;            //1: 图片，2：Flash，3：文本，4：代码
     private Date createDate;        //创建时间
@@ -45,19 +43,19 @@ public class Adv implements Serializable {
         this.advName = advName;
     }
 
-    public Date getAdvStartTime() {
+    public String getAdvStartTime() {
         return advStartTime;
     }
 
-    public void setAdvStartTime(Date advStartTime) {
+    public void setAdvStartTime(String advStartTime) {
         this.advStartTime = advStartTime;
     }
 
-    public Date getAdvEndTime() {
+    public String getAdvEndTime() {
         return advEndTime;
     }
 
-    public void setAdvEndTime(Date advEndTime) {
+    public void setAdvEndTime(String advEndTime) {
         this.advEndTime = advEndTime;
     }
 
@@ -116,7 +114,6 @@ public class Adv implements Serializable {
         return "Adv{" +
                 "advId=" + advId +
                 ", advName='" + advName + '\'' +
-//                ", advPosId=" + advPosId +
                 ", advStartTime=" + advStartTime +
                 ", advEndTime=" + advEndTime +
                 ", startUsing=" + startUsing +

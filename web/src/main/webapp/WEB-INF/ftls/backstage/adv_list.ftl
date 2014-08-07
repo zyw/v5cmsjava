@@ -150,7 +150,7 @@
         function deleteAdvs(advIds) {
             $.v5cms.confirm({icon:"question",content:"您确定要删除广告吗，删除后将不能恢复？",width:350,ok:function(){
                 var url = "<@spring.url '/manager/deleteadvs'/>";
-                $.post(url,{advPosIds:advIds},function(data){
+                $.post(url,{advIds:advIds},function(data){
                     if(data.status == "1"){
                         $.v5cms.tooltip({icon:"succeed","content":data.message},function(){
                             location.reload();

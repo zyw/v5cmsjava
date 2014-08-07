@@ -5,6 +5,7 @@ import cn.v5cn.v5cms.entity.wrapper.AdvWrapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.data.domain.Page;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -16,5 +17,5 @@ public interface AdvBiz {
     Adv findOne(Long advId);
     Adv update(AdvWrapper advWrapper) throws JsonProcessingException,IllegalAccessException, InvocationTargetException;
 
-    void deleteAdvs(Long[] advIds);
+    void deleteAdvs(Long[] advIds,HttpServletRequest request);
 }

@@ -67,8 +67,8 @@
                             <div class="col-sm-4 input-group" style="padding-left: 15px;">
                                 <input type="text" class="form-control" id="advStartEndTime"
                                        placeholder="开始结束时间" readonly>
-                                <input type="hidden" name="adv.advStartTime" value="${(adv.advStartTime!"")?string("yyyy-MM-dd")}" id="advStartTime">
-                                <input type="hidden" name="adv.advEndTime" value="${(adv.advEndTime!"")?string("yyyy-MM-dd")}" id="advEndTime">
+                                <input type="hidden" name="adv.advStartTime" value="${adv.advStartTime!""}" id="advStartTime">
+                                <input type="hidden" name="adv.advEndTime" value="${adv.advEndTime!""}" id="advEndTime">
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
