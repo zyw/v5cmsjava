@@ -16,7 +16,7 @@ create table manager
 	lastLoginTime        datetime								comment '最后登录时间',
 	originalPic          varchar(200)							comment '头像',
 	primary key (managerId)
-)ENGINE=MyISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
+)ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
 
 alter table manager comment '用户表';
 
@@ -35,7 +35,7 @@ create table site
 	isclosesite		  int 	default 0			comment '网站是否关闭 1 开启    0 关闭',
 	themeName		    varchar(200) default 'default' 	comment '使用的网站主题名称',
 	primary key (siteId)
-)ENGINE=MyISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
+)ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
 
 alter table site comment '网站信息表';
 
@@ -53,7 +53,7 @@ create table adv
   advTypeInfo  varchar(3000)        comment '广告类型信息JSON字符串',
   startUsing int default 0            comment '广告状态1：启用，0：关闭',
   primary key (advId)
-)ENGINE=MyISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8 comment '广告表';
+)ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 comment '广告表';
 
 /**广告版位**/
 CREATE TABLE advPos(
@@ -62,7 +62,7 @@ CREATE TABLE advPos(
   advPosState INT DEFAULT 0               COMMENT '状态0:关闭，1:启用',
   advPosDes VARCHAR(2000)                  COMMENT '描述',
   PRIMARY KEY (advPosId)
-)ENGINE=MYISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8 COMMENT '广告版位';
+)ENGINE=MYISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 COMMENT '广告版位';
 
 --友情连接表
 create table link
@@ -74,9 +74,7 @@ create table link
   openType varchar(50)                  comment '打开方式',
   isstart  int         default 0        comment '是否启用，1：启用，0：不启用',
   primary key (linkId)
-)ENGINE=MyISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
-
-alter table adv comment '友情连接表';
+)ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 comment '友情连接表';
 
 --banner表
 create table banner
@@ -88,11 +86,9 @@ create table banner
   isstart     int  default 0             comment '是否启用，1：启用，0：不启用',
   bcontent    text                       comment '设置banner上显示的文本',
   primary key (bannerId)
-)ENGINE=MyISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
+)ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 comment 'banner表';
 
-alter table banner comment 'banner表';
-
---栏目表
+/*栏目表*/
 create table cols
 (
   colsId        bigInt not null AUTO_INCREMENT ,
@@ -108,9 +104,20 @@ create table cols
   columnpic     varchar(200)                comment '栏目图片',
   parentId      int       default 0         comment '父栏目ID',
   primary key (colsId)
-)ENGINE=MyISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
+)ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 comment '栏目表';
 
-alter table cols comment '栏目表';
+/*栏目类型表*/
+create table colType
+(
+  colTypeId bigint not null AUTO_INCREMENT,
+  colTypeName varchar(200) not null           comment '类型名称',
+  coltpl      varchar(200) not null           comment '栏目模板名称',
+  contenttpl  varchar(200)                    comment '内容模板名称',
+  colsort     int          not null default 0 comment '栏目排序',
+  hasContent  int                             comment '是否有内容页',
+  isDisabled  int                             comment '是否可用',
+  primary key (colTypeId)
+)ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 comment '栏目类型表';
 
 --标签表
 
@@ -120,7 +127,7 @@ create table label
   labelName     varchar(200)    not null    comment '标签名称',
   alias         varchar(200)                comment '标签别名',
   primary key (labelId)
-)ENGINE=MyISAM auto_increment=10000 default charset=utf8;
+)ENGINE=MyISAM auto_increment=1000 default charset=utf8;
 
 alter table cols comment '文章标签表';
 
@@ -141,7 +148,7 @@ create table content
   cattas    varchar(1000)           comment '文章中使用的附件，多个使用丢号分割',
   dispic    varchar(200)            comment '展示图',
   primary key (contentId)
-)ENGINE=MyISAM auto_increment=10000 default charset=utf8;
+)ENGINE=MyISAM auto_increment=1000 default charset=utf8;
 
 alter table content comment '创建内容表';
 
@@ -152,7 +159,7 @@ create table content_label
   contentId   int,
   labelId     int,
   primary key (content_labelId)
-)ENGINE=MyISAM auto_increment=10000 default charset=utf8;
+)ENGINE=MyISAM auto_increment=1000 default charset=utf8;
 
 alter table content_label comment '文章标签中间表';
 
@@ -170,6 +177,6 @@ create table comments
   commentApproved int     default 0              comment '评语是否批准 0:待审批，1:通过审批，2:垃圾评语',
   commentParent   int     default 0              comment '父评语ID',
   primary key (commentsId)
-)ENGINE=MyISAM auto_increment=10000 default charset=utf8;
+)ENGINE=MyISAM auto_increment=1000 default charset=utf8;
 
 alter table comments comment '评语表';

@@ -121,7 +121,7 @@
         $("#backSiteList").click(function(){
             location.href="<@spring.url '/manager/siteList'/>"
         });
-
+        $("#isclosesite").chosen({disable_search_threshold: 10});
         $('#siteForm').ajaxForm({
             dataType : 'json',
             success : function(data) {

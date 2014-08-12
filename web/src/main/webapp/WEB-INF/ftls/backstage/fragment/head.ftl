@@ -343,37 +343,41 @@
                             charts</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="<@spring.url '/manager/collist'/>">
+                <li class="treeview" id="nav_columns">
+                    <#--<a href="<@spring.url '/manager/collist'/>">
                         <i class="fa fa-th-list"></i> <span>栏目管理</span>
-                    </a>
-                    <!--
+                    </a>-->
+
                     <a href="#">
                         <i class="fa fa-th-list"></i>
                         <span>栏目管理</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> General</a></li>
-                        <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Icons</a></li>
-                        <li><a href="pages/UI/buttons.html"><i class="fa fa-angle-double-right"></i> Buttons</a></li>
+                        <li><a href="<@spring.url '/manager/collist'/>"><i class="fa fa-angle-double-right"></i> 栏目</a></li>
+                        <li><a href="<@spring.url '/manager/coltypelist'/>"><i class="fa fa-angle-double-right"></i> 栏目类型</a></li>
+                        <#--<li><a href="pages/UI/buttons.html"><i class="fa fa-angle-double-right"></i> Buttons</a></li>
                         <li><a href="pages/UI/sliders.html"><i class="fa fa-angle-double-right"></i> Sliders</a></li>
-                        <li><a href="pages/UI/timeline.html"><i class="fa fa-angle-double-right"></i> Timeline</a></li>
+                        <li><a href="pages/UI/timeline.html"><i class="fa fa-angle-double-right"></i> Timeline</a></li>-->
                     </ul>
-                    -->
+
                 </li>
-                <li class="treeview">
-                    <a href="#">
+                <li>
+                    <a href="pages/widgets.html">
                         <i class="fa fa-edit"></i> <span>模板管理</span>
-                        <i class="fa fa-angle-left pull-right"></i>
+                        <small class="badge pull-right bg-green">new</small>
                     </a>
-                    <ul class="treeview-menu">
-                        <li><a href="pages/forms/general.html"><i class="fa fa-angle-double-right"></i> General Elements</a>
-                        </li>
-                        <li><a href="pages/forms/advanced.html"><i class="fa fa-angle-double-right"></i> Advanced
-                            Elements</a></li>
-                        <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i> Editors</a></li>
-                    </ul>
+                    <#--<a href="#">-->
+                        <#--<i class="fa fa-edit"></i> <span>模板管理</span>-->
+                        <#--<i class="fa fa-angle-left pull-right"></i>-->
+                    <#--</a>-->
+                    <#--<ul class="treeview-menu">-->
+                        <#--<li><a href="pages/forms/general.html"><i class="fa fa-angle-double-right"></i> General Elements</a>-->
+                        <#--</li>-->
+                        <#--<li><a href="pages/forms/advanced.html"><i class="fa fa-angle-double-right"></i> Advanced-->
+                            <#--Elements</a></li>-->
+                        <#--<li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i> Editors</a></li>-->
+                    <#--</ul>-->
                 </li>
                 <li class="treeview">
                     <a href="#">

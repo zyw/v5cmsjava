@@ -4,12 +4,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            栏目管理
+            栏目
             <small>Control panel</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
-            <li class="active">栏目管理</li>
+            <li>栏目管理</li>
+            <li class="active">栏目</li>
         </ol>
     </section>
 
@@ -25,7 +26,7 @@
                         <h3 class="box-title">栏目树</h3>
                     </div>
                     <!-- /.box-header -->
-                    <div class="box-body table-responsive" style="padding-top: 0;">
+                    <div class="box-body table-responsive v5-tree-div" style="padding-top: 0;">
                         <ul id="columnTree" class="ztree"></ul>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
@@ -100,6 +101,7 @@
 </aside><!-- /.right-side -->
 <#include "fragment/footer.ftl">
 <script type="text/javascript">
+    $("#nav_columns").imitClick();
     var setting = {
         view:{showLine:false},
         data: {

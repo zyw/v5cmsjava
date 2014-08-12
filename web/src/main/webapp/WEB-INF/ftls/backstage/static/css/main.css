@@ -49,6 +49,11 @@
     padding-right: 0px;
 }
 
+.v5-tree-div{
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
 /*baidu webuploader css **/
 .webuploader-container {
     position: relative;

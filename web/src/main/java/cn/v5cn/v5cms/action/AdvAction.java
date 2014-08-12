@@ -97,6 +97,7 @@ public class AdvAction {
         }
         model.addAttribute(adv);
         model.addAttribute("advTypes",advTypeMap);
+        model.addAttribute("page_title",getMessage("adv.updatepage.title"));
         return "backstage/adv_au";
     }
 
