@@ -19,6 +19,8 @@
 <script src="<@spring.url '/r/js/webuploader.min.js'/>" type="text/javascript"></script>
 <!-- jquery.ztree.all-3.5.min.js -->
 <script src="<@spring.url '/r/js/jquery.ztree.all-3.5.min.js'/>" type="text/javascript"></script>
+<!-- 弹出图片js -->
+<script src="<@spring.url '/r/js/jquery.fancybox.pack.js'/>" type="text/javascript"></script>
 <!-- AdminLTE App -->
 <script src="<@spring.url '/r/js/app.js'/>" type="text/javascript"></script>
 <!-- holder -->

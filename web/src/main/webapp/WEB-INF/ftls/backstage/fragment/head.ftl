@@ -363,7 +363,7 @@
 
                 </li>
                 <li>
-                    <a href="pages/widgets.html">
+                    <a href="<@spring.url '/manager/tpllist'/>">
                         <i class="fa fa-edit"></i> <span>模板管理</span>
                         <small class="badge pull-right bg-green">new</small>
                     </a>
