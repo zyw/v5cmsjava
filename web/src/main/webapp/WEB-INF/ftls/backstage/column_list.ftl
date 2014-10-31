@@ -18,20 +18,20 @@
     <section class="content">
         <!-- Small boxes (Stat box) -->
         <div class="row">
-            <div class="col-sm-2" style="padding-left: 0;padding-right: 0;">
+            <#--<div class="col-sm-2" style="padding-left: 0;padding-right: 0;">
                 <div class="box box-info">
                     <div class="box-header">
-                        <!-- tools box -->
+                        <!-- tools box &ndash;&gt;
                         <i class="fa fa-sitemap"></i>
                         <h3 class="box-title">栏目树</h3>
                     </div>
-                    <!-- /.box-header -->
+                    <!-- /.box-header &ndash;&gt;
                     <div class="box-body table-responsive v5-tree-div" style="padding-top: 0;">
                         <ul id="columnTree" class="ztree"></ul>
-                    </div><!-- /.box-body -->
-                </div><!-- /.box -->
-            </div>
-            <div class="col-sm-10" style="padding-right: 0;">
+                    </div><!-- /.box-body &ndash;&gt;
+                </div><!-- /.box &ndash;&gt;
+            </div>-->
+            <#--<div class="col-sm-12" style="padding-right: 0;">-->
                 <div class="box box-info">
                     <div class="box-header">
                         <!-- tools box -->
@@ -45,64 +45,45 @@
                         <h3 class="box-title">栏目列表</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
-                        <table class="table table-hover table-bordered table-striped">
-                            <colgroup>
-                                <col class="col-xs-1">
-                                <col class="col-xs-2">
-                                <col class="col-xs-3">
-                                <col class="col-xs-2">
-                                <col class="col-xs-2">
-                                <col class="col-xs-2">
-                            </colgroup>
+                        <table id="column-table" class="table-striped table-advance table-hover">
                             <thead>
                             <tr>
-                                <th class="td-center">
-                                    <input type="checkbox" id="thcheckbox"/>
-                                </th>
-                                <th>序号</th>
                                 <th>名称</th>
+                                <th>类型</th>
+                                <th>URL</th>
+                                <th>权限字符串</th>
                                 <th>状态</th>
-                                <th>创建时间</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <#--<#if sites?size != 0>-->
-                            <#--<#list sites as site>-->
-                            <#--<tr>-->
-                                <#--<td class="td-center">-->
-                                    <#--<input type="checkbox" class="table-cb" value="${site.siteId}"/>-->
-                                <#--</td>-->
-                                <#--<td>${site.siteId}</td>-->
-                                <#--<td>${site.siteName}</td>-->
-                                <#--<td>-->
-                                <#--${(site.isclosesite==1)?string("<small class='badge bg-green'>正常</small>",-->
-                                <#--"<small class='badge bg-red'>关闭</small>")}-->
-                                <#--</td>-->
-                                <#--<td>${site.createDate?string("yyyy-MM-dd")}</td>-->
-                                <#--<td>-->
-                                    <#--<a href="<@spring.url '/manager/updatesite/${site.siteId}'/>">修改</a>&nbsp;&nbsp;-->
-                                    <#--<a href="javascript:;" class="deletesite" data-siteid="${site.siteId}">删除</a>-->
-                                <#--</td>-->
-                            <#--</tr>-->
-                            <#--</#list>-->
-                        <#--<#else>-->
-                        <#--<tr>-->
-                            <#--<td colspan="5"><h3>还没有站点数据！</h3></td>-->
-                        <#--</tr>-->
-                        <#--</#if>-->
+                            <#list columns as column>
+                                <tr data-tt-id="${column.colsId }" <#if column.parentId != 0>data-tt-parent-id="${column.parentId }"</#if>>
+                                <td>${column.columnName}</td>
+                                <td>${column.columndisplay}</td>
+                                <td>${column.columnot}</td>
+                                <td>${column.columnOutside}</td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                </tr>
+                            </#list>
                             </tbody>
                         </table>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
-            </div><!-- /.col-xs-9 -->
+            <#--</div>--><!-- /.col-xs-9 -->
         </div><!-- /.row -->
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
 <#include "fragment/footer.ftl">
 <script type="text/javascript">
     $("#nav_columns").imitClick();
-    var setting = {
+    $("#column-table").treetable({ expandable: true,initialState:'expanded' });
+    /*var setting = {
         view:{showLine:false},
         data: {
             simpleData: {
@@ -141,10 +122,10 @@
         { id:233, pId:23, name:"叶子节点233"},
         { id:234, pId:23, name:"叶子节点234"},
         { id:3, pId:0, name:"父节点3 - 没有子节点", isParent:true}
-    ];
+    ];*/
 
     $(function(){
-        $.fn.zTree.init($("#columnTree"), setting, zNodes);
+        /*$.fn.zTree.init($("#columnTree"), setting, zNodes);*/
         //$("#nav_siteSetting").imitClick();
         /*$("#addSite").click(function(){
             <#--location.href="<@spring.url '/manager/addsite'/>";-->

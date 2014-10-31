@@ -102,7 +102,8 @@ create table cols
   columnot      int                         comment '连接打开方式',
   columnOutside varchar(1000)               comment '外链地址',
   columnpic     varchar(200)                comment '栏目图片',
-  parentId      int       default 0         comment '父栏目ID',
+  parentId      bigInt       default 0      comment '父栏目ID',
+  parentIds     varchar(200)                comment 'treetable排序使用',
   primary key (colsId)
 )ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 comment '栏目表';
 
