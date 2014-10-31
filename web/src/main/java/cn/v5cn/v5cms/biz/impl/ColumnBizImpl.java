@@ -20,6 +20,7 @@ public class ColumnBizImpl implements ColumnBiz {
 
     @Override
     public List<Column> findAll() {
+
 //        Iterable<Column> columns = columnDao.findAll(new Sort(Sort.Direction.ASC, "parentIds","colsId"));
         Iterable<Column> columns = columnDao.findOrderByParentIdsAndColsId();
         return Lists.newArrayList(columns);
