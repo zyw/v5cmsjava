@@ -10,7 +10,7 @@
         <ol class="breadcrumb">
             <li><a href="<@spring.url '/manager/index'/>"><i class="fa fa-dashboard"></i> 首页</a></li>
             <li>站点设置</li>
-            <li><a href="<@spring.url '/manager/advposlist'/>">广告版位</a></li>
+            <li><a href="<@spring.url '/manager/advpos/list'/>">广告版位</a></li>
             <li class="active">${page_title!"添加版位"}</li>
         </ol>
     </section>
@@ -33,7 +33,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form id="advPosForm" action="<@spring.url '/manager/advposau'/>" class="form-horizontal" role="form" method="POST">
+                    <form id="advPosForm" action="<@spring.url '/manager/advpos/edit'/>" class="form-horizontal" role="form" method="POST">
                         <input type="hidden" value="${advpos.advPosId!""}" name="advPosId">
                         <div class="form-group">
                             <label for="dvPosName" class="col-sm-2 control-label">版位名称 <span style="color: #ff0000">*</span></label>
@@ -81,7 +81,7 @@
     $(function(){
         $("#nav_siteSetting").imitClick();
         $("#backAdvPosList").click(function(){
-            location.href="<@spring.url '/manager/advposlist'/>"
+            location.href="<@spring.url '/manager/advpos/list'/>"
         });
         $("#advPosState").chosen({disable_search_threshold: 10});
         $('#advPosForm').ajaxForm({
@@ -89,7 +89,7 @@
             success : function(data) {
                 if(data.status == "1"){
                     $.v5cms.tooltip({icon:"succeed",content:data.message},function(){
-                        location.href="<@spring.url '/manager/advposlist'/>";
+                        location.href="<@spring.url '/manager/advpos/list'/>";
                     });
                 }else{
                     $.v5cms.tooltip({icon:"error",content:data.message},function(){});

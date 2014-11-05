@@ -10,7 +10,7 @@
         <ol class="breadcrumb">
             <li><a href="<@spring.url '/manager/index'/>"><i class="fa fa-dashboard"></i> 首页</a></li>
             <li>站点设置</li>
-            <li><a href="<@spring.url '/manager/sitelist'/>">广告管理</a></li>
+            <li><a href="<@spring.url '/manager/adv/list'/>">广告管理</a></li>
             <li class="active">${page_title!"添加广告"}</li>
         </ol>
     </section>
@@ -33,7 +33,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form id="advForm" action="<@spring.url '/manager/advau'/>" class="form-horizontal" role="form" method="POST">
+                    <form id="advForm" action="<@spring.url '/manager/adv/edit'/>" class="form-horizontal" role="form" method="POST">
                         <input type="hidden" name="adv.advId" value="${adv.advId!""}">
                         <div class="form-group">
                             <label for="advName" class="col-sm-2 control-label">广告名称 <span style="color: #ff0000">*</span></label>
@@ -304,7 +304,7 @@
                 $.v5cms.tooltip({icon:"error",content:settings.errMessage,timeout:1000},function(){});
                 return;
             }
-            $.post("<@spring.url '/manager/deleteadvif'/>",{if_path:settings.resPath},function(data){
+            $.post("<@spring.url '/manager/adv/delete/if'/>",{if_path:settings.resPath},function(data){
                 if(data.status == '0'){
                     $.v5cms.tooltip({icon:"error",content:data.message},function(){});
                     return;
@@ -315,7 +315,7 @@
 
         $("#nav_siteSetting").imitClick();
         $("#backAdvList").click(function(){
-            location.href="<@spring.url '/manager/advlist'/>"
+            location.href="<@spring.url '/manager/adv/list'/>"
         });
         //日期空间操作
         $("#advStartEndTime").daterangepicker({
@@ -345,7 +345,7 @@
             swf: "<@spring.url '/r/js/Uploader.swf'/>",
             auto: true,
             // 文件接收服务端。
-            server: '<@spring.url '/manager/advupload?tt='/>'+new Date().getTime(),
+            server: '<@spring.url '/manager/adv/upload?tt='/>'+new Date().getTime(),
             // 选择文件的按钮。可选。
             // 内部根据当前运行是创建，可能是input元素，也可能是flash.
             pick: '#advImageUpload',
@@ -401,7 +401,7 @@
             swf: "<@spring.url '/r/js/Uploader.swf'/>",
             auto: true,
             // 文件接收服务端。
-            server: '<@spring.url '/manager/advupload?tt='/>'+new Date().getTime(),
+            server: '<@spring.url '/manager/adv/upload?tt='/>'+new Date().getTime(),
             // 选择文件的按钮。可选。
             // 内部根据当前运行是创建，可能是input元素，也可能是flash.
             pick: '#advFlashUpload',
@@ -479,7 +479,7 @@
             success : function(data) {
                 if(data.status == "1"){
                     $.v5cms.tooltip({icon:"succeed",content:data.message},function(){
-                        location.href="<@spring.url '/manager/advlist'/>";
+                        location.href="<@spring.url '/manager/adv/list'/>";
                     });
                 }else{
                     $.v5cms.tooltip({icon:"error",content:data.message},function(){});

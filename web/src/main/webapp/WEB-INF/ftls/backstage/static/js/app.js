@@ -1247,3 +1247,11 @@ $(window).load(function() {
         }
     };
 }(jQuery));
+
+$(function(){
+    $("#site-manager").chosen({disable_search_threshold: 10,width:'160px'}).change(function(e,value){
+        var contextPaht = $("#v5cms_context_path").val();
+        location.href=contextPaht+"/manager/switch/site/"+value.selected;
+        console.log(value.selected+contextPaht);
+    });
+});

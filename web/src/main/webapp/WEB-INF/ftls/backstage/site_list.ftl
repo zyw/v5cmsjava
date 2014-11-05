@@ -68,7 +68,7 @@
                                 </td>
                                 <td>${site.createDate?string("yyyy-MM-dd")}</td>
                                 <td>
-                                    <a href="<@spring.url '/manager/updatesite/${site.siteId}'/>">修改</a>&nbsp;&nbsp;
+                                    <a href="<@spring.url '/manager/site/update/${site.siteId}'/>">修改</a>&nbsp;&nbsp;
                                     <a href="javascript:;" class="deletesite" data-siteid="${site.siteId}">删除</a>
                                 </td>
                             </tr>
@@ -95,12 +95,12 @@
     $(function(){
         $("#nav_siteSetting").imitClick();
         $("#addSite").click(function(){
-            location.href="<@spring.url '/manager/addsite'/>";
+            location.href="<@spring.url '/manager/site/edit'/>";
         });
 
         function deleteSites(siteIds) {
             $.v5cms.confirm({icon:"question",content:"您确定要删除站点信息吗，删除后将不能恢复？",width:350,ok:function(){
-                var url = "<@spring.url '/manager/deletesite'/>";
+                var url = "<@spring.url '/manager/site/delete'/>";
                 $.post(url,{siteIds:siteIds},function(data){
                     if(data.status == "1"){
                         $.v5cms.tooltip({icon:"succeed","content":data.message},function(){

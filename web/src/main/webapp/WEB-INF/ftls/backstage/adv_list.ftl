@@ -121,7 +121,7 @@
                                 "<small class='badge bg-red'>关闭</small>")}
                                 </td>
                                 <td>
-                                    <a href="<@spring.url '/manager/advaup/'/>${adv.advId}">修改</a>&nbsp;&nbsp;
+                                    <a href="<@spring.url '/manager/adv/edit/'/>${adv.advId}">修改</a>&nbsp;&nbsp;
                                     <a href="javascript:;" class="deleteAdv" data-advid="${adv.advId}">删除</a>
                                 </td>
                             </tr>
@@ -149,7 +149,7 @@
         $("#advPosId").chosen({allow_single_deselect: true});
         function deleteAdvs(advIds) {
             $.v5cms.confirm({icon:"question",content:"您确定要删除广告吗，删除后将不能恢复？",width:350,ok:function(){
-                var url = "<@spring.url '/manager/deleteadvs'/>";
+                var url = "<@spring.url '/manager/adv/delete'/>";
                 $.post(url,{advIds:advIds},function(data){
                     if(data.status == "1"){
                         $.v5cms.tooltip({icon:"succeed","content":data.message},function(){
@@ -165,7 +165,7 @@
         }
 
         $("#addAdv").click(function(){
-            location.href="<@spring.url '/manager/advaup'/>";
+            location.href="<@spring.url '/manager/adv/edit'/>";
         });
 
         $(".deleteAdv").click(function(){

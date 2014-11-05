@@ -32,6 +32,7 @@
     <![endif]-->
 </head>
 <body class="skin-blue">
+<input type="hidden" id="v5cms_context_path" value="<@spring.url ''/>"/>
 <!-- header logo: style can be found in header.less -->
 <header class="header">
 <a href="index" class="logo">
@@ -47,9 +48,17 @@
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
 </a>
-
 <div class="navbar-right">
+
 <ul class="nav navbar-nav">
+<li style="line-height: 50px;">
+    <select class="form-control" id="site-manager">
+        <#list sitesKey as site>
+            <option value="${site.siteId}" <#if siteKey == site>selected</#if>>${site.siteName}</option>
+        </#list>
+    </select>
+</li>
+
 <!-- Messages: style can be found in dropdown.less-->
 <li class="dropdown messages-menu">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -263,7 +272,7 @@
                 <small>${managerKey.managerEmail}</small>
             </p>
         </li>
-        <!-- Menu Body
+       <#-- Menu Body
         <li class="user-body">
             <div class="col-xs-4 text-center">
                 <a href="#">Followers</a>
@@ -354,8 +363,8 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="<@spring.url '/manager/collist'/>"><i class="fa fa-angle-double-right"></i> 栏目</a></li>
-                        <li><a href="<@spring.url '/manager/coltypelist'/>"><i class="fa fa-angle-double-right"></i> 栏目类型</a></li>
+                        <li><a href="<@spring.url '/manager/col/list'/>"><i class="fa fa-angle-double-right"></i> 栏目</a></li>
+                        <li><a href="<@spring.url '/manager/coltype/list'/>"><i class="fa fa-angle-double-right"></i> 栏目类型</a></li>
                         <#--<li><a href="pages/UI/buttons.html"><i class="fa fa-angle-double-right"></i> Buttons</a></li>
                         <li><a href="pages/UI/sliders.html"><i class="fa fa-angle-double-right"></i> Sliders</a></li>
                         <li><a href="pages/UI/timeline.html"><i class="fa fa-angle-double-right"></i> Timeline</a></li>-->
@@ -363,7 +372,7 @@
 
                 </li>
                 <li>
-                    <a href="<@spring.url '/manager/tpllist'/>">
+                    <a href="<@spring.url '/manager/tpl/list'/>">
                         <i class="fa fa-edit"></i> <span>模板管理</span>
                         <small class="badge pull-right bg-green">new</small>
                     </a>
@@ -412,13 +421,13 @@
                     </a>
                     <ul class="treeview-menu">
                         <li>
-                            <a href="<@spring.url '/manager/sitelist'/>">
+                            <a href="<@spring.url '/manager/site/list'/>">
                                 <i class="fa fa-angle-double-right"></i>
                                 站点管理
                             </a>
                         </li>
-                        <li><a href="<@spring.url '/manager/advlist'/>"><i class="fa fa-angle-double-right"></i> 广告管理</a></li>
-                        <li><a href="<@spring.url '/manager/advposlist'/>"><i class="fa fa-angle-double-right"></i> 广告版位</a></li>
+                        <li><a href="<@spring.url '/manager/adv/list'/>"><i class="fa fa-angle-double-right"></i> 广告管理</a></li>
+                        <li><a href="<@spring.url '/manager/advpos/list'/>"><i class="fa fa-angle-double-right"></i> 广告版位</a></li>
                         <li><a href="pages/examples/register.html"><i class="fa fa-angle-double-right"></i> 连接管理</a>
                         </li>
                         <!--

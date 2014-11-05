@@ -27,6 +27,13 @@
     </bean>
     -->
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/manager/**"/>
+            <bean class="cn.v5cn.v5cms.filter.GlobalInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="10485760"/><!--10MB-->
         <property name="defaultEncoding" value="UTF-8"/>

@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by ZYW on 2014/8/12.
  */
 @Controller
-@RequestMapping("/manager")
+@RequestMapping("/manager/coltype")
 public class ColTypeAction {
 
-    @RequestMapping(value = "/coltypelist",method = RequestMethod.GET)
+    @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String colTypeList(){
         return "backstage/coltype_list";
     }
 
-    @RequestMapping(value = "/coltypeaup",method = RequestMethod.GET)
-    public String colTypeaup(){
-        return "backstage/coltype_au";
+    @RequestMapping(value = "/edit",method = RequestMethod.GET)
+    public String colTypeEdit(){
+        return "backstage/coltype_edit";
     }
 }

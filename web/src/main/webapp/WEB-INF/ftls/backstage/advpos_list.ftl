@@ -65,7 +65,7 @@
                                 "<small class='badge bg-red'>关闭</small>")}
                                 </td>
                                 <td>
-                                    <a href="<@spring.url '/manager/advposaup/'/>${advpos.advPosId}">修改</a>&nbsp;&nbsp;
+                                    <a href="<@spring.url '/manager/advpos/edit/'/>${advpos.advPosId}">修改</a>&nbsp;&nbsp;
                                     <a href="javascript:;" class="deleteAdvPos" data-advposid="${advpos.advPosId}">删除</a>
                                 </td>
                             </tr>
@@ -94,7 +94,7 @@
 
         function deleteAdvPoses(advPosIds) {
             $.v5cms.confirm({icon:"question",content:"您确定要删除广告版位吗，删除后将不能恢复？",width:350,ok:function(){
-                var url = "<@spring.url '/manager/deleteadvpos'/>";
+                var url = "<@spring.url '/manager/advpos/delete'/>";
                 $.post(url,{advPosIds:advPosIds},function(data){
                     if(data.status == "1"){
                         $.v5cms.tooltip({icon:"succeed","content":data.message},function(){
@@ -110,7 +110,7 @@
         }
 
         $("#addAdvPos").click(function(){
-            location.href="<@spring.url '/manager/advposaup'/>";
+            location.href="<@spring.url '/manager/advpos/edit'/>";
         });
 
         $(".deleteAdvPos").click(function(){

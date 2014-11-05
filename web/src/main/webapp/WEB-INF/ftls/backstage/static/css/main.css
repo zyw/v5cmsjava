@@ -58,7 +58,9 @@
     word-wrap: break-word;
     word-break: normal;
 }
-
+.chosen-single span{
+    color:#000;
+}
 
 /*Fancybox
 ------------------------------------*/

@@ -14,13 +14,13 @@ import java.util.List;
  * Created by ZYW on 2014/8/7.
  */
 @Controller
-@RequestMapping("/manager")
+@RequestMapping("/manager/col")
 public class ColumnAction {
 
     @Autowired
     private ColumnBiz columnBiz;
 
-    @RequestMapping(value = "/collist",method = RequestMethod.GET)
+    @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String columnList(ModelMap modelMap){
         List<Column> columns = columnBiz.findAll();
         System.out.println(columns);

@@ -87,7 +87,7 @@
     $(function(){
         $("#nav_columns").imitClick();
         $("#addColType").click(function(){
-            location.href="<@spring.url '/manager/coltypeaup'/>";
+            location.href="<@spring.url '/manager/coltype/edit'/>";
         });
 
         /*function deleteSites(siteIds) {

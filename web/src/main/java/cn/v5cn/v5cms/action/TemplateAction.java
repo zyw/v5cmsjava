@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by ZYW on 2014/8/13.
  */
 @Controller
-@RequestMapping("/manager")
+@RequestMapping("/manager/tpl")
 public class TemplateAction {
 
-    @RequestMapping(value = "/tpllist",method = RequestMethod.GET)
+    @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String tplList(){
         return "backstage/tpl_list";
     }
 
-    @RequestMapping(value = "/tpledit",method = RequestMethod.GET)
+    @RequestMapping(value = "/edit",method = RequestMethod.GET)
     public String tplEdit(){
         return "backstage/tpl_edit";
     }

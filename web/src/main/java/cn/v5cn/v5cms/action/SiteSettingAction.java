@@ -28,14 +28,14 @@ import static cn.v5cn.v5cms.util.MessageSourceHelper.getMessage;
  * Created by ZYW on 2014/6/29.
  */
 @Controller
-@RequestMapping("/manager")
+@RequestMapping("/manager/site")
 public class SiteSettingAction {
     private static final Logger LOGGER = LoggerFactory.getLogger(SiteSettingAction.class);
 
     @Autowired
     private SiteBiz siteBiz;
 
-    @RequestMapping(value = "/sitelist",method = RequestMethod.GET)
+    @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String siteInfo(ModelMap model){
         ImmutableList<Site> result = siteBiz.finadAll();
         model.addAttribute("sites",result);
@@ -49,22 +49,22 @@ public class SiteSettingAction {
         return siteBiz.findSize(-1).asList();
     }*/
 
-    @RequestMapping(value = "/addsite",method = RequestMethod.GET)
+    @RequestMapping(value = "/edit",method = RequestMethod.GET)
     public String addSite(ModelMap model){
         model.addAttribute("site",new Site());
-        return "backstage/site_au";
+        return "backstage/site_edit";
     }
 
-    @RequestMapping(value = "/updatesite/{siteId}",method = RequestMethod.GET)
+    @RequestMapping(value = "/update/{siteId}",method = RequestMethod.GET)
     public String updateSite(ModelMap model,@PathVariable Long siteId){
         Site result = siteBiz.findBySiteId(siteId);
         model.addAttribute("site",result);
         model.addAttribute("page_title",getMessage("site.updatepage.title"));
-        return "backstage/site_au";
+        return "backstage/site_edit";
     }
 
     @ResponseBody
-    @RequestMapping(value = "/ausite",method = RequestMethod.POST)
+    @RequestMapping(value = "/edit",method = RequestMethod.POST)
     public ImmutableMap<String,Object> addUpdateSite(@Valid Site site,BindingResult binding){
         if (binding.hasErrors()) {
             Map<String, Object> errorMessage = Maps.newHashMap();
@@ -97,7 +97,7 @@ public class SiteSettingAction {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/deletesite",method = RequestMethod.POST)
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public ImmutableMap<String,String> deleteSite(Long[] siteIds){
         LOGGER.info("删除站点信息，ID为{}",siteIds);
         try {

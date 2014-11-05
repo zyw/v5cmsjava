@@ -93,10 +93,14 @@ create table cols
 (
   colsId        bigInt not null AUTO_INCREMENT ,
   columnName    varchar(200) not null       comment '栏目名称',
+
   columnlht     varchar(200)                comment '栏目列表页头模板',
   columnlbt     varchar(200)                comment '栏目列表主体模板',
   columncht     varchar(200)                comment '内容页头模板',
   columncbt     varchar(200)                comment '内容也主体模板',
+
+  colTypeId     bigint not null             comment '栏目类型',
+
   columnds      int                         comment '栏目显示顺序',
   columndisplay int                         comment '是否显示',
   columnot      int                         comment '连接打开方式',

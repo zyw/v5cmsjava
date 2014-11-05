@@ -39,7 +39,7 @@ import static cn.v5cn.v5cms.util.MessageSourceHelper.getMessage;
  * Created by ZYW on 2014/7/24.
  */
 @Controller
-@RequestMapping("/manager")
+@RequestMapping("/manager/adv")
 public class AdvAction {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(AdvAction.class);
@@ -49,7 +49,7 @@ public class AdvAction {
     @Autowired
     private AdvBiz advBiz;
 
-    @RequestMapping(value = "/advlist",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
     public String advList(@ModelAttribute Adv adv,
                           @RequestParam(value = "p",defaultValue = "0")int currPage,
                           ModelMap modelMap,HttpServletRequest request){
@@ -73,16 +73,16 @@ public class AdvAction {
         return "backstage/adv_list";
     }
 
-    @RequestMapping(value = "/advaup",method = RequestMethod.GET)
+    @RequestMapping(value = "/edit",method = RequestMethod.GET)
     public String advPosaup(ModelMap model){
         ImmutableList<AdvPos> advposes = advPosBiz.finadAll();
         model.addAttribute("aps",advposes);
         model.addAttribute(new Adv());
         model.addAttribute("advTypes", Maps.newHashMap());
-        return "backstage/adv_au";
+        return "backstage/adv_edit";
     }
 
-    @RequestMapping(value = "/advaup/{advId}",method = RequestMethod.GET)
+    @RequestMapping(value = "/edit/{advId}",method = RequestMethod.GET)
     public String advPosaup(@PathVariable Long advId,ModelMap model){
         ImmutableList<AdvPos> advposes = advPosBiz.finadAll();
         model.addAttribute("aps",advposes);
@@ -98,11 +98,11 @@ public class AdvAction {
         model.addAttribute(adv);
         model.addAttribute("advTypes",advTypeMap);
         model.addAttribute("page_title",getMessage("adv.updatepage.title"));
-        return "backstage/adv_au";
+        return "backstage/adv_edit";
     }
 
     @ResponseBody
-    @RequestMapping(value = "/advau",method = RequestMethod.POST)
+    @RequestMapping(value = "/edit",method = RequestMethod.POST)
     public ImmutableMap<String,Object> advAU(@ModelAttribute("adv") AdvWrapper advWrapper,HttpServletRequest request){
         List<String> deleteFilePaths = (List<String>)request.getSession().getAttribute("adv_delete_file_real_path");
         if(deleteFilePaths != null && deleteFilePaths.size() > 0){
@@ -145,7 +145,7 @@ public class AdvAction {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/advupload",method = RequestMethod.POST)
+    @RequestMapping(value = "/upload",method = RequestMethod.POST)
     public ImmutableMap<String,Object> advUploader(MultipartFile file,HttpServletRequest request){
         if(file.isEmpty()){
             return ImmutableMap.<String,Object>of("status","0","message",getMessage("global.uploadempty.message"));
@@ -165,7 +165,7 @@ public class AdvAction {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/deleteadvif",method = RequestMethod.POST)
+    @RequestMapping(value = "/delete/if",method = RequestMethod.POST)
     public ImmutableMap<String,Object> deleteAdvImage(String if_path,HttpServletRequest request){
         String fileExt = FilenameUtils.getExtension(if_path);
         String fileName = FilenameUtils.getName(if_path);
@@ -182,7 +182,7 @@ public class AdvAction {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/deleteadvs",method = RequestMethod.POST)
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public ImmutableMap<String,Object> deleteAdvs(Long[] advIds,HttpServletRequest request){
         LOGGER.info("删除广告信息，ID为{}",advIds);
         try {

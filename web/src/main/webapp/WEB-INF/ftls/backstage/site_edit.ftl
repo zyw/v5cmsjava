@@ -10,7 +10,7 @@
         <ol class="breadcrumb">
             <li><a href="<@spring.url '/manager/index'/>"><i class="fa fa-dashboard"></i> 首页</a></li>
             <li>站点设置</li>
-            <li><a href="<@spring.url '/manager/sitelist'/>">站点管理</a></li>
+            <li><a href="<@spring.url '/manager/site/list'/>">站点管理</a></li>
             <li class="active">${page_title!"添加站点"}</li>
         </ol>
     </section>
@@ -33,7 +33,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form id="siteForm" action="<@spring.url '/manager/ausite'/>" class="form-horizontal" role="form" method="POST">
+                    <form id="siteForm" action="<@spring.url '/manager/site/edit'/>" class="form-horizontal" role="form" method="POST">
                         <input type="hidden" value="${site.siteId!""}" name="siteId">
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">站点名称 <span style="color: #ff0000">*</span></label>
@@ -119,15 +119,15 @@
     $(function(){
         $("#nav_siteSetting").imitClick();
         $("#backSiteList").click(function(){
-            location.href="<@spring.url '/manager/siteList'/>"
+            location.href="<@spring.url '/manager/site/list'/>"
         });
-        $("#isclosesite").chosen({disable_search_threshold: 10});
+        $("#isclosesite").chosen({disable_search_threshold: 10,width:'100%'});
         $('#siteForm').ajaxForm({
             dataType : 'json',
             success : function(data) {
                 if(data.status == "1"){
                     $.v5cms.tooltip({icon:"succeed",content:data.message},function(){
-                        location.href="<@spring.url '/manager/sitelist'/>";
+                        location.href="<@spring.url '/manager/site/list'/>";
                     });
                 }else{
                     $.v5cms.tooltip({icon:"error",content:data.message},function(){});

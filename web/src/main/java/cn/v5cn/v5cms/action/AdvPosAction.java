@@ -24,35 +24,35 @@ import static cn.v5cn.v5cms.util.MessageSourceHelper.getMessage;
  * Created by ZYW on 2014/7/23.
  */
 @Controller
-@RequestMapping("/manager")
+@RequestMapping("/manager/advpos")
 public class AdvPosAction {
     private static final Logger LOGGER = LoggerFactory.getLogger(AdvPosAction.class);
     @Autowired
     private AdvPosBiz advPosBiz;
 
-    @RequestMapping(value = "/advposlist",method = RequestMethod.GET)
+    @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String advPosList(ModelMap model){
         model.addAttribute("advposs", advPosBiz.finadAll());
         return "backstage/advpos_list";
     }
 
-    @RequestMapping(value = "/advposaup",method = RequestMethod.GET)
+    @RequestMapping(value = "/edit",method = RequestMethod.GET)
     public String advPosaup(ModelMap model){
         model.addAttribute("advpos",new AdvPos());
-        return "backstage/advpos_au";
+        return "backstage/advpos_edit";
     }
 
-    @RequestMapping(value = "/advposaup/{advPosId}",method = RequestMethod.GET)
+    @RequestMapping(value = "/edit/{advPosId}",method = RequestMethod.GET)
     public String advPosaup(@PathVariable Long advPosId,ModelMap model){
 
         AdvPos result = advPosBiz.findOne(advPosId);
         model.addAttribute("advpos",result);
         model.addAttribute("page_title",getMessage("advpos.updatepage.title"));
-        return "backstage/advpos_au";
+        return "backstage/advpos_edit";
     }
 
     @ResponseBody
-    @RequestMapping(value = "/advposau",method = RequestMethod.POST)
+    @RequestMapping(value = "/edit",method = RequestMethod.POST)
     public ImmutableMap<String,Object> addUpdateAdvPos(@Valid AdvPos advPos,BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
@@ -92,7 +92,7 @@ public class AdvPosAction {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/deleteadvpos",method = RequestMethod.POST)
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public ImmutableMap<String,String> deleteAdvPos(Long[] advPosIds){
         LOGGER.info("删除广告版位，ID为{}",advPosIds);
         try {

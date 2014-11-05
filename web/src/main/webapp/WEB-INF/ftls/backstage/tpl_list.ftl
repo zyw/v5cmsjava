@@ -165,7 +165,7 @@
         $.v5cms.initFancybox();
         $(".tpl-edit").click(function(){
             var tplName = $(this).data('tplname');
-            location.href="<@spring.url '/manager/tpledit'/>"
+            location.href="<@spring.url '/manager/tpl/edit'/>"
         });
         <#--$("#addColType").click(function(){-->
             <#--location.href="<@spring.url '/manager/coltypeaup'/>";-->
