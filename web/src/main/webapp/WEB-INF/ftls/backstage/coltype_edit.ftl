@@ -47,7 +47,9 @@
                             <label for="coltpl" class="col-sm-2 control-label">栏目模板</label>
                             <div class="col-sm-4">
                                 <select class="form-control" id="coltpl" name="coltpl">
-                                    <option value="1">启用</option>
+                                    <#list templates as template>
+                                        <option value="${template.b}">${template.a}</option>
+                                    </#list>
                                 </select>
                                 <span class="help-block">设置栏目页面模板。</span>
                             </div>
@@ -56,7 +58,9 @@
                             <label for="contenttpl" class="col-sm-2 control-label">栏目内容模板</label>
                             <div class="col-sm-4">
                                 <select class="form-control" id="contenttpldd" name="contenttpl">
-                                    <option value="1">启dddd用</option>
+                                    <#list templates as template>
+                                        <option value="${template.b}">${template.a}</option>
+                                    </#list>
                                 </select>
                                 <span class="help-block">设置栏目内容模板。</span>
                             </div>
