@@ -2,6 +2,7 @@ package cn.v5cn.v5cms.biz;
 
 import cn.v5cn.v5cms.entity.ColumnType;
 import cn.v5cn.v5cms.util.TwoTuple;
+import org.springframework.data.domain.Page;
 
 import java.io.File;
 import java.util.List;
@@ -12,4 +13,5 @@ import java.util.List;
 public interface ColumnTypeBiz {
     ColumnType save(ColumnType columnType);
     List<TwoTuple<String,String>> templatePathAndName(File templatePath);
+    Page<ColumnType> findColumnTypeByColTypeNamePageable(ColumnType columnType,Integer currPage);
 }

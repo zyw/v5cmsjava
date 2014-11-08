@@ -49,13 +49,27 @@ public class AdvAction {
     @Autowired
     private AdvBiz advBiz;
 
-    @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
-    public String advList(@ModelAttribute Adv adv,
-                          @RequestParam(value = "p",defaultValue = "0")int currPage,
-                          ModelMap modelMap,HttpServletRequest request){
+    @RequestMapping(value = "/list/{p}",method = {RequestMethod.GET,RequestMethod.POST})
+    public String advList(Adv adv,@PathVariable Integer p,HttpSession session,HttpServletRequest request,ModelMap modelMap){
+        System.out.println(adv+"---------------------------------------------------");
+        if(StringUtils.isNotBlank(adv.getAdvName())
+                || (adv.getAdvPos() != null && adv.getAdvPos().getAdvPosId() != null)){
+            session.setAttribute("advSearch",adv);
+            modelMap.addAttribute("searchAdv",adv);
+        }else{
+            session.setAttribute("advSearch",null);
+        }
+        Object searchObj = session.getAttribute("advSearch");
 
-        HttpSession session = request.getSession();
-        if("GET".equalsIgnoreCase(request.getMethod())){
+        Page<Adv> result =  advBiz.findAdvByAdvNamePageable((searchObj == null ? (new Adv()):((Adv)searchObj)),p);
+
+//        if(searchObj != null){
+//            result = advBiz.findAdvByAdvNamePageable(((Adv)searchObj),p);
+//        }else{
+//            result = advBiz.findAdvByAdvNamePageable(new Adv(),p);
+//        }
+
+        /*if("GET".equalsIgnoreCase(request.getMethod())){
             adv = (Adv)session.getAttribute("search_adv");
         }
         if("POST".equalsIgnoreCase(request.getMethod())){
@@ -64,9 +78,9 @@ public class AdvAction {
                 session.setAttribute("search_adv",adv);
             }
         }
-        Page<Adv> pageListAdv =  advBiz.findAdvByAdvNamePageable((adv == null ? (new Adv()):adv),currPage);
-        modelMap.addAttribute("advs",pageListAdv);
-        modelMap.addAttribute("pagination",SystemUtils.pagination(pageListAdv,HttpUtils.getBasePath(request)+"/manager/advlist"));
+        Page<Adv> pageListAdv =  advBiz.findAdvByAdvNamePageable((adv == null ? (new Adv()):adv),currPage);*/
+        modelMap.addAttribute("advs",result);
+        modelMap.addAttribute("pagination",SystemUtils.pagination(result,HttpUtils.getContextPath(request)+"/manager/adv/list"));
         ImmutableList<AdvPos> advposes = advPosBiz.finadAll();
         modelMap.addAttribute("aps",advposes);
 

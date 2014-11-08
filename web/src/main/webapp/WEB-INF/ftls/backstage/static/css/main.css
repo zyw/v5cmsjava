@@ -6,7 +6,9 @@
     margin: 100px auto;
 }
 /**登录页面CSS 结束**/
-
+.v5-col-xs-1{
+    width: 3.2%;
+}
 .icon-succeed{
     background: url("img/succeed.png") no-repeat;
     display: inline-block;

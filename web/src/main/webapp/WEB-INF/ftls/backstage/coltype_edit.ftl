@@ -10,7 +10,7 @@
         <ol class="breadcrumb">
             <li><a href="<@spring.url '/manager/index'/>"><i class="fa fa-dashboard"></i> 首页</a></li>
             <li>栏目管理</li>
-            <li><a href="<@spring.url '/manager/coltype/list'/>">栏目类型</a></li>
+            <li><a href="<@spring.url '/manager/coltype/list/1'/>">栏目类型</a></li>
             <li class="active">${page_title!"添加栏目类型"}</li>
         </ol>
     </section>
@@ -33,7 +33,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form id="colTypeForm" action="<@spring.url '/manager/advposau'/>" class="form-horizontal" role="form" method="POST">
+                    <form id="colTypeForm" action="<@spring.url '/manager/coltype/edit'/>" class="form-horizontal" role="form" method="POST">
                         <input type="hidden" value="" name="colTypeId">
                         <div class="form-group">
                             <label for="colTypeName" class="col-sm-2 control-label">栏目类型名称 <span style="color: #ff0000">*</span></label>
@@ -105,7 +105,7 @@
     $(function(){
         $("#nav_columns").imitClick();
         $("#backColTypeList").click(function(){
-            location.href="<@spring.url '/manager/coltype/list'/>"
+            location.href="<@spring.url '/manager/coltype/list/1'/>"
         });
 
         $("#coltpl").chosen({disable_search_threshold: 10,width:'100%'});
@@ -114,9 +114,10 @@
         $('#colTypeForm').ajaxForm({
             dataType : 'json',
             success : function(data) {
+                console.log(data);
                 if(data.status == "1"){
                     $.v5cms.tooltip({icon:"succeed",content:data.message},function(){
-                        location.href="<@spring.url '/manager/advposlist'/>";
+                        location.href="<@spring.url '/manager/coltype/list/1'/>";
                     });
                 }else{
                     $.v5cms.tooltip({icon:"error",content:data.message},function(){});
@@ -125,8 +126,8 @@
         });
 
         $("#saveColTypeForm").click(function(){
-            var result = $("#advPosName").nonEmpty({content:"版位名称不能为空！"});
-            if(result) $("#advPosForm").submit();
+            var result = $("#colTypeName").nonEmpty({content:"栏目类型名称不能为空！"});
+            if(result) $("#colTypeForm").submit();
         });
     });
 </script>

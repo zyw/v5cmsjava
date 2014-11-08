@@ -34,7 +34,7 @@
                 <div class="box-body table-responsive">
                     <table class="table table-hover table-bordered table-striped">
                         <colgroup>
-                            <col class="col-xs-1">
+                            <col class="col-xs-1 v5-col-xs-1">
                             <col class="col-xs-2">
                             <col class="col-xs-3">
                             <col class="col-xs-2">

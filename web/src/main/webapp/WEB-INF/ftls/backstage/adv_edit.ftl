@@ -10,7 +10,7 @@
         <ol class="breadcrumb">
             <li><a href="<@spring.url '/manager/index'/>"><i class="fa fa-dashboard"></i> 首页</a></li>
             <li>站点设置</li>
-            <li><a href="<@spring.url '/manager/adv/list'/>">广告管理</a></li>
+            <li><a href="<@spring.url '/manager/adv/list/1'/>">广告管理</a></li>
             <li class="active">${page_title!"添加广告"}</li>
         </ol>
     </section>
@@ -315,7 +315,7 @@
 
         $("#nav_siteSetting").imitClick();
         $("#backAdvList").click(function(){
-            location.href="<@spring.url '/manager/adv/list'/>"
+            location.href="<@spring.url '/manager/adv/list/1'/>"
         });
         //日期空间操作
         $("#advStartEndTime").daterangepicker({
@@ -479,7 +479,7 @@
             success : function(data) {
                 if(data.status == "1"){
                     $.v5cms.tooltip({icon:"succeed",content:data.message},function(){
-                        location.href="<@spring.url '/manager/adv/list'/>";
+                        location.href="<@spring.url '/manager/adv/list/1'/>";
                     });
                 }else{
                     $.v5cms.tooltip({icon:"error",content:data.message},function(){});

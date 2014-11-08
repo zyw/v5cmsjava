@@ -2,15 +2,23 @@ package cn.v5cn.v5cms.biz.impl;
 
 import cn.v5cn.v5cms.biz.ColumnTypeBiz;
 import cn.v5cn.v5cms.dao.ColumnTypeDao;
+import cn.v5cn.v5cms.entity.Adv;
 import cn.v5cn.v5cms.entity.ColumnType;
+import cn.v5cn.v5cms.util.PropertyUtils;
 import cn.v5cn.v5cms.util.TwoTuple;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.*;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +34,7 @@ public class ColumnTypeBizImpl implements ColumnTypeBiz {
     private ColumnTypeDao columnTypeDao;
 
     @Override
+    @Transactional
     public ColumnType save(ColumnType columnType) {
         return columnTypeDao.save(columnType);
     }
@@ -64,5 +73,22 @@ public class ColumnTypeBizImpl implements ColumnTypeBiz {
             result.add(new TwoTuple<String,String>(fileName,file.getAbsolutePath()));
         }
         return result;
+    }
+
+    @Override
+    public Page<ColumnType> findColumnTypeByColTypeNamePageable(final ColumnType columnType, Integer currPage) {
+        int pageSize = Integer.valueOf(PropertyUtils.getValue("page.size").or("0"));
+        return columnTypeDao.findAll(new Specification<ColumnType>(){
+
+            @Override
+            public Predicate toPredicate(Root<ColumnType> columnTypeRoot, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                List<javax.persistence.criteria.Predicate> ps = Lists.newArrayList();
+                if(StringUtils.isNotBlank(columnType.getColTypeName())){
+                    Path<String> advName = columnTypeRoot.get("colTypeName");
+                    ps.add(criteriaBuilder.like(advName, "%" + columnType.getColTypeName() + "%"));
+                }
+                return criteriaBuilder.and(ps.toArray(new javax.persistence.criteria.Predicate[0]));
+            }
+        },new PageRequest(currPage-1,pageSize));
     }
 }

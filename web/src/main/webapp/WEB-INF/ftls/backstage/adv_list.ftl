@@ -32,13 +32,13 @@
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive">
                     <div class="container-fluid" style="margin-bottom: 8px;">
-                        <form method="POST">
+                        <form method="POST" action="<@spring.url '/manager/adv/list/1'/>">
                         <div class="col-xs-1 v5-text-align">
                             <label>名称</label>
                         </div>
                         <div class="col-xs-3">
                             <input type="text" class="form-control" name="advName"
-                                   value="<#if search_adv??>${search_adv.advName!""}</#if>"
+                                   value="<#if searchAdv??>${searchAdv.advName!""}</#if>"
                                    id="advName" placeholder="名称">
                         </div>
                         <div class="col-xs-1 v5-text-align">
@@ -49,11 +49,11 @@
                             <#if aps?size != 0>
                                 <option value=""></option>
                                 <#list aps as ap>
-                                    <#if search_adv?? && search_adv.advPos??  && search_adv.advPos.advPosId==ap.advPosId>
-                                        <option value="${ap.advPosId}" selected>${ap.advPosName}</option>
-                                    <#else>
-                                        <option value="${ap.advPosId}">${ap.advPosName}</option>
+                                    <option value="${ap.advPosId}"
+                                    <#if searchAdv?? && searchAdv.advPos?? && (searchAdv.advPos.advPosId!0)==ap.advPosId>
+                                        selected
                                     </#if>
+                                            >${ap.advPosName}</option>
                                 </#list>
                             <#else>
                                 <option value="-1">还没有版位信息</option>
@@ -70,7 +70,7 @@
                     </div>
                     <table class="table table-hover table-bordered table-striped">
                         <colgroup>
-                            <col class="col-xs-1">
+                            <col class="col-xs-1 v5-col-xs-1">
                             <col class="col-xs-1">
                             <col class="col-xs-3">
                             <col class="col-xs-3">

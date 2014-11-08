@@ -114,13 +114,14 @@ public class Adv implements Serializable {
         return "Adv{" +
                 "advId=" + advId +
                 ", advName='" + advName + '\'' +
-                ", advStartTime=" + advStartTime +
-                ", advEndTime=" + advEndTime +
+                ", advStartTime='" + advStartTime + '\'' +
+                ", advEndTime='" + advEndTime + '\'' +
                 ", startUsing=" + startUsing +
                 ", advType=" + advType +
-                ", advCode=" + advCode +
                 ", createDate=" + createDate +
+                ", advCode='" + advCode + '\'' +
                 ", advTypeInfo='" + advTypeInfo + '\'' +
+                ", advPos=" + advPos +
                 '}';
     }
 }

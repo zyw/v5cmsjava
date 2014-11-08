@@ -95,7 +95,7 @@ public class SystemUtils {
         if(page.isFirst()){
             htmlSb.append("<li class='disabled'><a>&laquo;</a></li>");
         }else{
-            htmlSb.append("<li><a href='").append(href).append("'>&laquo;</a></li>");
+            htmlSb.append("<li><a href='").append(href+"/1").append("'>&laquo;</a></li>");
         }
         int currPage = page.getNumber()+1;
         int page_start = currPage - 2 > 0 ? currPage-2 : 1;
@@ -104,11 +104,11 @@ public class SystemUtils {
             htmlSb.append("<li><a>...</a></li>");
         }
         for(int i = page_start; i <= page_end; i++){
-            int pageIndex = i -1;
+            int pageIndex = i;
             if(i == currPage){
                 htmlSb.append("<li class='disabled'><a>").append(i).append("</a></li>");
             }else{
-                htmlSb.append("<li><a href='").append(href+"?p="+pageIndex).append("'>").append(i).append("</a></li>");
+                htmlSb.append("<li><a href='").append(href+"/"+pageIndex).append("'>").append(i).append("</a></li>");
             }
         }
         if(page_end < page.getTotalPages()){
@@ -117,7 +117,7 @@ public class SystemUtils {
         if(currPage == page.getTotalPages()) {
             htmlSb.append("<li class='disabled'><a>&raquo;</a></li>");
         }else{
-            htmlSb.append("<li><a href='").append(href+"?p="+(page.getTotalPages()-1)).append("'>&raquo;</a></li>");
+            htmlSb.append("<li><a href='").append(href+"/"+(page.getTotalPages())).append("'>&raquo;</a></li>");
         }
         htmlSb.append("</ul>");
         return htmlSb.toString();

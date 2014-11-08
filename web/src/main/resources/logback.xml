@@ -29,11 +29,11 @@
         </rollingPolicy>
     </appender>
 
-    <logger name="cn.v5cn.v5cms" level="DEBUGE" />
-    <logger name="org.springframework" level="DEBUGE" />
-    <logger name="log4j.logger.org.springframework.data" level="DEBUGE"/>
+    <logger name="cn.v5cn.v5cms" level="ERROR" />
+    <logger name="org.springframework" level="ERROR" />
+    <logger name="log4j.logger.org.springframework.data" level="ERROR"/>
 
-    <root level="DEBUGE">
+    <root level="ERROR">
         <!--<appender-ref ref="FILE"/>-->
         <appender-ref ref="stdout"/>
     </root>

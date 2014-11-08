@@ -34,10 +34,13 @@
                 <div class="box-body table-responsive">
                     <table class="table table-hover table-bordered table-striped">
                         <colgroup>
+                            <col class="col-xs-1 v5-col-xs-1">
                             <col class="col-xs-1">
                             <col class="col-xs-2">
-                            <col class="col-xs-3">
                             <col class="col-xs-2">
+                            <col class="col-xs-2">
+                            <col class="col-xs-1">
+                            <col class="col-xs-1">
                             <col class="col-xs-2">
                         </colgroup>
                         <thead>
@@ -46,38 +49,50 @@
                                 <input type="checkbox" id="thcheckbox"/>
                             </th>
                             <th>序号</th>
-                            <th>名称</th>
-                            <th>状态</th>
+                            <th>类型名称</th>
+                            <th>列表模板</th>
+                            <th>内容模板</th>
+                            <th>单页</th>
+                            <th>禁用</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <#--<#if advposs?size != 0>-->
-                            <#--<#list advposs as advpos>-->
-                            <#--<tr>-->
-                                <#--<td class="td-center">-->
-                                    <#--<input type="checkbox" class="table-cb" value="${advpos.advPosId}"/>-->
-                                <#--</td>-->
-                                <#--<td>${advpos.advPosId}</td>-->
-                                <#--<td>${advpos.advPosName}</td>-->
-                                <#--<td>-->
-                                <#--${(advpos.advPosState==1)?string("<small class='badge bg-green'>开启</small>",-->
-                                <#--"<small class='badge bg-red'>关闭</small>")}-->
-                                <#--</td>-->
-                                <#--<td>-->
-                                    <#--<a href="<@spring.url '/manager/advposaup/'/>${advpos.advPosId}">修改</a>&nbsp;&nbsp;-->
-                                    <#--<a href="javascript:;" class="deleteAdvPos" data-advposid="${advpos.advPosId}">删除</a>-->
-                                <#--</td>-->
-                            <#--</tr>-->
-                            <#--</#list>-->
-                        <#--<#else>-->
-                        <#--<tr>-->
-                            <#--<td colspan="5"><h3>还没有版位数据！</h3></td>-->
-                        <#--</tr>-->
-                        <#--</#if>-->
+                        <#if cts?size != 0>
+                            <#list cts as ct>
+                            <tr>
+                                <td class="td-center">
+                                    <input type="checkbox" class="table-cb" value="${ct.colTypeId}"/>
+                                </td>
+                                <td>${ct.colTypeId}</td>
+                                <td>${ct.colTypeName}</td>
+                                <td>${ct.coltpl}</td>
+                                <td>${ct.contenttpl}</td>
+                                <td>
+                                ${(ct.hasContent==1)?string("<small class='badge bg-green'>是</small>",
+                                "<small class='badge bg-red'>否</small>")}
+                                </td>
+                                <td>
+                                ${(ct.isDisabled==1)?string("<small class='badge bg-green'>启用</small>",
+                                "<small class='badge bg-red'>禁用</small>")}
+                                </td>
+                                <td>
+                                    <a href="<@spring.url '/manager/advposaup/'/>${ct.colTypeId}">修改</a>&nbsp;&nbsp;
+                                    <a href="javascript:;" class="deleteAdvPos" data-ctid="${ct.colTypeId}">删除</a>
+                                </td>
+                            </tr>
+                            </#list>
+                        <#else>
+                        <tr>
+                            <td colspan="8"><h3>还没有栏目类型数据！</h3></td>
+                        </tr>
+                        </#if>
                         </tbody>
                     </table>
                 </div><!-- /.box-body -->
+                <div class="box-footer clearfix">
+                    ${pagination}
+                </div>
             </div><!-- /.box -->
         </div><!-- /.row -->
     </section><!-- /.content -->
