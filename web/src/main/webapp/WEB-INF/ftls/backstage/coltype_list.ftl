@@ -32,6 +32,24 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive">
+                    <div class="container-fluid" style="margin-bottom: 8px;">
+                        <form method="POST" action="<@spring.url '/manager/adv/list/1'/>">
+                            <div class="col-xs-1 v5-text-align">
+                                <label>类型名称</label>
+                            </div>
+                            <div class="col-xs-4">
+                                <input type="text" class="form-control" name="colTypeName"
+                                       value="<#if searchAdv??>${searchAdv.advName!""}</#if>"
+                                       id="colTypeName" placeholder="类型名称">
+                            </div>
+                            <div class="col-xs-4">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fa fa-search"></i>
+                                    查询
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                     <table class="table table-hover table-bordered table-striped">
                         <colgroup>
                             <col class="col-xs-1 v5-col-xs-1">
