@@ -5,6 +5,7 @@ import cn.v5cn.v5cms.biz.AdvPosBiz;
 import cn.v5cn.v5cms.entity.Adv;
 import cn.v5cn.v5cms.entity.AdvPos;
 import cn.v5cn.v5cms.entity.wrapper.AdvWrapper;
+import cn.v5cn.v5cms.exception.V5CMSNullValueException;
 import cn.v5cn.v5cms.util.HttpUtils;
 import cn.v5cn.v5cms.util.SystemConstant;
 import cn.v5cn.v5cms.util.SystemUtils;
@@ -101,6 +102,12 @@ public class AdvAction {
         ImmutableList<AdvPos> advposes = advPosBiz.finadAll();
         model.addAttribute("aps",advposes);
         Adv adv = advBiz.findOne(advId);
+
+        if(adv == null){
+            LOGGER.error("通过ID为{}没有查到广告信息。",advId);
+            throw new V5CMSNullValueException("通过ID为"+advId+"没有查到广告信息。");
+        }
+
         ObjectMapper jsonObj = new ObjectMapper();
         Map<String,String> advTypeMap = null;
         try {

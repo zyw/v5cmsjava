@@ -39,13 +39,13 @@ public class AdvPosBizImpl implements AdvPosBiz {
         return advPosDao.findOne(advPosId);
     }
 
-    @Override
+    /*@Override
     @Transactional
     public AdvPos update(AdvPos advPos) throws InvocationTargetException, IllegalAccessException {
         AdvPos dbAdvPos = findOne(advPos.getAdvPosId());
         SystemUtils.copyProperties(dbAdvPos,advPos);
         return dbAdvPos;
-    }
+    }*/
 
     @Override
     public void deleteAdvPos(Long[] advPosIds) {

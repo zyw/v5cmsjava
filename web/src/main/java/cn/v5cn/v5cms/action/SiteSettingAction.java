@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
@@ -77,12 +76,19 @@ public class SiteSettingAction {
         }
         //修改操作
         if(site.getSiteId() != null){
-            try {
+            /*try {
                 siteBiz.updateSite(site);
             }catch(InvocationTargetException ie){
                 LOGGER.error("Site更新异常：{}",ie.getMessage());
                 return ImmutableMap.<String, Object>of("status","0","message", getMessage("site.updatefailed.message"));
             } catch (Exception e) {
+                LOGGER.error("Site更新异常：{}",e.getMessage());
+                return ImmutableMap.<String, Object>of("status","0","message", getMessage("site.updatefailed.message"));
+            }
+            return ImmutableMap.<String, Object>of("status","1","message", getMessage("site.updatesuccess.message"));*/
+            try {
+                siteBiz.addSite(site);
+            }catch (Exception e) {
                 LOGGER.error("Site更新异常：{}",e.getMessage());
                 return ImmutableMap.<String, Object>of("status","0","message", getMessage("site.updatefailed.message"));
             }

@@ -1067,7 +1067,7 @@ $(window).load(function() {
 (function($){
     "use strict";
 
-    $.fn.imitClick = function(){
+    $.fn.imitClick = function(url){
         return this.each(function(){
             var btn = $(this).children("a").first();
             var menu = $(this).children(".treeview-menu").first();
@@ -1089,6 +1089,12 @@ $(window).load(function() {
             menu.find("li > a").each(function() {
                 var pad = parseInt($(this).css("margin-left")) + 10;
                 $(this).css({"margin-left": pad + "px"});
+            });
+            var li$ = menu.children("li");
+            li$.each(function(i,e){
+                if((location.href).indexOf($(e).children("a").attr('href')) !== -1){
+                    $(e).addClass("active")
+                }
             });
         });
     }
@@ -1198,7 +1204,7 @@ $(window).load(function() {
             options = _contentHeader(options);
             var settings = $.extend({
                 content:"",
-                timeout:700
+                timeout:1200
             },options);
 
             var d = dialog(settings).show();

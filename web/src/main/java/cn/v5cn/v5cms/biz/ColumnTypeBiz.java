@@ -14,4 +14,8 @@ public interface ColumnTypeBiz {
     ColumnType save(ColumnType columnType);
     List<TwoTuple<String,String>> templatePathAndName(File templatePath);
     Page<ColumnType> findColumnTypeByColTypeNamePageable(ColumnType columnType,Integer currPage);
+
+    ColumnType findOne(Long colTypeId);
+
+//    ColumnType update(ColumnType columnType) throws InvocationTargetException, IllegalAccessException;
 }

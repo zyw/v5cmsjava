@@ -11,10 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
@@ -37,16 +39,21 @@ public class AdvPosAction {
     }
 
     @RequestMapping(value = "/edit",method = RequestMethod.GET)
-    public String advPosaup(ModelMap model){
+    public String advPosEdit(ModelMap model){
         model.addAttribute("advpos",new AdvPos());
         return "backstage/advpos_edit";
     }
 
     @RequestMapping(value = "/edit/{advPosId}",method = RequestMethod.GET)
-    public String advPosaup(@PathVariable Long advPosId,ModelMap model){
+    public String advPosEdit(@PathVariable Long advPosId,ModelMap model){
 
         AdvPos result = advPosBiz.findOne(advPosId);
-        model.addAttribute("advpos",result);
+        if(result == null){
+            model.addAttribute("advpos",new AdvPos());
+        }else{
+            model.addAttribute("advpos",result);
+        }
+
         model.addAttribute("page_title",getMessage("advpos.updatepage.title"));
         return "backstage/advpos_edit";
     }
@@ -75,14 +82,22 @@ public class AdvPosAction {
             return ImmutableMap.<String, Object>of("status","0","message",getMessage("advpos.addfailed.message"));
         }
         //修改操作
+//        AdvPos updateAdvPos = null;
+//        try {
+//            updateAdvPos = advPosBiz.update(advPos);
+//        } catch (InvocationTargetException e) {
+//            e.printStackTrace();
+//            LOGGER.error("修改广告版位失败，{},失败堆栈错误：{}",advPos,e.getMessage());
+//            return ImmutableMap.<String, Object>of("status","0","message",getMessage("advpos.updatefailed.message"));
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//            LOGGER.error("修改广告版位失败，{},失败堆栈错误：{}",advPos,e.getMessage());
+//            return ImmutableMap.<String, Object>of("status","0","message",getMessage("advpos.updatefailed.message"));
+//        }
         AdvPos updateAdvPos = null;
         try {
-            updateAdvPos = advPosBiz.update(advPos);
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-            LOGGER.error("修改广告版位失败，{},失败堆栈错误：{}",advPos,e.getMessage());
-            return ImmutableMap.<String, Object>of("status","0","message",getMessage("advpos.updatefailed.message"));
-        } catch (IllegalAccessException e) {
+            updateAdvPos = advPosBiz.save(advPos);
+        } catch (Exception e) {
             e.printStackTrace();
             LOGGER.error("修改广告版位失败，{},失败堆栈错误：{}",advPos,e.getMessage());
             return ImmutableMap.<String, Object>of("status","0","message",getMessage("advpos.updatefailed.message"));

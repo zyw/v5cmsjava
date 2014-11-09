@@ -57,8 +57,9 @@ public class ColumnTypeAction {
         return "backstage/coltype_list";
     }
 
-    @RequestMapping(value = "/edit",method = RequestMethod.GET)
-    public String columnTypeEdit(ModelMap modelMap,HttpSession session){
+    @RequestMapping(value = "/edit/{colTypeId}",method = RequestMethod.GET)
+    public String columnTypeEdit(@PathVariable Long colTypeId,ModelMap modelMap,HttpSession session){
+
         Object siteObj = session.getAttribute(SystemConstant.SITE_SESSION_KEY);
         if(siteObj == null){
             LOGGER.error("Session中存储的站点信息为Null！");
@@ -80,21 +81,56 @@ public class ColumnTypeAction {
             String uri = StringUtils.remove(nameAndUri.b, templateBasePath + File.separator + themeName);
             result.add(new TwoTuple<String, String>(nameAndUri.a,uri));
         }
-        System.out.println(result);
 
         modelMap.addAttribute("templates",result);
+
+        if(colTypeId == 0){
+            modelMap.addAttribute(new ColumnType());
+        }else{
+            ColumnType columnType = columnTypeBiz.findOne(colTypeId);
+            if(columnType == null){
+                LOGGER.error("ID为{}的栏目类型数据没有查到！",colTypeId);
+                throw new V5CMSNullValueException("ID为"+colTypeId+"的栏目类型数据没有查到！");
+            }
+            modelMap.addAttribute(columnType);
+        }
+
         return "backstage/coltype_edit";
     }
 
     @ResponseBody
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
     public ImmutableMap<String,String> columnTypeEdit(ColumnType columnType){
-        ColumnType saveColType = columnTypeBiz.save(columnType);
-        if(saveColType.getColTypeId() != null){
-            LOGGER.info("栏目类型添加成功，{}",saveColType);
-            return ImmutableMap.of("status","1","message",getMessage("column.type.addsuccess.message"));
+        if(columnType.getColTypeId() == null){
+
+            ColumnType saveColType = columnTypeBiz.save(columnType);
+            if(saveColType.getColTypeId() != null){
+                LOGGER.info("栏目类型添加成功，{}",saveColType);
+                return ImmutableMap.of("status","1","message",getMessage("column.type.addsuccess.message"));
+            }
+            LOGGER.info("栏目类型添加失败，{}",saveColType);
+            return ImmutableMap.of("status","0","message",getMessage("column.type.addfailed.message"));
         }
-        LOGGER.info("栏目类型添加失败，{}",saveColType);
-        return ImmutableMap.of("status","0","message",getMessage("column.type.addfailed.message"));
+//        try {
+//            columnTypeBiz.update(columnType);
+//        } catch (InvocationTargetException e) {
+//            e.printStackTrace();
+//            LOGGER.error("修改栏目类型失败，{},失败堆栈错误：{}",columnType,e.getMessage());
+//            return ImmutableMap.of("status","0","message",getMessage("column.type.updatefailed.message"));
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//            LOGGER.error("修改栏目类型失败，{},失败堆栈错误：{}",columnType,e.getMessage());
+//            return ImmutableMap.of("status","0","message",getMessage("column.type.updatefailed.message"));
+//        }
+//        LOGGER.info("修改栏目类型成功，{}",columnType);
+//        return ImmutableMap.of("status","1","message",getMessage("column.type.updatesuccess.message"));
+        try {
+            columnTypeBiz.save(columnType);
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.error("修改栏目类型失败，{},失败堆栈错误：{}",columnType,e.getMessage());
+            return ImmutableMap.of("status","0","message",getMessage("column.type.updatefailed.message"));
+        }
+        return ImmutableMap.of("status","1","message",getMessage("column.type.updatesuccess.message"));
     }
 }

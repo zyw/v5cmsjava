@@ -5,6 +5,7 @@ import cn.v5cn.v5cms.dao.ColumnTypeDao;
 import cn.v5cn.v5cms.entity.Adv;
 import cn.v5cn.v5cms.entity.ColumnType;
 import cn.v5cn.v5cms.util.PropertyUtils;
+import cn.v5cn.v5cms.util.SystemUtils;
 import cn.v5cn.v5cms.util.TwoTuple;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.*;
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
@@ -91,4 +93,17 @@ public class ColumnTypeBizImpl implements ColumnTypeBiz {
             }
         },new PageRequest(currPage-1,pageSize));
     }
+
+    @Override
+    public ColumnType findOne(Long colTypeId) {
+        return columnTypeDao.findOne(colTypeId);
+    }
+
+//    @Override
+//    @Transactional
+//    public ColumnType update(ColumnType columnType) throws InvocationTargetException, IllegalAccessException {
+//        ColumnType dbct = findOne(columnType.getColTypeId());
+//        SystemUtils.copyProperties(dbct,columnType);
+//        return dbct;
+//    }
 }

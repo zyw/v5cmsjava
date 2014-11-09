@@ -95,7 +95,7 @@
                                 "<small class='badge bg-red'>禁用</small>")}
                                 </td>
                                 <td>
-                                    <a href="<@spring.url '/manager/advposaup/'/>${ct.colTypeId}">修改</a>&nbsp;&nbsp;
+                                    <a href="<@spring.url '/manager/coltype/edit/'/>${ct.colTypeId}">修改</a>&nbsp;&nbsp;
                                     <a href="javascript:;" class="deleteAdvPos" data-ctid="${ct.colTypeId}">删除</a>
                                 </td>
                             </tr>
@@ -120,9 +120,14 @@
     $(function(){
         $("#nav_columns").imitClick();
         $("#addColType").click(function(){
-            location.href="<@spring.url '/manager/coltype/edit'/>";
+            location.href="<@spring.url '/manager/coltype/edit/0'/>";
         });
-
+        $("#thcheckbox").on('ifChecked', function(event){
+            $('.table-cb').iCheck('check');
+        });
+        $("#thcheckbox").on('ifUnchecked', function(event){
+            $('.table-cb').iCheck('uncheck');
+        });
         /*function deleteSites(siteIds) {
              $.v5cms.confirm({icon:"question",content:"您确定要删除站点信息吗，删除后将不能恢复？",width:350,ok:function(){
                  <#--var url = "<@spring.url '/manager/deletesite'/>";-->
@@ -143,13 +148,6 @@
         $(".deletesite").click(function(){
             var siteId = $(this).data("siteid");
             deleteSites(siteId);
-        });
-
-        $("#thcheckbox").on('ifChecked', function(event){
-            $('.table-cb').iCheck('check');
-        });
-        $("#thcheckbox").on('ifUnchecked', function(event){
-            $('.table-cb').iCheck('uncheck');
         });
 
         $("#siteBatchDelete").click(function(){
