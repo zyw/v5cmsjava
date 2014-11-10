@@ -17,5 +17,7 @@ public interface ColumnTypeBiz {
 
     ColumnType findOne(Long colTypeId);
 
+    void deleteColType(Long[] colTypeIds);
+
 //    ColumnType update(ColumnType columnType) throws InvocationTargetException, IllegalAccessException;
 }

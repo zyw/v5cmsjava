@@ -4,6 +4,7 @@ import cn.v5cn.v5cms.biz.ColumnTypeBiz;
 import cn.v5cn.v5cms.dao.ColumnTypeDao;
 import cn.v5cn.v5cms.entity.Adv;
 import cn.v5cn.v5cms.entity.ColumnType;
+import cn.v5cn.v5cms.entity.Site;
 import cn.v5cn.v5cms.util.PropertyUtils;
 import cn.v5cn.v5cms.util.SystemUtils;
 import cn.v5cn.v5cms.util.TwoTuple;
@@ -97,6 +98,18 @@ public class ColumnTypeBizImpl implements ColumnTypeBiz {
     @Override
     public ColumnType findOne(Long colTypeId) {
         return columnTypeDao.findOne(colTypeId);
+    }
+
+    @Override
+    public void deleteColType(Long[] colTypeIds) {
+        List<ColumnType> colTypes = Lists.newArrayList();
+        ColumnType columnType = null;
+        for(Long colTypeId : colTypeIds){
+            columnType = new ColumnType();
+            columnType.setColTypeId(colTypeId);
+            colTypes.add(columnType);
+        }
+        columnTypeDao.delete(colTypes);
     }
 
 //    @Override

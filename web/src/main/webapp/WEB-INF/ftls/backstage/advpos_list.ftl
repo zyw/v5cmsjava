@@ -127,7 +127,7 @@
         $("#advPosBatchDelete").click(function(){
             var $chs = $(":checkbox[checked=checked]");
             if($chs.length == 0){
-                $.v5cms.modalDialog({icon:'warning',content:"您还没有选中要操作的数据项！",width:250});
+                $.v5cms.tooltip({icon:"warning","content":"您还没有选中要操作的数据项！"},function(){});
                 return;
             }
             var advPosIds = [];

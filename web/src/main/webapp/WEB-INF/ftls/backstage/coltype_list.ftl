@@ -24,7 +24,7 @@
                     <div class="pull-right box-tools">
                         <button id="addColType" class="btn btn-success btn-sm" data-toggle="tooltip" title="添加栏目类型">
                             <i class="fa fa-plus"></i> 添加栏目类型</button>
-                        <button id="advPosBatchDelete" class="btn btn-warning btn-sm" data-toggle="tooltip" title="批量删除">
+                        <button id="colTypeBatchDelete" class="btn btn-warning btn-sm" data-toggle="tooltip" title="批量删除">
                             <i class="fa fa-trash-o"></i> 批量删除</button>
                     </div><!-- /. tools -->
                     <i class="fa fa-table"></i>
@@ -96,7 +96,7 @@
                                 </td>
                                 <td>
                                     <a href="<@spring.url '/manager/coltype/edit/'/>${ct.colTypeId}">修改</a>&nbsp;&nbsp;
-                                    <a href="javascript:;" class="deleteAdvPos" data-ctid="${ct.colTypeId}">删除</a>
+                                    <a href="javascript:;" class="deleteColType" data-ctid="${ct.colTypeId}">删除</a>
                                 </td>
                             </tr>
                             </#list>
@@ -128,10 +128,10 @@
         $("#thcheckbox").on('ifUnchecked', function(event){
             $('.table-cb').iCheck('uncheck');
         });
-        /*function deleteSites(siteIds) {
-             $.v5cms.confirm({icon:"question",content:"您确定要删除站点信息吗，删除后将不能恢复？",width:350,ok:function(){
-                 <#--var url = "<@spring.url '/manager/deletesite'/>";-->
-                $.post(url,{siteIds:siteIds},function(data){
+       function deleteColType(ctIds) {
+             $.v5cms.confirm({icon:"question",content:"您确定要删除栏目类型吗，删除后将不能恢复？",width:350,ok:function(){
+                 var url = "<@spring.url '/manager/coltype/delete'/>";
+                $.post(url,{colTypeIds:ctIds},function(data){
                     if(data.status == "1"){
                         $.v5cms.tooltip({icon:"succeed","content":data.message},function(){
                             location.reload();
@@ -145,24 +145,24 @@
             }});
         }
 
-        $(".deletesite").click(function(){
-            var siteId = $(this).data("siteid");
-            deleteSites(siteId);
+        $(".deleteColType").click(function(){
+            var colTypeId = $(this).data("ctid");
+            deleteColType(colTypeId);
         });
 
-        $("#siteBatchDelete").click(function(){
+        $("#colTypeBatchDelete").click(function(){
             var $chs = $(":checkbox[checked=checked]");
             if($chs.length == 0){
-                $.v5cms.modalDialog({icon:'warning',content:"您还没有选中要操作的数据项！",width:250});
+                $.v5cms.tooltip({icon:"warning","content":"您还没有选中要操作的数据项！"},function(){});
                 return;
             }
-            var siteIds = [];
+            var colTypeIds = [];
             for(var i=0;i<$chs.length;i++){
                 var v = $($chs[i]).val();
                 if(v == "on") continue;
-                siteIds.push(v);
+                colTypeIds.push(v);
             }
-            deleteSites(siteIds.join());
-        });*/
+            deleteColType(colTypeIds.join());
+        });
     });
 </script>

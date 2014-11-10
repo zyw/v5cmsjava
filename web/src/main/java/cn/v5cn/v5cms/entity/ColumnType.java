@@ -16,7 +16,7 @@ public class ColumnType implements Serializable {
     private String contenttpl;                  //内容模板名称
     private int colsort;                        //栏目排序
     private int hasContent;                     //是否有内容页
-    private int isDisabled;                     //是否可用
+    private int isDisabled=1;                     //是否可用
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -133,4 +133,19 @@ public class ColumnTypeAction {
         }
         return ImmutableMap.of("status","1","message",getMessage("column.type.updatesuccess.message"));
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    public ImmutableMap<String,String> colTypeDelete(Long[] colTypeIds){
+        System.out.println(colTypeIds);
+        try {
+            columnTypeBiz.deleteColType(colTypeIds);
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.error("删除栏目类型信息失败，失败原因：{}",e.getMessage());
+            return ImmutableMap.of("status","1","message",getMessage("column.type.deletefailed.message"));
+        }
+        LOGGER.info("删除栏目类型信息，ID为{}",StringUtils.join(colTypeIds,","));
+        return ImmutableMap.of("status","1","message",getMessage("column.type.deletesuccess.message"));
+    }
 }

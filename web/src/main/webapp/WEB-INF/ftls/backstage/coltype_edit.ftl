@@ -34,12 +34,12 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <form id="colTypeForm" action="<@spring.url '/manager/coltype/edit'/>" class="form-horizontal" role="form" method="POST">
-                        <input type="hidden" value="${columnType.colTypeId}" name="colTypeId">
+                        <input type="hidden" value="${columnType.colTypeId!""}" name="colTypeId">
                         <div class="form-group">
                             <label for="colTypeName" class="col-sm-2 control-label">栏目类型名称 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" name="colTypeName" id="colTypeName"
-                                       placeholder="栏目类型名称" value="${columnType.colTypeName}">
+                                       placeholder="栏目类型名称" value="${columnType.colTypeName!""}">
                                 <span class="help-block">设置版位的名称，方便日后管理。</span>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                             <div class="col-sm-4">
                                 <select class="form-control" id="coltpl" name="coltpl">
                                     <#list templates as template>
-                                        <option value="${template.b}" <#if columnType.coltpl==template.b>selected</#if>>${template.a}</option>
+                                        <option value="${template.b!""}" <#if (columnType.coltpl!"")==(template.b!"")>selected</#if>>${template.a!""}</option>
                                     </#list>
                                 </select>
                                 <span class="help-block">设置栏目页面模板。</span>
@@ -59,7 +59,7 @@
                             <div class="col-sm-4">
                                 <select class="form-control" id="contenttpldd" name="contenttpl">
                                     <#list templates as template>
-                                        <option value="${template.b}" <#if columnType.contenttpl==template.b>selected</#if>>${template.a}</option>
+                                        <option value="${template.b!""}" <#if (columnType.contenttpl!"")==(template.b!"")>selected</#if>>${template.a!""}</option>
                                     </#list>
                                 </select>
                                 <span class="help-block">设置栏目内容模板。</span>
