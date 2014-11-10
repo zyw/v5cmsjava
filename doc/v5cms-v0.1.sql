@@ -108,6 +108,7 @@ create table cols
   columnpic     varchar(200)                comment '栏目图片',
   parentId      bigInt       default 0      comment '父栏目ID',
   parentIds     varchar(200)                comment 'treetable排序使用',
+  siteId        bigint                      comment '栏目所属站点',
   primary key (colsId)
 )ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 comment '栏目表';
 
@@ -121,6 +122,7 @@ create table colType
   colsort     int          not null default 0 comment '栏目排序',
   hasContent  int                             comment '是否有内容页',
   isDisabled  int                             comment '是否可用',
+  siteId      bigint                          comment '栏目类型所属站点',
   primary key (colTypeId)
 )ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 comment '栏目类型表';
 

@@ -86,6 +86,8 @@ public class ColumnTypeBizImpl implements ColumnTypeBiz {
             @Override
             public Predicate toPredicate(Root<ColumnType> columnTypeRoot, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 List<javax.persistence.criteria.Predicate> ps = Lists.newArrayList();
+                Path<Long> siteId = columnTypeRoot.get("siteId");
+                ps.add(criteriaBuilder.equal(siteId,columnType.getSiteId()));
                 if(StringUtils.isNotBlank(columnType.getColTypeName())){
                     Path<String> advName = columnTypeRoot.get("colTypeName");
                     ps.add(criteriaBuilder.like(advName, "%" + columnType.getColTypeName() + "%"));

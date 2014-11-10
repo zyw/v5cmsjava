@@ -51,7 +51,18 @@ public class ColumnTypeAction {
             session.setAttribute("columnTypeSearch",null);
         }
         Object searchObj = session.getAttribute("columnTypeSearch");
-        Page<ColumnType> pageColumnTypes = columnTypeBiz.findColumnTypeByColTypeNamePageable((searchObj == null ? (new ColumnType()) : ((ColumnType) searchObj)), p);
+
+        ColumnType colType = searchObj == null ? (new ColumnType()) : ((ColumnType) searchObj);
+
+        Object siteObj = session.getAttribute(SystemConstant.SITE_SESSION_KEY);
+        if(siteObj == null){
+            LOGGER.error("Session中存储的站点信息为空！");
+            throw new V5CMSSessionValueNullException("Session中存储的站点信息为空！");
+        }
+        Site site = (Site)siteObj;
+        colType.setSiteId(site.getSiteId());
+
+        Page<ColumnType> pageColumnTypes = columnTypeBiz.findColumnTypeByColTypeNamePageable(colType, p);
         modelMap.addAttribute("cts",pageColumnTypes.getContent());
         modelMap.addAttribute("pagination", SystemUtils.pagination(pageColumnTypes, HttpUtils.getContextPath(request) + "/manager/coltype/list"));
         return "backstage/coltype_list";

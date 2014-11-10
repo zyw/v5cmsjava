@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface ColumnBiz {
     List<Column> findAll();
+    List<Column> findOrderByParentIdsAndColsId(Long siteId);
 }

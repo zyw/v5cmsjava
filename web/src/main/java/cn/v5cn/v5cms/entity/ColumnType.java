@@ -17,6 +17,7 @@ public class ColumnType implements Serializable {
     private int colsort;                        //栏目排序
     private int hasContent;                     //是否有内容页
     private int isDisabled=1;                     //是否可用
+    private Long siteId;                //站点ID
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -76,6 +77,14 @@ public class ColumnType implements Serializable {
         this.isDisabled = isDisabled;
     }
 
+    public Long getSiteId() {
+        return siteId;
+    }
+
+    public void setSiteId(Long siteId) {
+        this.siteId = siteId;
+    }
+
     @Override
     public String toString() {
         return "ColumnType{" +
@@ -86,6 +95,7 @@ public class ColumnType implements Serializable {
                 ", colsort=" + colsort +
                 ", hasContent=" + hasContent +
                 ", isDisabled=" + isDisabled +
+                ", siteId=" + siteId +
                 '}';
     }
 }

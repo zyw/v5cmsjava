@@ -13,10 +13,7 @@ import java.io.Serializable;
 public class Column implements Serializable {
     private Long colsId;
     private String columnName;          //栏目名称
-    private String columnlht;           //栏目列表页头模板
-    private String columnlbt;           //栏目列表主体模板
-    private String columncht;           //内容页头模板
-    private String columncbt;           //内容也主体模板
+    private Long colTypeId;             //栏目类型
     private int columnds;               //栏目显示顺序
     private int columndisplay;          //是否显示
     private int columnot;               //连接打开方式
@@ -24,6 +21,7 @@ public class Column implements Serializable {
     private String columnpic;           //栏目图片
     private Long parentId;              //父栏目ID
     private String parentIds;           //treetable排序使用
+    private Long siteId;                //站点ID
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,36 +41,12 @@ public class Column implements Serializable {
         this.columnName = columnName;
     }
 
-    public String getColumnlht() {
-        return columnlht;
+    public Long getColTypeId() {
+        return colTypeId;
     }
 
-    public void setColumnlht(String columnlht) {
-        this.columnlht = columnlht;
-    }
-
-    public String getColumnlbt() {
-        return columnlbt;
-    }
-
-    public void setColumnlbt(String columnlbt) {
-        this.columnlbt = columnlbt;
-    }
-
-    public String getColumncht() {
-        return columncht;
-    }
-
-    public void setColumncht(String columncht) {
-        this.columncht = columncht;
-    }
-
-    public String getColumncbt() {
-        return columncbt;
-    }
-
-    public void setColumncbt(String columncbt) {
-        this.columncbt = columncbt;
+    public void setColTypeId(Long colTypeId) {
+        this.colTypeId = colTypeId;
     }
 
     public int getColumnds() {
@@ -131,22 +105,28 @@ public class Column implements Serializable {
         this.parentIds = parentIds;
     }
 
+    public Long getSiteId() {
+        return siteId;
+    }
+
+    public void setSiteId(Long siteId) {
+        this.siteId = siteId;
+    }
+
     @Override
     public String toString() {
         return "Column{" +
                 "colsId=" + colsId +
                 ", columnName='" + columnName + '\'' +
-                ", columnlht='" + columnlht + '\'' +
-                ", columnlbt='" + columnlbt + '\'' +
-                ", columncht='" + columncht + '\'' +
-                ", columncbt='" + columncbt + '\'' +
+                ", colTypeId=" + colTypeId +
                 ", columnds=" + columnds +
                 ", columndisplay=" + columndisplay +
                 ", columnot=" + columnot +
                 ", columnOutside='" + columnOutside + '\'' +
                 ", columnpic='" + columnpic + '\'' +
                 ", parentId=" + parentId +
-                ", parentIds=" + parentIds +
+                ", parentIds='" + parentIds + '\'' +
+                ", siteId=" + siteId +
                 '}';
     }
 }

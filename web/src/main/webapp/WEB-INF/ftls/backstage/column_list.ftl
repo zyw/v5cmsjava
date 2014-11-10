@@ -57,6 +57,7 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <#if columns?size != 0>
                             <#list columns as column>
                                 <tr data-tt-id="${column.colsId }" <#if column.parentId != 0>data-tt-parent-id="${column.parentId }"</#if>>
                                 <td>${column.columnName}</td>
@@ -71,6 +72,11 @@
                                 </td>
                                 </tr>
                             </#list>
+                            <#else>
+                            <tr>
+                                <td colspan="6"><h3>还没有栏目数据！</h3></td>
+                            </tr>
+                            </#if>
                             </tbody>
                         </table>
                     </div><!-- /.box-body -->

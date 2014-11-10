@@ -21,8 +21,12 @@ public class ColumnBizImpl implements ColumnBiz {
     @Override
     public List<Column> findAll() {
 
-//        Iterable<Column> columns = columnDao.findAll(new Sort(Sort.Direction.ASC, "parentIds","colsId"));
-        Iterable<Column> columns = columnDao.findOrderByParentIdsAndColsId();
+        Iterable<Column> columns = columnDao.findAll();
         return Lists.newArrayList(columns);
+    }
+
+    @Override
+    public List<Column> findOrderByParentIdsAndColsId(Long siteId) {
+        return columnDao.findOrderByParentIdsAndColsId(siteId);
     }
 }
