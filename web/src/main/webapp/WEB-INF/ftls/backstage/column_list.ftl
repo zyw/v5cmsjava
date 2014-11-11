@@ -46,6 +46,14 @@
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
                         <table id="column-table" class="table-striped table-advance table-hover">
+                            <colgroup>
+                                <col class="col-xs-2">
+                                <col class="col-xs-1">
+                                <col class="col-xs-2">
+                                <col class="col-xs-2">
+                                <col class="col-xs-1">
+                                <col class="col-xs-2">
+                            </colgroup>
                             <thead>
                             <tr>
                                 <th>名称</th>
@@ -68,7 +76,9 @@
 
                                 </td>
                                 <td>
-
+                                    <a class="btn btn-success btn-xs"><i class="fa fa-plus"></i></a>&nbsp;
+                                    <a class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>&nbsp;
+                                    <a class="btn btn-warning btn-xs"><i class="fa fa-times"></i></a>
                                 </td>
                                 </tr>
                             </#list>

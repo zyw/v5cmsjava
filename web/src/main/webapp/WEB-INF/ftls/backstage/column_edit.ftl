@@ -34,51 +34,81 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <form id="colTypeForm" action="<@spring.url '/manager/coltype/edit'/>" class="form-horizontal" role="form" method="POST">
-                        <input type="hidden" value="" name="colTypeId">
+                        <input type="hidden" value="" name="colsId">
                         <div class="form-group">
-                            <label for="colTypeName" class="col-sm-2 control-label">栏目类型名称 <span style="color: #ff0000">*</span></label>
+                            <label for="columnName" class="col-sm-2 control-label">父栏目</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" name="colTypeName" id="colTypeName"
-                                       placeholder="栏目类型名称" value="">
+                                <input type="hidden" name="parentId">
+                                <input type="text" class="form-control" value="一级栏目" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="columnName" class="col-sm-2 control-label">栏目名称 <span style="color: #ff0000">*</span></label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="columnName" id="columnName"
+                                       placeholder="栏目名称" value="">
                                 <span class="help-block">设置版位的名称，方便日后管理。</span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="coltpl" class="col-sm-2 control-label">栏目模板</label>
+                            <label for="coltpl" class="col-sm-2 control-label">栏目类型</label>
                             <div class="col-sm-4">
                                 <select class="form-control" id="coltpl" name="coltpl">
                                     <#--<#list templates as template>-->
                                         <#--<option value="${template.b!""}" <#if (columnType.coltpl!"")==(template.b!"")>selected</#if>>${template.a!""}</option>-->
                                     <#--</#list>-->
                                 </select>
-                                <span class="help-block">设置栏目页面模板。</span>
+                                <span class="help-block">为栏目选择类型。</span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="contenttpl" class="col-sm-2 control-label">栏目内容模板</label>
+                            <label for="columnName" class="col-sm-2 control-label">显示顺序</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="columnName" id="columnName"
+                                       placeholder="显示顺序" value="">
+                                <span class="help-block">栏目的显示顺序越小越靠前。</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contenttpl" class="col-sm-2 control-label">打开方式</label>
                             <div class="col-sm-4">
                                 <select class="form-control" id="contenttpldd" name="contenttpl">
                                     <#--<#list templates as template>-->
                                         <#--<option value="${template.b!""}" <#if (columnType.contenttpl!"")==(template.b!"")>selected</#if>>${template.a!""}</option>-->
                                     <#--</#list>-->
                                 </select>
-                                <span class="help-block">设置栏目内容模板。</span>
+                                <span class="help-block">栏目的打开方式，本页打开或者新窗口打开。</span>
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="columnName" class="col-sm-2 control-label">栏目图标</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="columnName" id="columnName"
+                                       placeholder="栏目图标" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="columnName" class="col-sm-2 control-label">外链地址</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="columnName" id="columnName"
+                                       placeholder="外链地址" value="">
+                                <span class="help-block">连接到其他站点。</span>
+                            </div>
+                        </div>
+                        <#--<div class="form-group">
                             <label for="isDisabled" class="col-sm-2 control-label">单页</label>
                             <div class="col-sm-3">
                                 <label class="checkbox-inline" style="padding-left:0;">
-                                    <input type="radio" name="hasContent" value="1" id="hasContent1" <#--<#if columnType.hasContent==1>checked</#if>-->>
+                                    <input type="radio" name="hasContent" value="1" id="hasContent1" &lt;#&ndash;<#if columnType.hasContent==1>checked</#if>&ndash;&gt;>
                                     <label for="available1">是</label>
                                     &nbsp;&nbsp;
-                                    <input type="radio" name="hasContent" value="0" id="hasContent0"<#-- <#if columnType.hasContent==0>checked</#if>-->>
+                                    <input type="radio" name="hasContent" value="0" id="hasContent0"&lt;#&ndash; <#if columnType.hasContent==0>checked</#if>&ndash;&gt;>
                                     <label for="available0">否</label>
                                 </label>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="form-group">
-                            <label for="isDisabled" class="col-sm-2 control-label">类型状态</label>
+                            <label for="isDisabled" class="col-sm-2 control-label">栏目状态</label>
                             <div class="col-sm-3">
                                 <label class="checkbox-inline" style="padding-left:0;">
                                     <input type="radio" name="isDisabled" value="1" id="isDisabled1"<#-- <#if columnType.isDisabled==1>checked</#if>-->>
