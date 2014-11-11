@@ -49,7 +49,7 @@ public class ColumnTypeBizImpl implements ColumnTypeBiz {
         List<TwoTuple<String,String>> result = null;
 
         for(File file : files){
-            if(file.isDirectory() && "assets".equalsIgnoreCase(file.getName())) continue;
+//            if(file.isDirectory() && "assets".equalsIgnoreCase(file.getName())) continue;
 
             if(file.isDirectory()){
                 List<TwoTuple<String,String>> temp = this.templatePathAndName(file);
