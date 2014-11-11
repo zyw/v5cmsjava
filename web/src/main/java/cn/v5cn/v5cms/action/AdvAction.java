@@ -85,7 +85,7 @@ public class AdvAction {
         ImmutableList<AdvPos> advposes = advPosBiz.finadAll();
         modelMap.addAttribute("aps",advposes);
 
-        return "backstage/adv_list";
+        return "adv_list";
     }
 
     @RequestMapping(value = "/edit",method = RequestMethod.GET)
@@ -94,7 +94,7 @@ public class AdvAction {
         model.addAttribute("aps",advposes);
         model.addAttribute(new Adv());
         model.addAttribute("advTypes", Maps.newHashMap());
-        return "backstage/adv_edit";
+        return "adv_edit";
     }
 
     @RequestMapping(value = "/edit/{advId}",method = RequestMethod.GET)
@@ -119,7 +119,7 @@ public class AdvAction {
         model.addAttribute(adv);
         model.addAttribute("advTypes",advTypeMap);
         model.addAttribute("page_title",getMessage("adv.updatepage.title"));
-        return "backstage/adv_edit";
+        return "adv_edit";
     }
 
     @ResponseBody
@@ -182,7 +182,7 @@ public class AdvAction {
             return ImmutableMap.<String,Object>of("status","0","message",getMessage("adv.uploaderror.message"));
         }
         return ImmutableMap.<String,Object>of("status","1","message",getMessage("adv.uploadsuccess.message"),
-                "filePath","/r/advfiles/"+timeFileName,"contentPath", HttpUtils.getBasePath(request));
+                "filePath","/res/uploads/advfiles/"+timeFileName,"contentPath", HttpUtils.getBasePath(request));
     }
 
     @ResponseBody

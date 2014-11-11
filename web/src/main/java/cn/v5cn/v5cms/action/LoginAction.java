@@ -26,7 +26,7 @@ import static cn.v5cn.v5cms.util.MessageSourceHelper.getMessage;
  * Created by ZYW on 2014/5/30.
  */
 @Controller
-@RequestMapping("/admin/manager")
+@RequestMapping("/manager")
 public class LoginAction {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginAction.class);
@@ -39,7 +39,7 @@ public class LoginAction {
 
     @RequestMapping(value="/login",method = RequestMethod.GET)
     public String login(){
-        return "backstage/login";
+        return "login";
     }
 
     @RequestMapping(value="/login",method = RequestMethod.POST)
@@ -69,7 +69,7 @@ public class LoginAction {
         return "redirect:/manager/index";
     }
 
-    @RequestMapping(value="/captcha",method = RequestMethod.GET)
+    @RequestMapping(value="/login/captcha",method = RequestMethod.GET)
     public void captcha(HttpServletRequest request,HttpServletResponse response) throws Exception{
         response.setDateHeader("Expires", 0);
         response.setHeader("Cache-Control",

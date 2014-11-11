@@ -13,11 +13,11 @@ public class TemplateAction {
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String tplList(){
-        return "backstage/tpl_list";
+        return "tpl_list";
     }
 
     @RequestMapping(value = "/edit",method = RequestMethod.GET)
     public String tplEdit(){
-        return "backstage/tpl_edit";
+        return "tpl_edit";
     }
 }

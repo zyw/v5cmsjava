@@ -29,7 +29,7 @@ public class IndexAction {
     public String index(HttpSession session){
 
         LOGGER.info("站点信息初始化成功！");
-        return "backstage/index";
+        return "index";
     }
 
     @RequestMapping(value="/switch/site/{siteId}",method = RequestMethod.GET)

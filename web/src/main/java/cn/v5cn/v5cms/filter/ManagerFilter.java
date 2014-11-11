@@ -3,6 +3,7 @@ package cn.v5cn.v5cms.filter;
 import cn.v5cn.v5cms.entity.Manager;
 import cn.v5cn.v5cms.util.HttpUtils;
 import cn.v5cn.v5cms.util.SystemConstant;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -21,10 +22,15 @@ public class ManagerFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
+
+        if(StringUtils.contains(request.getRequestURI(), "/manager/login")){
+            filterChain.doFilter(servletRequest,servletResponse);
+            return;
+        }
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         Manager manager = (Manager)request.getSession().getAttribute(SystemConstant.SESSION_KEY);
         if(manager == null){
-            response.sendRedirect(HttpUtils.getBasePath(request) + "/admin/manager/login");
+            response.sendRedirect(HttpUtils.getBasePath(request) + "/manager/login");
         }else{
             filterChain.doFilter(servletRequest,servletResponse);
         }

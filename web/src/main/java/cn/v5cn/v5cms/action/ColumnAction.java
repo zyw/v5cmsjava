@@ -20,7 +20,7 @@ import java.util.List;
  * Created by ZYW on 2014/8/7.
  */
 @Controller
-@RequestMapping("/manager/col")
+@RequestMapping("/manager/column")
 public class ColumnAction {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ColumnAction.class);
@@ -39,6 +39,11 @@ public class ColumnAction {
         List<Column> columns = columnBiz.findOrderByParentIdsAndColsId(site.getSiteId());
         System.out.println(columns);
         modelMap.addAttribute("columns",columns);
-        return "backstage/column_list";
+        return "column_list";
+    }
+
+    @RequestMapping(value = "/edit",method = RequestMethod.GET)
+    public String columnEdit(){
+        return "column_edit";
     }
 }

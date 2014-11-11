@@ -3,6 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
@@ -14,10 +15,18 @@
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"
+                  p:supportedMediaTypes="text/html"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
-    <mvc:resources mapping="/r/**"
-                   location="/WEB-INF/ftls/backstage/static/,/WEB-INF/ftls/front/,/WEB-INF/uploads/"/>
+    <bean id="handlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <property name="alwaysUseFullPath" value="true"/>
+    </bean>
+    <!--<mvc:resources mapping="/r/**"-->
+                   <!--location="/WEB-INF/ftls/backstage/static/,/WEB-INF/ftls/front/,/WEB-INF/uploads/"/>-->
 
     <!--
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -41,7 +50,7 @@
 
     <!-- 配置FreeMarker -->
     <bean id="freeMarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <property name="templateLoaderPath" value="/WEB-INF/ftls/"/>
+        <property name="templateLoaderPath" value="/WEB-INF/ftls/backstage/"/>
         <property name="defaultEncoding" value="UTF-8" />
         <property name="freemarkerSettings">
             <props>
@@ -84,11 +93,11 @@
     </bean>
 
     <!-- 自定义拦截器interceptor -->
-    <mvc:interceptors>
+    <!--<mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <bean class="cn.v5cn.v5cms.filter.GlobalInterceptor"/>
         </mvc:interceptor>
-    </mvc:interceptors>
+    </mvc:interceptors>-->
     <!-- ./自定义拦截器interceptor -->
 </beans>

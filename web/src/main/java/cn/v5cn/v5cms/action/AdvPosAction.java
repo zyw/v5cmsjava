@@ -35,13 +35,13 @@ public class AdvPosAction {
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String advPosList(ModelMap model){
         model.addAttribute("advposs", advPosBiz.finadAll());
-        return "backstage/advpos_list";
+        return "advpos_list";
     }
 
     @RequestMapping(value = "/edit",method = RequestMethod.GET)
     public String advPosEdit(ModelMap model){
         model.addAttribute("advpos",new AdvPos());
-        return "backstage/advpos_edit";
+        return "advpos_edit";
     }
 
     @RequestMapping(value = "/edit/{advPosId}",method = RequestMethod.GET)
@@ -55,7 +55,7 @@ public class AdvPosAction {
         }
 
         model.addAttribute("page_title",getMessage("advpos.updatepage.title"));
-        return "backstage/advpos_edit";
+        return "advpos_edit";
     }
 
     @ResponseBody

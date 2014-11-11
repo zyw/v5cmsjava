@@ -15,7 +15,7 @@ public class SystemConstant {
 
     public static final String SITES_SESSION_KEY = "sitesKey";
 
-    public static final String ADV_RES_PATH = "/WEB-INF/uploads/advfiles/";
+    public static final String ADV_RES_PATH = "/res/uploads/advfiles/";
 
     public static final String SITE_TEMPLATE_PATH = "/WEB-INF/ftls/front/";
 }

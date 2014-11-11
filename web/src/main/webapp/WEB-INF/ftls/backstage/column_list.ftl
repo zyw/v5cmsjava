@@ -133,11 +133,11 @@
     $(function(){
         /*$.fn.zTree.init($("#columnTree"), setting, zNodes);*/
         //$("#nav_siteSetting").imitClick();
-        /*$("#addSite").click(function(){
-            <#--location.href="<@spring.url '/manager/addsite'/>";-->
+        $("#addColumn").click(function(){
+            location.href="<@spring.url '/manager/column/edit'/>";
         });
 
-        function deleteSites(siteIds) {
+        /*function deleteSites(siteIds) {
             $.v5cms.confirm({icon:"question",content:"您确定要删除站点信息吗，删除后将不能恢复？",width:350,ok:function(){
                 <#--var url = "<@spring.url '/manager/deletesite'/>";-->
                 $.post(url,{siteIds:siteIds},function(data){

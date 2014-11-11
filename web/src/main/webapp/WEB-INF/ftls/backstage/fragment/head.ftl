@@ -5,24 +5,43 @@
     <meta charset="UTF-8">
     <title>${siteKey.siteName!"没有站点"} | 后台</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <!-- bootstrap 3.0.2 -->
+    <#--<!-- bootstrap 3.0.2 &ndash;&gt;
     <link href="<@spring.url '/r/css/bootstrap.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- font Awesome -->
+    <!-- font Awesome &ndash;&gt;
     <link href="<@spring.url '/r/css/font-awesome.min.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- Ionicons -->
+    <!-- Ionicons &ndash;&gt;
     <link href="<@spring.url '/r/css/ionicons.min.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- colorpicker -->
+    <!-- colorpicker &ndash;&gt;
     <link href="<@spring.url '/r/css/bootstrap-colorpicker.min.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- artDialog -->
+    <!-- artDialog &ndash;&gt;
     <link href="<@spring.url '/r/css/ui-dialog.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- Theme style -->
+    <!-- Theme style &ndash;&gt;
     <link href="<@spring.url '/r/css/AdminLTE.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- bootstrap-chosen -->
+    <!-- bootstrap-chosen &ndash;&gt;
     <link href="<@spring.url '/r/css/bootstrap-chosen.min.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- zTreeStyle.css -->
+    <!-- zTreeStyle.css &ndash;&gt;
     <link href="<@spring.url '/r/css/zTreeStyle.css'/>" rel="stylesheet" type="text/css"/>
+    <!--custom CSS&ndash;&gt;
+    <link href="<@spring.url '/r/css/main.css'/>" rel="stylesheet" type="text/css"/>-->
+
+    <!-- bootstrap 3.0.2 -->
+    <link href="<@spring.url '/res/backstage/css/bootstrap.css'/>" rel="stylesheet" type="text/css"/>
+    <!-- font Awesome -->
+    <link href="<@spring.url '/res/backstage/css/font-awesome.min.css'/>" rel="stylesheet" type="text/css"/>
+    <!-- Ionicons -->
+    <link href="<@spring.url '/res/backstage/css/ionicons.min.css'/>" rel="stylesheet" type="text/css"/>
+    <!-- colorpicker -->
+    <link href="<@spring.url '/res/backstage/css/bootstrap-colorpicker.min.css'/>" rel="stylesheet" type="text/css"/>
+    <!-- artDialog -->
+    <link href="<@spring.url '/res/backstage/css/ui-dialog.css'/>" rel="stylesheet" type="text/css"/>
+    <!-- Theme style -->
+    <link href="<@spring.url '/res/backstage/css/AdminLTE.css'/>" rel="stylesheet" type="text/css"/>
+    <!-- bootstrap-chosen -->
+    <link href="<@spring.url '/res/backstage/css/bootstrap-chosen.min.css'/>" rel="stylesheet" type="text/css"/>
+    <!-- zTreeStyle.css -->
+    <link href="<@spring.url '/res/backstage/css/zTreeStyle.css'/>" rel="stylesheet" type="text/css"/>
     <!--custom CSS-->
-    <link href="<@spring.url '/r/css/main.css'/>" rel="stylesheet" type="text/css"/>
+    <link href="<@spring.url '/res/backstage/css/main.css'/>" rel="stylesheet" type="text/css"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -73,7 +92,7 @@
                 <li><!-- start message -->
                     <a href="#">
                         <div class="pull-left">
-                            <img src="<@spring.url '/r/images/avatar5.png'/>" class="img-circle" alt="User Image"/>
+                            <img src="<@spring.url '/res/backstage/images/avatar5.png'/>" class="img-circle" alt="User Image"/>
                         </div>
                         <h4>
                             支持团队
@@ -86,7 +105,7 @@
                 <li>
                     <a href="#">
                         <div class="pull-left">
-                            <img src="<@spring.url '/r/images/avatar5.png'/>" class="img-circle" alt="user image"/>
+                            <img src="<@spring.url '/res/backstage/images/avatar5.png'/>" class="img-circle" alt="user image"/>
                         </div>
                         <h4>
                             设计团队
@@ -98,7 +117,7 @@
                 <li>
                     <a href="#">
                         <div class="pull-left">
-                            <img src="<@spring.url '/r/images/avatar5.png'/>" class="img-circle" alt="user image"/>
+                            <img src="<@spring.url '/res/backstage/images/avatar5.png'/>" class="img-circle" alt="user image"/>
                         </div>
                         <h4>
                             开发
@@ -110,7 +129,7 @@
                 <li>
                     <a href="#">
                         <div class="pull-left">
-                            <img src="<@spring.url '/r/images/avatar5.png'/>" class="img-circle" alt="user image"/>
+                            <img src="<@spring.url '/res/backstage/images/avatar5.png'/>" class="img-circle" alt="user image"/>
                         </div>
                         <h4>
                             业务部门
@@ -122,7 +141,7 @@
                 <li>
                     <a href="#">
                         <div class="pull-left">
-                            <img src="<@spring.url '/r/images/avatar5.png'/>" class="img-circle" alt="user image"/>
+                            <img src="<@spring.url '/res/backstage/images/avatar5.png'/>" class="img-circle" alt="user image"/>
                         </div>
                         <h4>
                             审核部门
@@ -265,7 +284,7 @@
     <ul class="dropdown-menu">
         <!-- User image -->
         <li class="user-header bg-light-blue">
-            <img src="<@spring.url '/r/images/avatar5.png'/>" class="img-circle" alt="User Image"/>
+            <img src="<@spring.url '/res/backstage/images/avatar5.png'/>" class="img-circle" alt="User Image"/>
 
             <p>
             ${managerKey.managerName} - 管理员
@@ -363,7 +382,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="<@spring.url '/manager/col/list'/>"><i class="fa fa-angle-double-right"></i> 栏目</a></li>
+                        <li><a href="<@spring.url '/manager/column/list'/>"><i class="fa fa-angle-double-right"></i> 栏目</a></li>
                         <li><a href="<@spring.url '/manager/coltype/list/1'/>"><i class="fa fa-angle-double-right"></i> 栏目类型</a></li>
                         <#--<li><a href="pages/UI/buttons.html"><i class="fa fa-angle-double-right"></i> Buttons</a></li>
                         <li><a href="pages/UI/sliders.html"><i class="fa fa-angle-double-right"></i> Sliders</a></li>

@@ -25,7 +25,7 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        if(StringUtils.contains(request.getRequestURI(),"/login")) return true;
+        if(StringUtils.contains(request.getRequestURI(),"/manager/login")) return true;
 
         HttpSession session = request.getSession();
         if(session.getAttribute(SITES_SESSION_KEY) != null) return true;

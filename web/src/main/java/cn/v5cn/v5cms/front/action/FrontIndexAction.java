@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class FrontIndexAction {
 
-    @RequestMapping(value = {"/"})
+    @RequestMapping(value = "index.htm")
     public String index(){
-        return "front/default/index";
+        return "default/index";
     }
 }
