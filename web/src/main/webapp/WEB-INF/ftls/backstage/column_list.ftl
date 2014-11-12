@@ -49,8 +49,7 @@
                             <colgroup>
                                 <col class="col-xs-2">
                                 <col class="col-xs-1">
-                                <col class="col-xs-2">
-                                <col class="col-xs-2">
+                                <col class="col-xs-1">
                                 <col class="col-xs-1">
                                 <col class="col-xs-2">
                             </colgroup>
@@ -58,8 +57,7 @@
                             <tr>
                                 <th>名称</th>
                                 <th>类型</th>
-                                <th>URL</th>
-                                <th>权限字符串</th>
+                                <th>顺序</th>
                                 <th>状态</th>
                                 <th>操作</th>
                             </tr>
@@ -69,14 +67,11 @@
                             <#list columns as column>
                                 <tr data-tt-id="${column.colsId }" <#if column.parentId != 0>data-tt-parent-id="${column.parentId }"</#if>>
                                 <td>${column.columnName}</td>
+                                <td>${column.columnType.colTypeName}</td>
+                                <td>${column.columnds}</td>
                                 <td>${column.columndisplay}</td>
-                                <td>${column.columnot}</td>
-                                <td>${column.columnOutside}</td>
                                 <td>
-
-                                </td>
-                                <td>
-                                    <a class="btn btn-success btn-xs"><i class="fa fa-plus"></i></a>&nbsp;
+                                    <a href="<@spring.url '/manager/column/edit/${column.colsId}'/>" class="btn btn-success btn-xs"><i class="fa fa-plus"></i></a>&nbsp;
                                     <a class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>&nbsp;
                                     <a class="btn btn-warning btn-xs"><i class="fa fa-times"></i></a>
                                 </td>
@@ -144,7 +139,7 @@
         /*$.fn.zTree.init($("#columnTree"), setting, zNodes);*/
         //$("#nav_siteSetting").imitClick();
         $("#addColumn").click(function(){
-            location.href="<@spring.url '/manager/column/edit'/>";
+            location.href="<@spring.url '/manager/column/edit/0'/>";
         });
 
         /*function deleteSites(siteIds) {

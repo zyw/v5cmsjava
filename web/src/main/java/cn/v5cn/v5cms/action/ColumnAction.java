@@ -1,7 +1,9 @@
 package cn.v5cn.v5cms.action;
 
 import cn.v5cn.v5cms.biz.ColumnBiz;
+import cn.v5cn.v5cms.biz.ColumnTypeBiz;
 import cn.v5cn.v5cms.entity.Column;
+import cn.v5cn.v5cms.entity.ColumnType;
 import cn.v5cn.v5cms.entity.Site;
 import cn.v5cn.v5cms.exception.V5CMSSessionValueNullException;
 import cn.v5cn.v5cms.util.SystemConstant;
@@ -10,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -28,6 +31,9 @@ public class ColumnAction {
     @Autowired
     private ColumnBiz columnBiz;
 
+    @Autowired
+    private ColumnTypeBiz columnTypeBiz;
+
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String columnList(ModelMap modelMap,HttpSession session){
         Object siteObj = session.getAttribute(SystemConstant.SITE_SESSION_KEY);
@@ -42,8 +48,23 @@ public class ColumnAction {
         return "column_list";
     }
 
-    @RequestMapping(value = "/edit",method = RequestMethod.GET)
-    public String columnEdit(){
+    @RequestMapping(value = "/edit/{columnId}",method = RequestMethod.GET)
+    public String columnEdit(ModelMap modelMap,@PathVariable Long columnId){
+        Column column = new Column();
+        if(columnId == 0){
+            column.setParentIds("0/");
+            column.setParentId(0L);
+            modelMap.addAttribute("column",column);
+            modelMap.addAttribute("parentName","一级栏目");
+        }else{
+            Column dbColumn = columnBiz.findOne(columnId);
+            column.setParentIds(dbColumn.getParentIds()+dbColumn.getColsId()+"/");
+            column.setParentId(dbColumn.getColsId());
+            modelMap.addAttribute("parentName",dbColumn.getColumnName());
+            modelMap.addAttribute("column",column);
+        }
+        List<ColumnType> colTypes = columnTypeBiz.findAll();
+        modelMap.addAttribute("colTypes",colTypes);
         return "column_edit";
     }
 }

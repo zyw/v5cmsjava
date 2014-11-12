@@ -122,6 +122,9 @@
                 }else{
                     $.v5cms.tooltip({icon:"error",content:data.message},function(){});
                 }
+            },
+            error:function(xhr, status, error){
+                $.v5cms.tooltip({icon:"error",content:"错误代码：" + status + " 错误消息：" + error},function(){});
             }
         });
 

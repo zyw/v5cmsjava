@@ -114,6 +114,11 @@ public class ColumnTypeBizImpl implements ColumnTypeBiz {
         columnTypeDao.delete(colTypes);
     }
 
+    @Override
+    public List<ColumnType> findAll() {
+        return Lists.newArrayList(columnTypeDao.findAll());
+    }
+
 //    @Override
 //    @Transactional
 //    public ColumnType update(ColumnType columnType) throws InvocationTargetException, IllegalAccessException {

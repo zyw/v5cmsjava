@@ -34,12 +34,13 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <form id="colTypeForm" action="<@spring.url '/manager/coltype/edit'/>" class="form-horizontal" role="form" method="POST">
-                        <input type="hidden" value="" name="colsId">
+                        <input type="hidden" value="${column.colsId!0}" name="colsId">
                         <div class="form-group">
                             <label for="columnName" class="col-sm-2 control-label">父栏目</label>
                             <div class="col-sm-4">
-                                <input type="hidden" name="parentId">
-                                <input type="text" class="form-control" value="一级栏目" readonly>
+                                <input type="hidden" name="parentId" value="${column.parentId!0}">
+                                <input type="hidden" name="parentIds" value="${column.parentIds!""}">
+                                <input type="text" class="form-control" value="${parentName!""}" readonly>
                             </div>
                         </div>
                         <div class="form-group">
@@ -53,68 +54,55 @@
                         <div class="form-group">
                             <label for="coltpl" class="col-sm-2 control-label">栏目类型</label>
                             <div class="col-sm-4">
-                                <select class="form-control" id="coltpl" name="coltpl">
-                                    <#--<#list templates as template>-->
-                                        <#--<option value="${template.b!""}" <#if (columnType.coltpl!"")==(template.b!"")>selected</#if>>${template.a!""}</option>-->
-                                    <#--</#list>-->
+                                <select class="form-control" id="colTypeId" name="columnType.colTypeId">
+                                    <#list colTypes as colType>
+                                        <option value="${colType.colTypeId!0}" <#--<#if (columnType.coltpl!"")==(template.b!"")>selected</#if>-->>${colType.colTypeName!""}</option>
+                                    </#list>
                                 </select>
                                 <span class="help-block">为栏目选择类型。</span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="columnName" class="col-sm-2 control-label">显示顺序</label>
+                            <label for="columnds" class="col-sm-2 control-label">显示顺序</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" name="columnName" id="columnName"
+                                <input type="text" class="form-control" name="columnds" id="columnds"
                                        placeholder="显示顺序" value="">
                                 <span class="help-block">栏目的显示顺序越小越靠前。</span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="contenttpl" class="col-sm-2 control-label">打开方式</label>
+                            <label for="columnot" class="col-sm-2 control-label">打开方式</label>
                             <div class="col-sm-4">
-                                <select class="form-control" id="contenttpldd" name="contenttpl">
-                                    <#--<#list templates as template>-->
-                                        <#--<option value="${template.b!""}" <#if (columnType.contenttpl!"")==(template.b!"")>selected</#if>>${template.a!""}</option>-->
-                                    <#--</#list>-->
+                                <select class="form-control" id="columnot" name="columnot">
+                                    <option value="_self" selected>当前窗口</option>
+                                    <option value="_blank">新窗口</option>
                                 </select>
                                 <span class="help-block">栏目的打开方式，本页打开或者新窗口打开。</span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="columnName" class="col-sm-2 control-label">栏目图标</label>
+                            <label for="columnpic" class="col-sm-2 control-label">栏目图标</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" name="columnName" id="columnName"
+                                <input type="text" class="form-control" name="columnpic" id="columnpic"
                                        placeholder="栏目图标" value="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="columnName" class="col-sm-2 control-label">外链地址</label>
+                            <label for="columnOutside" class="col-sm-2 control-label">外链地址</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" name="columnName" id="columnName"
+                                <input type="text" class="form-control" name="columnOutside" id="columnOutside"
                                        placeholder="外链地址" value="">
                                 <span class="help-block">连接到其他站点。</span>
                             </div>
                         </div>
-                        <#--<div class="form-group">
-                            <label for="isDisabled" class="col-sm-2 control-label">单页</label>
-                            <div class="col-sm-3">
-                                <label class="checkbox-inline" style="padding-left:0;">
-                                    <input type="radio" name="hasContent" value="1" id="hasContent1" &lt;#&ndash;<#if columnType.hasContent==1>checked</#if>&ndash;&gt;>
-                                    <label for="available1">是</label>
-                                    &nbsp;&nbsp;
-                                    <input type="radio" name="hasContent" value="0" id="hasContent0"&lt;#&ndash; <#if columnType.hasContent==0>checked</#if>&ndash;&gt;>
-                                    <label for="available0">否</label>
-                                </label>
-                            </div>
-                        </div>-->
                         <div class="form-group">
                             <label for="isDisabled" class="col-sm-2 control-label">栏目状态</label>
                             <div class="col-sm-3">
                                 <label class="checkbox-inline" style="padding-left:0;">
-                                    <input type="radio" name="isDisabled" value="1" id="isDisabled1"<#-- <#if columnType.isDisabled==1>checked</#if>-->>
+                                    <input type="radio" name="columndisplay" value="1" id="columndisplay1"<#-- <#if columnType.isDisabled==1>checked</#if>-->>
                                     <label for="available1">可用</label>
                                     &nbsp;&nbsp;
-                                    <input type="radio" name="isDisabled" value="0" id="isDisabled0"<#-- <#if columnType.isDisabled==0>checked</#if>-->>
+                                    <input type="radio" name="columndisplay" value="0" id="columndisplay0"<#-- <#if columnType.isDisabled==0>checked</#if>-->>
                                     <label for="available0">禁用</label>
                                 </label>
                             </div>
@@ -138,8 +126,8 @@
             location.href="<@spring.url '/manager/column/list'/>"
         });
 
-        $("#coltpl").chosen({disable_search_threshold: 10,width:'100%'});
-        $("#contenttpldd").chosen({disable_search_threshold: 10,width:'100%'});
+        $("#colTypeId").chosen({disable_search_threshold: 10,width:'100%'});
+        $("#columnot").chosen({disable_search_threshold: 10,width:'100%'});
 
         $('#colTypeForm').ajaxForm({
             dataType : 'json',
@@ -152,6 +140,9 @@
                 }else{
                     $.v5cms.tooltip({icon:"error",content:data.message},function(){});
                 }
+            },
+            error:function(xhr, status, error){
+                $.v5cms.tooltip({icon:"error",content:"错误代码：" + status + " 错误消息：" + error},function(){});
             }
         });
 

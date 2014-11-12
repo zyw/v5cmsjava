@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class Column implements Serializable {
     private Long colsId;
     private String columnName;          //栏目名称
-    private Long colTypeId;             //栏目类型
+//    private Long colTypeId;             //栏目类型
     private int columnds;               //栏目显示顺序
     private int columndisplay;          //是否显示
     private int columnot;               //连接打开方式
@@ -22,6 +22,8 @@ public class Column implements Serializable {
     private Long parentId;              //父栏目ID
     private String parentIds;           //treetable排序使用
     private Long siteId;                //站点ID
+
+    private ColumnType columnType;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,14 +41,6 @@ public class Column implements Serializable {
 
     public void setColumnName(String columnName) {
         this.columnName = columnName;
-    }
-
-    public Long getColTypeId() {
-        return colTypeId;
-    }
-
-    public void setColTypeId(Long colTypeId) {
-        this.colTypeId = colTypeId;
     }
 
     public int getColumnds() {
@@ -113,12 +107,21 @@ public class Column implements Serializable {
         this.siteId = siteId;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "colTypeId")
+    public ColumnType getColumnType() {
+        return columnType;
+    }
+
+    public void setColumnType(ColumnType columnType) {
+        this.columnType = columnType;
+    }
+
     @Override
     public String toString() {
         return "Column{" +
                 "colsId=" + colsId +
                 ", columnName='" + columnName + '\'' +
-                ", colTypeId=" + colTypeId +
                 ", columnds=" + columnds +
                 ", columndisplay=" + columndisplay +
                 ", columnot=" + columnot +
@@ -127,6 +130,7 @@ public class Column implements Serializable {
                 ", parentId=" + parentId +
                 ", parentIds='" + parentIds + '\'' +
                 ", siteId=" + siteId +
+                ", columnType=" + columnType +
                 '}';
     }
 }

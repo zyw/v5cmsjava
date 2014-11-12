@@ -111,8 +111,16 @@ public class ColumnTypeAction {
 
     @ResponseBody
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
-    public ImmutableMap<String,String> columnTypeEdit(ColumnType columnType){
+    public ImmutableMap<String,String> columnTypeEdit(ColumnType columnType,HttpSession session){
         if(columnType.getColTypeId() == null){
+            //设置站点ID
+            Object siteObj = session.getAttribute(SystemConstant.SITE_SESSION_KEY);
+            if(siteObj == null){
+                LOGGER.error("Session中存储的站点信息为Null！");
+                throw new V5CMSSessionValueNullException("Session中存储的站点信息为Null！");
+            }
+            Site site = (Site)siteObj;
+            columnType.setSiteId(site.getSiteId());
 
             ColumnType saveColType = columnTypeBiz.save(columnType);
             if(saveColType.getColTypeId() != null){

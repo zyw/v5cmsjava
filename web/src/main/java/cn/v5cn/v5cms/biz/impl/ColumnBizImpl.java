@@ -29,4 +29,9 @@ public class ColumnBizImpl implements ColumnBiz {
     public List<Column> findOrderByParentIdsAndColsId(Long siteId) {
         return columnDao.findOrderByParentIdsAndColsId(siteId);
     }
+
+    @Override
+    public Column findOne(Long columnId) {
+        return columnDao.findOne(columnId);
+    }
 }
