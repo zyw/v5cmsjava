@@ -23,7 +23,7 @@
                 <div class="box-header">
                     <!-- tools box -->
                     <div class="pull-right box-tools">
-                        <button id="saveColumnForm" class="btn btn-success btn-sm" data-toggle="tooltip" title="保存">
+                        <button id="saveColumnButton" class="btn btn-success btn-sm" data-toggle="tooltip" title="保存">
                             <i class="fa fa-save"></i> 保存</button>
                         <button id="backColumnList" class="btn btn-default btn-sm" data-toggle="tooltip" title="返回">
                             <i class="fa fa-mail-forward"></i> 返回</button>
@@ -33,7 +33,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form id="colTypeForm" action="<@spring.url '/manager/coltype/edit'/>" class="form-horizontal" role="form" method="POST">
+                    <form id="columnForm" action="<@spring.url '/manager/column/edit'/>" class="form-horizontal" role="form" method="POST">
                         <input type="hidden" value="${column.colsId!0}" name="colsId">
                         <div class="form-group">
                             <label for="columnName" class="col-sm-2 control-label">父栏目</label>
@@ -129,7 +129,7 @@
         $("#colTypeId").chosen({disable_search_threshold: 10,width:'100%'});
         $("#columnot").chosen({disable_search_threshold: 10,width:'100%'});
 
-        $('#colTypeForm').ajaxForm({
+        $('#columnForm').ajaxForm({
             dataType : 'json',
             success : function(data) {
                 console.log(data);
@@ -146,9 +146,9 @@
             }
         });
 
-        $("#saveColTypeForm").click(function(){
-            var result = $("#colTypeName").nonEmpty({content:"栏目类型名称不能为空！"});
-            if(result) $("#colTypeForm").submit();
+        $("#saveColumnButton").click(function(){
+            var result = $("#columnName").nonEmpty({content:"栏目类型名称不能为空！"});
+            if(result) $("#columnForm").submit();
         });
     });
 </script>

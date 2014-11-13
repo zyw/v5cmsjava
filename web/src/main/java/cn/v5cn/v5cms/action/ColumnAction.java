@@ -7,6 +7,7 @@ import cn.v5cn.v5cms.entity.ColumnType;
 import cn.v5cn.v5cms.entity.Site;
 import cn.v5cn.v5cms.exception.V5CMSSessionValueNullException;
 import cn.v5cn.v5cms.util.SystemConstant;
+import com.google.common.collect.ImmutableMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+
+import static cn.v5cn.v5cms.util.MessageSourceHelper.getMessage;
 
 /**
  * Created by ZYW on 2014/8/7.
@@ -66,5 +70,17 @@ public class ColumnAction {
         List<ColumnType> colTypes = columnTypeBiz.findAll();
         modelMap.addAttribute("colTypes",colTypes);
         return "column_edit";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/edit",method = RequestMethod.POST)
+    public ImmutableMap<String,String> columnEdit(Column column){
+        column = columnBiz.save(column);
+        if(column.getColsId() != null){
+            LOGGER.info("栏目添加成功,{}",column);
+            return ImmutableMap.of("status","1","message",getMessage("column.addsuccess.message"));
+        }
+        LOGGER.error("栏目添加失败,{}",column);
+        return ImmutableMap.of("status","0","message",getMessage("column.addfailed.message"));
     }
 }

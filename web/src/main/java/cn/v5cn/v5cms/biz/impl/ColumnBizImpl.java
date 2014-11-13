@@ -6,6 +6,7 @@ import cn.v5cn.v5cms.entity.Column;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,6 +18,12 @@ public class ColumnBizImpl implements ColumnBiz {
 
     @Autowired
     private ColumnDao columnDao;
+
+    @Override
+    @Transactional
+    public Column save(Column column) {
+        return columnDao.save(column);
+    }
 
     @Override
     public List<Column> findAll() {

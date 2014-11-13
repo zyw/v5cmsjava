@@ -69,7 +69,13 @@
                                 <td>${column.columnName}</td>
                                 <td>${column.columnType.colTypeName}</td>
                                 <td>${column.columnds}</td>
-                                <td>${column.columndisplay}</td>
+                                <td>
+                                    <#if column.columndisplay == 1>
+                                        <span class="badge bg-green">可用</span>
+                                    <#else>
+                                        <span class="badge bg-red">禁用</span>
+                                    </#if>
+                                </td>
                                 <td>
                                     <a href="<@spring.url '/manager/column/edit/${column.colsId}'/>" class="btn btn-success btn-xs"><i class="fa fa-plus"></i></a>&nbsp;
                                     <a class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>&nbsp;
