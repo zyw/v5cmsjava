@@ -53,7 +53,7 @@ public class ColumnAction {
     }
 
     @RequestMapping(value = "/edit/{columnId}",method = RequestMethod.GET)
-    public String columnEdit(ModelMap modelMap,@PathVariable Long columnId){
+    public String columnEdit(@PathVariable Long columnId,ModelMap modelMap){
         Column column = new Column();
         if(columnId == 0){
             column.setParentIds("0/");
@@ -74,7 +74,16 @@ public class ColumnAction {
 
     @ResponseBody
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
-    public ImmutableMap<String,String> columnEdit(Column column){
+    public ImmutableMap<String,String> columnEdits(Column column,HttpSession session){
+        //设置站点ID
+        Object siteObj = session.getAttribute(SystemConstant.SITE_SESSION_KEY);
+        if(siteObj == null){
+            LOGGER.error("Session中存储的站点信息为Null！");
+            throw new V5CMSSessionValueNullException("Session中存储的站点信息为Null！");
+        }
+        Site site = (Site)siteObj;
+        column.setSiteId(site.getSiteId());
+
         column = columnBiz.save(column);
         if(column.getColsId() != null){
             LOGGER.info("栏目添加成功,{}",column);

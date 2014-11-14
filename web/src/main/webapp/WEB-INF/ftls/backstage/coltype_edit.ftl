@@ -114,7 +114,6 @@
         $('#colTypeForm').ajaxForm({
             dataType : 'json',
             success : function(data) {
-                console.log(data);
                 if(data.status == "1"){
                     $.v5cms.tooltip({icon:"succeed",content:data.message},function(){
                         location.href="<@spring.url '/manager/coltype/list/1'/>";

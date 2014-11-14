@@ -66,9 +66,9 @@
                             <#if columns?size != 0>
                             <#list columns as column>
                                 <tr data-tt-id="${column.colsId }" <#if column.parentId != 0>data-tt-parent-id="${column.parentId }"</#if>>
-                                <td>${column.columnName}</td>
-                                <td>${column.columnType.colTypeName}</td>
-                                <td>${column.columnds}</td>
+                                <td>${column.columnName!""}</td>
+                                <td>${column.columnType.colTypeName!""}</td>
+                                <td>${column.columnSort!0}</td>
                                 <td>
                                     <#if column.columndisplay == 1>
                                         <span class="badge bg-green">可用</span>

@@ -36,7 +36,7 @@
                     <form id="columnForm" action="<@spring.url '/manager/column/edit'/>" class="form-horizontal" role="form" method="POST">
                         <input type="hidden" value="${column.colsId!0}" name="colsId">
                         <div class="form-group">
-                            <label for="columnName" class="col-sm-2 control-label">父栏目</label>
+                            <label class="col-sm-2 control-label">父栏目</label>
                             <div class="col-sm-4">
                                 <input type="hidden" name="parentId" value="${column.parentId!0}">
                                 <input type="hidden" name="parentIds" value="${column.parentIds!""}">
@@ -47,7 +47,7 @@
                             <label for="columnName" class="col-sm-2 control-label">栏目名称 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" name="columnName" id="columnName"
-                                       placeholder="栏目名称" value="">
+                                       placeholder="栏目名称">
                                 <span class="help-block">设置版位的名称，方便日后管理。</span>
                             </div>
                         </div>
@@ -55,25 +55,25 @@
                             <label for="coltpl" class="col-sm-2 control-label">栏目类型</label>
                             <div class="col-sm-4">
                                 <select class="form-control" id="colTypeId" name="columnType.colTypeId">
-                                    <#list colTypes as colType>
-                                        <option value="${colType.colTypeId!0}" <#--<#if (columnType.coltpl!"")==(template.b!"")>selected</#if>-->>${colType.colTypeName!""}</option>
-                                    </#list>
+                                <#list colTypes as colType>
+                                    <option value="${colType.colTypeId!0}">${colType.colTypeName!""}</option>
+                                </#list>
                                 </select>
                                 <span class="help-block">为栏目选择类型。</span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="columnds" class="col-sm-2 control-label">显示顺序</label>
+                            <label for="sortNum" class="col-sm-2 control-label">显示顺序</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" name="columnds" id="columnds"
-                                       placeholder="显示顺序" value="">
+                                <input type="text" class="form-control" name="sortNum" id="sortNum"
+                                       placeholder="显示顺序">
                                 <span class="help-block">栏目的显示顺序越小越靠前。</span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="columnot" class="col-sm-2 control-label">打开方式</label>
+                            <label for="openWay" class="col-sm-2 control-label">打开方式</label>
                             <div class="col-sm-4">
-                                <select class="form-control" id="columnot" name="columnot">
+                                <select class="form-control" id="openWay" name="openWay">
                                     <option value="_self" selected>当前窗口</option>
                                     <option value="_blank">新窗口</option>
                                 </select>
@@ -84,14 +84,14 @@
                             <label for="columnpic" class="col-sm-2 control-label">栏目图标</label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" name="columnpic" id="columnpic"
-                                       placeholder="栏目图标" value="">
+                                       placeholder="栏目图标">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="columnOutside" class="col-sm-2 control-label">外链地址</label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" name="columnOutside" id="columnOutside"
-                                       placeholder="外链地址" value="">
+                                       placeholder="外链地址">
                                 <span class="help-block">连接到其他站点。</span>
                             </div>
                         </div>
@@ -99,11 +99,11 @@
                             <label for="isDisabled" class="col-sm-2 control-label">栏目状态</label>
                             <div class="col-sm-3">
                                 <label class="checkbox-inline" style="padding-left:0;">
-                                    <input type="radio" name="columndisplay" value="1" id="columndisplay1"<#-- <#if columnType.isDisabled==1>checked</#if>-->>
-                                    <label for="available1">可用</label>
+                                    <input type="radio" name="columndisplay" value="1" id="columndisplay1" checked>
+                                    <label for="columndisplay1">可用</label>
                                     &nbsp;&nbsp;
-                                    <input type="radio" name="columndisplay" value="0" id="columndisplay0"<#-- <#if columnType.isDisabled==0>checked</#if>-->>
-                                    <label for="available0">禁用</label>
+                                    <input type="radio" name="columndisplay" value="0" id="columndisplay0">
+                                    <label for="columndisplay0">禁用</label>
                                 </label>
                             </div>
                         </div>
@@ -127,22 +127,21 @@
         });
 
         $("#colTypeId").chosen({disable_search_threshold: 10,width:'100%'});
-        $("#columnot").chosen({disable_search_threshold: 10,width:'100%'});
+        $("#openWay").chosen({disable_search_threshold: 10,width:'100%'});
 
-        $('#columnForm').ajaxForm({
+        $("#columnForm").ajaxForm({
             dataType : 'json',
             success : function(data) {
-                console.log(data);
-                if(data.status == "1"){
+                if(data.status === "1"){
                     $.v5cms.tooltip({icon:"succeed",content:data.message},function(){
-                        location.href="<@spring.url '/manager/coltype/list/1'/>";
+                        location.href="<@spring.url '/manager/column/list'/>";
                     });
                 }else{
                     $.v5cms.tooltip({icon:"error",content:data.message},function(){});
                 }
             },
             error:function(xhr, status, error){
-                $.v5cms.tooltip({icon:"error",content:"错误代码：" + status + " 错误消息：" + error},function(){});
+                $.v5cms.tooltip({icon:"error",content:("错误代码：" + status + " 错误消息：" + error)},function(){});
             }
         });
 

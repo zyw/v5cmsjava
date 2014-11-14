@@ -14,9 +14,9 @@ public class Column implements Serializable {
     private Long colsId;
     private String columnName;          //栏目名称
 //    private Long colTypeId;             //栏目类型
-    private int columnds;               //栏目显示顺序
+    private int columnSort;               //栏目显示顺序
     private int columndisplay;          //是否显示
-    private int columnot;               //连接打开方式
+    private int openType;               //连接打开方式
     private String columnOutside;       //外链地址
     private String columnpic;           //栏目图片
     private Long parentId;              //父栏目ID
@@ -43,12 +43,12 @@ public class Column implements Serializable {
         this.columnName = columnName;
     }
 
-    public int getColumnds() {
-        return columnds;
+    public int getColumnSort() {
+        return columnSort;
     }
 
-    public void setColumnds(int columnds) {
-        this.columnds = columnds;
+    public void setColumnSort(int columnSort) {
+        this.columnSort = columnSort;
     }
 
     public int getColumndisplay() {
@@ -59,12 +59,12 @@ public class Column implements Serializable {
         this.columndisplay = columndisplay;
     }
 
-    public int getColumnot() {
-        return columnot;
+    public int getOpenType() {
+        return openType;
     }
 
-    public void setColumnot(int columnot) {
-        this.columnot = columnot;
+    public void setOpenType(int openType) {
+        this.openType = openType;
     }
 
     public String getColumnOutside() {
@@ -122,9 +122,9 @@ public class Column implements Serializable {
         return "Column{" +
                 "colsId=" + colsId +
                 ", columnName='" + columnName + '\'' +
-                ", columnds=" + columnds +
+                ", columnSort=" + columnSort +
                 ", columndisplay=" + columndisplay +
-                ", columnot=" + columnot +
+                ", openType=" + openType +
                 ", columnOutside='" + columnOutside + '\'' +
                 ", columnpic='" + columnpic + '\'' +
                 ", parentId=" + parentId +
