@@ -4,13 +4,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            栏目
+            内容管理
             <small>Control panel</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
-            <li>栏目管理</li>
-            <li class="active">栏目</li>
+            <li>内容管理</li>
+            <li class="active">内容列表</li>
         </ol>
     </section>
 
@@ -36,59 +36,71 @@
                     <div class="box-header">
                         <!-- tools box -->
                         <div class="pull-right box-tools">
-                            <button id="addColumn" class="btn btn-success btn-sm" data-toggle="tooltip" title="添加栏目">
-                                <i class="fa fa-plus"></i> 添加栏目</button>
+                            <button id="addColumn" class="btn btn-success btn-sm" data-toggle="tooltip" title="添加内容">
+                                <i class="fa fa-plus"></i> 添加内容</button>
                             <button id="columnBatchDelete" class="btn btn-warning btn-sm" data-toggle="tooltip" title="批量删除">
                                 <i class="fa fa-trash-o"></i> 批量删除</button>
                         </div><!-- /. tools -->
                         <i class="fa fa-table"></i>
-                        <h3 class="box-title">栏目列表</h3>
+                        <h3 class="box-title">内容列表</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
-                        <table id="column-table" class="table-striped table-advance table-hover">
+                        <table class="table table-hover table-bordered table-striped">
                             <colgroup>
-                                <col class="col-xs-2">
+                                <col class="col-xs-1 v5-col-xs-1">
                                 <col class="col-xs-1">
+                                <col class="col-xs-2">
+                                <col class="col-xs-2">
+                                <col class="col-xs-2">
                                 <col class="col-xs-1">
                                 <col class="col-xs-1">
                                 <col class="col-xs-2">
                             </colgroup>
                             <thead>
                             <tr>
-                                <th>名称</th>
-                                <th>类型</th>
-                                <th>顺序</th>
-                                <th>状态</th>
+                                <th class="td-center">
+                                    <input type="checkbox" id="thcheckbox"/>
+                                </th>
+                                <th>序号</th>
+                                <th>类型名称</th>
+                                <th>列表模板</th>
+                                <th>内容模板</th>
+                                <th>单页</th>
+                                <th>禁用</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <#if columns?size != 0>
-                            <#list columns as column>
-                                <tr data-tt-id="${column.colsId }" <#if column.parentId != 0>data-tt-parent-id="${column.parentId }"</#if>>
-                                <td>${column.columnName!""}</td>
-                                <td>${column.columnType.colTypeName!""}</td>
-                                <td>${column.columnSort!0}</td>
-                                <td>
-                                    <#if column.columndisplay == 1>
-                                        <span class="badge bg-green">可用</span>
-                                    <#else>
-                                        <span class="badge bg-red">禁用</span>
-                                    </#if>
-                                </td>
-                                <td>
-                                    <a href="<@spring.url '/manager/column/edit/${column.colsId}'/>" class="btn btn-success btn-xs"><i class="fa fa-plus"></i></a>&nbsp;
-                                    <a href="<@spring.url '/manager/column/${column.colsId}/update'/>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>&nbsp;
-                                    <a href="javascript:;" data-columnid="${column.colsId}" class="btn btn-warning btn-xs delete-column"><i class="fa fa-times"></i></a>
-                                </td>
+                            <#--<#if cts?size != 0>
+                                <#list cts as ct>
+                                <tr>
+                                    <td class="td-center">
+                                        <input type="checkbox" class="table-cb" value="${ct.colTypeId}"/>
+                                    </td>
+                                    <td>${ct.colTypeId}</td>
+                                    <td>${ct.colTypeName}</td>
+                                    <td>${ct.coltpl}</td>
+                                    <td>${ct.contenttpl}</td>
+                                    <td>
+                                    ${(ct.hasContent==1)?string("<small class='badge bg-green'>是</small>",
+                                    "<small class='badge bg-red'>否</small>")}
+                                    </td>
+                                    <td>
+                                    ${(ct.isDisabled==1)?string("<small class='badge bg-green'>启用</small>",
+                                    "<small class='badge bg-red'>禁用</small>")}
+                                    </td>
+                                    <td>
+                                        <a href="<@spring.url '/manager/coltype/edit/'/>${ct.colTypeId}">修改</a>&nbsp;&nbsp;
+                                        <a href="javascript:;" class="deleteColType" data-ctid="${ct.colTypeId}">删除</a>
+                                    </td>
                                 </tr>
-                            </#list>
+                                </#list>
                             <#else>
                             <tr>
-                                <td colspan="6"><h3>还没有栏目数据！</h3></td>
+                                <td colspan="8"><h3>还没有栏目类型数据！</h3></td>
                             </tr>
                             </#if>
-                            </tbody>
+                            </tbody>-->
                         </table>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
@@ -143,7 +155,7 @@
     $(function(){
         /*$.fn.zTree.init($("#columnTree"), setting, zNodes);*/
         //$("#nav_siteSetting").imitClick();
-        $("#nav_columns").imitClick();
+        $("#nav_content").imitClick();
         $("#column-table").treetable({ expandable: true,initialState:'expanded' });
         $("#addColumn").click(function(){
             location.href="<@spring.url '/manager/column/edit/0'/>";
@@ -177,5 +189,27 @@
             var columnId = $(this).data("columnid");
             deleteColumn(columnId);
         });
+
+//        $("#thcheckbox").on('ifChecked', function(event){
+//            $('.table-cb').iCheck('check');
+//        });
+//        $("#thcheckbox").on('ifUnchecked', function(event){
+//            $('.table-cb').iCheck('uncheck');
+//        });
+//
+//        $("#siteBatchDelete").click(function(){
+//            var $chs = $(":checkbox[checked=checked]");
+//            if($chs.length == 0){
+//                $.v5cms.modalDialog({icon:'warning',content:"您还没有选中要操作的数据项！",width:250});
+//                return;
+//            }
+//            var siteIds = [];
+//            for(var i=0;i<$chs.length;i++){
+//                var v = $($chs[i]).val();
+//                if(v == "on") continue;
+//                siteIds.push(v);
+//            }
+//            deleteSites(siteIds.join());
+//        });
     });
 </script>

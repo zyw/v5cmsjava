@@ -358,14 +358,14 @@
                         <small class="badge pull-right bg-green">new</small>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="treeview" id="nav_content">
                     <a href="#">
                         <i class="glyphicon glyphicon-list-alt"></i>
                         <span>内容管理</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="pages/charts/morris.html"><i class="fa fa-angle-double-right"></i> Morris</a></li>
+                        <li><a href="<@spring.url "/manager/content/list"/>"><i class="fa fa-angle-double-right"></i> 内容列表</a></li>
                         <li><a href="pages/charts/flot.html"><i class="fa fa-angle-double-right"></i> Flot</a></li>
                         <li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Inline
                             charts</a></li>
