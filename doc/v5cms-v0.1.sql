@@ -103,7 +103,7 @@ create table cols
 
   sortNum      int                         comment '栏目显示顺序',
   columndisplay int                         comment '是否显示',
-  openWay      int                         comment '连接打开方式',
+  openWay      varchar(20)                  comment '连接打开方式',
   columnOutside varchar(1000)               comment '外链地址',
   columnpic     varchar(200)                comment '栏目图片',
   parentId      bigInt       default 0      comment '父栏目ID',

@@ -14,9 +14,9 @@ public class Column implements Serializable {
     private Long colsId;
     private String columnName;          //栏目名称
 //    private Long colTypeId;             //栏目类型
-    private int columnSort;               //栏目显示顺序
-    private int columndisplay;          //是否显示
-    private int openType;               //连接打开方式
+    private int sortNum;               //栏目显示顺序
+    private int columndisplay=1;          //是否显示
+    private String openWay;               //连接打开方式
     private String columnOutside;       //外链地址
     private String columnpic;           //栏目图片
     private Long parentId;              //父栏目ID
@@ -43,12 +43,12 @@ public class Column implements Serializable {
         this.columnName = columnName;
     }
 
-    public int getColumnSort() {
-        return columnSort;
+    public int getSortNum() {
+        return sortNum;
     }
 
-    public void setColumnSort(int columnSort) {
-        this.columnSort = columnSort;
+    public void setSortNum(int sortNum) {
+        this.sortNum = sortNum;
     }
 
     public int getColumndisplay() {
@@ -59,12 +59,12 @@ public class Column implements Serializable {
         this.columndisplay = columndisplay;
     }
 
-    public int getOpenType() {
-        return openType;
+    public String getOpenWay() {
+        return openWay;
     }
 
-    public void setOpenType(int openType) {
-        this.openType = openType;
+    public void setOpenWay(String openWay) {
+        this.openWay = openWay;
     }
 
     public String getColumnOutside() {
@@ -122,9 +122,9 @@ public class Column implements Serializable {
         return "Column{" +
                 "colsId=" + colsId +
                 ", columnName='" + columnName + '\'' +
-                ", columnSort=" + columnSort +
+                ", sortNum=" + sortNum +
                 ", columndisplay=" + columndisplay +
-                ", openType=" + openType +
+                ", openWay=" + openWay +
                 ", columnOutside='" + columnOutside + '\'' +
                 ", columnpic='" + columnpic + '\'' +
                 ", parentId=" + parentId +

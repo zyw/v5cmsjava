@@ -304,13 +304,22 @@
                 $.v5cms.tooltip({icon:"error",content:settings.errMessage,timeout:1000},function(){});
                 return;
             }
-            $.post("<@spring.url '/manager/adv/delete/if'/>",{if_path:settings.resPath},function(data){
-                if(data.status == '0'){
-                    $.v5cms.tooltip({icon:"error",content:data.message},function(){});
-                    return;
+            $.ajax({
+                dataType:'json',
+                type:'POST',
+                url:"<@spring.url '/manager/adv/delete/if'/>",
+                data:{if_path:settings.resPath},
+                success:function(data){
+                    if(data.status == '0'){
+                        $.v5cms.tooltip({icon:"error",content:data.message},function(){});
+                        return;
+                    }
+                    $.v5cms.tooltip({icon:"succeed",content:data.message},settings.sCallBack());
+                },
+                error:function(XMLHttpRequest, textStatus, errorThrown){
+                    $.v5cms.tooltip({icon:"error","content":"删除图片出错，"+textStatus+"，"+errorThrown});
                 }
-                $.v5cms.tooltip({icon:"succeed",content:data.message},settings.sCallBack());
-            },'json');
+            });
         }
 
         $("#nav_siteSetting").imitClick();
@@ -444,6 +453,7 @@
                 var vailObj = {};
                 vailObj.advNameVail = $("#advName").nonEmpty({content:"广告名称不能为空！"});
                 vailObj.advPosIdVail = $("#advPosId").nonEmpty({content:"广告版位不能为空！"});
+                vailObj.advStartTimeVail = $("#advStartTime").nonEmpty({content:"广告的开始和结束时间不能为空！"})
                 vailObj.advTypeVail = false;
                 advType = $("#hidden_advType").val();
                 switch (advType){

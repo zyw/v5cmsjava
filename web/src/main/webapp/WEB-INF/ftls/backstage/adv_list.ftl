@@ -150,7 +150,25 @@
         function deleteAdvs(advIds) {
             $.v5cms.confirm({icon:"question",content:"您确定要删除广告吗，删除后将不能恢复？",width:350,ok:function(){
                 var url = "<@spring.url '/manager/adv/delete'/>";
-                $.post(url,{advIds:advIds},function(data){
+                $.ajax({
+                    dataType:'json',
+                    type:'POST',
+                    url:url,
+                    data:{advIds:advIds},
+                    success:function(data){
+                        if(data.status == "1"){
+                            $.v5cms.tooltip({icon:"succeed","content":data.message},function(){
+                                location.reload();
+                            });
+                        }else{
+                            $.v5cms.tooltip({icon:"error","content":data.message},function(){});
+                        }
+                    },
+                    error:function(XMLHttpRequest, textStatus, errorThrown){
+                        $.v5cms.tooltip({icon:"error","content":"删除广告出错，"+textStatus+"，"+errorThrown});
+                    }
+                });
+                /*$.post(url,{advIds:advIds},function(data){
                     if(data.status == "1"){
                         $.v5cms.tooltip({icon:"succeed","content":data.message},function(){
                             location.reload();
@@ -160,7 +178,7 @@
                             location.reload();
                         });
                     }
-                },"json");
+                },"json");*/
             }});
         }
 

@@ -78,8 +78,8 @@
                                 </td>
                                 <td>
                                     <a href="<@spring.url '/manager/column/edit/${column.colsId}'/>" class="btn btn-success btn-xs"><i class="fa fa-plus"></i></a>&nbsp;
-                                    <a class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>&nbsp;
-                                    <a class="btn btn-warning btn-xs"><i class="fa fa-times"></i></a>
+                                    <a href="<@spring.url '/manager/column/${column.colsId}/update'/>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>&nbsp;
+                                    <a href="javascript:;" data-columnid="${column.colsId}" class="btn btn-warning btn-xs delete-column"><i class="fa fa-times"></i></a>
                                 </td>
                                 </tr>
                             </#list>
@@ -98,8 +98,7 @@
 </aside><!-- /.right-side -->
 <#include "fragment/footer.ftl">
 <script type="text/javascript">
-    $("#nav_columns").imitClick();
-    $("#column-table").treetable({ expandable: true,initialState:'expanded' });
+
     /*var setting = {
         view:{showLine:false},
         data: {
@@ -144,52 +143,61 @@
     $(function(){
         /*$.fn.zTree.init($("#columnTree"), setting, zNodes);*/
         //$("#nav_siteSetting").imitClick();
+        $("#nav_columns").imitClick();
+        $("#column-table").treetable({ expandable: true,initialState:'expanded' });
         $("#addColumn").click(function(){
             location.href="<@spring.url '/manager/column/edit/0'/>";
         });
 
-        /*function deleteSites(siteIds) {
-            $.v5cms.confirm({icon:"question",content:"您确定要删除站点信息吗，删除后将不能恢复？",width:350,ok:function(){
-                <#--var url = "<@spring.url '/manager/deletesite'/>";-->
-                $.post(url,{siteIds:siteIds},function(data){
-                    if(data.status == "1"){
-                        $.v5cms.tooltip({icon:"succeed","content":data.message},function(){
-                            location.reload();
-                        });
-                    }else{
-                        $.v5cms.tooltip({icon:"error","content":data.message},function(){
-                            location.reload();
-                        });
+        function deleteColumn(columnId) {
+            $.v5cms.confirm({icon:"question",content:"您确定要删除栏目信息吗，删除后将不能恢复？",width:350,ok:function(){
+                var url = "<@spring.url '/manager/column/delete'/>";
+                $.ajax({
+                    dataType:'json',
+                    type:'POST',
+                    url:url,
+                    data:{columnId:columnId},
+                    success:function(data){
+                        if(data.status == "1"){
+                            $.v5cms.tooltip({icon:"succeed","content":data.message},function(){
+                                location.reload();
+                            });
+                        }else{
+                            $.v5cms.tooltip({icon:"error","content":data.message});
+                        }
+                    },
+                    error:function(XMLHttpRequest, textStatus, errorThrown){
+                        $.v5cms.tooltip({icon:"error","content":"删除栏目信息出错，"+textStatus+"，"+errorThrown});
                     }
-                },"json");
+                });
             }});
         }
 
-        $(".deletesite").click(function(){
-            var siteId = $(this).data("siteid");
-            deleteSites(siteId);
+        $(".delete-column").click(function(){
+            var columnId = $(this).data("columnid");
+            deleteColumn(columnId);
         });
 
-        $("#thcheckbox").on('ifChecked', function(event){
-            $('.table-cb').iCheck('check');
-        });
-        $("#thcheckbox").on('ifUnchecked', function(event){
-            $('.table-cb').iCheck('uncheck');
-        });
-
-        $("#siteBatchDelete").click(function(){
-            var $chs = $(":checkbox[checked=checked]");
-            if($chs.length == 0){
-                $.v5cms.modalDialog({icon:'warning',content:"您还没有选中要操作的数据项！",width:250});
-                return;
-            }
-            var siteIds = [];
-            for(var i=0;i<$chs.length;i++){
-                var v = $($chs[i]).val();
-                if(v == "on") continue;
-                siteIds.push(v);
-            }
-            deleteSites(siteIds.join());
-        });*/
+//        $("#thcheckbox").on('ifChecked', function(event){
+//            $('.table-cb').iCheck('check');
+//        });
+//        $("#thcheckbox").on('ifUnchecked', function(event){
+//            $('.table-cb').iCheck('uncheck');
+//        });
+//
+//        $("#siteBatchDelete").click(function(){
+//            var $chs = $(":checkbox[checked=checked]");
+//            if($chs.length == 0){
+//                $.v5cms.modalDialog({icon:'warning',content:"您还没有选中要操作的数据项！",width:250});
+//                return;
+//            }
+//            var siteIds = [];
+//            for(var i=0;i<$chs.length;i++){
+//                var v = $($chs[i]).val();
+//                if(v == "on") continue;
+//                siteIds.push(v);
+//            }
+//            deleteSites(siteIds.join());
+//        });
     });
 </script>

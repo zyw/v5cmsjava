@@ -14,4 +14,6 @@ public interface ColumnBiz {
     List<Column> findAll();
     List<Column> findOrderByParentIdsAndColsId(Long siteId);
     Column findOne(Long columnId);
+
+    void delete(Long columnId);
 }

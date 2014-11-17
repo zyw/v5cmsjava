@@ -41,4 +41,9 @@ public class ColumnBizImpl implements ColumnBiz {
     public Column findOne(Long columnId) {
         return columnDao.findOne(columnId);
     }
+
+    @Override
+    public void delete(Long columnId) {
+        columnDao.delete(columnId);
+    }
 }

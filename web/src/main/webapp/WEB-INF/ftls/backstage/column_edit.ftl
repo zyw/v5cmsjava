@@ -40,6 +40,7 @@
                             <div class="col-sm-4">
                                 <input type="hidden" name="parentId" value="${column.parentId!0}">
                                 <input type="hidden" name="parentIds" value="${column.parentIds!""}">
+                                <input type="hidden" name="siteId" value="${column.siteId!0}">
                                 <input type="text" class="form-control" value="${parentName!""}" readonly>
                             </div>
                         </div>
@@ -47,7 +48,7 @@
                             <label for="columnName" class="col-sm-2 control-label">栏目名称 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" name="columnName" id="columnName"
-                                       placeholder="栏目名称">
+                                       placeholder="栏目名称" value="${column.columnName!""}">
                                 <span class="help-block">设置版位的名称，方便日后管理。</span>
                             </div>
                         </div>
@@ -56,7 +57,7 @@
                             <div class="col-sm-4">
                                 <select class="form-control" id="colTypeId" name="columnType.colTypeId">
                                 <#list colTypes as colType>
-                                    <option value="${colType.colTypeId!0}">${colType.colTypeName!""}</option>
+                                    <option value="${colType.colTypeId!0}" <#if column?? && column.columnType?? && column.columnType.colTypeId == colType.colTypeId>selected</#if>>${colType.colTypeName!""}</option>
                                 </#list>
                                 </select>
                                 <span class="help-block">为栏目选择类型。</span>
@@ -66,7 +67,7 @@
                             <label for="sortNum" class="col-sm-2 control-label">显示顺序</label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" name="sortNum" id="sortNum"
-                                       placeholder="显示顺序">
+                                       placeholder="显示顺序" value="${column.sortNum!0}">
                                 <span class="help-block">栏目的显示顺序越小越靠前。</span>
                             </div>
                         </div>
@@ -74,8 +75,8 @@
                             <label for="openWay" class="col-sm-2 control-label">打开方式</label>
                             <div class="col-sm-4">
                                 <select class="form-control" id="openWay" name="openWay">
-                                    <option value="_self" selected>当前窗口</option>
-                                    <option value="_blank">新窗口</option>
+                                    <option value="_self" <#if (column.openWay!"") == "" || (column.openWay!"") == "_self">selected</#if>>当前窗口</option>
+                                    <option value="_blank" <#if (column.openWay!"") == "_blank">selected</#if>>新窗口</option>
                                 </select>
                                 <span class="help-block">栏目的打开方式，本页打开或者新窗口打开。</span>
                             </div>
@@ -84,14 +85,14 @@
                             <label for="columnpic" class="col-sm-2 control-label">栏目图标</label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" name="columnpic" id="columnpic"
-                                       placeholder="栏目图标">
+                                       placeholder="栏目图标" value="${column.columnpic!''}">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="columnOutside" class="col-sm-2 control-label">外链地址</label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" name="columnOutside" id="columnOutside"
-                                       placeholder="外链地址">
+                                       placeholder="外链地址" value="${column.columnOutside!''}">
                                 <span class="help-block">连接到其他站点。</span>
                             </div>
                         </div>
@@ -99,10 +100,12 @@
                             <label for="isDisabled" class="col-sm-2 control-label">栏目状态</label>
                             <div class="col-sm-3">
                                 <label class="checkbox-inline" style="padding-left:0;">
-                                    <input type="radio" name="columndisplay" value="1" id="columndisplay1" checked>
+                                    <input type="radio" name="columndisplay" value="1" id="columndisplay1"
+                                           <#if column.columndisplay==1>checked</#if>>
                                     <label for="columndisplay1">可用</label>
                                     &nbsp;&nbsp;
-                                    <input type="radio" name="columndisplay" value="0" id="columndisplay0">
+                                    <input type="radio" name="columndisplay" value="0" id="columndisplay0"
+                                           <#if column.columndisplay==0>checked</#if>>
                                     <label for="columndisplay0">禁用</label>
                                 </label>
                             </div>

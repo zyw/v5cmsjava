@@ -101,7 +101,25 @@
         function deleteSites(siteIds) {
             $.v5cms.confirm({icon:"question",content:"您确定要删除站点信息吗，删除后将不能恢复？",width:350,ok:function(){
                 var url = "<@spring.url '/manager/site/delete'/>";
-                $.post(url,{siteIds:siteIds},function(data){
+                $.ajax({
+                    dataType:'json',
+                    type:'POST',
+                    url:url,
+                    data:{siteIds:siteIds},
+                    success:function(data){
+                        if(data.status == "1"){
+                            $.v5cms.tooltip({icon:"succeed","content":data.message},function(){
+                                location.reload();
+                            });
+                        }else{
+                            $.v5cms.tooltip({icon:"error","content":data.message},function(){});
+                        }
+                    },
+                    error:function(XMLHttpRequest, textStatus, errorThrown){
+                        $.v5cms.tooltip({icon:"error","content":"删除站点出错，"+textStatus+"，"+errorThrown});
+                    }
+                });
+                /*$.post(url,{siteIds:siteIds},function(data){
                     if(data.status == "1"){
                         $.v5cms.tooltip({icon:"succeed","content":data.message},function(){
                             location.reload();
@@ -111,7 +129,7 @@
                             location.reload();
                         });
                     }
-                },"json");
+                },"json");*/
             }});
         }
 

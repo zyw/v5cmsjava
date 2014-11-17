@@ -59,7 +59,7 @@ public class ColumnAction {
             column.setParentIds("0/");
             column.setParentId(0L);
             modelMap.addAttribute("column",column);
-            modelMap.addAttribute("parentName","一级栏目");
+            modelMap.addAttribute("parentName",getMessage("column.first"));
         }else{
             Column dbColumn = columnBiz.findOne(columnId);
             column.setParentIds(dbColumn.getParentIds()+dbColumn.getColsId()+"/");
@@ -75,21 +75,61 @@ public class ColumnAction {
     @ResponseBody
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
     public ImmutableMap<String,String> columnEdits(Column column,HttpSession session){
-        //设置站点ID
-        Object siteObj = session.getAttribute(SystemConstant.SITE_SESSION_KEY);
-        if(siteObj == null){
-            LOGGER.error("Session中存储的站点信息为Null！");
-            throw new V5CMSSessionValueNullException("Session中存储的站点信息为Null！");
-        }
-        Site site = (Site)siteObj;
-        column.setSiteId(site.getSiteId());
+        if(column.getColsId() == null){
+            //设置站点ID
+            Object siteObj = session.getAttribute(SystemConstant.SITE_SESSION_KEY);
+            if(siteObj == null){
+                LOGGER.error("Session中存储的站点信息为Null！");
+                throw new V5CMSSessionValueNullException("Session中存储的站点信息为Null！");
+            }
+            Site site = (Site)siteObj;
+            column.setSiteId(site.getSiteId());
 
-        column = columnBiz.save(column);
-        if(column.getColsId() != null){
-            LOGGER.info("栏目添加成功,{}",column);
-            return ImmutableMap.of("status","1","message",getMessage("column.addsuccess.message"));
+            column = columnBiz.save(column);
+            if(column.getColsId() != null){
+                LOGGER.info("栏目添加成功,{}",column);
+                return ImmutableMap.of("status","1","message",getMessage("column.addsuccess.message"));
+            }
+            LOGGER.error("栏目添加失败,{}",column);
+            return ImmutableMap.of("status","0","message",getMessage("column.addfailed.message"));
         }
-        LOGGER.error("栏目添加失败,{}",column);
-        return ImmutableMap.of("status","0","message",getMessage("column.addfailed.message"));
+        //修改
+        try {
+            columnBiz.save(column);
+        } catch (Exception e) {
+            LOGGER.error("栏目修改失败,{}",e);
+            e.printStackTrace();
+            return ImmutableMap.of("status","0","message",getMessage("column.updatefailed.message"));
+        }
+        LOGGER.info("栏目添加成功,{}",column);
+        return ImmutableMap.of("status","1","message",getMessage("column.updatesuccess.message"));
+    }
+
+    @RequestMapping(value = "/{colId}/update")
+    public String columnUpdate(@PathVariable Long colId,ModelMap modelMap){
+        Column column = columnBiz.findOne(colId);
+        List<ColumnType> colTypes = columnTypeBiz.findAll();
+        modelMap.addAttribute("colTypes",colTypes);
+        modelMap.addAttribute("column",column);
+        if(column.getParentId() == 0){
+            modelMap.addAttribute("parentName",getMessage("column.first"));
+        }else{
+            Column parentColumn = columnBiz.findOne(column.getParentId());
+            modelMap.addAttribute("parentName",parentColumn.getColumnName());
+        }
+        return "column_edit";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    public ImmutableMap<String,String> columnDelete(Long columnId){
+        try {
+            columnBiz.delete(columnId);
+        } catch (Exception e) {
+            LOGGER.info("栏目删除失败,ID:{}。失败信息：{}",columnId,e.getMessage());
+            return ImmutableMap.of("status","0","message",getMessage("column.deletefailed.message"));
+        }
+        LOGGER.info("栏目删除成功,ID:{}",columnId);
+        return ImmutableMap.of("status","1","message",getMessage("column.deletesuccess.message"));
     }
 }
