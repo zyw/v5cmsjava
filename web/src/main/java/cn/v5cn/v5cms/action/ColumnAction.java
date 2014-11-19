@@ -5,6 +5,7 @@ import cn.v5cn.v5cms.biz.ColumnTypeBiz;
 import cn.v5cn.v5cms.entity.Column;
 import cn.v5cn.v5cms.entity.ColumnType;
 import cn.v5cn.v5cms.entity.Site;
+import cn.v5cn.v5cms.entity.wrapper.ZTreeNode;
 import cn.v5cn.v5cms.exception.V5CMSSessionValueNullException;
 import cn.v5cn.v5cms.util.SystemConstant;
 import com.google.common.collect.ImmutableMap;
@@ -75,7 +76,7 @@ public class ColumnAction {
     @ResponseBody
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
     public ImmutableMap<String,String> columnEdits(Column column,HttpSession session){
-        if(column.getColsId() == null){
+        if(column.getColsId() == null || column.getColsId() == 0L){
             //设置站点ID
             Object siteObj = session.getAttribute(SystemConstant.SITE_SESSION_KEY);
             if(siteObj == null){
@@ -131,5 +132,13 @@ public class ColumnAction {
         }
         LOGGER.info("栏目删除成功,ID:{}",columnId);
         return ImmutableMap.of("status","1","message",getMessage("column.deletesuccess.message"));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/tree/json",method = RequestMethod.POST)
+    public List<ZTreeNode> columnTree(){
+        List<ZTreeNode> treeNodes = columnBiz.buildTreeNode(0L);
+        LOGGER.debug("treeNodes: " + treeNodes);
+        return treeNodes;
     }
 }

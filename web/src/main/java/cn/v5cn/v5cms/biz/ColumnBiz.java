@@ -1,6 +1,7 @@
 package cn.v5cn.v5cms.biz;
 
 import cn.v5cn.v5cms.entity.Column;
+import cn.v5cn.v5cms.entity.wrapper.ZTreeNode;
 
 import java.util.List;
 
@@ -16,4 +17,8 @@ public interface ColumnBiz {
     Column findOne(Long columnId);
 
     void delete(Long columnId);
+
+    List<Column> findByParentId(Long parentId);
+
+    List<ZTreeNode> buildTreeNode(Long parentId);
 }

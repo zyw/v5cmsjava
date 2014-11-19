@@ -34,7 +34,7 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <form id="columnForm" action="<@spring.url '/manager/column/edit'/>" class="form-horizontal" role="form" method="POST">
-                        <input type="hidden" value="${column.colsId!0}" name="colsId">
+                        <input type="hidden" value="${column.colsId!""}" name="colsId">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">父栏目</label>
                             <div class="col-sm-4">

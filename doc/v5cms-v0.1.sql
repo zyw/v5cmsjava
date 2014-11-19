@@ -142,7 +142,7 @@ alter table cols comment '文章标签表';
 create table content
 (
   contentId bigInt not null AUTO_INCREMENT ,
-  columnId  int                     comment '所属栏目ID',
+  columnId  bigint                     comment '所属栏目ID',
   cname varchar(500)    not null    comment '内容标题',
   cbody longtext                    comment '发布的内容',
   lastdt datetime                   comment '最后更新的时间',

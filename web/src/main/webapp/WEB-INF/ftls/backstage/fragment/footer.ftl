@@ -53,5 +53,8 @@
 <script src="<@spring.url '/res/backstage/js/app.js'/>" type="text/javascript"></script>
 <!-- holder -->
 <script src="<@spring.url '/res/backstage/js/holder.js'/>" type="text/javascript"></script>
+<script type="text/javascript">
+    $.v5cms.backToTop.init("<@spring.url '/res/backstage/images/up.png'/>")
+</script>
 </body>
 </html>

@@ -14,4 +14,6 @@ import java.util.List;
 public interface ColumnDao extends PagingAndSortingRepository<Column,Long> {
     @Query("select c from Column c where c.siteId=?1 order by CONCAT(c.parentIds,c.colsId)")
     List<Column> findOrderByParentIdsAndColsId(Long siteId);
+
+    List<Column> findByParentId(Long parentId);
 }
