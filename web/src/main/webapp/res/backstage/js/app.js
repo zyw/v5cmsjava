@@ -1294,7 +1294,7 @@ $(window).load(function() {
                 }
             },
             builderImg:function(imgUrl){
-                return "<img src='"+imgUrl+"' style='width:51px; height:42px' />";
+                return "<img src='"+imgUrl+"' style='width:51px; height:42px;z-index:9999;position:relative;' />";
             },
             init:function(imgUrl){
                 jQuery(document).ready(function($){

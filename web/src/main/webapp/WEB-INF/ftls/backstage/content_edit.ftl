@@ -35,6 +35,17 @@
                 <div class="box-body">
                     <form id="columnForm" action="<@spring.url '/manager/column/edit'/>" class="form-horizontal" role="form" method="POST">
                         <input type="hidden" value="" name="colsId">
+                        <div class="form-group has-feedback">
+                            <label class="col-sm-2 control-label">所属栏目 <span style="color: #ff0000">*</span></label>
+                            <div class="col-sm-4">
+                                <input type="text" id="columnTreeInput" class="form-control" value="" readonly>
+                                <input type="hidden" id="columnId" name="columnId">
+                                <span class="glyphicon glyphicon-chevron-down form-control-feedback" aria-hidden="true"></span>
+                                <div id="columnTreeDiv" style="width: 92.6%;background:#fff;display: none;position: absolute;border: 1px #c0c0c0 solid;z-index: 9999;">
+                                    <ul id="columnTree" class="ztree"></ul>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="columnName" class="col-sm-2 control-label">内容标题 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-4">
@@ -43,29 +54,22 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">父栏目</label>
+                            <label for="sortNum" class="col-sm-2 control-label">是否置顶</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" value="" readonly>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="coltpl" class="col-sm-2 control-label">栏目类型</label>
-                            <div class="col-sm-4">
-                                <select class="form-control" id="colTypeId" name="columnType.colTypeId">
-                                <#--<#list colTypes as colType>
-                                    <option value="${colType.colTypeId!0}" <#if column?? && column.columnType?? && column.columnType.colTypeId == colType.colTypeId>selected</#if>>${colType.colTypeName!""}</option>
-                                </#list>-->
-                                </select>
-                                <span class="help-block">为栏目选择类型。</span>
+                                <label class="checkbox-inline" style="padding-left: 0px;width: 100px;">
+                                    <select class="form-control" id="openWay" name="openWay">
+                                        <option value="0">否</option>
+                                        <option value="1">是</option>
+                                    </select>
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="text" class="form-control" id="inlineCheckbox2" value="" placeholder="置顶序号">
+                                </label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="sortNum" class="col-sm-2 control-label">显示顺序</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" name="sortNum" id="sortNum"
-                                       placeholder="显示顺序" value="">
-                                <span class="help-block">栏目的显示顺序越小越靠前。</span>
+                            <div class="col-sm-12">
+                                <script id="editor" type="text/plain"  style="height:500px;"></script>
                             </div>
                         </div>
                         <div class="form-group">
@@ -119,9 +123,46 @@
     <!-- /.content -->
 </aside><!-- /.right-side -->
 <#include "fragment/footer.ftl">
+<script type="text/javascript" charset="utf-8" src="<@spring.url '/res/backstage/ueditor/ueditor.config.js'/>"></script>
+<script type="text/javascript" charset="utf-8" src="<@spring.url '/res/backstage/ueditor/ueditor.all.min.js'/>"> </script>
+<script type="text/javascript" charset="utf-8" src="<@spring.url '/res/backstage/ueditor/lang/zh-cn/zh-cn.js'/>"></script>
 <script type="text/javascript">
     $(function(){
+        var ue = UE.getEditor('editor');
+        var columnSetting = {
+            view : {
+                dblClickExpand : false
+            },
+            async : {
+                enable : true,
+                dataType : "json",
+                url : "<@spring.url "/manager/column/tree/json"/>"
+            },
+            callback : {
+                onAsyncSuccess : function(event, treeId, treeNode, msg) {
+                    var zTree = $.fn.zTree.getZTreeObj("columnTree");
+                    zTree.expandAll(true);
+                },
+                onClick:function(event, treeId, treeNode){
+                    $("#columnTreeInput").val(treeNode.name);
+                    $("#columnId").val(treeNode.id);
+                    $("#columnTreeDiv").css("display","none");
+                }
+            }
+        };
+        $.fn.zTree.init($("#columnTree"), columnSetting);
         $("#nav_content").imitClick();
+
+        $("#columnTreeInput").click(function () {
+            var display = $("#columnTreeDiv").css("display");
+            if(display === 'block'){
+                $("#columnTreeDiv").css("display","none");
+            }else{
+                $("#columnTreeDiv").css("display","block");
+            }
+
+        });
+
         $("#backContentList").click(function(){
             location.href="<@spring.url '/manager/content/list'/>"
         });
