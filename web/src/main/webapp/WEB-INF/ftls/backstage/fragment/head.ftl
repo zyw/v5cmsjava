@@ -38,6 +38,8 @@
     <link href="<@spring.url '/res/backstage/css/AdminLTE.css'/>" rel="stylesheet" type="text/css"/>
     <!-- bootstrap-chosen -->
     <link href="<@spring.url '/res/backstage/css/bootstrap-chosen.min.css'/>" rel="stylesheet" type="text/css"/>
+    <!-- DatePicker -->
+    <link href="<@spring.url '/res/backstage/css/datepicker3.css'/>" rel="stylesheet" type="text/css"/>
     <!-- zTreeStyle.css -->
     <link href="<@spring.url '/res/backstage/css/zTreeStyle.css'/>" rel="stylesheet" type="text/css"/>
     <!--custom CSS-->

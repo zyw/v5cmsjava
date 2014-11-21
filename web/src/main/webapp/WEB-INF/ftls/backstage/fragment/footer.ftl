@@ -28,7 +28,7 @@
 <!-- holder &ndash;&gt;
 <script src="<@spring.url '/r/js/holder.js'/>" type="text/javascript"></script>-->
 <!-- jQuery 1.8.3 -->
-<script src="<@spring.url '/res/backstage/js/jquery-1.8.3.min.js'/>" type="text/javascript"></script>
+<script src="<@spring.url '/res/backstage/js/jquery-1.10.2.min.js'/>" type="text/javascript"></script>
 <!-- daterangepicker -->
 <script src="<@spring.url '/res/backstage/js/daterangepicker.js'/>" type="text/javascript"></script>
 <!-- colorpicker -->
@@ -49,6 +49,8 @@
 <script src="<@spring.url '/res/backstage/js/jquery.fancybox.pack.js'/>" type="text/javascript"></script>
 <!-- treetable js -->
 <script src="<@spring.url '/res/backstage/js/jquery.treetable.js'/>" type="text/javascript"></script>
+<!-- bootstrap-datepicker -->
+<script src="<@spring.url '/res/backstage/js/bootstrap-datepicker.js'/>" type="text/javascript"></script>
 <!-- AdminLTE App -->
 <script src="<@spring.url '/res/backstage/js/app.js'/>" type="text/javascript"></script>
 <!-- holder -->

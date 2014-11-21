@@ -157,7 +157,6 @@
         <dependency>
             <groupId>cn.v5cn.v5cms</groupId>
             <artifactId>common-utils</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>

@@ -1,10 +1,13 @@
 package cn.v5cn.v5cms.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * Created by ZYW on 2014/11/19.
  */
+@Entity
+@Table(name = "content")
 public class Content implements Serializable {
     private Long contentId;
     private Long columnId;
@@ -20,6 +23,8 @@ public class Content implements Serializable {
     private String cattas;              //文章中使用的附件，多个使用丢号分割
     private String dispic;              //展示图
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getContentId() {
         return contentId;
     }

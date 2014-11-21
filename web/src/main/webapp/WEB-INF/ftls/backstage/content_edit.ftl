@@ -25,6 +25,8 @@
                     <div class="pull-right box-tools">
                         <button id="saveColumnButton" class="btn btn-success btn-sm" data-toggle="tooltip" title="保存">
                             <i class="fa fa-save"></i> 保存</button>
+                        <button id="saveColumnButton" class="btn btn-info btn-sm" data-toggle="tooltip" title="保存草稿箱">
+                            <i class="fa fa-save"></i> 保存草稿箱</button>
                         <button id="backContentList" class="btn btn-default btn-sm" data-toggle="tooltip" title="返回">
                             <i class="fa fa-mail-forward"></i> 返回</button>
                     </div><!-- /. tools -->
@@ -36,7 +38,7 @@
                     <form id="columnForm" action="<@spring.url '/manager/column/edit'/>" class="form-horizontal" role="form" method="POST">
                         <input type="hidden" value="" name="colsId">
                         <div class="form-group has-feedback">
-                            <label class="col-sm-2 control-label">所属栏目 <span style="color: #ff0000">*</span></label>
+                            <label class="col-sm-2 control-label">栏目 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-4">
                                 <input type="text" id="columnTreeInput" class="form-control" value="" readonly>
                                 <input type="hidden" id="columnId" name="columnId">
@@ -47,68 +49,100 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="columnName" class="col-sm-2 control-label">内容标题 <span style="color: #ff0000">*</span></label>
-                            <div class="col-sm-4">
+                            <label for="columnName" class="col-sm-2 control-label">标题 <span style="color: #ff0000">*</span></label>
+                            <div class="col-sm-5">
                                 <input type="text" class="form-control" name="columnName" id="columnName"
                                        placeholder="内容标题" value="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="sortNum" class="col-sm-2 control-label">是否置顶</label>
-                            <div class="col-sm-4">
+                            <label for="sortNum" class="col-sm-2 control-label" style="line-height: 30px;">外部链接</label>
+                            <div class="col-sm-10">
                                 <label class="checkbox-inline" style="padding-left: 0px;width: 100px;">
-                                    <select class="form-control" id="openWay" name="openWay">
+                                    <select class="form-control" id="stick" name="stick">
                                         <option value="0">否</option>
                                         <option value="1">是</option>
                                     </select>
                                 </label>
-                                <label class="checkbox-inline">
-                                    <input type="text" class="form-control" id="inlineCheckbox2" value="" placeholder="置顶序号">
+                                <label class="checkbox-inline" style="width: 300px;">
+                                    <input type="text" class="form-control" style="width:300px;" name="stickNum" id="stickNum" value="" placeholder="链接地址">
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-12">
-                                <script id="editor" type="text/plain"  style="height:500px;"></script>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="openWay" class="col-sm-2 control-label">打开方式</label>
-                            <div class="col-sm-4">
-                                <select class="form-control" id="openWay" name="openWay">
-                                    <#--<option value="_self" <#if (column.openWay!"") == "" || (column.openWay!"") == "_self">selected</#if>>当前窗口</option>
-                                    <option value="_blank" <#if (column.openWay!"") == "_blank">selected</#if>>新窗口</option>-->
-                                </select>
-                                <span class="help-block">栏目的打开方式，本页打开或者新窗口打开。</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="columnpic" class="col-sm-2 control-label">栏目图标</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" name="columnpic" id="columnpic"
-                                       placeholder="栏目图标" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="columnOutside" class="col-sm-2 control-label">外链地址</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" name="columnOutside" id="columnOutside"
-                                       placeholder="外链地址" value="">
-                                <span class="help-block">连接到其他站点。</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="isDisabled" class="col-sm-2 control-label">栏目状态</label>
-                            <div class="col-sm-3">
-                                <label class="checkbox-inline" style="padding-left:0;">
-                                    <input type="radio" name="columndisplay" value="1" id="columndisplay1"
-                                           >
-                                    <label for="columndisplay1">可用</label>
-                                    &nbsp;&nbsp;
-                                    <input type="radio" name="columndisplay" value="0" id="columndisplay0"
-                                           >
-                                    <label for="columndisplay0">禁用</label>
+                            <label for="sortNum" class="col-sm-2 control-label" style="line-height: 40px;">标题样式</label>
+                            <div class="col-sm-10">
+                                <label class="checkbox-inline" style="padding-left: 0px;width: 150px;">
+                                    <div class="input-group text-color col-sm-12" style="padding-top: 5px;padding-left: 0px;">
+                                        <input type="text" id="adv_text_color" name="ati['adv_text_color']"
+                                               value=""
+                                               class="form-control" placeholder="标题颜色">
+                                        <div class="input-group-addon">
+                                            <i></i>
+                                        </div>
+                                    </div>
                                 </label>
+                                <label class="checkbox-inline" style="padding-left: 0px;">
+                                    <input type="checkbox" name="ati['adv_image_openType']" value="_blank"> 加粗
+                                </label>
+                                <label class="checkbox-inline" style="padding-left: 0px;">
+                                    <input type="checkbox" name="ati['adv_image_openType']" value="_self"> 斜体
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="columnName" class="col-sm-2 control-label">关键字</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="columnName" id="columnName"
+                                       placeholder="内容关键字提示SEO" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="columnName" class="col-sm-2 control-label">摘要</label>
+                            <div class="col-sm-5">
+                                <textarea class="form-control" name="advPosDes" id="advPosDes" rows="4"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sortNum" class="col-sm-2 control-label" style="line-height: 30px;">作者</label>
+                            <div class="col-sm-10">
+                                <label class="checkbox-inline" style="padding-left: 0px;width: 150px;">
+                                    <input type="text" class="form-control" style="width:150px;" name="stickNum" id="stickNum" value="" placeholder="作者">
+                                </label>
+                                <label class="checkbox-inline" style="width: 150px;">
+                                    <input type="text" class="form-control" style="width:150px;" name="stickNum" id="stickNum" value="" placeholder="来源">
+                                </label>
+                                <label class="checkbox-inline" style="width: 300px;">
+                                    <input type="text" class="form-control" style="width:300px;" name="stickNum" id="stickNum" value="" placeholder="来源地址">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sortNum" class="col-sm-2 control-label" style="line-height: 30px;">是否置顶</label>
+                            <div class="col-sm-10">
+                                <label class="checkbox-inline col-sm-4" style="padding-left: 0px;width: 80px;">
+                                    <select class="form-control" id="stick" name="stick">
+                                        <option value="0">否</option>
+                                        <option value="1">是</option>
+                                    </select>
+                                </label>
+                                <label class="checkbox-inline col-sm-2">
+                                    <input type="text" class="form-control" name="stickNum" id="stickNum" value="" placeholder="置顶序号">
+                                </label>
+                                <label class="checkbox-inline col-sm-3">
+                                    <div class="input-group date date-picker">
+                                        <input type="text" class="form-control date-picker" placeholder="发布日期">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editor" class="col-sm-2 control-label">内容</label>
+                            <div class="col-sm-10">
+                                <script id="editor" type="text/plain"  style="height:400px;"></script>
                             </div>
                         </div>
                     </form>
@@ -128,6 +162,11 @@
 <script type="text/javascript" charset="utf-8" src="<@spring.url '/res/backstage/ueditor/lang/zh-cn/zh-cn.js'/>"></script>
 <script type="text/javascript">
     $(function(){
+        $(".text-color").colorpicker();
+        $('.date-picker').datepicker({
+            format: "yyyy-mm-dd",
+            language: "zh-CN"
+        });
         var ue = UE.getEditor('editor');
         var columnSetting = {
             view : {
