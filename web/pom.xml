@@ -158,7 +158,10 @@
             <groupId>cn.v5cn.v5cms</groupId>
             <artifactId>common-utils</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.baidu</groupId>
+            <artifactId>ueditor</artifactId>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
