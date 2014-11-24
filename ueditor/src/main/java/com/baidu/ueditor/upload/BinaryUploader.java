@@ -5,56 +5,26 @@ import com.baidu.ueditor.define.AppInfo;
 import com.baidu.ueditor.define.BaseState;
 import com.baidu.ueditor.define.FileType;
 import com.baidu.ueditor.define.State;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.fileupload.FileItemIterator;
-import org.apache.commons.fileupload.FileItemStream;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
 public class BinaryUploader {
 
-	public static final State save(HttpServletRequest request,
-			Map<String, Object> conf) {
-		FileItemStream fileStream = null;
-		boolean isAjaxUpload = request.getHeader( "X_Requested_With" ) != null;
-
-		if (!ServletFileUpload.isMultipartContent(request)) {
-			return new BaseState(false, AppInfo.NOT_MULTIPART_CONTENT);
-		}
-
-		ServletFileUpload upload = new ServletFileUpload(
-				new DiskFileItemFactory());
-
-        if ( isAjaxUpload ) {
-            upload.setHeaderEncoding( "UTF-8" );
-        }
-
+	public static final State save(MultipartFile file,HttpServletRequest request,Map<String, Object> conf) {
 		try {
-			FileItemIterator iterator = upload.getItemIterator(request);
-
-			while (iterator.hasNext()) {
-				fileStream = iterator.next();
-
-				if (!fileStream.isFormField())
-					break;
-				fileStream = null;
-			}
-
-			if (fileStream == null) {
+			if (file == null || file.isEmpty()) {
 				return new BaseState(false, AppInfo.NOTFOUND_UPLOAD_DATA);
 			}
 
 			String savePath = (String) conf.get("savePath");
-			String originFileName = fileStream.getName();
+
+			String originFileName = file.getOriginalFilename();
 			String suffix = FileType.getSuffixByFilename(originFileName);
 
 			originFileName = originFileName.substring(0,
@@ -71,21 +41,21 @@ public class BinaryUploader {
 
 			String physicalPath = (String) conf.get("rootPath") + savePath;
 
-			InputStream is = fileStream.openStream();
-			State storageState = StorageManager.saveFileByInputStream(is,
-					physicalPath, maxSize);
+			InputStream is = file.getInputStream();
+			State storageState = StorageManager.saveFileByInputStream(is,physicalPath, maxSize);
+
 			is.close();
 
 			if (storageState.isSuccess()) {
-				storageState.putInfo("url", PathFormat.format(savePath));
+				storageState.putInfo("url", ((String) conf.get("contextPath"))+PathFormat.format(savePath));
 				storageState.putInfo("type", suffix);
 				storageState.putInfo("original", originFileName + suffix);
 			}
 
 			return storageState;
-		} catch (FileUploadException e) {
-			return new BaseState(false, AppInfo.PARSE_REQUEST_ERROR);
-		} catch (IOException e) {
+		}
+        catch (IOException e) {
+
 		}
 		return new BaseState(false, AppInfo.IO_ERROR);
 	}

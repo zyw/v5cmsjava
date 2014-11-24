@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="<@spring.url '/res/backstage/css/bootstrap-theme.css'/>">
     <link rel="stylesheet" href="<@spring.url '/res/backstage/css/main.css'/>">
 
-    <script src="<@spring.url '/res/backstage/js/jquery-1.8.3.min.js'/>" type="text/javascript"></script>
+    <script src="<@spring.url '/res/backstage/js/jquery-1.10.2.min.js'/>" type="text/javascript"></script>
     <script src="<@spring.url '/res/backstage/js/bootstrap.min.js'/>" type="text/javascript"></script>
 </head>
 <body>

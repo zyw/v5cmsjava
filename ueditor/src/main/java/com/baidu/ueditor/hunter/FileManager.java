@@ -1,28 +1,29 @@
 package com.baidu.ueditor.hunter;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Map;
-
-import org.apache.commons.io.FileUtils;
-
 import com.baidu.ueditor.PathFormat;
 import com.baidu.ueditor.define.AppInfo;
 import com.baidu.ueditor.define.BaseState;
 import com.baidu.ueditor.define.MultiState;
 import com.baidu.ueditor.define.State;
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Map;
 
 public class FileManager {
 
 	private String dir = null;
 	private String rootPath = null;
+    private String contentPath = null;
 	private String[] allowFiles = null;
 	private int count = 0;
 	
 	public FileManager ( Map<String, Object> conf ) {
 
 		this.rootPath = (String)conf.get( "rootPath" );
+        this.contentPath = ((String) conf.get("contextPath"));
 		this.dir = this.rootPath + (String)conf.get( "dir" );
 		this.allowFiles = this.getAllowFiles( conf.get("allowFiles") );
 		this.count = (Integer)conf.get( "count" );
@@ -71,7 +72,7 @@ public class FileManager {
 			}
 			file = (File)obj;
 			fileState = new BaseState( true );
-			fileState.putInfo( "url", PathFormat.format( this.getPath( file ) ) );
+			fileState.putInfo( "url", contentPath + PathFormat.format( this.getPath( file ) ) );
 			state.addState( fileState );
 		}
 		

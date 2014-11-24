@@ -159,6 +159,7 @@
 <#include "fragment/footer.ftl">
 <script type="text/javascript" charset="utf-8" src="<@spring.url '/res/backstage/ueditor/ueditor.config.js'/>"></script>
 <script type="text/javascript" charset="utf-8" src="<@spring.url '/res/backstage/ueditor/ueditor.all.min.js'/>"> </script>
+<script type="text/javascript" charset="utf-8" src="<@spring.url '/res/backstage/ueditor/ueditor.action.js'/>"> </script>
 <script type="text/javascript" charset="utf-8" src="<@spring.url '/res/backstage/ueditor/lang/zh-cn/zh-cn.js'/>"></script>
 <script type="text/javascript">
     $(function(){

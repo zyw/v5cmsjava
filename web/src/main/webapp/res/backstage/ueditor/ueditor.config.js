@@ -21,7 +21,6 @@
      */
     var URL = window.UEDITOR_HOME_URL || getUEBasePath();
     var contextPaht = $("#v5cms_context_path").val();
-    console.log(URL+"++++++++++++++");
     /**
      * 配置项主体。注意，此处所有涉及到路径的配置别遗漏URL变量。
      */
@@ -410,5 +409,4 @@
     window.UE = {
         getUEBasePath: getUEBasePath
     };
-
 })();

@@ -16,10 +16,9 @@ import java.util.Map;
 public final class ConfigManager {
 
 	private final String rootPath;
-	private final String originalPath;
 	private final String contextPath;
 	private static final String configFileName = "config.json";
-	private String parentPath = null;
+
 	private JSONObject jsonConfig = null;
 	// 涂鸦上传filename定义
 	private final static String SCRAWL_FILE_NAME = "scrawl";
@@ -29,33 +28,27 @@ public final class ConfigManager {
 	/*
 	 * 通过一个给定的路径构建一个配置管理器， 该管理器要求地址路径所在目录下必须存在config.properties文件
 	 */
-	private ConfigManager ( String rootPath, String contextPath, String uri ) throws FileNotFoundException, IOException {
+	private ConfigManager ( String rootPath, String contextPath) throws FileNotFoundException, IOException {
 		
 		rootPath = rootPath.replace( "\\", "/" );
         this.rootPath = rootPath;
 		this.contextPath = contextPath;
-		
-		if ( contextPath.length() > 0 ) {
-			this.originalPath = this.rootPath + uri.substring( contextPath.length() );
-		} else {
-			this.originalPath = this.rootPath + uri;
-		}
-		
+
 		this.initEnv();
 		
 	}
-	
+	/*	 * @param contextPath 服务器所在项目路径
+	 * @param uri 当前访问的uri*/
 	/**
 	 * 配置管理器构造工厂
 	 * @param rootPath 服务器根路径
-	 * @param contextPath 服务器所在项目路径
-	 * @param uri 当前访问的uri
+
 	 * @return 配置管理器实例或者null
 	 */
-	public static ConfigManager getInstance ( String rootPath, String contextPath, String uri ) {
+	public static ConfigManager getInstance ( String rootPath, String contextPath) {
 		
 		try {
-			return new ConfigManager(rootPath, contextPath, uri);
+			return new ConfigManager(rootPath, contextPath);
 		} catch ( Exception e ) {
 			return null;
 		}
@@ -133,7 +126,7 @@ public final class ConfigManager {
 				break;
 				
 		}
-		
+		conf.put("contextPath",contextPath);
 		conf.put( "savePath", savePath );
 		conf.put( "rootPath", this.rootPath );
 		
@@ -142,13 +135,6 @@ public final class ConfigManager {
 	}
 	
 	private void initEnv () throws FileNotFoundException, IOException {
-        File file = new File( this.originalPath );
-		
-		if ( !file.isAbsolute() ) {
-			file = new File( file.getAbsolutePath() );
-		}
-		
-		this.parentPath = file.getParent();
 		
 		String configContent = this.readFile( this.getConfigPath() );
         try{
@@ -161,7 +147,7 @@ public final class ConfigManager {
 	}
 	
 	private String getConfigPath () {
-		return  this.rootPath + File.separator + ConfigManager.configFileName;
+		return  this.rootPath + File.separator + "WEB-INF" + File.separator + "config" + File.separator + ConfigManager.configFileName;
 	}
 
 	private String[] getArray ( String key ) {
