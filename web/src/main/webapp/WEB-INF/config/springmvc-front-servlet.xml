@@ -62,16 +62,16 @@
     </bean>
     <!-- ./配置FreeMarker -->
 
-    <!-- 配置国际化 -->
-    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="basename" value="messages"/>
-        <property name="defaultEncoding" value="UTF-8"/>
-        <property name="alwaysUseMessageFormat" value="true"/>
-    </bean>
-    <!-- 在代码中使用国际化的自定义类 -->
-    <bean id="messageSourceHelper" class="cn.v5cn.v5cms.util.MessageSourceHelper">
-        <property name="messageSource" ref="messageSource"/>
-    </bean>
+    <!--&lt;!&ndash; 配置国际化 &ndash;&gt;-->
+    <!--<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">-->
+        <!--<property name="basename" value="messages"/>-->
+        <!--<property name="defaultEncoding" value="UTF-8"/>-->
+        <!--<property name="alwaysUseMessageFormat" value="true"/>-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; 在代码中使用国际化的自定义类 &ndash;&gt;-->
+    <!--<bean id="messageSourceHelper" class="cn.v5cn.v5cms.util.MessageSourceHelper">-->
+        <!--<property name="messageSource" ref="messageSource"/>-->
+    <!--</bean>-->
 
     <!-- 自定义拦截器interceptor -->
     <!--<mvc:interceptors>

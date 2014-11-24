@@ -4,16 +4,19 @@ import cn.v5cn.v5cms.biz.AdvBiz;
 import cn.v5cn.v5cms.biz.AdvPosBiz;
 import cn.v5cn.v5cms.entity.Adv;
 import cn.v5cn.v5cms.entity.AdvPos;
+import cn.v5cn.v5cms.entity.Site;
 import cn.v5cn.v5cms.entity.wrapper.AdvWrapper;
 import cn.v5cn.v5cms.exception.V5CMSNullValueException;
+import cn.v5cn.v5cms.exception.V5CMSSessionValueNullException;
 import cn.v5cn.v5cms.util.HttpUtils;
+import cn.v5cn.v5cms.util.MessageSourceHelper;
 import cn.v5cn.v5cms.util.SystemConstant;
 import cn.v5cn.v5cms.util.SystemUtils;
+import com.baidu.ueditor.PathFormat;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -31,7 +34,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import static cn.v5cn.v5cms.util.MessageSourceHelper.getMessage;
@@ -98,7 +100,7 @@ public class AdvAction {
     }
 
     @RequestMapping(value = "/edit/{advId}",method = RequestMethod.GET)
-    public String advPosaup(@PathVariable Long advId,ModelMap model){
+    public String advEdit(@PathVariable Long advId,ModelMap model){
         ImmutableList<AdvPos> advposes = advPosBiz.finadAll();
         model.addAttribute("aps",advposes);
         Adv adv = advBiz.findOne(advId);
@@ -124,20 +126,20 @@ public class AdvAction {
 
     @ResponseBody
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
-    public ImmutableMap<String,Object> advAU(@ModelAttribute("adv") AdvWrapper advWrapper,HttpServletRequest request){
-        List<String> deleteFilePaths = (List<String>)request.getSession().getAttribute("adv_delete_file_real_path");
-        if(deleteFilePaths != null && deleteFilePaths.size() > 0){
-            for(String deleteFilePath : deleteFilePaths){
-                String fileExt = FilenameUtils.getExtension(deleteFilePath);
-                boolean result = FileUtils.deleteQuietly(new File(deleteFilePath));
-                if(!result){
-                    //String failedMessage = "swf".equalsIgnoreCase(fileExt)?getMessage("adv.flashdeletefailed.message"):getMessage("adv.imagedeletefailed.message");
-                    LOGGER.warn("广告图片或者Flash删除失败，名称{}",deleteFilePath);
-                    //return ImmutableMap.<String,Object>of("status","0","message",failedMessage);
-                }
-            }
-            request.getSession().setAttribute("adv_delete_file_real_path",null);
-        }
+    public ImmutableMap<String,Object> advEdit(@ModelAttribute("adv") AdvWrapper advWrapper,HttpServletRequest request){
+//        List<String> deleteFilePaths = (List<String>)request.getSession().getAttribute("adv_delete_file_real_path");
+//        if(deleteFilePaths != null && deleteFilePaths.size() > 0){
+//            for(String deleteFilePath : deleteFilePaths){
+//                String fileExt = FilenameUtils.getExtension(deleteFilePath);
+//                boolean result = FileUtils.deleteQuietly(new File(deleteFilePath));
+//                if(!result){
+//                    //String failedMessage = "swf".equalsIgnoreCase(fileExt)?getMessage("adv.flashdeletefailed.message"):getMessage("adv.imagedeletefailed.message");
+//                    LOGGER.warn("广告图片或者Flash删除失败，名称{}",deleteFilePath);
+//                    //return ImmutableMap.<String,Object>of("status","0","message",failedMessage);
+//                }
+//            }
+//            request.getSession().setAttribute("adv_delete_file_real_path",null);
+//        }
         if(advWrapper.getAdv().getAdvId() != null){
             try {
                 advBiz.update(advWrapper);
@@ -171,9 +173,17 @@ public class AdvAction {
         if(file.isEmpty()){
             return ImmutableMap.<String,Object>of("status","0","message",getMessage("global.uploadempty.message"));
         }
-        String realPath = HttpUtils.getRealPath(request, SystemConstant.ADV_RES_PATH);
+        Object siteObj = request.getSession().getAttribute(SystemConstant.SITE_SESSION_KEY);
+        if(siteObj == null){
+            LOGGER.error("Session中存储的站点信息为空！");
+            throw new V5CMSSessionValueNullException("Session中存储的站点信息为空！");
+        }
+        Site site = (Site)siteObj;
+        String advPath = PathFormat.parseSiteId(SystemConstant.ADV_RES_PATH, site.getSiteId() + "");
+        String realPath = HttpUtils.getRealPath(request, advPath);
 
         SystemUtils.isNotExistCreate(realPath);
+
         String timeFileName = SystemUtils.timeFileName(file.getOriginalFilename());
         try {
             file.transferTo(new File(realPath+"/"+timeFileName));
@@ -182,24 +192,35 @@ public class AdvAction {
             return ImmutableMap.<String,Object>of("status","0","message",getMessage("adv.uploaderror.message"));
         }
         return ImmutableMap.<String,Object>of("status","1","message",getMessage("adv.uploadsuccess.message"),
-                "filePath","/res/uploads/advfiles/"+timeFileName,"contentPath", HttpUtils.getBasePath(request));
+                "filePath",advPath+timeFileName,"contentPath", HttpUtils.getBasePath(request));
     }
 
     @ResponseBody
     @RequestMapping(value = "/delete/if",method = RequestMethod.POST)
-    public ImmutableMap<String,Object> deleteAdvImage(String if_path,HttpServletRequest request){
+    public ImmutableMap<String,String> deleteAdvImage(String if_path,HttpServletRequest request){
+//        Object siteObj = request.getSession().getAttribute(SystemConstant.SITE_SESSION_KEY);
+//        if(siteObj == null){
+//            LOGGER.error("Session中存储的站点信息为空！");
+//            throw new V5CMSSessionValueNullException("Session中存储的站点信息为空！");
+//        }
+//        Site site = (Site)siteObj;
         String fileExt = FilenameUtils.getExtension(if_path);
-        String fileName = FilenameUtils.getName(if_path);
-        String realPath = HttpUtils.getRealPath(request, SystemConstant.ADV_RES_PATH);
-        List<String> deletePaths = (List<String>)request.getSession().getAttribute("adv_delete_file_real_path");
-        if(deletePaths == null){
-            deletePaths = Lists.newArrayList();
-        }
-        deletePaths.add(realPath+"/"+fileName);
+//        String fileName = FilenameUtils.getName(if_path);
 
-        request.getSession().setAttribute("adv_delete_file_real_path",deletePaths);
-        String failedMessage = "swf".equalsIgnoreCase(fileExt)?getMessage("adv.flashdelete.before.message"):getMessage("adv.imagedelete.before.message");
-        return ImmutableMap.<String,Object>of("status","1","message",failedMessage);
+        String realPath = HttpUtils.getRealPath(request, if_path);
+
+        FileUtils.deleteQuietly(new File(realPath));
+
+//        List<String> deletePaths = (List<String>)request.getSession().getAttribute("adv_delete_file_real_path");
+//        if(deletePaths == null){
+//            deletePaths = Lists.newArrayList();
+//        }
+//        deletePaths.add(realPath+"/"+fileName);
+//
+//        request.getSession().setAttribute("adv_delete_file_real_path",deletePaths);
+        System.out.println((MessageSourceHelper.getMessage("adv.imagedelete.before.message"))+"++++++++++++++++++" + fileExt);
+        String failedMessage = "swf".equalsIgnoreCase(fileExt)?(getMessage("adv.flashdelete.before.message")):(getMessage("adv.imagedelete.before.message"));
+        return ImmutableMap.of("status","1","message",failedMessage);
     }
 
     @ResponseBody

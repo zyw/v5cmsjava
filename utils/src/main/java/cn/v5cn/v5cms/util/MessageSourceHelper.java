@@ -35,17 +35,18 @@ public class MessageSourceHelper {
     }
 
     public static String getMessage(String code,Object[] args,String defaultMessage){
-        String msg = getMessage(code,args,defaultMessage,Locale.CHINESE);
+
+        String msg = getMessage(code,args,defaultMessage,Locale.SIMPLIFIED_CHINESE);
         return msg;
     }
 
     public static String getMessage(String code,String defaultMessage){
-        String msg = getMessage(code,new Object[]{},defaultMessage,Locale.CHINESE);
+        String msg = getMessage(code,new Object[]{},defaultMessage,Locale.SIMPLIFIED_CHINESE);
         return msg;
     }
 
     public static String getMessage(String code){
-        String msg = getMessage(code,new Object[]{},"",Locale.CHINESE);
+        String msg = getMessage(code,new Object[]{},"",Locale.SIMPLIFIED_CHINESE);
         return msg;
     }
 }
