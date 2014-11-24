@@ -18,12 +18,15 @@ public class ActionEnter {
 	private MultipartFile file;
 	private String rootPath = null;
 
+    private String siteId = null;
+
 	private String actionType = null;
 	
 	private ConfigManager configManager = null;
 
-	public ActionEnter (MultipartFile file,HttpServletRequest request, String rootPath ) {
+	public ActionEnter (MultipartFile file,HttpServletRequest request, String rootPath, String siteId ) {
         this.file = file;
+        this.siteId = siteId;
 		this.request = request;
 		this.rootPath = rootPath;
 		this.actionType = request.getParameter( "action" );
@@ -75,7 +78,7 @@ public class ActionEnter {
 			case ActionMap.UPLOAD_VIDEO:
 			case ActionMap.UPLOAD_FILE:
 				conf = this.configManager.getConfig( actionCode );
-				state = new Uploader(file,request, conf ).doExec();
+				state = new Uploader(file,request, conf, siteId).doExec();
 				break;
 				
 			case ActionMap.CATCH_IMAGE:
@@ -88,7 +91,7 @@ public class ActionEnter {
 			case ActionMap.LIST_FILE:
 				conf = configManager.getConfig( actionCode );
 				int start = this.getStartIndex();
-				state = new FileManager( conf ).listFile( start );
+				state = new FileManager( conf, siteId ).listFile( start );
 				break;
 				
 		}

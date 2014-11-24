@@ -9,11 +9,13 @@ import java.util.Map;
 public class Uploader {
 	private HttpServletRequest request = null;
 	private Map<String, Object> conf = null;
+    private String siteId = null;
     private MultipartFile file;
 
-	public Uploader(MultipartFile file,HttpServletRequest request, Map<String, Object> conf) {
+	public Uploader(MultipartFile file,HttpServletRequest request, Map<String, Object> conf,String siteId) {
         this.file = file;
 		this.request = request;
+        this.siteId = siteId;
 		this.conf = conf;
 	}
 
@@ -24,7 +26,7 @@ public class Uploader {
 		if ("true".equals(this.conf.get("isBase64"))) {
 			state = Base64Uploader.save(this.request.getParameter(filedName),this.conf);
 		} else {
-			state = BinaryUploader.save(file,this.request, this.conf);
+			state = BinaryUploader.save(file,siteId,this.conf);
 		}
 
 		return state;

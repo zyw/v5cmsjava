@@ -7,7 +7,6 @@ import com.baidu.ueditor.define.FileType;
 import com.baidu.ueditor.define.State;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -16,7 +15,7 @@ import java.util.Map;
 
 public class BinaryUploader {
 
-	public static final State save(MultipartFile file,HttpServletRequest request,Map<String, Object> conf) {
+	public static final State save(MultipartFile file,String siteId,Map<String, Object> conf) {
 		try {
 			if (file == null || file.isEmpty()) {
 				return new BaseState(false, AppInfo.NOTFOUND_UPLOAD_DATA);
@@ -37,7 +36,7 @@ public class BinaryUploader {
 				return new BaseState(false, AppInfo.NOT_ALLOW_FILE_TYPE);
 			}
 
-			savePath = PathFormat.parse(savePath, originFileName);
+			savePath = PathFormat.parseSiteId(savePath, originFileName,siteId);
 
 			String physicalPath = (String) conf.get("rootPath") + savePath;
 

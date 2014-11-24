@@ -76,6 +76,59 @@ public class PathFormat {
 		
 		return sb.toString();
 	}
+
+    public static String parseSiteId(String input,String siteId){
+        Pattern pattern = Pattern.compile( "\\{([^\\}]+)\\}", Pattern.CASE_INSENSITIVE  );
+        Matcher matcher = pattern.matcher(input);
+        String matchStr = null;
+
+        PathFormat.currentDate = new Date();
+
+        StringBuffer sb = new StringBuffer();
+
+        while ( matcher.find() ) {
+
+            matchStr = matcher.group( 1 );
+            if(matchStr.indexOf("siteId") != -1){
+                siteId = siteId.replace( "$", "\\$" ).replaceAll( "[\\/:*?\"<>|]", "" );
+                matcher.appendReplacement(sb, siteId );
+            }
+        }
+
+        matcher.appendTail(sb);
+
+        return sb.toString();
+    }
+
+    public static String parseSiteId ( String input, String filename,String siteId) {
+
+        Pattern pattern = Pattern.compile( "\\{([^\\}]+)\\}", Pattern.CASE_INSENSITIVE  );
+        Matcher matcher = pattern.matcher(input);
+        String matchStr = null;
+
+        PathFormat.currentDate = new Date();
+
+        StringBuffer sb = new StringBuffer();
+
+        while ( matcher.find() ) {
+
+            matchStr = matcher.group( 1 );
+            if ( matchStr.indexOf( "filename" ) != -1 ) {
+                filename = filename.replace( "$", "\\$" ).replaceAll( "[\\/:*?\"<>|]", "" );
+                matcher.appendReplacement(sb, filename );
+            }else if(matchStr.indexOf("siteId") != -1){
+                siteId = siteId.replace( "$", "\\$" ).replaceAll( "[\\/:*?\"<>|]", "" );
+                matcher.appendReplacement(sb, siteId );
+            }else {
+                matcher.appendReplacement(sb, PathFormat.getString( matchStr ) );
+            }
+
+        }
+
+        matcher.appendTail(sb);
+
+        return sb.toString();
+    }
 		
 	private static String getString ( String pattern ) {
 		

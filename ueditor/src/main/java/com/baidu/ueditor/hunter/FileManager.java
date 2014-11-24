@@ -20,11 +20,11 @@ public class FileManager {
 	private String[] allowFiles = null;
 	private int count = 0;
 	
-	public FileManager ( Map<String, Object> conf ) {
+	public FileManager ( Map<String, Object> conf, String siteId) {
 
 		this.rootPath = (String)conf.get( "rootPath" );
         this.contentPath = ((String) conf.get("contextPath"));
-		this.dir = this.rootPath + (String)conf.get( "dir" );
+		this.dir = this.rootPath + PathFormat.parseSiteId(((String)conf.get( "dir" )),siteId);
 		this.allowFiles = this.getAllowFiles( conf.get("allowFiles") );
 		this.count = (Integer)conf.get( "count" );
 		
@@ -34,7 +34,6 @@ public class FileManager {
 		
 		File dir = new File( this.dir );
 		State state = null;
-
 		if ( !dir.exists() ) {
 			return new BaseState( false, AppInfo.NOT_EXIST );
 		}
@@ -72,7 +71,7 @@ public class FileManager {
 			}
 			file = (File)obj;
 			fileState = new BaseState( true );
-			fileState.putInfo( "url", contentPath + PathFormat.format( this.getPath( file ) ) );
+            fileState.putInfo( "url", contentPath + PathFormat.format( this.getPath( file ) ) );
 			state.addState( fileState );
 		}
 		
