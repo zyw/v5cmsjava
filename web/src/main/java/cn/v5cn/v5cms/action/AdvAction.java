@@ -138,6 +138,7 @@ public class AdvAction {
 //            }
 //            request.getSession().setAttribute("adv_delete_file_real_path",null);
 //        }
+
         if(advWrapper.getAdv().getAdvId() != null){
             try {
                 advBiz.update(advWrapper);
