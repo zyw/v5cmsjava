@@ -11,7 +11,8 @@
     var video = {},
         uploadVideoList = [],
         isModifyUploadVideo = false,
-        uploadFile;
+        uploadFile,
+        videoList;
 
     window.onload = function(){
         $focus($G("videoUrl"));
@@ -36,9 +37,25 @@
                         domUtils.removeClasses($G(bodyId), 'focus');
                     }
                 }
+                setTabFocus(target.getAttribute('data-content-id'));
             });
         }
     }
+    /* 初始化tabbody */
+    function setTabFocus(id) {
+        if(id == 'browseOnline'){
+            videoList = videoList || new VideoList('videoList');
+            videoList.reset();
+        }
+    }
+
+    /* 在线图片 */
+    function VideoList(target) {
+        this.container = utils.isString(target) ? document.getElementById(target) : target;
+        this.init();
+    }
+
+
 
     function initVideo(){
         createAlignButton( ["videoFloat", "upload_alignment"] );
@@ -84,7 +101,11 @@
                 case "upload":
                     return insertUpload();
                     break;
+                case "vBrowse":
+                    uploadVideoList = videoList.getInsertList();
+                    break;
             }
+            insertUpload();
         };
         dialog.oncancel = function(){
             $G("preview").innerHTML = "";
@@ -791,4 +812,161 @@
         }
     };
 
+
+    VideoList.prototype = {
+        init: function () {
+            this.reset();
+            this.initEvents();
+        },
+        /* 初始化容器 */
+        initContainer: function () {
+            this.container.innerHTML = '';
+            this.list = document.createElement('ul');
+            this.clearFloat = document.createElement('li');
+
+            domUtils.addClass(this.list, 'list');
+            domUtils.addClass(this.clearFloat, 'clearFloat');
+
+            this.list.appendChild(this.clearFloat);
+            this.container.appendChild(this.list);
+        },
+        /* 初始化滚动事件,滚动到地步自动拉取数据 */
+        initEvents: function () {
+            var _this = this;
+
+            /* 滚动拉取图片 */
+            domUtils.on($G('videoList'), 'scroll', function(e){
+                var panel = this;
+                if (panel.scrollHeight - (panel.offsetHeight + panel.scrollTop) < 10) {
+                    _this.getImageData();
+                }
+            });
+            /* 选中图片 */
+            domUtils.on(this.container, 'click', function (e) {
+                var target = e.target || e.srcElement,
+                    li = target.parentNode;
+
+                if (li.tagName.toLowerCase() == 'li') {
+                    if (domUtils.hasClass(li, 'selected')) {
+                        domUtils.removeClasses(li, 'selected');
+                    } else {
+                        domUtils.addClass(li, 'selected');
+                    }
+                }
+            });
+        },
+        /* 初始化第一次的数据 */
+        initData: function () {
+
+            /* 拉取数据需要使用的值 */
+            this.state = 0;
+            this.listSize = editor.getOpt('videoManagerListSize');
+            this.listIndex = 0;
+            this.listEnd = false;
+
+            /* 第一次拉取数据 */
+            this.getImageData();
+        },
+        /* 重置界面 */
+        reset: function() {
+            this.initContainer();
+            this.initData();
+        },
+        /* 向后台拉取图片列表数据 */
+        getImageData: function () {
+            var _this = this;
+
+            if(!_this.listEnd && !this.isLoadingData) {
+                this.isLoadingData = true;
+                var url = editor.getActionUrl(editor.getOpt('videoManagerActionName')),
+                    isJsonp = utils.isCrossDomainUrl(url);
+                ajax.request(url, {
+                    'timeout': 100000,
+                    'dataType': isJsonp ? 'jsonp':'',
+                    'data': utils.extend({
+                        start: this.listIndex,
+                        size: this.listSize
+                    }, editor.queryCommandValue('serverparam')),
+                    'method': 'get',
+                    'onsuccess': function (r) {
+                        try {
+                            var json = isJsonp ? r:eval('(' + r.responseText + ')');
+                            console.log(json);
+                            console.log(json.list);
+                            if (json.state == 'SUCCESS') {
+                                _this.pushData(json.list);
+                                _this.listIndex = parseInt(json.start) + parseInt(json.list.length);
+                                if(_this.listIndex >= json.total) {
+                                    _this.listEnd = true;
+                                }
+                                _this.isLoadingData = false;
+                            }
+                        } catch (e) {
+                            if(r.responseText.indexOf('ue_separate_ue') != -1) {
+                                var list = r.responseText.split(r.responseText);
+                                _this.pushData(list);
+                                _this.listIndex = parseInt(list.length);
+                                _this.listEnd = true;
+                                _this.isLoadingData = false;
+                            }
+                        }
+                    },
+                    'onerror': function () {
+                        _this.isLoadingData = false;
+                    }
+                });
+            }
+        },
+        /* 添加图片到列表界面上 */
+        pushData: function (list) {
+            var i, item, img, icon, _this = this,
+                urlPrefix = editor.getOpt('videoManagerUrlPrefix');
+            for (i = 0; i < list.length; i++) {
+                if(list[i] && list[i].url) {
+                    var $p1 = $('<p class="title" _url="'+list[i].url+'">'+list[i].original+'</p>');
+                    var $p2 = $('<p class="imgWrap notimage">'+
+                            '<i class="file-preview file-type-mp4"></i>'+
+                            '<span class="file-title">'+list[i].original+'</span>'+
+                        '</p>');
+                    item = document.createElement('li');
+                    item.setAttribute("id","VODEO_FILE"+i);
+                    img = document.createElement('img');
+                    icon = document.createElement('span');
+
+/*                    domUtils.on(img, 'load', (function(image){
+                        return function(){
+                            _this.scale(image, image.parentNode.offsetWidth, image.parentNode.offsetHeight);
+                        }
+                    })(img));
+                    img.width = 113;
+                    img.setAttribute('src', urlPrefix + list[i].url + (list[i].url.indexOf('?') == -1 ? '?noCache=':'&noCache=') + (+new Date()).toString(36) );
+                    img.setAttribute('_src', urlPrefix + list[i].url);*/
+                    domUtils.addClass(icon, 'icon');
+
+                    //item.appendChild(img);
+                    item.appendChild($p1.get(0));
+                    item.appendChild($p2.get(0));
+                    item.appendChild(icon);
+                    this.list.insertBefore(item, this.clearFloat);
+                }
+            }
+        },
+        getInsertList: function () {
+            var i, lis = this.list.children, list = [];//, align = getAlign();
+            for (i = 0; i < lis.length; i++) {
+                if (domUtils.hasClass(lis[i], 'selected')) {
+                    var p = lis[i].firstChild,
+                        url = p.getAttribute('_url');
+                    list.push({
+                        'url': url,
+                        'type': '',
+                        'original':'json.original'
+                    });
+
+                }
+
+            }
+            return list;
+        }
+    };
 })();

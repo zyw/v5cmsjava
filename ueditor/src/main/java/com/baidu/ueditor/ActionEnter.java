@@ -89,6 +89,7 @@ public class ActionEnter {
 				
 			case ActionMap.LIST_IMAGE:
 			case ActionMap.LIST_FILE:
+            case ActionMap.LIST_VIDEO:
 				conf = configManager.getConfig( actionCode );
 				int start = this.getStartIndex();
 				state = new FileManager( conf, siteId ).listFile( start );

@@ -72,6 +72,15 @@
     "imageManagerInsertAlign": "none", /* 插入的图片浮动方式 */
     "imageManagerAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"], /* 列出的文件类型 */
 
+
+    /* 列出指定目录下的视频 */
+    "videoManagerActionName": "listvideo", /* 执行视频管理的action名称 */
+    "videoManagerListPath": "/res/uploads/{siteId}/content/video/", /* 指定要列出视频的目录 */
+    "videoManagerListSize": 20, /* 每次列出文件数量 */
+    "videoManagerUrlPrefix": "", /* 视频访问路径前缀 */
+    "videoManagerInsertAlign": "none", /* 插入的视频浮动方式 */
+    "videoManagerAllowFiles": [".mov", ".wmv", ".mp4", ".webm", ".mp3", ".wav",".swf"], /* 列出的文件类型 */
+
     /* 列出指定目录下的文件 */
     "fileManagerActionName": "listfile", /* 执行文件管理的action名称 */
     "fileManagerListPath": "/res/uploads/{siteId}/content/file/", /* 指定要列出文件的目录 */
