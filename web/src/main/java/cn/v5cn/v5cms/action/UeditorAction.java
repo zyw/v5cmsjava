@@ -1,9 +1,8 @@
 package cn.v5cn.v5cms.action;
 
 import cn.v5cn.v5cms.entity.Site;
-import cn.v5cn.v5cms.exception.V5CMSSessionValueNullException;
 import cn.v5cn.v5cms.util.HttpUtils;
-import cn.v5cn.v5cms.util.SystemConstant;
+import cn.v5cn.v5cms.util.SystemUtils;
 import com.baidu.ueditor.ActionEnter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,12 +27,7 @@ public class UeditorAction {
 
     @RequestMapping(value = "/config",method = {RequestMethod.GET,RequestMethod.POST})
     public void ueditorConfig(HttpServletRequest request,HttpServletResponse response) throws IOException {
-        Object siteObj = request.getSession().getAttribute(SystemConstant.SITE_SESSION_KEY);
-        if(siteObj == null){
-            LOGGER.error("Session中存储的站点信息为空！");
-            throw new V5CMSSessionValueNullException("Session中存储的站点信息为空！");
-        }
-        Site site = (Site)siteObj;
+        Site site = (Site)(SystemUtils.getSessionSite(request));
         PrintWriter out = response.getWriter();
         response.setHeader("Content-Type" , "text/html");
 
@@ -44,12 +38,8 @@ public class UeditorAction {
 
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
     public void ueditorUpload(MultipartFile upfile,HttpServletRequest request,HttpServletResponse response) throws IOException {
-        Object siteObj = request.getSession().getAttribute(SystemConstant.SITE_SESSION_KEY);
-        if(siteObj == null){
-            LOGGER.error("Session中存储的站点信息为空！");
-            throw new V5CMSSessionValueNullException("Session中存储的站点信息为空！");
-        }
-        Site site = (Site)siteObj;
+
+        Site site = (Site)(SystemUtils.getSessionSite(request));
 
         PrintWriter out = response.getWriter();
         response.setHeader("Content-Type" , "text/html");

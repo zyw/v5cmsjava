@@ -6,8 +6,7 @@ import cn.v5cn.v5cms.entity.Column;
 import cn.v5cn.v5cms.entity.ColumnType;
 import cn.v5cn.v5cms.entity.Site;
 import cn.v5cn.v5cms.entity.wrapper.ZTreeNode;
-import cn.v5cn.v5cms.exception.V5CMSSessionValueNullException;
-import cn.v5cn.v5cms.util.SystemConstant;
+import cn.v5cn.v5cms.util.SystemUtils;
 import com.google.common.collect.ImmutableMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,12 +40,7 @@ public class ColumnAction {
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String columnList(ModelMap modelMap,HttpSession session){
-        Object siteObj = session.getAttribute(SystemConstant.SITE_SESSION_KEY);
-        if(siteObj == null){
-            LOGGER.error("Session中存储的站点信息为空！");
-            throw new V5CMSSessionValueNullException("Session中存储的站点信息为空！");
-        }
-        Site site = (Site)siteObj;
+        Site site = (Site)(SystemUtils.getSessionSite(session));
         List<Column> columns = columnBiz.findOrderByParentIdsAndColsId(site.getSiteId());
         System.out.println(columns);
         modelMap.addAttribute("columns",columns);
@@ -78,12 +72,7 @@ public class ColumnAction {
     public ImmutableMap<String,String> columnEdits(Column column,HttpSession session){
         if(column.getColsId() == null || column.getColsId() == 0L){
             //设置站点ID
-            Object siteObj = session.getAttribute(SystemConstant.SITE_SESSION_KEY);
-            if(siteObj == null){
-                LOGGER.error("Session中存储的站点信息为Null！");
-                throw new V5CMSSessionValueNullException("Session中存储的站点信息为Null！");
-            }
-            Site site = (Site)siteObj;
+            Site site = (Site)(SystemUtils.getSessionSite(session));
             column.setSiteId(site.getSiteId());
 
             column = columnBiz.save(column);

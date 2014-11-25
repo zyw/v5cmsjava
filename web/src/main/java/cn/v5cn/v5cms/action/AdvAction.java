@@ -7,9 +7,7 @@ import cn.v5cn.v5cms.entity.AdvPos;
 import cn.v5cn.v5cms.entity.Site;
 import cn.v5cn.v5cms.entity.wrapper.AdvWrapper;
 import cn.v5cn.v5cms.exception.V5CMSNullValueException;
-import cn.v5cn.v5cms.exception.V5CMSSessionValueNullException;
 import cn.v5cn.v5cms.util.HttpUtils;
-import cn.v5cn.v5cms.util.MessageSourceHelper;
 import cn.v5cn.v5cms.util.SystemConstant;
 import cn.v5cn.v5cms.util.SystemUtils;
 import com.baidu.ueditor.PathFormat;
@@ -173,12 +171,7 @@ public class AdvAction {
         if(file.isEmpty()){
             return ImmutableMap.<String,Object>of("status","0","message",getMessage("global.uploadempty.message"));
         }
-        Object siteObj = request.getSession().getAttribute(SystemConstant.SITE_SESSION_KEY);
-        if(siteObj == null){
-            LOGGER.error("Session中存储的站点信息为空！");
-            throw new V5CMSSessionValueNullException("Session中存储的站点信息为空！");
-        }
-        Site site = (Site)siteObj;
+        Site site = (Site)(SystemUtils.getSessionSite(request));
         String advPath = PathFormat.parseSiteId(SystemConstant.ADV_RES_PATH, site.getSiteId() + "");
         String realPath = HttpUtils.getRealPath(request, advPath);
 
@@ -209,7 +202,7 @@ public class AdvAction {
 
         String realPath = HttpUtils.getRealPath(request, if_path);
 
-        FileUtils.deleteQuietly(new File(realPath));
+        boolean deleteResult = FileUtils.deleteQuietly(new File(realPath));
 
 //        List<String> deletePaths = (List<String>)request.getSession().getAttribute("adv_delete_file_real_path");
 //        if(deletePaths == null){
@@ -218,8 +211,12 @@ public class AdvAction {
 //        deletePaths.add(realPath+"/"+fileName);
 //
 //        request.getSession().setAttribute("adv_delete_file_real_path",deletePaths);
-        System.out.println((MessageSourceHelper.getMessage("adv.imagedelete.before.message"))+"++++++++++++++++++" + fileExt);
-        String failedMessage = "swf".equalsIgnoreCase(fileExt)?(getMessage("adv.flashdelete.before.message")):(getMessage("adv.imagedelete.before.message"));
+        String failedMessage = "";
+        if(deleteResult){
+            failedMessage = "swf".equalsIgnoreCase(fileExt)?(getMessage("adv.flashdeletesuccess.message")):(getMessage("adv.imagedeletesuccess.message"));
+        }else{
+            failedMessage = "swf".equalsIgnoreCase(fileExt)?(getMessage("adv.flashdeletefailed.message")):(getMessage("adv.imagedeletefailed.message"));
+        }
         return ImmutableMap.of("status","1","message",failedMessage);
     }
 

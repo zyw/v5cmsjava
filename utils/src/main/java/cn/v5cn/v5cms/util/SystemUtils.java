@@ -1,11 +1,16 @@
 package cn.v5cn.v5cms.util;
 
+import cn.v5cn.v5cms.exception.V5CMSSessionValueNullException;
 import cn.v5cn.v5cms.util.annotation.Ignore;
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.beans.PropertyDescriptor;
 import java.io.File;
 import java.io.Serializable;
@@ -17,6 +22,8 @@ import java.util.Map;
  * Created by ZYW on 2014/7/18.
  */
 public class SystemUtils {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(SystemUtils.class);
 
     private static final BeanUtilsBean BEAN_UTILS_BEAN = BeanUtilsBean.getInstance();
 
@@ -121,5 +128,17 @@ public class SystemUtils {
         }
         htmlSb.append("</ul>");
         return htmlSb.toString();
+    }
+
+    public static Object getSessionSite(HttpServletRequest request){
+        return getSessionSite(request.getSession());
+    }
+    public static Object getSessionSite(HttpSession session){
+        Object siteObj = session.getAttribute(SystemConstant.SITE_SESSION_KEY);
+        if(siteObj == null){
+            LOGGER.error("Session中存储的站点信息为空！");
+            throw new V5CMSSessionValueNullException("Session中存储的站点信息为空！");
+        }
+        return siteObj;
     }
  }

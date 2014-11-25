@@ -4,7 +4,6 @@ import cn.v5cn.v5cms.biz.ColumnTypeBiz;
 import cn.v5cn.v5cms.entity.ColumnType;
 import cn.v5cn.v5cms.entity.Site;
 import cn.v5cn.v5cms.exception.V5CMSNullValueException;
-import cn.v5cn.v5cms.exception.V5CMSSessionValueNullException;
 import cn.v5cn.v5cms.util.HttpUtils;
 import cn.v5cn.v5cms.util.SystemConstant;
 import cn.v5cn.v5cms.util.SystemUtils;
@@ -54,12 +53,7 @@ public class ColumnTypeAction {
 
         ColumnType colType = searchObj == null ? (new ColumnType()) : ((ColumnType) searchObj);
 
-        Object siteObj = session.getAttribute(SystemConstant.SITE_SESSION_KEY);
-        if(siteObj == null){
-            LOGGER.error("Session中存储的站点信息为空！");
-            throw new V5CMSSessionValueNullException("Session中存储的站点信息为空！");
-        }
-        Site site = (Site)siteObj;
+        Site site = (Site)(SystemUtils.getSessionSite(session));
         colType.setSiteId(site.getSiteId());
 
         Page<ColumnType> pageColumnTypes = columnTypeBiz.findColumnTypeByColTypeNamePageable(colType, p);
@@ -71,12 +65,7 @@ public class ColumnTypeAction {
     @RequestMapping(value = "/edit/{colTypeId}",method = RequestMethod.GET)
     public String columnTypeEdit(@PathVariable Long colTypeId,ModelMap modelMap,HttpSession session){
 
-        Object siteObj = session.getAttribute(SystemConstant.SITE_SESSION_KEY);
-        if(siteObj == null){
-            LOGGER.error("Session中存储的站点信息为Null！");
-            throw new V5CMSSessionValueNullException("Session中存储的站点信息为Null！");
-        }
-        Site site = (Site)siteObj;
+        Site site = (Site)(SystemUtils.getSessionSite(session));
         String templateBasePath = session.getServletContext().getRealPath(SystemConstant.SITE_TEMPLATE_PATH);
         String themeName = site.getThemeName();
         if(StringUtils.isBlank(themeName)){
@@ -113,12 +102,7 @@ public class ColumnTypeAction {
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
     public ImmutableMap<String,String> columnTypeEdit(ColumnType columnType,HttpSession session){
         //设置站点ID
-        Object siteObj = session.getAttribute(SystemConstant.SITE_SESSION_KEY);
-        if(siteObj == null){
-            LOGGER.error("Session中存储的站点信息为Null！");
-            throw new V5CMSSessionValueNullException("Session中存储的站点信息为Null！");
-        }
-        Site site = (Site)siteObj;
+        Site site = (Site)(SystemUtils.getSessionSite(session));
         columnType.setSiteId(site.getSiteId());
         if(columnType.getColTypeId() == null){
 
@@ -156,7 +140,6 @@ public class ColumnTypeAction {
     @ResponseBody
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public ImmutableMap<String,String> colTypeDelete(Long[] colTypeIds){
-        System.out.println(colTypeIds);
         try {
             columnTypeBiz.deleteColType(colTypeIds);
         } catch (Exception e) {
