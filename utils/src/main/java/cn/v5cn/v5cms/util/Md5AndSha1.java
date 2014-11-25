@@ -59,10 +59,4 @@ public class Md5AndSha1 {
 		}
 		return buf.toString();
 	}
-
-	public static void main(String[] args) {
-		System.out.println("111111 MD5  :"+ Md5AndSha1.encodeByMD5("111111"));
-		System.out.println("111111 MD5  :"+ Md5AndSha1.encode("MD5", "111111"));
-		System.out.println("111111 SHA1 :"+ Md5AndSha1.encode("SHA1", "111111"));
-	}
 }
