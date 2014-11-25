@@ -1,4 +1,7 @@
 <#include "fragment/head.ftl">
+<!-- webuploader -->
+<link href="<@spring.url '/res/backstage/webuploader/css/webuploader.css'/>" rel="stylesheet" type="text/css"/>
+<link href="<@spring.url '/res/backstage/webuploader/css/style.css'/>" rel="stylesheet" type="text/css"/>
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side">
     <!-- Content Header (Page header) -->
@@ -140,6 +143,13 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="editor" class="col-sm-2 control-label">图片内容</label>
+                            <div class="col-sm-10">
+                                <input value="添加或选择图片" id="uploadAndViewImage" class="btn btn-success">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label for="editor" class="col-sm-2 control-label">内容</label>
                             <div class="col-sm-10">
                                 <script id="editor" type="text/plain"  style="height:400px;"></script>
@@ -156,7 +166,74 @@
     </section>
     <!-- /.content -->
 </aside><!-- /.right-side -->
+<div class="modal fade" id="addSelectImgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 800px;">
+        <div class="modal-content">
+            <#--<div class="modal-header">-->
+                <#--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                <#--<h4 class="modal-title" id="myModalLabel">添加或选择图片</h4>-->
+            <#--</div>-->
+            <div class="modal-body" style="padding: 5px 0 0 0;">
+                <div class="nav-tabs-custom" style="margin-bottom: 0px;">
+                    <ul class="nav nav-tabs pull-right">
+                        <li class=""><a data-toggle="tab" href="#tab_1">浏览</a></li>
+                        <li class="active"><a data-toggle="tab" href="#tab_2">上传</a></li>
+
+                        <li class="pull-left"><h4 class="modal-title" style="line-height: 35px;margin-left: 10px;">添加或选择图片</h4></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="tab_1" class="tab-pane">
+                            <b>How to use:</b>
+                            <p>Exactly like the original bootstrap tabs except you should use
+                                the custom wrapper <code>.nav-tabs-custom</code> to achieve this style.</p>
+                            A wonderful serenity has taken possession of my entire soul,
+                            like these sweet mornings of spring which I enjoy with my whole heart.
+                            I am alone, and feel the charm of existence in this spot,
+                            which was created for the bliss of souls like mine. I am so happy,
+                            my dear friend, so absorbed in the exquisite sense of mere tranquil existence,
+                            that I neglect my talents. I should be incapable of drawing a single stroke
+                            at the present moment; and yet I feel that I never was a greater artist than now.
+                        </div><!-- /.tab-pane -->
+                        <div id="tab_2" class="tab-pane active">
+                            <div id="wrapper" style="margin: 0;">
+                                <div id="container">
+                                    <!--头部，相册选择和格式选择-->
+
+                                    <div id="uploader">
+                                        <div class="queueList">
+                                            <div id="dndArea" class="placeholder">
+                                                <div id="filePicker"></div>
+                                                <p>或将照片拖到这里，单次最多可选300张</p>
+                                            </div>
+                                        </div>
+                                        <div class="statusBar" style="display:none;">
+                                            <div class="upload-progress">
+                                                <span class="text">0%</span>
+                                                <span class="percentage"></span>
+                                            </div><div class="info"></div>
+                                            <div class="btns">
+                                                <div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.tab-pane -->
+                    </div><!-- /.tab-content -->
+                </div>
+            </div>
+            <div class="modal-footer" style="margin-top: 0px;">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 <#include "fragment/footer.ftl">
+<!-- webuploader -->
+<script src="<@spring.url '/res/backstage/webuploader/webuploader.min.js'/>" type="text/javascript"></script>
+<script src="<@spring.url '/res/backstage/webuploader/upload.js'/>" type="text/javascript"></script>
+<!-- ueditor -->
 <script type="text/javascript" charset="utf-8" src="<@spring.url '/res/backstage/ueditor/ueditor.config.js'/>"></script>
 <script type="text/javascript" charset="utf-8" src="<@spring.url '/res/backstage/ueditor/ueditor.all.min.js'/>"> </script>
 <script type="text/javascript" charset="utf-8" src="<@spring.url '/res/backstage/ueditor/ueditor.action.js'/>"> </script>
@@ -210,6 +287,12 @@
         $("#colTypeId").chosen({disable_search_threshold: 10,width:'100%'});
         $("#openWay").chosen({disable_search_threshold: 10,width:'100%'});
 
+        $("#uploadAndViewImage").click(function(){
+            $("#addSelectImgModal").modal('show');
+        });
+        $("#addSelectImgModal").on('shown.bs.modal',function(){
+            $.v5cms.loadWebUploader();
+        });
         $("#columnForm").ajaxForm({
             dataType : 'json',
             success : function(data) {

@@ -205,12 +205,12 @@ a.thumbnail {
 }
 
 /*baidu webuploader css **/
-.webuploader-container {
+/*.webuploader-container {
     position: relative;
 }
 .webuploader-element-invisible {
     position: absolute !important;
-    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px 1px 1px 1px); *//* IE6, IE7 *//*
     clip: rect(1px,1px,1px,1px);
 }
 .webuploader-pick {
@@ -231,7 +231,7 @@ a.thumbnail {
 .webuploader-pick-disable {
     opacity: 0.6;
     pointer-events:none;
-}
+}*/
 
 /*!
  * Stylesheet for the Date Range Picker, for use with Bootstrap 3.x

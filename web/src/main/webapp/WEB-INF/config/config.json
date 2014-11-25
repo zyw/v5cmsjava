@@ -79,7 +79,7 @@
     "videoManagerListSize": 20, /* 每次列出文件数量 */
     "videoManagerUrlPrefix": "", /* 视频访问路径前缀 */
     "videoManagerInsertAlign": "none", /* 插入的视频浮动方式 */
-    "videoManagerAllowFiles": [".mov", ".wmv", ".mp4", ".webm", ".mp3", ".wav",".swf"], /* 列出的文件类型 */
+    "videoManagerAllowFiles": [".mov", ".wmv", ".mp4", ".webm", ".mp3", ".wav",".swf",".flv"], /* 列出的文件类型 */
 
     /* 列出指定目录下的文件 */
     "fileManagerActionName": "listfile", /* 执行文件管理的action名称 */

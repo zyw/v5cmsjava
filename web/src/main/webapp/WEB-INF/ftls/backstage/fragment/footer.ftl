@@ -41,8 +41,6 @@
 <script src="<@spring.url '/res/backstage/js/chosen.jquery.min.js'/>" type="text/javascript"></script>
 <!-- artDialog -->
 <script src="<@spring.url '/res/backstage/js/dialog-min.js'/>" type="text/javascript"></script>
-<!-- webuploader -->
-<script src="<@spring.url '/res/backstage/js/webuploader.min.js'/>" type="text/javascript"></script>
 <!-- jquery.ztree.all-3.5.min.js -->
 <script src="<@spring.url '/res/backstage/js/jquery.ztree.all-3.5.min.js'/>" type="text/javascript"></script>
 <!-- 弹出图片js -->

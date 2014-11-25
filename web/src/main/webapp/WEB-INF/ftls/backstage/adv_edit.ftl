@@ -1,4 +1,6 @@
 <#include "fragment/head.ftl">
+<!-- webuploader -->
+<link href="<@spring.url '/res/backstage/webuploader/css/webuploader.css'/>" rel="stylesheet" type="text/css"/>
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side">
     <!-- Content Header (Page header) -->
@@ -291,6 +293,8 @@
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
 <#include "fragment/footer.ftl">
+<!-- webuploader -->
+<script src="<@spring.url '/res/backstage/webuploader/webuploader.min.js'/>" type="text/javascript"></script>
 <script type="text/javascript">
     $(function(){
 
