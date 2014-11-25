@@ -44,7 +44,7 @@
     </mvc:interceptors>
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="10485760"/><!--10MB-->
+        <property name="maxUploadSize" value="104857600"/><!--100MB-->
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
 
