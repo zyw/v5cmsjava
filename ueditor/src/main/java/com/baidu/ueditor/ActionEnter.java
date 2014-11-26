@@ -17,7 +17,6 @@ public class ActionEnter {
 	private HttpServletRequest request = null;
 	private MultipartFile file;
 	private String rootPath = null;
-
     private String siteId = null;
 
 	private String actionType = null;
