@@ -71,7 +71,7 @@ public class FileManager {
 			}
 			file = (File)obj;
 			fileState = new BaseState( true );
-            fileState.putInfo( "url", contentPath + PathFormat.format( this.getPath( file ) ) );
+            fileState.putInfo( "url", contentPath +  this.getPath( file ));
 			state.addState( fileState );
 		}
 		
@@ -80,10 +80,9 @@ public class FileManager {
 	}
 	
 	private String getPath ( File file ) {
-		
-		String path = file.getAbsolutePath();
-		
-		return path.replace( this.rootPath, "/" );
+        String path = PathFormat.format(file.getAbsolutePath());
+        String searchStr = PathFormat.format(this.rootPath);
+        return path.replace( searchStr, "/" );
 		
 	}
 	

@@ -5,45 +5,28 @@
     <meta charset="UTF-8">
     <title>${siteKey.siteName!"没有站点"} | 后台</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <#--<!-- bootstrap 3.0.2 &ndash;&gt;
-    <link href="<@spring.url '/r/css/bootstrap.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- font Awesome &ndash;&gt;
-    <link href="<@spring.url '/r/css/font-awesome.min.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- Ionicons &ndash;&gt;
-    <link href="<@spring.url '/r/css/ionicons.min.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- colorpicker &ndash;&gt;
-    <link href="<@spring.url '/r/css/bootstrap-colorpicker.min.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- artDialog &ndash;&gt;
-    <link href="<@spring.url '/r/css/ui-dialog.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- Theme style &ndash;&gt;
-    <link href="<@spring.url '/r/css/AdminLTE.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- bootstrap-chosen &ndash;&gt;
-    <link href="<@spring.url '/r/css/bootstrap-chosen.min.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- zTreeStyle.css &ndash;&gt;
-    <link href="<@spring.url '/r/css/zTreeStyle.css'/>" rel="stylesheet" type="text/css"/>
-    <!--custom CSS&ndash;&gt;
-    <link href="<@spring.url '/r/css/main.css'/>" rel="stylesheet" type="text/css"/>-->
 
-    <!-- bootstrap 3.0.2 -->
+    <#--<!-- bootstrap 3.0.2 &ndash;&gt;
     <link href="<@spring.url '/res/backstage/css/bootstrap.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- font Awesome -->
+    <!-- font Awesome &ndash;&gt;
     <link href="<@spring.url '/res/backstage/css/font-awesome.min.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- Ionicons -->
+    <!-- Ionicons &ndash;&gt;
     <link href="<@spring.url '/res/backstage/css/ionicons.min.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- colorpicker -->
+    <!-- colorpicker &ndash;&gt;
     <link href="<@spring.url '/res/backstage/css/bootstrap-colorpicker.min.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- artDialog -->
+    <!-- artDialog &ndash;&gt;
     <link href="<@spring.url '/res/backstage/css/ui-dialog.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- Theme style -->
+    <!-- Theme style &ndash;&gt;
     <link href="<@spring.url '/res/backstage/css/AdminLTE.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- bootstrap-chosen -->
+    <!-- bootstrap-chosen &ndash;&gt;
     <link href="<@spring.url '/res/backstage/css/bootstrap-chosen.min.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- DatePicker -->
+    <!-- DatePicker &ndash;&gt;
     <link href="<@spring.url '/res/backstage/css/datepicker3.css'/>" rel="stylesheet" type="text/css"/>
-    <!-- zTreeStyle.css -->
+    <!-- zTreeStyle.css &ndash;&gt;
     <link href="<@spring.url '/res/backstage/css/zTreeStyle.css'/>" rel="stylesheet" type="text/css"/>
-    <!--custom CSS-->
-    <link href="<@spring.url '/res/backstage/css/main.css'/>" rel="stylesheet" type="text/css"/>
+    <!--custom CSS&ndash;&gt;
+    <link href="<@spring.url '/res/backstage/css/main.css'/>" rel="stylesheet" type="text/css"/>-->
+    <link href="<@spring.url '/wro/all.css'/>" rel="stylesheet" type="text/css"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

@@ -185,6 +185,12 @@
                 <version>0.0.9</version>
             </dependency>
 
+            <dependency>
+                <groupId>ro.isdc.wro4j</groupId>
+                <artifactId>wro4j-core</artifactId>
+                <version>1.7.7</version>
+            </dependency>
+
             <!-- 打印完整执行的SQL语句所需要的jar包
             <dependency>
                 <groupId>org.lazyluke</groupId>

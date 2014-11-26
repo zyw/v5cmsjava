@@ -73,6 +73,17 @@
         <filter-name>managerFilter</filter-name>
         <url-pattern>/manager/*</url-pattern>
     </filter-mapping>
+
+    <filter>
+        <filter-name>WebResourceOptimizer</filter-name>
+        <filter-class>ro.isdc.wro.http.WroFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>WebResourceOptimizer</filter-name>
+        <url-pattern>/wro/*</url-pattern>
+    </filter-mapping>
+
     <welcome-file-list>
         <welcome-file>index.htm</welcome-file>
         <welcome-file>index.html</welcome-file>

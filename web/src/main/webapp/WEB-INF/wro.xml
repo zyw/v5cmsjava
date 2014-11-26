@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<groups xmlns="http://www.isdc.ro/wro">
+    <group name="all">
+        <css>/res/backstage/css/*.css</css>
+
+        <js>/res/backstage/js/jquery-1.10.1.min.js</js>
+        <js>/res/backstage/js/bootstrap.min.js</js>
+        <js>/res/backstage/js/bootstrap-colorpicker.min.js</js>
+        <js>/res/backstage/js/bootstrap-datepicker.js</js>
+        <js>/res/backstage/js/chosen.jquery.min.js</js>
+        <js>/res/backstage/js/daterangepicker.js</js>
+        <js>/res/backstage/js/dialog-min.js</js>
+        <js>/res/backstage/js/jquery.form.js</js>
+        <js>/res/backstage/js/jquery.treetable.js</js>
+        <js>/res/backstage/js/jquery.ztree.all-3.5.min.js</js>
+        <js>/res/backstage/js/holder.js</js>
+        <js>/res/backstage/js/app.js</js>
+        <js>/res/backstage/js/jquery.fancybox.pack.js</js>
+    </group>
+</groups>

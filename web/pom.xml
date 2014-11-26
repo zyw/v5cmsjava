@@ -119,6 +119,12 @@
             <groupId>com.github.axet</groupId>
             <artifactId>kaptcha</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>ro.isdc.wro4j</groupId>
+            <artifactId>wro4j-core</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.mortbay.jetty</groupId>
             <artifactId>servlet-api</artifactId>
