@@ -18,7 +18,6 @@ public class ActionEnter {
 	private MultipartFile file;
 	private String rootPath = null;
     private String siteId = null;
-
 	private String actionType = null;
 	
 	private ConfigManager configManager = null;
