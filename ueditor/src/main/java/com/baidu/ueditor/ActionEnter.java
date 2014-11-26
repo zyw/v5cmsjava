@@ -19,7 +19,6 @@ public class ActionEnter {
 	private String rootPath = null;
     private String siteId = null;
 	private String actionType = null;
-	
 	private ConfigManager configManager = null;
 
 	public ActionEnter (MultipartFile file,HttpServletRequest request, String rootPath, String siteId ) {
