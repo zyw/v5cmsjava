@@ -19,7 +19,7 @@
             // 没选择文件之前的内容。
             $placeHolder = $wrap.find( '.placeholder' ),
 
-            $progress = $statusBar.find( '.progress' ).hide(),
+            $progress = $statusBar.find( '.upload-progress' ).hide(),
 
             // 添加的文件数量
             fileCount = 0,
@@ -148,7 +148,7 @@
             },
             dnd: '#dndArea',
             paste: '#uploader',
-            swf: '../../dist/Uploader.swf',
+            swf: './Uploader.swf',
             chunked: false,
             chunkSize: 512 * 1024,
             server: '../../server/fileupload.php',
@@ -218,7 +218,7 @@
                     '<span class="cancel">删除</span>' +
                     '<span class="rotateRight">向右旋转</span>' +
                     '<span class="rotateLeft">向左旋转</span></div>').appendTo( $li ),
-                $prgress = $li.find('p.progress span'),
+                $prgress = $li.find('p.upload-progress span'),
                 $wrap = $li.find( 'p.imgWrap' ),
                 $info = $('<p class="error"></p>'),
 
