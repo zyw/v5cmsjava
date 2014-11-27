@@ -2,7 +2,8 @@
     // 当domReady的时候开始初始化
     $.v5cms.loadWebUploader = function() {
         var $wrap = $('#uploader'),
-
+            //上下文
+            contextPaht = $("#v5cms_context_path").val(),
             // 图片容器
             $queue = $( '<ul class="filelist"></ul>' )
                 .appendTo( $wrap.find( '.queueList' ) ),
@@ -47,7 +48,7 @@
                     if( this.width != 1 || this.height != 1 ) {
                         support = false;
                     }
-                }
+                };
                 data.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
                 return support;
             } )(),
@@ -93,11 +94,11 @@
                     window['expressinstallcallback'] = function( state ) {
                         switch(state) {
                             case 'Download.Cancelled':
-                                alert('您取消了更新！')
+                                alert('您取消了更新！');
                                 break;
 
                             case 'Download.Failed':
-                                alert('安装失败')
+                                alert('安装失败');
                                 break;
 
                             default:
@@ -151,14 +152,14 @@
             swf: './Uploader.swf',
             chunked: false,
             chunkSize: 512 * 1024,
-            server: '../../server/fileupload.php',
+            server: contextPaht+"/manager/ueditor/config?action=uploadimage",
             // runtimeOrder: 'flash',
 
-            // accept: {
-            //     title: 'Images',
-            //     extensions: 'gif,jpg,jpeg,bmp,png',
-            //     mimeTypes: 'image/*'
-            // },
+            accept: {
+                 title: 'Images',
+                 extensions: 'gif,jpg,jpeg,bmp,png',
+                 mimeTypes: 'image/*'
+            },
 
             // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
             disableGlobalDnd: true,
