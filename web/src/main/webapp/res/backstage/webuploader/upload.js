@@ -1,9 +1,9 @@
 (function( $ ){
+    //上下文
+    var contextPaht = $("#v5cms_context_path").val();
     // 当domReady的时候开始初始化
     $.v5cms.loadWebUploader = function() {
         var $wrap = $('#uploader'),
-            //上下文
-            contextPaht = $("#v5cms_context_path").val(),
             // 图片容器
             $queue = $( '<ul class="filelist"></ul>' )
                 .appendTo( $wrap.find( '.queueList' ) ),
@@ -144,16 +144,12 @@
                 id: '#filePicker',
                 label: '点击选择图片'
             },
-            formData: {
-                uid: 123
-            },
             dnd: '#dndArea',
             paste: '#uploader',
             swf: './Uploader.swf',
             chunked: false,
             chunkSize: 512 * 1024,
-            server: contextPaht+"/manager/ueditor/config?action=uploadimage",
-            // runtimeOrder: 'flash',
+            server: contextPaht+"/manager/ueditor/upload?action=uploadimage",
 
             accept: {
                  title: 'Images',
@@ -203,9 +199,9 @@
             label: '继续添加'
         });
 
-        uploader.on('ready', function() {
-            window.uploader = uploader;
-        });
+//        uploader.on('ready', function() {
+//            window.uploader = uploader;
+//        });
 
         // 当有文件添加进来时执行，负责view的创建
         function addFile( file ) {
@@ -471,7 +467,7 @@
                 case 'finish':
                     stats = uploader.getStats();
                     if ( stats.successNum ) {
-                        alert( '上传成功' );
+                        $.v5cms.tooltip({icon:"succeed",content:"图片上传成功！"},function(){});
                     } else {
                         // 没有成功的图片，重设
                         state = 'done';
@@ -565,6 +561,90 @@
 
         $upload.addClass( 'state-' + state );
         updateTotalProgress();
+    };
+    /* 改变图片大小 */
+    function scale(img, w, h, type) {
+        var ow = img.width,
+            oh = img.height;
+
+        if (type == 'justify') {
+            if (ow >= oh) {
+                img.width = w;
+                img.height = h * oh / ow;
+                img.style.marginLeft = '-' + parseInt((img.width - w) / 2) + 'px';
+            } else {
+                img.width = w * ow / oh;
+                img.height = h;
+                img.style.marginTop = '-' + parseInt((img.height - h) / 2) + 'px';
+            }
+        } else {
+            if (ow >= oh) {
+                img.width = w * ow / oh;
+                img.height = h;
+                img.style.marginLeft = '-' + parseInt((img.width - w) / 2) + 'px';
+            } else {
+                img.width = w;
+                img.height = h * oh / ow;
+                img.style.marginTop = '-' + parseInt((img.height - h) / 2) + 'px';
+            }
+        }
+    }
+    function pushData(insertId,list){
+        $("#"+insertId).empty();
+        var i, item, img, icon,ulList = document.createElement('ul');
+        /* 选中图片 */
+        $(ulList).on('click', function (e) {
+            var target = e.target || e.srcElement,
+                li = target.parentNode;
+
+            if (li.tagName.toLowerCase() == 'li') {
+                if ($(li).hasClass('selected')) {
+                    $(li).removeClass('selected');
+                } else {
+                    $(li).addClass('selected');
+                }
+            }
+        });
+        for (i = 0; i < list.length; i++) {
+            if(list[i] && list[i].url) {
+                item = document.createElement('li');
+                img = document.createElement('img');
+                icon = document.createElement('span');
+
+                $(img).on('load', (function(image){
+                    return function(){
+                        scale(image, image.parentNode.offsetWidth, image.parentNode.offsetHeight);
+                    }
+                })(img));
+                img.width = 113;
+                img.setAttribute('src', list[i].url + (list[i].url.indexOf('?') == -1 ? '?noCache=':'&noCache=') + (+new Date()).toString(36) );
+                img.setAttribute('_src', list[i].url);
+                $(icon).addClass('icon');
+
+                item.appendChild(img);
+                item.appendChild(icon);
+                ulList.appendChild(item);
+                //this.list.insertBefore(item, this.clearFloat);
+
+            }
+        }
+        $("#"+insertId).append(ulList);
+    }
+    $.v5cms.imageBrowses = function(insertId){
+        $.ajax({
+            url:contextPaht+'/manager/ueditor/config?action=listimage',
+            dataType:'jsonp',
+            type:"POST",
+            success:function(data){
+                console.log(data.state);
+                if (data.state == 'SUCCESS') {
+                    pushData(insertId,data.list);
+                }
+            },
+            error:function(xhr, status, error){
+                $.v5cms.tooltip({icon:"error",content:("错误代码：" + status + " 错误消息：" + error)},function(){});
+            }
+        });
     }
 
 })( jQuery );

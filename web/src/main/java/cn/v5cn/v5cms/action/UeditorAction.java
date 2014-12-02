@@ -37,7 +37,7 @@ public class UeditorAction {
     }
 
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
-    public void ueditorUpload(MultipartFile upfile,HttpServletRequest request,HttpServletResponse response) throws IOException {
+    public void ueditorUpload(MultipartFile file,HttpServletRequest request,HttpServletResponse response) throws IOException {
 
         Site site = (Site)(SystemUtils.getSessionSite(request));
 
@@ -45,7 +45,7 @@ public class UeditorAction {
         response.setHeader("Content-Type" , "text/html");
 
         String realPath = HttpUtils.getRealPath(request,"/");//request.getSession().getServletContext().getRealPath("/");
-        String uploadFileInfo = new ActionEnter(upfile, request, realPath,site.getSiteId()+"").exec();
+        String uploadFileInfo = new ActionEnter(file, request, realPath,site.getSiteId()+"").exec();
         out.write(uploadFileInfo);
         out.flush();
     }

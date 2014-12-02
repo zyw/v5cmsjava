@@ -63,7 +63,78 @@
 .chosen-single span{
     color:#000;
 }
-
+/* 图片管理样式 */
+#online {
+    width: 100%;
+    height: 336px;
+    padding: 10px 0 0 0;
+}
+#online #imageList{
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+}
+#online ul {
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#online li {
+    float: left;
+    display: block;
+    list-style: none;
+    padding: 0;
+    width: 113px;
+    height: 113px;
+    margin: 0 0 9px 9px;
+    *margin: 0 0 6px 6px;
+    background-color: #eee;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+}
+#online li.clearFloat {
+    float: none;
+    clear: both;
+    display: block;
+    width:0;
+    height:0;
+    margin: 0;
+    padding: 0;
+}
+#online li img {
+    cursor: pointer;
+}
+#online li .icon {
+    cursor: pointer;
+    width: 113px;
+    height: 113px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    border: 0;
+    background-repeat: no-repeat;
+}
+#online li .icon:hover {
+    width: 114px;
+    height: 114px;
+    border: 3px solid #1094fa;
+}
+#online li.selected .icon {
+    background-image: url(../images/success.png);
+    background-image: url(../images/success.gif)\9;
+    background-position: 75px 75px;
+}
+#online li.selected .icon:hover {
+    width: 114px;
+    height: 114px;
+    border: 3px solid #1094fa;
+    background-position: 72px 72px;
+}
 /*Fancybox
 ------------------------------------*/
 /*For Topbar*/

@@ -292,6 +292,7 @@
     <input type="hidden" id="path_context" value="<@spring.url ''/>">
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
+
 <#include "fragment/footer.ftl">
 <!-- webuploader -->
 <script src="<@spring.url '/res/backstage/webuploader/webuploader.min.js'/>" type="text/javascript"></script>
@@ -353,9 +354,8 @@
 
         //上传图片
         var uploadImage = WebUploader.create({
-
             // swf文件路径
-            swf: "<@spring.url '/r/js/Uploader.swf'/>",
+            swf: "<@spring.url '/res/backstage/webuploader/Uploader.swf'/>",
             auto: true,
             // 文件接收服务端。
             server: '<@spring.url '/manager/adv/upload?tt='/>'+new Date().getTime(),
@@ -411,7 +411,7 @@
         var uploadFlash = WebUploader.create({
 
             // swf文件路径
-            swf: "<@spring.url '/r/js/Uploader.swf'/>",
+            swf: "<@spring.url '/res/backstage/webuploader/Uploader.swf'/>'/>",
             auto: true,
             // 文件接收服务端。
             server: '<@spring.url '/manager/adv/upload?tt='/>'+new Date().getTime(),

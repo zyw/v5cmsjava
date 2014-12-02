@@ -1,16 +1,16 @@
 </div><!-- ./wrapper -->
 
-<#--<!-- jQuery 1.8.3 &ndash;&gt;
-<script src="<@spring.url '/res/backstage/js/jquery-1.10.2.min.js'/>" type="text/javascript"></script>
+<!-- jQuery 1.10.1 -->
+<#--<script src="<@spring.url '/res/backstage/js/jquery-1.10.1.min.js'/>" type="text/javascript"></script>
 <!-- daterangepicker &ndash;&gt;
 <script src="<@spring.url '/res/backstage/js/daterangepicker.js'/>" type="text/javascript"></script>
 <!-- colorpicker &ndash;&gt;
 <script src="<@spring.url '/res/backstage/js/bootstrap-colorpicker.min.js'/>" type="text/javascript"></script>
 <!-- Bootstrap &ndash;&gt;
 <script src="<@spring.url '/res/backstage/js/bootstrap.min.js'/>" type="text/javascript"></script>
-<!-- form asynchron submit lib&ndash;&gt;
+<!-- form asynchron submit lib &ndash;&gt;
 <script src="<@spring.url '/res/backstage/js/jquery.form.js'/>" type="text/javascript"></script>
-<!-- chosen.jquery.js&ndash;&gt;
+<!-- chosen.jquery.js &ndash;&gt;
 <script src="<@spring.url '/res/backstage/js/chosen.jquery.min.js'/>" type="text/javascript"></script>
 <!-- artDialog &ndash;&gt;
 <script src="<@spring.url '/res/backstage/js/dialog-min.js'/>" type="text/javascript"></script>

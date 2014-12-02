@@ -175,7 +175,7 @@
             <#--</div>-->
             <div class="modal-body" style="padding: 5px 0 0 0;">
                 <div class="nav-tabs-custom" style="margin-bottom: 0px;">
-                    <ul class="nav nav-tabs pull-right">
+                    <ul class="nav nav-tabs pull-right" id="uploadBrowseImage">
                         <li class=""><a data-toggle="tab" href="#tab_1">浏览</a></li>
                         <li class="active"><a data-toggle="tab" href="#tab_2">上传</a></li>
 
@@ -183,16 +183,9 @@
                     </ul>
                     <div class="tab-content">
                         <div id="tab_1" class="tab-pane">
-                            <b>How to use:</b>
-                            <p>Exactly like the original bootstrap tabs except you should use
-                                the custom wrapper <code>.nav-tabs-custom</code> to achieve this style.</p>
-                            A wonderful serenity has taken possession of my entire soul,
-                            like these sweet mornings of spring which I enjoy with my whole heart.
-                            I am alone, and feel the charm of existence in this spot,
-                            which was created for the bliss of souls like mine. I am so happy,
-                            my dear friend, so absorbed in the exquisite sense of mere tranquil existence,
-                            that I neglect my talents. I should be incapable of drawing a single stroke
-                            at the present moment; and yet I feel that I never was a greater artist than now.
+                            <div id="online">
+                                <div id="imageList" style="text-align: center;"><img src="<@spring.url '/res/backstage/images/ajax-loader1.gif'/>"></div>
+                            </div>
                         </div><!-- /.tab-pane -->
                         <div id="tab_2" class="tab-pane active">
                             <div id="wrapper" style="margin: 0;">
@@ -230,13 +223,14 @@
     </div>
 </div>
 <#include "fragment/footer.ftl">
-<!-- webuploader -->
-<script src="<@spring.url '/res/backstage/webuploader/webuploader.min.js'/>" type="text/javascript"></script>
-<script src="<@spring.url '/res/backstage/webuploader/upload.js'/>" type="text/javascript"></script>
 <!-- ueditor -->
 <script type="text/javascript" charset="utf-8" src="<@spring.url '/res/backstage/ueditor/ueditor.config.js'/>"></script>
 <script type="text/javascript" charset="utf-8" src="<@spring.url '/res/backstage/ueditor/ueditor.all.min.js'/>"> </script>
 <script type="text/javascript" charset="utf-8" src="<@spring.url '/res/backstage/ueditor/ueditor.action.js'/>"> </script>
+
+<!-- webuploader -->
+<script src="<@spring.url '/res/backstage/webuploader/webuploader.min.js'/>" type="text/javascript"></script>
+<script src="<@spring.url '/res/backstage/webuploader/upload.js'/>" type="text/javascript"></script>
 <script type="text/javascript">
     $(function(){
         $(".text-color").colorpicker();
@@ -283,8 +277,8 @@
             location.href="<@spring.url '/manager/content/list'/>"
         });
 
-        $("#colTypeId").chosen({disable_search_threshold: 10,width:'100%'});
-        $("#openWay").chosen({disable_search_threshold: 10,width:'100%'});
+//        $("#colTypeId").chosen({disable_search_threshold: 10,width:'100%'});
+//        $("#openWay").chosen({disable_search_threshold: 10,width:'100%'});
 
         $("#uploadAndViewImage").click(function(){
             $("#addSelectImgModal").modal('show');
@@ -292,12 +286,18 @@
         $("#addSelectImgModal").on('shown.bs.modal',function(){
             $.v5cms.loadWebUploader();
         });
-        $("#columnForm").ajaxForm({
+        $("#uploadBrowseImage").on("shown.bs.tab",function(e){
+            var tabTitle = $(e.target).text();
+            if(tabTitle === '浏览'){
+                $.v5cms.imageBrowses("imageList");
+            }
+        });
+       /* $("#columnForm").ajaxForm({
             dataType : 'json',
             success : function(data) {
                 if(data.status === "1"){
                     $.v5cms.tooltip({icon:"succeed",content:data.message},function(){
-                        location.href="<@spring.url '/manager/column/list'/>";
+                        location.href="<#--<@spring.url '/manager/column/list'/>-->";
                     });
                 }else{
                     $.v5cms.tooltip({icon:"error",content:data.message},function(){});
@@ -311,6 +311,6 @@
         $("#saveColumnButton").click(function(){
             var result = $("#columnName").nonEmpty({content:"栏目类型名称不能为空！"});
             if(result) $("#columnForm").submit();
-        });
+        });*/
     });
 </script>
