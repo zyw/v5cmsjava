@@ -589,8 +589,17 @@
             }
         }
     }
-    function pushData(insertId,list){
+    function pushData(insertId,data){
         $("#"+insertId).empty();
+        if (data.state != 'SUCCESS') {
+            $("#"+insertId).html("<h2>"+data.state+"</h2>");
+            return;
+        }
+        if(data.list == null || data.list.length == 0){
+            $("#"+insertId).html("<h2>没有图片信息。</h2>");
+            return;
+        }
+
         var i, item, img, icon,ulList = document.createElement('ul');
         /* 选中图片 */
         $(ulList).on('click', function (e) {
@@ -605,8 +614,8 @@
                 }
             }
         });
-        for (i = 0; i < list.length; i++) {
-            if(list[i] && list[i].url) {
+        for (i = 0; i < data.list.length; i++) {
+            if(data.list[i] && data.list[i].url) {
                 item = document.createElement('li');
                 img = document.createElement('img');
                 icon = document.createElement('span');
@@ -617,8 +626,8 @@
                     }
                 })(img));
                 img.width = 113;
-                img.setAttribute('src', list[i].url + (list[i].url.indexOf('?') == -1 ? '?noCache=':'&noCache=') + (+new Date()).toString(36) );
-                img.setAttribute('_src', list[i].url);
+                img.setAttribute('src', data.list[i].url + (data.list[i].url.indexOf('?') == -1 ? '?noCache=':'&noCache=') + (+new Date()).toString(36) );
+                img.setAttribute('_src', data.list[i].url);
                 $(icon).addClass('icon');
 
                 item.appendChild(img);
@@ -637,9 +646,7 @@
             type:"POST",
             success:function(data){
                 console.log(data.state);
-                if (data.state == 'SUCCESS') {
-                    pushData(insertId,data.list);
-                }
+                pushData(insertId,data);
             },
             error:function(xhr, status, error){
                 $.v5cms.tooltip({icon:"error",content:("错误代码：" + status + " 错误消息：" + error)},function(){});

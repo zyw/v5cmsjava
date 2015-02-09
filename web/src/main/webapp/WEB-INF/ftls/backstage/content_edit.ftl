@@ -26,9 +26,9 @@
                 <div class="box-header">
                     <!-- tools box -->
                     <div class="pull-right box-tools">
-                        <button id="saveColumnButton" class="btn btn-success btn-sm" data-toggle="tooltip" title="保存">
+                        <button id="saveContentButton" class="btn btn-success btn-sm" data-toggle="tooltip" title="保存">
                             <i class="fa fa-save"></i> 保存</button>
-                        <button id="saveColumnButton" class="btn btn-info btn-sm" data-toggle="tooltip" title="保存草稿箱">
+                        <button id="saveContentDraftButton" class="btn btn-info btn-sm" data-toggle="tooltip" title="保存草稿箱">
                             <i class="fa fa-save"></i> 保存草稿箱</button>
                         <button id="backContentList" class="btn btn-default btn-sm" data-toggle="tooltip" title="返回">
                             <i class="fa fa-mail-forward"></i> 返回</button>
@@ -38,8 +38,8 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form id="columnForm" action="<@spring.url '/manager/column/edit'/>" class="form-horizontal" role="form" method="POST">
-                        <input type="hidden" value="" name="colsId">
+                    <form id="contentForm" action="<@spring.url '/manager/content/save'/>" class="form-horizontal" role="form" method="POST">
+                        <input type="hidden" value="" name="contentId">
                         <div class="form-group has-feedback">
                             <label class="col-sm-2 control-label">栏目 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-4">
@@ -54,7 +54,7 @@
                         <div class="form-group">
                             <label for="columnName" class="col-sm-2 control-label">标题 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-5">
-                                <input type="text" class="form-control" name="columnName" id="columnName"
+                                <input type="text" class="form-control" name="cname" id="cname"
                                        placeholder="内容标题" value="">
                             </div>
                         </div>
@@ -62,13 +62,13 @@
                             <label for="sortNum" class="col-sm-2 control-label" style="line-height: 30px;">外部链接</label>
                             <div class="col-sm-10">
                                 <label class="checkbox-inline" style="padding-left: 0px;width: 100px;">
-                                    <select class="form-control" id="stick" name="stick">
+                                    <select class="form-control" id="outside" name="outside">
                                         <option value="0">否</option>
                                         <option value="1">是</option>
                                     </select>
                                 </label>
                                 <label class="checkbox-inline" style="width: 300px;">
-                                    <input type="text" class="form-control" style="width:300px;" name="stickNum" id="stickNum" value="" placeholder="链接地址">
+                                    <input type="text" class="form-control" style="width:300px;" name="outsideURL" id="outsideURL" value="" placeholder="链接地址">
                                 </label>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                             <div class="col-sm-10">
                                 <label class="checkbox-inline" style="padding-left: 0px;width: 150px;">
                                     <div class="input-group text-color col-sm-12" style="padding-top: 5px;padding-left: 0px;">
-                                        <input type="text" id="adv_text_color" name="ati['adv_text_color']"
+                                        <input type="text" id="titleColor" name="titleColor"
                                                value=""
                                                class="form-control" placeholder="标题颜色">
                                         <div class="input-group-addon">
@@ -86,37 +86,37 @@
                                     </div>
                                 </label>
                                 <label class="checkbox-inline" style="padding-left: 0px;">
-                                    <input type="checkbox" name="ati['adv_image_openType']" value="_blank"> 加粗
+                                    <input type="checkbox" name="titleBold" value="_blank"> 加粗
                                 </label>
                                 <label class="checkbox-inline" style="padding-left: 0px;">
-                                    <input type="checkbox" name="ati['adv_image_openType']" value="_self"> 斜体
+                                    <input type="checkbox" name="titleItalic" value="_self"> 斜体
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="columnName" class="col-sm-2 control-label">关键字</label>
                             <div class="col-sm-5">
-                                <input type="text" class="form-control" name="columnName" id="columnName"
+                                <input type="text" class="form-control" name="contentKey" id="contentKey"
                                        placeholder="内容关键字提示SEO" value="">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="columnName" class="col-sm-2 control-label">摘要</label>
                             <div class="col-sm-5">
-                                <textarea class="form-control" name="advPosDes" id="advPosDes" rows="4"></textarea>
+                                <textarea class="form-control" name="contentDes" id="contentDes" rows="4"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="sortNum" class="col-sm-2 control-label" style="line-height: 30px;">作者</label>
                             <div class="col-sm-10">
                                 <label class="checkbox-inline" style="padding-left: 0px;width: 150px;">
-                                    <input type="text" class="form-control" style="width:150px;" name="stickNum" id="stickNum" value="" placeholder="作者">
+                                    <input type="text" class="form-control" style="width:150px;" name="author" id="author" value="" placeholder="作者">
                                 </label>
                                 <label class="checkbox-inline" style="width: 150px;">
-                                    <input type="text" class="form-control" style="width:150px;" name="stickNum" id="stickNum" value="" placeholder="来源">
+                                    <input type="text" class="form-control" style="width:150px;" name="source" id="source" value="" placeholder="来源">
                                 </label>
                                 <label class="checkbox-inline" style="width: 300px;">
-                                    <input type="text" class="form-control" style="width:300px;" name="stickNum" id="stickNum" value="" placeholder="来源地址">
+                                    <input type="text" class="form-control" style="width:300px;" name="sourceURL" id="sourceURL" value="" placeholder="来源地址">
                                 </label>
                             </div>
                         </div>
@@ -134,7 +134,7 @@
                                 </label>
                                 <label class="checkbox-inline col-sm-3">
                                     <div class="input-group date date-picker">
-                                        <input type="text" class="form-control date-picker" placeholder="发布日期">
+                                        <input type="text" class="form-control date-picker" name="publishDT" placeholder="发布日期">
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
@@ -292,7 +292,7 @@
                 $.v5cms.imageBrowses("imageList");
             }
         });
-       /* $("#columnForm").ajaxForm({
+       $("#contentForm").ajaxForm({
             dataType : 'json',
             success : function(data) {
                 if(data.status === "1"){
@@ -308,9 +308,10 @@
             }
         });
 
-        $("#saveColumnButton").click(function(){
-            var result = $("#columnName").nonEmpty({content:"栏目类型名称不能为空！"});
-            if(result) $("#columnForm").submit();
-        });*/
+        $("#saveContentButton").click(function(){
+            var result = $("#columnId").nonEmpty({content:"栏目类型不能为空！"});
+            var cnameResult = $("#cname").nonEmpty({content:"内容标题不能为空！"});
+            if(result && cnameResult) $("#columnForm").submit();
+        });
     });
 </script>
