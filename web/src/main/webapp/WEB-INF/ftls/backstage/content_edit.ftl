@@ -39,7 +39,8 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <form id="contentForm" action="<@spring.url '/manager/content/save'/>" class="form-horizontal" role="form" method="POST">
-                        <input type="hidden" value="" name="contentId">
+                        <input type="hidden" name="contentId">
+                        <input type="hidden" name="state" id="content_state">
                         <div class="form-group has-feedback">
                             <label class="col-sm-2 control-label">栏目 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-4">
@@ -86,10 +87,10 @@
                                     </div>
                                 </label>
                                 <label class="checkbox-inline" style="padding-left: 0px;">
-                                    <input type="checkbox" name="titleBold" value="_blank"> 加粗
+                                    <input type="checkbox" name="titleBold" value="1"> 加粗
                                 </label>
                                 <label class="checkbox-inline" style="padding-left: 0px;">
-                                    <input type="checkbox" name="titleItalic" value="_self"> 斜体
+                                    <input type="checkbox" name="titleItalic" value="1"> 斜体
                                 </label>
                             </div>
                         </div>
@@ -97,26 +98,26 @@
                             <label for="columnName" class="col-sm-2 control-label">关键字</label>
                             <div class="col-sm-5">
                                 <input type="text" class="form-control" name="contentKey" id="contentKey"
-                                       placeholder="内容关键字提示SEO" value="">
+                                       placeholder="内容关键字提示SEO">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="columnName" class="col-sm-2 control-label">摘要</label>
                             <div class="col-sm-5">
-                                <textarea class="form-control" name="contentDes" id="contentDes" rows="4"></textarea>
+                                <textarea class="form-control" name="contentDes" id="contentDes" placeholder="文章的简单摘要" rows="4"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="sortNum" class="col-sm-2 control-label" style="line-height: 30px;">作者</label>
                             <div class="col-sm-10">
                                 <label class="checkbox-inline" style="padding-left: 0px;width: 150px;">
-                                    <input type="text" class="form-control" style="width:150px;" name="author" id="author" value="" placeholder="作者">
+                                    <input type="text" class="form-control" style="width:150px;" name="author" id="author" placeholder="作者">
                                 </label>
                                 <label class="checkbox-inline" style="width: 150px;">
-                                    <input type="text" class="form-control" style="width:150px;" name="source" id="source" value="" placeholder="来源">
+                                    <input type="text" class="form-control" style="width:150px;" name="source" id="source" placeholder="来源">
                                 </label>
                                 <label class="checkbox-inline" style="width: 300px;">
-                                    <input type="text" class="form-control" style="width:300px;" name="sourceURL" id="sourceURL" value="" placeholder="来源地址">
+                                    <input type="text" class="form-control" style="width:300px;" name="sourceURL" id="sourceURL" placeholder="来源地址">
                                 </label>
                             </div>
                         </div>
@@ -130,7 +131,7 @@
                                     </select>
                                 </label>
                                 <label class="checkbox-inline col-sm-2">
-                                    <input type="text" class="form-control" name="stickNum" id="stickNum" value="" placeholder="置顶序号">
+                                    <input type="text" class="form-control" name="stickNum" id="stickNum" placeholder="置顶序号">
                                 </label>
                                 <label class="checkbox-inline col-sm-3">
                                     <div class="input-group date date-picker">
@@ -148,11 +149,10 @@
                                 <input value="添加或选择图片" id="uploadAndViewImage" class="btn btn-success">
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label for="editor" class="col-sm-2 control-label">内容</label>
                             <div class="col-sm-10">
-                                <script id="editor" type="text/plain"  style="height:400px;"></script>
+                                <script id="editor" type="text/plain" name="cbody" style="height:400px;"></script>
                             </div>
                         </div>
                     </form>
@@ -238,6 +238,37 @@
             format: "yyyy-mm-dd",
             language: "zh-CN"
         });
+        $("#contentForm").ajaxForm({
+            dataType : 'json',
+            type:'POST',
+            success : function(data) {
+                if(data.status === "1"){
+                    $.v5cms.tooltip({icon:"succeed",content:data.message},function(){
+                        location.href="<@spring.url '/manager/content/list'/>";
+                    });
+                }else{
+                    $.v5cms.tooltip({icon:"error",content:data.message},function(){});
+                }
+            },
+            error:function(xhr, status, error){
+                $.v5cms.tooltip({icon:"error",content:("错误代码：" + status + " 错误消息：" + error)},function(){});
+            }
+        });
+
+        function saveContent(contentState){
+            var result = $("#columnId").nonEmpty({content:"栏目类型不能为空！"});
+            var cnameResult = $("#cname").nonEmpty({content:"内容标题不能为空！"});
+            $("#content_state").val(contentState);
+            if(result && cnameResult) $("#contentForm").submit();
+
+        }
+
+        $("#saveContentButton").click(function(){
+            saveContent(1);
+        });
+        $("#saveContentDraftButton").click(function(){
+            saveContent(0);
+        });
         var ue = UE.getEditor('editor');
         var columnSetting = {
             view : {
@@ -291,27 +322,6 @@
             if(tabTitle === '浏览'){
                 $.v5cms.imageBrowses("imageList");
             }
-        });
-       $("#contentForm").ajaxForm({
-            dataType : 'json',
-            success : function(data) {
-                if(data.status === "1"){
-                    $.v5cms.tooltip({icon:"succeed",content:data.message},function(){
-                        location.href="<#--<@spring.url '/manager/column/list'/>-->";
-                    });
-                }else{
-                    $.v5cms.tooltip({icon:"error",content:data.message},function(){});
-                }
-            },
-            error:function(xhr, status, error){
-                $.v5cms.tooltip({icon:"error",content:("错误代码：" + status + " 错误消息：" + error)},function(){});
-            }
-        });
-
-        $("#saveContentButton").click(function(){
-            var result = $("#columnId").nonEmpty({content:"栏目类型不能为空！"});
-            var cnameResult = $("#cname").nonEmpty({content:"内容标题不能为空！"});
-            if(result && cnameResult) $("#columnForm").submit();
         });
     });
 </script>

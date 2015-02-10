@@ -1,5 +1,7 @@
 package cn.v5cn.v5cms.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -28,7 +30,7 @@ public class Content implements Serializable {
     private String sourceURL;       //来源地址
     private Integer stick;          //是否置顶，1：置顶，2：反之
     private Integer stickNum;       //置顶序号，只有是置顶状态，才起作用
-    private Date publishDT;         //原内容发布日期
+    private String publishDT;         //原内容发布日期
     private Integer state;          //是否是草稿，1：发布，0：草稿
     private String cpics;           //与文章关联的图片，多个使用逗号分割
     private String cattas;          //文章中使用的附件，多个使用丢号分割
@@ -180,11 +182,11 @@ public class Content implements Serializable {
         this.stickNum = stickNum;
     }
 
-    public Date getPublishDT() {
+    public String getPublishDT() {
         return publishDT;
     }
 
-    public void setPublishDT(Date publishDT) {
+    public void setPublishDT(String publishDT) {
         this.publishDT = publishDT;
     }
 
@@ -218,5 +220,34 @@ public class Content implements Serializable {
 
     public void setDispic(String dispic) {
         this.dispic = dispic;
+    }
+
+    @Override
+    public String toString() {
+        return "Content{" +
+                "contentId=" + contentId +
+                ", columnId=" + columnId +
+                ", cname='" + cname + '\'' +
+                ", cbody='" + cbody + '\'' +
+                ", outside=" + outside +
+                ", outsideURL='" + outsideURL + '\'' +
+                ", titleColor='" + titleColor + '\'' +
+                ", titleBold=" + titleBold +
+                ", titleItalic=" + titleItalic +
+                ", contentKey='" + contentKey + '\'' +
+                ", contentDes='" + contentDes + '\'' +
+                ", lastdt=" + lastdt +
+                ", writerId=" + writerId +
+                ", author='" + author + '\'' +
+                ", source='" + source + '\'' +
+                ", sourceURL='" + sourceURL + '\'' +
+                ", stick=" + stick +
+                ", stickNum=" + stickNum +
+                ", publishDT=" + publishDT +
+                ", state=" + state +
+                ", cpics='" + cpics + '\'' +
+                ", cattas='" + cattas + '\'' +
+                ", dispic='" + dispic + '\'' +
+                '}';
     }
 }

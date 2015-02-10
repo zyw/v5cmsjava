@@ -159,7 +159,7 @@ create table content
   sourceURL varchar(200)            comment '来源地址',
   stick    int                      comment '是否置顶，1：置顶，2：反之',
   stickNum  int                     comment '置顶序号，只有是置顶状态，才起作用',
-  publishDT   datetime              comment '原内容发布日期',
+  publishDT varchar(10)             comment '原内容发布日期',
   state   int                       comment '是否是草稿，1：发布，0：草稿',
   cpics     varchar(2000)           comment '与文章关联的图片，多个使用逗号分割',
   cattas    varchar(1000)           comment '文章中使用的附件，多个使用丢号分割',
