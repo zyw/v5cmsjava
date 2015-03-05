@@ -305,7 +305,7 @@
         });
 
         $("#backContentList").click(function(){
-            location.href="<@spring.url '/manager/content/list'/>"
+            location.href="<@spring.url '/manager/content/list/1'/>"
         });
 
 //        $("#colTypeId").chosen({disable_search_threshold: 10,width:'100%'});

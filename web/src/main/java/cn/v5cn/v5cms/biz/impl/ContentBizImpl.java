@@ -2,6 +2,9 @@ package cn.v5cn.v5cms.biz.impl;
 
 import cn.v5cn.v5cms.biz.ContentBiz;
 import cn.v5cn.v5cms.dao.ContentDao;
+import cn.v5cn.v5cms.entity.Adv;
+import cn.v5cn.v5cms.entity.AdvPos;
+import cn.v5cn.v5cms.entity.Column;
 import cn.v5cn.v5cms.entity.Content;
 import cn.v5cn.v5cms.util.PropertyUtils;
 import com.google.common.collect.Lists;
@@ -39,13 +42,18 @@ public class ContentBizImpl implements ContentBiz {
         int pageSize = Integer.valueOf(PropertyUtils.getValue("page.size").or("0"));
 
         return contentDao.findAll(new Specification<Content>(){
+
             @Override
             public Predicate toPredicate(Root<Content> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                Join<Content,Column> columns = root.join("column", JoinType.INNER);
                 List<Predicate> ps = Lists.newArrayList();
-                if(content.getColumnId() != null){
-                    Path<Long> advName = root.get("columnId");
-                    ps.add(criteriaBuilder.equal(advName,content.getColumnId()));
+                if(content.getColumn() !=null && content.getColumn().getColsId() != null){
+                    Path<Long> columnId = columns.get("columnId");
+                    ps.add(criteriaBuilder.equal(columnId,content.getColumn().getColsId()));
                 }
+                Path<Long> siteId = root.get("siteId");
+                ps.add(criteriaBuilder.equal(siteId,content.getSiteId()));
+
                 return criteriaBuilder.and(ps.toArray(new javax.persistence.criteria.Predicate[0]));
             }
         },new PageRequest(currPage-1,pageSize,new Sort(Sort.Direction.DESC,new String[]{"lastdt"})));

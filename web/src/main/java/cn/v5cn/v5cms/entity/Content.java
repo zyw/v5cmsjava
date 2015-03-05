@@ -13,7 +13,7 @@ import java.util.Date;
 @Table(name = "content")
 public class Content implements Serializable {
     private Long contentId;
-    private Long columnId;          //所属栏目ID
+//    private Long columnId;          //所属栏目ID
     private String cname;           //内容标题
     private String cbody;           //发布的内容
     private Integer outside;        //是否是外链，1：是，0：不是
@@ -34,7 +34,10 @@ public class Content implements Serializable {
     private Integer state;          //是否是草稿，1：发布，0：草稿
     private String cpics;           //与文章关联的图片，多个使用逗号分割
     private String cattas;          //文章中使用的附件，多个使用丢号分割
-    private String dispic;          //展示图'
+    private String dispic;          //展示图
+    private Long siteId;            //站点Id
+
+    private Column column;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,13 +49,13 @@ public class Content implements Serializable {
         this.contentId = contentId;
     }
 
-    public Long getColumnId() {
-        return columnId;
-    }
-
-    public void setColumnId(Long columnId) {
-        this.columnId = columnId;
-    }
+//    public Long getColumnId() {
+//        return columnId;
+//    }
+//
+//    public void setColumnId(Long columnId) {
+//        this.columnId = columnId;
+//    }
 
     public String getCname() {
         return cname;
@@ -222,11 +225,29 @@ public class Content implements Serializable {
         this.dispic = dispic;
     }
 
+    public Long getSiteId() {
+        return siteId;
+    }
+
+    public void setSiteId(Long siteId) {
+        this.siteId = siteId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "columnId")
+    public Column getColumn() {
+        return column;
+    }
+
+    public void setColumn(Column column) {
+        this.column = column;
+    }
+
     @Override
     public String toString() {
         return "Content{" +
                 "contentId=" + contentId +
-                ", columnId=" + columnId +
+                ", column=" + column +
                 ", cname='" + cname + '\'' +
                 ", cbody='" + cbody + '\'' +
                 ", outside=" + outside +
@@ -248,6 +269,7 @@ public class Content implements Serializable {
                 ", cpics='" + cpics + '\'' +
                 ", cattas='" + cattas + '\'' +
                 ", dispic='" + dispic + '\'' +
+                ", siteId='" + siteId + '\'' +
                 '}';
     }
 }

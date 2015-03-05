@@ -164,6 +164,7 @@ create table content
   cpics     varchar(2000)           comment '与文章关联的图片，多个使用逗号分割',
   cattas    varchar(1000)           comment '文章中使用的附件，多个使用丢号分割',
   dispic    varchar(200)            comment '展示图',
+  siteId    bigInt                  comment '所属站点',
   primary key (contentId)
 )ENGINE=MyISAM auto_increment=1000 default charset=utf8;
 

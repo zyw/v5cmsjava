@@ -54,7 +54,6 @@
                                 <col class="col-xs-2">
                                 <col class="col-xs-1">
                                 <col class="col-xs-1">
-                                <col class="col-xs-2">
                             </colgroup>
                             <thead>
                             <tr>
@@ -62,45 +61,37 @@
                                     <input type="checkbox" id="thcheckbox"/>
                                 </th>
                                 <th>序号</th>
-                                <th>类型名称</th>
-                                <th>列表模板</th>
-                                <th>内容模板</th>
-                                <th>单页</th>
-                                <th>禁用</th>
+                                <th>标题</th>
+                                <th>所属栏目</th>
+                                <th>创建时间</th>
+                                <th>状态</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <#--<#if cts?size != 0>
-                                <#list cts as ct>
+                            <#if contents?size != 0>
+                                <#list contents as content>
                                 <tr>
                                     <td class="td-center">
-                                        <input type="checkbox" class="table-cb" value="${ct.colTypeId}"/>
+                                        <input type="checkbox" class="table-cb" value="${content.contentId}"/>
                                     </td>
-                                    <td>${ct.colTypeId}</td>
-                                    <td>${ct.colTypeName}</td>
-                                    <td>${ct.coltpl}</td>
-                                    <td>${ct.contenttpl}</td>
+                                    <td>${content.contentId}</td>
+                                    <td>${content.cname}</td>
+                                    <td>${content.column.columnName}</td>
+                                    <td>${content.lastdt}</td>
+                                    <td>${content.state}</td>
                                     <td>
-                                    ${(ct.hasContent==1)?string("<small class='badge bg-green'>是</small>",
-                                    "<small class='badge bg-red'>否</small>")}
-                                    </td>
-                                    <td>
-                                    ${(ct.isDisabled==1)?string("<small class='badge bg-green'>启用</small>",
-                                    "<small class='badge bg-red'>禁用</small>")}
-                                    </td>
-                                    <td>
-                                        <a href="<@spring.url '/manager/coltype/edit/'/>${ct.colTypeId}">修改</a>&nbsp;&nbsp;
-                                        <a href="javascript:;" class="deleteColType" data-ctid="${ct.colTypeId}">删除</a>
+                                        <a href="<@spring.url '/manager/coltype/edit/'/>${content.contentId}">修改</a>&nbsp;&nbsp;
+                                        <a href="javascript:;" class="deleteColType" data-ctid="${content.contentId}">删除</a>
                                     </td>
                                 </tr>
                                 </#list>
                             <#else>
                             <tr>
-                                <td colspan="8"><h3>还没有栏目类型数据！</h3></td>
+                                <td colspan="8"><h3>还没有内容数据！</h3></td>
                             </tr>
                             </#if>
-                            </tbody>-->
+                            </tbody>
                         </table>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
@@ -166,12 +157,12 @@
             deleteColumn(columnId);
         });
 
-//        $("#thcheckbox").on('ifChecked', function(event){
-//            $('.table-cb').iCheck('check');
-//        });
-//        $("#thcheckbox").on('ifUnchecked', function(event){
-//            $('.table-cb').iCheck('uncheck');
-//        });
+        $("#thcheckbox").on('ifChecked', function(event){
+            $('.table-cb').iCheck('check');
+        });
+        $("#thcheckbox").on('ifUnchecked', function(event){
+            $('.table-cb').iCheck('uncheck');
+        });
 //
 //        $("#siteBatchDelete").click(function(){
 //            var $chs = $(":checkbox[checked=checked]");

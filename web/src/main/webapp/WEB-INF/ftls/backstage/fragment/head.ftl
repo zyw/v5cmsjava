@@ -333,7 +333,7 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="active">
-                    <a href="index">
+                    <a href="<@spring.url "/manager/index"/>">
                         <i class="fa fa-dashboard"></i> <span>仪表盘</span>
                     </a>
                 </li>
@@ -344,16 +344,16 @@
                     </a>
                 </li>
                 <li class="treeview" id="nav_content">
-                    <a href="#">
+                    <a href="javascript:;">
                         <i class="glyphicon glyphicon-list-alt"></i>
                         <span>内容管理</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="<@spring.url "/manager/content/list"/>"><i class="fa fa-angle-double-right"></i> 内容列表</a></li>
+                        <li><a href="<@spring.url "/manager/content/list/1"/>"><i class="fa fa-angle-double-right"></i> 内容列表</a></li>
                         <li><a href="<@spring.url "/manager/content/edit"/>"><i class="fa fa-angle-double-right"></i> 添加内容</a></li>
-                        <li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Inline
-                            charts</a></li>
+                        <#--<li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Inline
+                            charts</a></li>-->
                     </ul>
                 </li>
                 <li class="treeview" id="nav_columns">
@@ -361,7 +361,7 @@
                         <i class="fa fa-th-list"></i> <span>栏目管理</span>
                     </a>-->
 
-                    <a href="#">
+                    <a href="javascript:;">
                         <i class="fa fa-th-list"></i>
                         <span>栏目管理</span>
                         <i class="fa fa-angle-left pull-right"></i>
@@ -393,7 +393,7 @@
                     <#--</ul>-->
                 </li>
                 <li class="treeview">
-                    <a href="#">
+                    <a href="javascript:;">
                         <i class="fa fa-paste"></i> <span>资源管理</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
@@ -419,7 +419,7 @@
                 </li>
                 -->
                 <li class="treeview" id="nav_siteSetting">
-                    <a href="#">
+                    <a href="javascript:;">
                         <i class="fa fa-wrench"></i> <span>站点设置</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
