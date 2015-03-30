@@ -28,9 +28,8 @@ public class ActionEnter {
 		this.rootPath = rootPath;
 		this.actionType = request.getParameter( "action" );
         this.configManager = ConfigManager.getInstance( this.rootPath, request.getContextPath());
-		
 	}
-	
+
 	public String exec () {
 		
 		String callbackName = this.request.getParameter("callback");
