@@ -24,7 +24,7 @@
 
     <context:property-placeholder file-encoding="UTF-8" location="WEB-INF/config/jdbc.properties"/>
 
-    <util:properties id="proper" location="classpath:sys_constant.properties"/>
+    <!--<util:properties id="proper" location="classpath:sys_constant.properties"/>-->
     <!--
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <property name="url" value="${jdbc.url}"/>
@@ -147,4 +147,5 @@
     <bean id="messageSourceHelper" class="cn.v5cn.v5cms.util.MessageSourceHelper">
         <property name="messageSource" ref="messageSource"/>
     </bean>
+    <import resource="application-shiro.xml"/>
 </beans>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>v5cmsjava</artifactId>
+        <groupId>cn.v5cn.v5cms</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
+    <artifactId>shiro-freemarker</artifactId>
+
+    <properties>
+        <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
+        <jfinal.version>1.8</jfinal.version>
+        <jfinal-shiro.version>0.2</jfinal-shiro.version>
+        <freemarker.version>2.3.20</freemarker.version>
+    </properties>
+
+    <dependencies>
+        <!--jfinal-->
+        <dependency>
+            <groupId>com.jfinal</groupId>
+            <artifactId>jfinal</artifactId>
+            <version>${jfinal.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.dreampie</groupId>
+            <artifactId>jfinal-shiro</artifactId>
+            <version>${jfinal-shiro.version}</version>
+        </dependency>
+
+        <!--freemarker界面模板-->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>${freemarker.version}</version>
+        </dependency>
+    </dependencies>
+</project>

@@ -165,9 +165,43 @@
             <artifactId>common-utils</artifactId>
         </dependency>
         <dependency>
+            <groupId>cn.v5cn.v5cms</groupId>
+            <artifactId>shiro-freemarker</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.baidu</groupId>
             <artifactId>ueditor</artifactId>
         </dependency>
+
+        <!--Shiro-->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-aspectj</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+        </dependency>
+
+
+        <!--<dependency>-->
+            <!--<groupId>cn.dreampie</groupId>-->
+            <!--<artifactId>jfinal-shiro-freemarker</artifactId>-->
+        <!--</dependency>-->
+        <!--./Shiro-->
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

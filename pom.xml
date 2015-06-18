@@ -13,11 +13,13 @@
         <module>utils</module>
         <module>web</module>
         <module>ueditor</module>
+        <module>shiro-freemarker</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>4.1.1.RELEASE</spring.version>
+        <shiro.version>1.2.3</shiro.version>
     </properties>
 
     <dependencyManagement>
@@ -234,6 +236,11 @@
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
+                <groupId>cn.v5cn.v5cms</groupId>
+                <artifactId>shiro-freemarker</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
                 <groupId>com.baidu</groupId>
                 <artifactId>ueditor</artifactId>
                 <version>1.4.3</version>
@@ -254,6 +261,41 @@
                 <artifactId>commons-codec</artifactId>
                 <version>1.9</version>
             </dependency>
+
+            <!--Shiro-->
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-core</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-web</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-aspectj</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-ehcache</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+
+            <!--<dependency>-->
+                <!--<groupId>cn.dreampie</groupId>-->
+                <!--<artifactId>jfinal-shiro-freemarker</artifactId>-->
+                <!--<version>0.2</version>-->
+            <!--</dependency>-->
+            <!--./Shiro-->
+
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>

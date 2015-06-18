@@ -6,10 +6,13 @@ import cn.v5cn.v5cms.util.Md5AndSha1;
 import cn.v5cn.v5cms.util.SystemConstant;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -31,8 +34,8 @@ public class LoginAction {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginAction.class);
 
-    @Autowired
-    private ManagerBiz managerBiz;
+//    @Autowired
+//    private ManagerBiz managerBiz;
 
     @Autowired
     private DefaultKaptcha captchaProducer;
@@ -43,14 +46,14 @@ public class LoginAction {
     }
 
     @RequestMapping(value="/login",method = RequestMethod.POST)
-    public String login(String loginName,String loginPwd,String captcha,HttpServletRequest request){
-        LOGGER.info("用户{}开始登录！",loginName);
-        String captchaSession = (String)request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
-        /*if(!captchaSession.equalsIgnoreCase(captcha)){
+    public String login(HttpServletRequest request,ModelMap modelMap/*String loginName,String loginPwd,String captcha,HttpServletRequest request*/){
+        //LOGGER.info("用户{}开始登录！",loginName);
+        /*String captchaSession = (String)request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        *//*if(!captchaSession.equalsIgnoreCase(captcha)){
             request.setAttribute(SystemConstant.ERROR_MESSAGE,getMessage("login.captchaerror.message"));
             LOGGER.warn("用户{}验证码输入错误！",loginName);
             return "backstage/login";
-        }*/
+        }*//*
         List<Manager> result = managerBiz.findByManagerLoginname(loginName);
         if(result==null || result.isEmpty()){
             request.setAttribute(SystemConstant.ERROR_MESSAGE,getMessage("login.usernameerror.message"));
@@ -66,7 +69,20 @@ public class LoginAction {
         LOGGER.info("用户{}登录成功！",loginName);
         manager.setManagerPassword("");
         request.getSession().setAttribute(SystemConstant.SESSION_KEY,manager);
-        return "redirect:/manager/index";
+        return "redirect:/manager/index";*/
+        String exceptionClassName = (String)request.getAttribute("shiroLoginFailure");
+        String error = null;
+        if(UnknownAccountException.class.getName().equals(exceptionClassName)){
+            error = "用户名/密码错误";
+        }else if(IncorrectCredentialsException.class.getName().equals(exceptionClassName)){
+            error = "用户名/密码错误";
+        }else if("jCaptcha.error".equals(exceptionClassName)){
+            error = "验证码输入错误";
+        }else if(exceptionClassName != null){
+            error = "其他错误：" + exceptionClassName;
+        }
+        modelMap.addAttribute("error",error);
+        return "login";
     }
 
     @RequestMapping(value="/login/captcha",method = RequestMethod.GET)

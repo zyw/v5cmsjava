@@ -264,7 +264,7 @@
 <li class="dropdown user user-menu">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <i class="glyphicon glyphicon-user"></i>
-        <span>你好，${managerKey.managerName} <i class="caret"></i></span>
+        <span>你好，<@shiro.principal name="full_name"/> <i class="caret"></i></span>
     </a>
     <ul class="dropdown-menu">
         <!-- User image -->
@@ -272,8 +272,8 @@
             <img src="<@spring.url '/res/backstage/images/avatar5.png'/>" class="img-circle" alt="User Image"/>
 
             <p>
-            ${managerKey.managerName} - 管理员
-                <small>${managerKey.managerEmail}</small>
+            <@shiro.principal name="full_name"/> - 管理员
+                <small>${managerKey.email}</small>
             </p>
         </li>
        <#-- Menu Body

@@ -21,13 +21,13 @@
             <div class="form-group">
                 <label for="managerName" class="col-lg-3 control-label">用户名</label>
                 <div class="col-lg-9">
-                    <input type="text" class="form-control" name="loginName" id="loginName" placeholder="用户名" value="zhangsan">
+                    <input type="text" class="form-control" name="loginname" id="loginName" placeholder="用户名" value="zhangsan">
                 </div>
             </div>
             <div class="form-group" style="display: block">
                 <label for="managerPwd" class="col-lg-3 control-label">密码</label>
                 <div class="col-lg-9">
-                    <input type="password" class="form-control" name="loginPwd" id="loginPwd" placeholder="密码" value="000000">
+                    <input type="password" class="form-control" name="password" id="loginPwd" placeholder="密码" value="000000">
                 </div>
             </div>
 
