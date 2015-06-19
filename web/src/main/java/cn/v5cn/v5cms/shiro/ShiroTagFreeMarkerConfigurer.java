@@ -1,6 +1,6 @@
 package cn.v5cn.v5cms.shiro;
 
-import cn.dreampie.shiro.freemarker.ShiroTags;
+import cn.v5cn.v5cms.shiro.freemarker.ShiroTags;
 import freemarker.template.TemplateException;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 

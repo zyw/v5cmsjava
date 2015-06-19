@@ -1,4 +1,4 @@
-package cn.dreampie.shiro.freemarker;
+package cn.v5cn.v5cms.shiro.freemarker;
 
 /**
  * <p>Equivalent to {@link org.apache.shiro.web.tags.LacksRoleTag}</p>

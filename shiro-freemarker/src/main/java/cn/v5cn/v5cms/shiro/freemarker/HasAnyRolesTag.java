@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package cn.dreampie.shiro.freemarker;
+package cn.v5cn.v5cms.shiro.freemarker;
 
 import org.apache.shiro.subject.Subject;
 

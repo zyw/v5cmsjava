@@ -1,4 +1,4 @@
-package cn.dreampie.shiro.freemarker;
+package cn.v5cn.v5cms.shiro.freemarker;
 
 import freemarker.template.SimpleHash;
 

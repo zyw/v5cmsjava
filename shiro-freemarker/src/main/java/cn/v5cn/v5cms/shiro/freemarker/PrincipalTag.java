@@ -1,6 +1,5 @@
-package cn.dreampie.shiro.freemarker;
+package cn.v5cn.v5cms.shiro.freemarker;
 
-import cn.dreampie.web.model.Model;
 import freemarker.core.Environment;
 import freemarker.log.Logger;
 import freemarker.template.TemplateDirectiveBody;
@@ -62,9 +61,12 @@ public class PrincipalTag extends SecureTag {
       if (principal != null) {
         String property = getProperty(params);
 
-        if (property == null) {
-          result = ((Model<?>) principal).get("full_name");
-        } else {
+//        if (property == null) {
+//          result = ((Model<?>) principal).get("full_name");
+//        } else {
+//          result = getPrincipalProperty(principal, property);
+//        }
+        if (property != null) {
           result = getPrincipalProperty(principal, property);
         }
       } else {

@@ -19,21 +19,21 @@
     <div class="panel-body">
         <form class="form-horizontal" action="<@spring.url '/manager/login'/>" method="post" role="form">
             <div class="form-group">
-                <label for="managerName" class="col-lg-3 control-label">用户名</label>
-                <div class="col-lg-9">
+                <label for="managerName" class="col-xs-3 control-label">用户名</label>
+                <div class="col-xs-9">
                     <input type="text" class="form-control" name="loginname" id="loginName" placeholder="用户名" value="zhangsan">
                 </div>
             </div>
             <div class="form-group" style="display: block">
-                <label for="managerPwd" class="col-lg-3 control-label">密码</label>
-                <div class="col-lg-9">
+                <label for="managerPwd" class="col-xs-3 control-label">密码</label>
+                <div class="col-xs-9">
                     <input type="password" class="form-control" name="password" id="loginPwd" placeholder="密码" value="000000">
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="managerVcode" class="col-lg-3 control-label">验证码</label>
-                <div class="col-lg-5" style="padding-right: 10px;">
+                <label for="managerVcode" class="col-xs-3 control-label">验证码</label>
+                <div class="col-xs-5" style="padding-right: 10px;">
                     <input type="text" class="form-control" name="captcha" id="captcha" placeholder="验证码">
                 </div>
             <img id="vcode_img" src="<@spring.url '/manager/login/captcha'/>" title="点击更换验证码"
@@ -41,15 +41,15 @@
             </div>
 
             <div class="form-group">
-                <div class="col-lg-offset-3 col-lg-9">
-                    <button type="submit" class="btn btn-primary col-lg-9">
+                <div class="col-xs-offset-3 col-xs-9">
+                    <button type="submit" class="btn btn-primary col-xs-9">
                         <span class="glyphicon glyphicon-log-in"></span>&nbsp;
                         登&nbsp;&nbsp;录
                     </button>
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-lg-offset-3 col-lg-9">
+                <div class="col-xs-offset-3 col-xs-9">
                     <label style="color: #ff0000">${errorMessage!""}</label>
                 </div>
             </div>
