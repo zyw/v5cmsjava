@@ -87,10 +87,16 @@
     <!--
     <bean id="menuFilter" class="cn.v5cn.basicframework.interceptor.MenuFilter"/>
     -->
+    <!-- 验证码过滤器 -->
     <bean id="captchaValidateFilter" class="cn.v5cn.v5cms.filter.JCaptchaValidateFilter">
         <property name="jcaptchaEbabled" value="true"/>
         <property name="jcaptchaParam" value="jcaptchaCode"/>
         <property name="failureKeyAttribute" value="shiroLoginFailure"/>
+    </bean>
+
+    <!-- 配置logoutFilter的重定向 -->
+    <bean id="logout" class="org.apache.shiro.web.filter.authc.LogoutFilter">
+        <property name="redirectUrl" value="/manager/login"/>
     </bean>
 
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">

@@ -294,7 +294,7 @@
                 <a href="#" class="btn btn-default btn-flat">设置</a>
             </div>
             <div class="pull-right">
-                <a href="#" class="btn btn-default btn-flat">退出</a>
+                <a href="<@spring.url '/manager/logout'/>" class="btn btn-default btn-flat">退出</a>
             </div>
         </li>
     </ul>
