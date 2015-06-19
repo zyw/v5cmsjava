@@ -34,7 +34,7 @@
             <div class="form-group">
                 <label for="managerVcode" class="col-xs-3 control-label">验证码</label>
                 <div class="col-xs-5" style="padding-right: 10px;">
-                    <input type="text" class="form-control" name="captcha" id="captcha" placeholder="验证码">
+                    <input type="text" class="form-control" name="jcaptchaCode" id="captcha" placeholder="验证码">
                 </div>
             <img id="vcode_img" src="<@spring.url '/manager/login/captcha'/>" title="点击更换验证码"
                  style="cursor: pointer;width: 80px;height: 35px;"/>
@@ -50,7 +50,7 @@
             </div>
             <div class="form-group">
                 <div class="col-xs-offset-3 col-xs-9">
-                    <label style="color: #ff0000">${errorMessage!""}</label>
+                    <label style="color: #ff0000">${error!""}</label>
                 </div>
             </div>
         </form>

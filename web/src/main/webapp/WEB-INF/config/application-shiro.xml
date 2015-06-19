@@ -60,7 +60,7 @@
         <property name="cookie" ref="rememberMeCookie"/>
     </bean>
 
-    <bean id="formAuthenticationFilter" class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter">
+    <bean id="formAuthenticationFilter" class="cn.v5cn.v5cms.filter.MyFormAuthenticationFilter">
         <property name="usernameParam" value="loginname"/>
         <property name="passwordParam" value="password"/>
         <property name="rememberMeParam" value="rememberMe"/>
@@ -86,13 +86,12 @@
 
     <!--
     <bean id="menuFilter" class="cn.v5cn.basicframework.interceptor.MenuFilter"/>
-
-    <bean id="captchaValidateFilter" class="cn.v5cn.basicframework.interceptor.JCaptchaValidateFilter">
+    -->
+    <bean id="captchaValidateFilter" class="cn.v5cn.v5cms.filter.JCaptchaValidateFilter">
         <property name="jcaptchaEbabled" value="true"/>
         <property name="jcaptchaParam" value="jcaptchaCode"/>
         <property name="failureKeyAttribute" value="shiroLoginFailure"/>
     </bean>
-    -->
 
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
@@ -103,7 +102,7 @@
             <map>
                 <entry key="authc" value-ref="formAuthenticationFilter"/>
                 <!--<entry key="menuFilter" value-ref="menuFilter"/>-->
-                <!--<entry key="jCaptchaValidate" value-ref="captchaValidateFilter"/>-->
+                <entry key="jCaptchaValidate" value-ref="captchaValidateFilter"/>
             </map>
         </property>
         <!--
@@ -112,7 +111,7 @@
         -->
         <property name="filterChainDefinitions">
             <value>
-                /manager/login=authc
+                /manager/login=jCaptchaValidate,authc
                 /manager/logout=logout
                 /r/**=anon
                 /manager/login/captcha*=anon
