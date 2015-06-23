@@ -100,7 +100,7 @@
                 <constructor-arg type="java.util.Properties">
                     <props>
                         <!-- 验证码宽度 -->
-                        <prop key="kaptcha.image.width">85</prop>
+                        <prop key="kaptcha.image.width">115</prop>
                         <!-- 验证码高度 -->
                         <prop key="kaptcha.image.height">35</prop>
                         <!-- 生成验证码内容范围 -->
@@ -112,7 +112,7 @@
                         <!-- 验证码字体颜色 -->
                         <prop key="kaptcha.textproducer.font.color">red</prop>
                         <!-- 验证码字体大小 -->
-                        <prop key="kaptcha.textproducer.font.size">22</prop>
+                        <prop key="kaptcha.textproducer.font.size">24</prop>
                         <!-- 验证码所属字体样式 -->
                         <prop key="kaptcha.textproducer.font.names">Arial, Courier</prop>
                         <prop key="kaptcha.background.clear.from">white</prop>

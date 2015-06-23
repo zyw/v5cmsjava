@@ -24,7 +24,7 @@
                     <input type="text" class="form-control" name="loginname" id="loginName" placeholder="用户名" value="zhangsan">
                 </div>
             </div>
-            <div class="form-group" style="display: block">
+            <div class="form-group">
                 <label for="managerPwd" class="col-xs-3 control-label">密码</label>
                 <div class="col-xs-9">
                     <input type="password" class="form-control" name="password" id="loginPwd" placeholder="密码" value="000000">
@@ -36,10 +36,15 @@
                 <div class="col-xs-5" style="padding-right: 10px;">
                     <input type="text" class="form-control" name="jcaptchaCode" id="captcha" placeholder="验证码">
                 </div>
-            <img id="vcode_img" src="<@spring.url '/manager/login/captcha'/>" title="点击更换验证码"
-                 style="cursor: pointer;width: 80px;height: 35px;"/>
+                <img id="vcode_img" src="<@spring.url '/manager/login/captcha'/>" title="点击更换验证码"
+                 style="cursor: pointer;width: 115px;height: 35px;"/>
             </div>
-
+            <div class="form-group">
+                <label for="managerPwd" class="col-xs-3 control-label"></label>
+                <div class="col-xs-9">
+                    <input type="checkbox" name="rememberMe"> 记住我
+                </div>
+            </div>
             <div class="form-group">
                 <div class="col-xs-offset-3 col-xs-9">
                     <button type="submit" class="btn btn-primary col-xs-9">

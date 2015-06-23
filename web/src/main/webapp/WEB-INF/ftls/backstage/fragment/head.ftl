@@ -357,10 +357,6 @@
                     </ul>
                 </li>
                 <li class="treeview" id="nav_columns">
-                    <#--<a href="<@spring.url '/manager/collist'/>">
-                        <i class="fa fa-th-list"></i> <span>栏目管理</span>
-                    </a>-->
-
                     <a href="javascript:;">
                         <i class="fa fa-th-list"></i>
                         <span>栏目管理</span>
@@ -404,12 +400,25 @@
                         </li>
                     </ul>
                 </li>
+                <li class="treeview" id="user_auth">
+                    <a href="javascript:;">
+                        <i class="fa fa-user"></i> <span>用户权限</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="pages/tables/simple.html"><i class="fa fa-angle-double-right"></i> 用户管理</a></li>
+                        <li><a href="<@spring.url '/manager/res/list'/>"><i class="fa fa-angle-double-right"></i> 资源管理</a>
+                        </li>
+                    </ul>
+                </li>
+                <!--
                 <li>
                     <a href="pages/calendar.html">
                         <i class="fa fa-user"></i> <span>用户管理</span>
                         <small class="badge pull-right bg-red">3</small>
                     </a>
                 </li>
+                -->
                 <!--
                 <li>
                     <a href="pages/mailbox.html">

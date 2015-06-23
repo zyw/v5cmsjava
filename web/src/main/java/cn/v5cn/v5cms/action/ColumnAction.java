@@ -42,7 +42,6 @@ public class ColumnAction {
     public String columnList(ModelMap modelMap,HttpSession session){
         Site site = (Site)(SystemUtils.getSessionSite(session));
         List<Column> columns = columnBiz.findOrderByParentIdsAndColsId(site.getSiteId());
-        System.out.println(columns);
         modelMap.addAttribute("columns",columns);
         return "column_list";
     }

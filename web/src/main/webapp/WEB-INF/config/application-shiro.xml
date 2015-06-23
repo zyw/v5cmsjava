@@ -69,12 +69,12 @@
     </bean>
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="cacheManager" ref="shiroEhCacheManager"/>
-        <property name="realm" ref="v5Realm"/>
+        <property name="realm" ref="v5CMSRealm"/>
         <!-- 记住密码配置 -->
         <property name="rememberMeManager" ref="rememberMeManager"/>
         <!--<property name="sessionManager" ref="sessionManager"/>-->
     </bean>
-    <bean id="v5Realm" class="cn.v5cn.v5cms.shiro.V5CMSRealm">
+    <bean id="v5CMSRealm" class="cn.v5cn.v5cms.shiro.V5CMSRealm">
         <property name="credentialsMatcher">
             <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
                 <property name="hashAlgorithmName" value="MD5"/>
