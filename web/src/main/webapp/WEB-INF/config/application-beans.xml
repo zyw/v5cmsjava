@@ -59,7 +59,7 @@
                 <property name="database" value="MYSQL"/>
             </bean>
         </property>
-        <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
+        <!--<property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>-->
         <property name="persistenceUnitName" value="cn.v5cn.v5cms"/>
     </bean>
 

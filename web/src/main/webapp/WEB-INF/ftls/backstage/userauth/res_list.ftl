@@ -22,7 +22,7 @@
                 <div class="box-header">
                     <!-- tools box -->
                     <div class="pull-right box-tools">
-                        <button id="addColumn" class="btn btn-success btn-sm" data-toggle="tooltip" title="添加资源">
+                        <button id="addRes" class="btn btn-success btn-sm" data-toggle="tooltip" title="添加资源">
                             <i class="fa fa-plus"></i> 添加资源</button>
                         <button id="columnBatchDelete" class="btn btn-warning btn-sm" data-toggle="tooltip" title="批量删除">
                             <i class="fa fa-trash-o"></i> 批量删除</button>
@@ -31,7 +31,7 @@
                     <h3 class="box-title">资源列表</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive">
-                    <table id="column-table" class="table-striped table-advance table-hover">
+                    <table id="res-table" class="table-striped table-advance table-hover">
                         <colgroup>
                             <col class="col-xs-2">
                             <col class="col-xs-1">
@@ -71,7 +71,7 @@
                                         <i class="fa fa-plus"></i></a>&nbsp;
                                 </#if>
                                 <a href="<@spring.url '/manager/res/${res.id}/update'/>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>&nbsp;
-                                <a href="javascript:;" data-resid="${res.id}" class="btn btn-warning btn-xs delete-column"><i class="fa fa-times"></i></a>
+                                <a href="javascript:;" data-resid="${res.id}" class="btn btn-warning btn-xs delete-res"><i class="fa fa-times"></i></a>
                             </td>
                             </tr>
                         </#list>
@@ -91,19 +91,19 @@
 <script type="text/javascript">
     $(function(){
         $("#user_auth").imitClick();
-        $("#column-table").treetable({ expandable: true,initialState:'expanded' });
-        $("#addColumn").click(function(){
+        $("#res-table").treetable({ expandable: true,initialState:'expanded' });
+        $("#addRes").click(function(){
             location.href="<@spring.url '/manager/column/edit/0'/>";
         });
 
-        function deleteColumn(columnId) {
-            $.v5cms.confirm({icon:"question",content:"您确定要删除栏目信息吗，删除后将不能恢复？",width:350,ok:function(){
+        function deleteRes(resid) {
+            $.v5cms.confirm({icon:"question",content:"您确定要删除资源信息吗，删除后将不能恢复？",width:350,ok:function(){
                 var url = "<@spring.url '/manager/column/delete'/>";
                 $.ajax({
                     dataType:'json',
                     type:'POST',
                     url:url,
-                    data:{columnId:columnId},
+                    data:{columnId:resid},
                     success:function(data){
                         if(data.status == "1"){
                             $.v5cms.tooltip({icon:"succeed","content":data.message},function(){
@@ -114,15 +114,15 @@
                         }
                     },
                     error:function(XMLHttpRequest, textStatus, errorThrown){
-                        $.v5cms.tooltip({icon:"error","content":"删除栏目信息出错，"+textStatus+"，"+errorThrown});
+                        $.v5cms.tooltip({icon:"error","content":"删除资源信息出错，"+textStatus+"，"+errorThrown});
                     }
                 });
             }});
         }
 
-        $(".delete-column").click(function(){
-            var columnId = $(this).data("columnid");
-            deleteColumn(columnId);
+        $(".delete-res").click(function(){
+            var resid = $(this).data("resid");
+            deleteRes(resid);
         });
     });
 </script>
