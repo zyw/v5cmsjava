@@ -16,7 +16,7 @@
 html,
 body {
   overflow-x: hidden!important;
-  font-family: '微软雅黑','Source Sans Pro', sans-serif;
+  font-family: 'Microsoft YaHei','Source Sans Pro', sans-serif;
   -webkit-font-smoothing: antialiased;
   min-height: 100%;
   background: #f9f9f9;
