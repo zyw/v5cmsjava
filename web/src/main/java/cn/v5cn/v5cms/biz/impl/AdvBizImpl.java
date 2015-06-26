@@ -127,7 +127,7 @@ public class AdvBizImpl implements AdvBiz {
                 }
                 return criteriaBuilder.and(ps.toArray(new javax.persistence.criteria.Predicate[0]));
             }
-        }, new PageRequest(currPage-1,pageSize,new Sort(Sort.Direction.DESC,new String[]{"createDate"})));
+        }, new PageRequest(currPage-1,pageSize,new Sort(Sort.Direction.DESC,"createDate")));
     }
 
     @Override

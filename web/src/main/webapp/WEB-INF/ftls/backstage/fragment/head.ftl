@@ -406,9 +406,9 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="pages/tables/simple.html"><i class="fa fa-angle-double-right"></i> 用户管理</a></li>
-                        <li><a href="<@spring.url '/manager/res/list'/>"><i class="fa fa-angle-double-right"></i> 资源管理</a>
-                        </li>
+                        <li><a href="<@spring.url '/manager/user/list/1'/>"><i class="fa fa-angle-double-right"></i> 用户管理</a></li>
+                        <li><a href="<@spring.url '/manager/role/list/1'/>"><i class="fa fa-angle-double-right"></i> 角色管理</a></li>
+                        <li><a href="<@spring.url '/manager/res/list'/>"><i class="fa fa-angle-double-right"></i> 资源管理</a></li>
                     </ul>
                 </li>
                 <!--
@@ -416,14 +416,6 @@
                     <a href="pages/calendar.html">
                         <i class="fa fa-user"></i> <span>用户管理</span>
                         <small class="badge pull-right bg-red">3</small>
-                    </a>
-                </li>
-                -->
-                <!--
-                <li>
-                    <a href="pages/mailbox.html">
-                        <i class="fa fa-envelope"></i> <span></span>
-                        <small class="badge pull-right bg-yellow">12</small>
                     </a>
                 </li>
                 -->

@@ -77,9 +77,15 @@
                                     </#if>
                                 </td>
                                 <td>
-                                    <a href="<@spring.url '/manager/column/edit/${column.colsId}'/>" class="btn btn-success btn-xs"><i class="fa fa-plus"></i></a>&nbsp;
-                                    <a href="<@spring.url '/manager/column/${column.colsId}/update'/>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>&nbsp;
-                                    <a href="javascript:;" data-columnid="${column.colsId}" class="btn btn-warning btn-xs delete-column"><i class="fa fa-times"></i></a>
+                                    <a href="<@spring.url '/manager/column/edit/${column.colsId}'/>" class="btn btn-success btn-xs" data-toggle="tooltip" title="添加子栏目">
+                                        <i class="fa fa-plus"></i>
+                                    </a>&nbsp;
+                                    <a href="<@spring.url '/manager/column/${column.colsId}/update'/>" class="btn btn-primary btn-xs" data-toggle="tooltip" title="修改栏目">
+                                        <i class="fa fa-edit"></i>
+                                    </a>&nbsp;
+                                    <a href="javascript:;" data-columnid="${column.colsId}" class="btn btn-warning btn-xs delete-column" data-toggle="tooltip" title="删除栏目">
+                                        <i class="fa fa-times"></i>
+                                    </a>
                                 </td>
                                 </tr>
                             </#list>

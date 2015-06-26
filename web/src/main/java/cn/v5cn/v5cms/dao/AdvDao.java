@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
  * Created by ZYW on 2014/7/28.
  */
 @Repository("advDao")
-public interface AdvDao extends PagingAndSortingRepository<Adv,Long>,JpaSpecificationExecutor{
+public interface AdvDao extends PagingAndSortingRepository<Adv,Long>,JpaSpecificationExecutor<Adv>{
 
 }

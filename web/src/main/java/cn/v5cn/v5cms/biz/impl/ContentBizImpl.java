@@ -56,6 +56,6 @@ public class ContentBizImpl implements ContentBiz {
 
                 return criteriaBuilder.and(ps.toArray(new javax.persistence.criteria.Predicate[0]));
             }
-        },new PageRequest(currPage-1,pageSize,new Sort(Sort.Direction.DESC,new String[]{"lastdt"})));
+        },new PageRequest(currPage-1,pageSize,new Sort(Sort.Direction.DESC,"lastdt")));
     }
 }

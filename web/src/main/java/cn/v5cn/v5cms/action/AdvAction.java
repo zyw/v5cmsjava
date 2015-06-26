@@ -52,7 +52,6 @@ public class AdvAction {
 
     @RequestMapping(value = "/list/{p}",method = {RequestMethod.GET,RequestMethod.POST})
     public String advList(Adv adv,@PathVariable Integer p,HttpSession session,HttpServletRequest request,ModelMap modelMap){
-        System.out.println(adv+"---------------------------------------------------");
         if(StringUtils.isNotBlank(adv.getAdvName())
                 || (adv.getAdvPos() != null && adv.getAdvPos().getAdvPosId() != null)){
             session.setAttribute("advSearch",adv);

@@ -63,6 +63,15 @@
 .chosen-single span{
     color:#000;
 }
+.v5-man{
+    font-size: 22px;
+    color: #1c87ff;
+}
+.v5-woman{
+    font-size: 22px;
+    color: #ff7888;
+}
+
 /* 图片管理样式 */
 #online {
     width: 100%;

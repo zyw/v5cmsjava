@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
  * Created by ZYW on 2014/11/19.
  */
 @Repository("contentDao")
-public interface ContentDao extends PagingAndSortingRepository<Content,Long> ,JpaSpecificationExecutor {
+public interface ContentDao extends PagingAndSortingRepository<Content,Long> ,JpaSpecificationExecutor<Content> {
 
 }

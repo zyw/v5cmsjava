@@ -4,13 +4,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            资源
+            资源管理
             <small>Control panel</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
             <li>用户权限</li>
-            <li class="active">资源</li>
+            <li class="active">资源管理</li>
         </ol>
     </section>
 
@@ -67,11 +67,16 @@
                             </td>
                             <td>
                                 <#if res.type == 1>
-                                    <a href="<@spring.url '/manager/res/edit/${res.id}'/>" class="btn btn-success btn-xs">
-                                        <i class="fa fa-plus"></i></a>&nbsp;
+                                    <a href="<@spring.url '/manager/res/edit/${res.id}'/>" class="btn btn-success btn-xs" data-toggle="tooltip" title="添加资源">
+                                        <i class="fa fa-plus"></i>
+                                    </a>&nbsp;
                                 </#if>
-                                <a href="<@spring.url '/manager/res/${res.id}/update'/>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>&nbsp;
-                                <a href="javascript:;" data-resid="${res.id}" class="btn btn-warning btn-xs delete-res"><i class="fa fa-times"></i></a>
+                                <a href="<@spring.url '/manager/res/${res.id}/update'/>" class="btn btn-primary btn-xs" data-toggle="tooltip" title="修改资源">
+                                    <i class="fa fa-edit"></i>
+                                </a>&nbsp;
+                                <a href="javascript:;" data-resid="${res.id}" class="btn btn-warning btn-xs delete-res" data-toggle="tooltip" title="删除资源">
+                                    <i class="fa fa-times"></i>
+                                </a>
                             </td>
                             </tr>
                         </#list>
