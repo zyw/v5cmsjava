@@ -159,11 +159,14 @@
             },
             callback:function(data){
                 if(data.status === "1"){
-                    $.v5cms.tooltip({icon:"succeed",content:data.message},function(){
+                    layer.msg(data.message, {
+                        icon: 1,
+                        time:2000
+                    },function(){
                         location.href="<@spring.url '/manager/role/list/1'/>";
                     });
                 }else{
-                    $.v5cms.tooltip({icon:"error",content:data.message},function(){});
+                    layer.msg(data.message, {icon: 2});
                 }
             }
         });
