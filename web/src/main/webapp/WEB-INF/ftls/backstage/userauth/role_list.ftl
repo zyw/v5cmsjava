@@ -79,8 +79,8 @@
                                 </td>
                                 <td>${role.id}</td>
                                 <td>${role.name}</td>
-                                <td>${role.des}</td>
-                                <td>${role.sortNum}</td>
+                                <td>${role.des!""}</td>
+                                <td>${role.sortNum!"0"}</td>
                                 <td>
                                 ${(role.available==1)?string("<small class='badge bg-green'>启用</small>",
                                 "<small class='badge bg-red'>禁用</small>")}
@@ -115,7 +115,7 @@
     $(function(){
         $("#user_auth").imitClick();
         $("#addRole").click(function(){
-            location.href="<@spring.url '/manager/coltype/edit/0'/>";
+            location.href="<@spring.url '/manager/role/edit'/>";
         });
         $("#thcheckbox").on('ifChecked', function(event){
             $('.table-cb').iCheck('check');

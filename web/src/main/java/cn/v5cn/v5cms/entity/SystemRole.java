@@ -1,7 +1,10 @@
 package cn.v5cn.v5cms.entity;
 
+import com.google.common.collect.Sets;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Created by ZXF-PC1 on 2015/6/26.
@@ -64,6 +67,19 @@ public class SystemRole implements Serializable {
 
     public void setAvailable(Integer available) {
         this.available = available;
+    }
+
+
+    private Set<SystemRes> reses = Sets.newHashSet();
+
+    @ManyToMany
+    @JoinTable(name = "system_role_res",joinColumns = @JoinColumn(name = "role_id"),inverseJoinColumns = @JoinColumn(name = "res_id"))
+    public Set<SystemRes> getReses() {
+        return reses;
+    }
+
+    public void setReses(Set<SystemRes> reses) {
+        this.reses = reses;
     }
 
     @Override

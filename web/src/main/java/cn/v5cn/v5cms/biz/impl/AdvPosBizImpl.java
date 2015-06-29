@@ -3,15 +3,12 @@ package cn.v5cn.v5cms.biz.impl;
 import cn.v5cn.v5cms.biz.AdvPosBiz;
 import cn.v5cn.v5cms.dao.AdvPosDao;
 import cn.v5cn.v5cms.entity.AdvPos;
-import cn.v5cn.v5cms.entity.Site;
-import cn.v5cn.v5cms.util.SystemUtils;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**

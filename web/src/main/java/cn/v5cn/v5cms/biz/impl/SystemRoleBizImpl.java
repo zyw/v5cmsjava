@@ -2,8 +2,10 @@ package cn.v5cn.v5cms.biz.impl;
 
 import cn.v5cn.v5cms.biz.SystemRoleBiz;
 import cn.v5cn.v5cms.dao.SystemRoleDao;
+import cn.v5cn.v5cms.entity.SystemRes;
 import cn.v5cn.v5cms.entity.SystemRole;
 import cn.v5cn.v5cms.util.PropertyUtils;
+import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.*;
 import java.util.List;
@@ -46,5 +49,22 @@ public class SystemRoleBizImpl implements SystemRoleBiz {
         }, new PageRequest(currPage - 1, pageSize, new Sort("sortNum")));
 
         return roles;
+    }
+
+    @Override
+    @Transactional
+    public Long save(SystemRole role,String resIds) {
+
+        if(resIds != null && resIds.length() > 0){
+            List<String> resIdList = Splitter.on(",").splitToList(resIds);
+            SystemRes res = null;
+            for(String resId : resIdList){
+                res = new SystemRes();
+                res.setId(Long.valueOf(resId));
+                role.getReses().add(res);
+            }
+        }
+        role = systemRoleDao.save(role);
+        return role.getId();
     }
 }

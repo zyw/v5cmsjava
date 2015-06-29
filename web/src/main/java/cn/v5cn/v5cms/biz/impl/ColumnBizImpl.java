@@ -44,6 +44,7 @@ public class ColumnBizImpl implements ColumnBiz {
     }
 
     @Override
+    @Transactional
     public void delete(Long columnId) {
         columnDao.delete(columnId);
     }

@@ -1,8 +1,11 @@
 package cn.v5cn.v5cms.entity;
 
+import com.google.common.collect.Sets;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by ZYW on 2014/10/14.
@@ -135,6 +138,17 @@ public class SystemRes implements Serializable {
     public void setChildren(List<SystemRes> children) {
         this.children = children;
     }*/
+
+    private Set<SystemRole> roles = Sets.newHashSet();
+
+    @ManyToMany(mappedBy = "reses")
+    public Set<SystemRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<SystemRole> roles) {
+        this.roles = roles;
+    }
 
     @Override
     public String toString() {

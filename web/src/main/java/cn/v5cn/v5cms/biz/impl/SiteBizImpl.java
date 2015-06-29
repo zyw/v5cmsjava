@@ -17,7 +17,6 @@ import java.util.List;
 /**
  * Created by ZYW on 2014/6/30.
  */
-@Transactional
 @Service("siteBiz")
 public class SiteBizImpl implements SiteBiz {
 
@@ -41,6 +40,7 @@ public class SiteBizImpl implements SiteBiz {
     }
 
     @Override
+    @Transactional
     public Long addSite(Site site) {
         site.setCreateDate(DateTime.now().toDate());
 
@@ -48,6 +48,7 @@ public class SiteBizImpl implements SiteBiz {
     }
 
     @Override
+    @Transactional
     public Site updateSite(Site site) throws InvocationTargetException, IllegalAccessException {
         Site s = siteDao.findOne(site.getSiteId());
         SystemUtils.copyProperties(s,site);
@@ -55,6 +56,7 @@ public class SiteBizImpl implements SiteBiz {
     }
 
     @Override
+    @Transactional
     public void deleteSite(Long[] siteIds) {
         List<Site> sites = Lists.newArrayList();
         Site site = null;

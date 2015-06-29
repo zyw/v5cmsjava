@@ -8,4 +8,5 @@ import org.springframework.data.domain.Page;
  */
 public interface SystemRoleBiz {
     Page<SystemRole> findRoleByRoleNamePageable(SystemRole role,Integer currPage);
+    Long save(SystemRole role,String resIds);
 }

@@ -1,6 +1,7 @@
 package cn.v5cn.v5cms.biz;
 
 import cn.v5cn.v5cms.entity.SystemRes;
+import cn.v5cn.v5cms.entity.wrapper.ZTreeNode;
 
 import java.util.List;
 
@@ -9,4 +10,5 @@ import java.util.List;
  */
 public interface SystemResBiz {
     List<SystemRes> findOrderByPidsAndId();
+    List<ZTreeNode> buildTreeNode(Long parentId);
 }

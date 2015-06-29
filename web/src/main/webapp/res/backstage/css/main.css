@@ -72,6 +72,14 @@
     color: #ff7888;
 }
 
+.v5-div-scroll{
+    border:1px #EFF2F7 solid;
+    overflow-y: scroll;
+    overflow-x:hidden;
+    height: 200px;
+    width: 220px;
+}
+
 /* 图片管理样式 */
 #online {
     width: 100%;
