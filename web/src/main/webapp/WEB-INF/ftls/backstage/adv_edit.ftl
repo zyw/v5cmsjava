@@ -469,7 +469,7 @@
                         inputId = inputId + "_chosen"
                     }
                     if(o.type == 2){
-                        layer.tips(msg, "#"+inputId,{time:0,tips:[2, '#78BA32']});
+                        layer.tips(msg, "#"+inputId,{tips:[2, '#78BA32']});
                     }else{
                         layer.tips(msg, "#"+inputId,{time:0});
                     }

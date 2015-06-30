@@ -149,7 +149,7 @@
             tiptype:function(msg,o,cssctl){
                 if(!o.obj.is("form")){
                     if(o.type == 2){
-                        layer.tips(msg, o.obj,{time:0,tips:[2, '#78BA32']});
+                        layer.tips(msg, o.obj,{tips:[2, '#78BA32']});
                     }else{
                         layer.tips(msg, o.obj,{time:0});
                     }
