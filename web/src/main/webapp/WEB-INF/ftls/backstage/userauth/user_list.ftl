@@ -161,17 +161,6 @@
                          $.v5cms.tooltip({icon:"error","content":"删除用户信息出错，"+textStatus+"，"+errorThrown});
                      }
                  });
-                /*$.post(url,{colTypeIds:ctIds},function(data){
-                    if(data.status == "1"){
-                        $.v5cms.tooltip({icon:"succeed","content":data.message},function(){
-                            location.reload();
-                        });
-                    }else{
-                        $.v5cms.tooltip({icon:"error","content":data.message},function(){
-                            location.reload();
-                        });
-                    }
-                },"json");*/
             }});
         }
 

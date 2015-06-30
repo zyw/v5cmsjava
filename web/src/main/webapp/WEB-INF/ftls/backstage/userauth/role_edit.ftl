@@ -46,7 +46,7 @@
                         <div class="form-group">
                             <label for="coltpl" class="col-sm-2 control-label">序号</label>
                             <div class="col-sm-4">
-                                <input type="text" name="sortNum" id="sortNum" class="form-control" placeholder="序号" value="0">
+                                <input type="text" name="sortNum" id="sortNum" class="form-control" placeholder="序号" value="0" datatype="n" errormsg="序号必须为数字！">
                                 <span class="help-block">对角色进行排序，越小越靠前。</span>
                             </div>
                         </div>
@@ -92,7 +92,7 @@
 <#include "../fragment/footer.ftl">
 <script type="text/javascript">
     $(function(){
-        $("#nav_columns").imitClick();
+        $("#user_auth").imitClick();
         $("#backRoleList").click(function(){
             location.href="<@spring.url '/manager/role/list/1'/>"
         });
@@ -165,8 +165,10 @@
                     },function(){
                         location.href="<@spring.url '/manager/role/list/1'/>";
                     });
-                }else{
+                }else if(data.status === "0"){
                     layer.msg(data.message, {icon: 2});
+                }else{
+                    layer.msg("错误代码："+data.status+" 错误消息："+data.statusText, {icon: 2});
                 }
             }
         });

@@ -39,7 +39,7 @@
                             <label for="dvPosName" class="col-sm-2 control-label">版位名称 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" name="advPosName" id="advPosName"
-                                       placeholder="版位名称" value="${advpos.advPosName!""}">
+                                       placeholder="版位名称" value="${advpos.advPosName!""}" datatype="*" nullmsg="版位名称不能为空！"/>
                                 <span class="help-block">设置版位的名称，方便日后管理。</span>
                             </div>
                         </div>
@@ -84,6 +84,37 @@
             location.href="<@spring.url '/manager/advpos/list'/>"
         });
         $("#advPosState").chosen({disable_search_threshold: 10});
+
+        $("#advPosForm").Validform({
+            ajaxPost:true,
+            tiptype:function(msg,o,cssctl){
+                if(!o.obj.is("form")){
+                    if(o.type == 2){
+                        layer.tips(msg, o.obj,{time:0,tips:[2, '#78BA32']});
+                    }else{
+                        layer.tips(msg, o.obj,{time:0});
+                    }
+                }else{
+                    layer.closeAll('tips');
+                }
+            },
+            callback:function(data){
+                if(data.status === "1"){
+                    layer.msg(data.message, {
+                        icon: 1,
+                        time:2000
+                    },function(){
+                        location.href="<@spring.url '/manager/advpos/list'/>";
+                    });
+                }else if(data.status === "0"){
+                    layer.msg(data.message, {icon: 2});
+                }else{
+                    layer.msg("错误代码："+data.status+" 错误消息："+data.statusText, {icon: 2});
+                }
+            }
+        });
+
+        <#--
         $('#advPosForm').ajaxForm({
             dataType : 'json',
             success : function(data) {
@@ -99,10 +130,12 @@
                 $.v5cms.tooltip({icon:"error",content:"错误代码：" + status + " 错误消息：" + error},function(){});
             }
         });
+        -->
 
         $("#saveAdvPosForm").click(function(){
-            var result = $("#advPosName").nonEmpty({content:"版位名称不能为空！"});
-            if(result) $("#advPosForm").submit();
+            /*var result = $("#advPosName").nonEmpty({content:"版位名称不能为空！"});
+            if(result) $("#advPosForm").submit();*/
+            $("#advPosForm").submit();
         });
     });
 </script>

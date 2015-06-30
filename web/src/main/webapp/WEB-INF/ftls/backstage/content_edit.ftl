@@ -44,7 +44,7 @@
                         <div class="form-group has-feedback">
                             <label class="col-sm-2 control-label">栏目 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-4">
-                                <input type="text" id="columnTreeInput" class="form-control" value="" readonly>
+                                <input type="text" id="columnTreeInput" class="form-control" value="" datatype="*" nullmsg="栏目类型不能为空！" readonly>
                                 <input type="hidden" id="columnId" name="columnId">
                                 <span class="glyphicon glyphicon-chevron-down form-control-feedback" aria-hidden="true"></span>
                                 <div id="columnTreeDiv" style="width: 92.6%;background:#fff;display: none;position: absolute;border: 1px #c0c0c0 solid;z-index: 9999;">
@@ -56,7 +56,7 @@
                             <label for="columnName" class="col-sm-2 control-label">标题 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-5">
                                 <input type="text" class="form-control" name="cname" id="cname"
-                                       placeholder="内容标题" value="">
+                                       placeholder="内容标题" value="" datatype="*" nullmsg="内容标题不能为空！">
                             </div>
                         </div>
                         <div class="form-group">
@@ -238,6 +238,37 @@
             format: "yyyy-mm-dd",
             language: "zh-CN"
         });
+
+        $("#contentForm").Validform({
+            ajaxPost:true,
+            tiptype:function(msg,o,cssctl){
+                if(!o.obj.is("form")){
+                    if(o.type == 2){
+                        layer.tips(msg, o.obj,{time:0,tips:[2, '#78BA32']});
+                    }else{
+                        layer.tips(msg, o.obj,{time:0});
+                    }
+                }else{
+                    layer.closeAll('tips');
+                }
+            },
+            callback:function(data){
+                if(data.status === "1"){
+                    layer.msg(data.message, {
+                        icon: 1,
+                        time:2000
+                    },function(){
+                        location.href="<@spring.url '/manager/content/list'/>";
+                    });
+                }else if(data.status === "0"){
+                    layer.msg(data.message, {icon: 2});
+                }else{
+                    layer.msg("错误代码："+data.status+" 错误消息："+data.statusText, {icon: 2});
+                }
+            }
+        });
+
+        <#--
         $("#contentForm").ajaxForm({
             dataType : 'json',
             type:'POST',
@@ -254,13 +285,15 @@
                 $.v5cms.tooltip({icon:"error",content:("错误代码：" + status + " 错误消息：" + error)},function(){});
             }
         });
+        -->
 
         function saveContent(contentState){
-            var result = $("#columnId").nonEmpty({content:"栏目类型不能为空！"});
+            /*var result = $("#columnId").nonEmpty({content:"栏目类型不能为空！"});
             var cnameResult = $("#cname").nonEmpty({content:"内容标题不能为空！"});
             $("#content_state").val(contentState);
-            if(result && cnameResult) $("#contentForm").submit();
+            if(result && cnameResult) $("#contentForm").submit();*/
 
+            $("#contentForm").submit();
         }
 
         $("#saveContentButton").click(function(){

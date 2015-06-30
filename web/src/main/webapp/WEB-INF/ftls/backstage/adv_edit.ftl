@@ -41,14 +41,14 @@
                             <label for="advName" class="col-sm-2 control-label">广告名称 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" name="adv.advName" id="advName"
-                                       placeholder="广告名称" value="${adv.advName!""}">
+                                       placeholder="广告名称" value="${adv.advName!""}" datatype="*" nullmsg="请输入广告名称！">
                                 <span class="help-block">设置广告名称。</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="advPosId" class="col-sm-2 control-label">广告版位 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-4">
-                                <select data-placeholder="广告版位" class="form-control" id="advPosId" name="adv.advPos.advPosId">
+                                <select data-placeholder="广告版位" class="form-control" id="advPosId" name="adv.advPos.advPosId" datatype="*" nullmsg="请输入广告版位！">
                                     <#if aps?size != 0>
                                         <option value=""></option>
                                         <#list aps as ap>
@@ -65,10 +65,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="advStartEndTime" class="col-sm-2 control-label">开始结束时间</label>
+                            <label for="advStartEndTime" class="col-sm-2 control-label">开始结束时间 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-4 input-group" style="padding-left: 15px;">
                                 <input type="text" class="form-control" id="advStartEndTime"
-                                       placeholder="开始结束时间" readonly>
+                                       placeholder="开始结束时间" datatype="*" nullmsg="广告的开始和结束时间不能为空！" readonly>
                                 <input type="hidden" name="adv.advStartTime" value="${adv.advStartTime!""}" id="advStartTime">
                                 <input type="hidden" name="adv.advEndTime" value="${adv.advEndTime!""}" id="advEndTime">
                                 <div class="input-group-addon">
@@ -77,7 +77,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">启用 <span style="color: #ff0000">*</span></label>
+                            <label for="inputPassword3" class="col-sm-2 control-label">启用 </label>
                             <div class="col-sm-3">
                                 <select class="form-control" id="startUsing" name="adv.startUsing">
                                     <#if adv?? && adv.startUsing==1>
@@ -277,7 +277,7 @@
                                                 <label for="inputPassword3" class="col-sm-2 control-label">广告代码</label>
                                                 <div class="col-sm-7">
                                                     <textarea class="form-control" name="adv.advCode"
-                                                              value="${adv.advCode!""}" id="advCode" rows="5"></textarea>
+                                                              value="${adv.advCode!""}" id="advCode" rows="5" style="margin-top:10px;margin-bottom:10px;"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -306,7 +306,8 @@
                 sCallBack:function(){}
             },options);
             if(settings.resPath == null || settings.resPath == ""){
-                $.v5cms.tooltip({icon:"error",content:settings.errMessage,timeout:1000},function(){});
+                //$.v5cms.tooltip({icon:"error",content:settings.errMessage,timeout:1000},function(){});
+                layer.msg(settings.errMessage, {icon: 2});
                 return;
             }
             $.ajax({
@@ -316,13 +317,16 @@
                 data:{if_path:settings.resPath},
                 success:function(data){
                     if(data.status == '0'){
-                        $.v5cms.tooltip({icon:"error",content:data.message},function(){});
+                        //$.v5cms.tooltip({icon:"error",content:data.message},function(){});
+                        layer.msg(data.message, {icon: 2});
                         return;
                     }
-                    $.v5cms.tooltip({icon:"succeed",content:data.message},settings.sCallBack());
+                    //$.v5cms.tooltip({icon:"succeed",content:data.message},settings.sCallBack());
+                    layer.msg(data.message, {icon: 1,time:2000},settings.sCallBack());
                 },
                 error:function(XMLHttpRequest, textStatus, errorThrown){
-                    $.v5cms.tooltip({icon:"error","content":"删除图片出错，"+textStatus+"，"+errorThrown});
+                    //$.v5cms.tooltip({icon:"error","content":"删除图片出错，"+textStatus+"，"+errorThrown});
+                    layer.msg("删除图片出错，"+textStatus+"，"+errorThrown, {icon: 2});
                 }
             });
         }
@@ -333,7 +337,7 @@
         });
         //日期空间操作
         $("#advStartEndTime").daterangepicker({
-            format: 'YYYY年MM月DD日',
+            format: 'YYYY年MM月DD日'
         });
 
         $('#advStartEndTime').on('apply.daterangepicker', function(ev, picker) {
@@ -371,7 +375,8 @@
         });
         uploadImage.on( 'uploadSuccess', function( file,response ) {
             if(response.status == '0'){
-                $.v5cms.tooltip({icon:"error",content:response.message},function(){});
+                //$.v5cms.tooltip({icon:"error",content:response.message},function(){});
+                layer.msg(response.message, {icon: 2});
                 return;
             }
             $("#adv_image_url").val(response.filePath);
@@ -379,12 +384,14 @@
         });
 
         uploadImage.on( 'uploadError', function( file,reason  ) {
-            $.v5cms.tooltip({icon:"error",content:"上传图片出错！"},function(){});
+            //$.v5cms.tooltip({icon:"error",content:"上传图片出错！"},function(){});
+            layer.msg("上传图片出错！", {icon: 2});
         });
         uploadImage.on("beforeFileQueued",function(file){
             var temp = $("#adv_image_url").val();
             if(temp != null && temp != ""){
-                $.v5cms.tooltip({icon:"error",content:"您已经上传了一张图片，请先删除在上传！",timeout:1000},function(){});
+                //$.v5cms.tooltip({icon:"error",content:"您已经上传了一张图片，请先删除在上传！",timeout:1000},function(){});
+                layer.msg("您已经上传了一张图片，请先删除在上传！", {icon: 2});
                 return false;
             }
             return true;
@@ -427,19 +434,22 @@
         });
         uploadFlash.on( 'uploadSuccess', function( file,response ) {
             if(response.status == '0'){
-                $.v5cms.tooltip({icon:"error",content:response.message},function(){});
+                //$.v5cms.tooltip({icon:"error",content:response.message},function(){});
+                layer.msg(response.message, {icon: 2});
                 return;
             }
             $("#adv_flash_url").val(response.filePath);
         });
 
         uploadFlash.on( 'uploadError', function( file,reason  ) {
-            $.v5cms.tooltip({icon:"error",content:"上传Flash出错！"},function(){});
+            //$.v5cms.tooltip({icon:"error",content:"上传Flash出错！"},function(){});
+            layer.msg("上传Flash出错！", {icon: 2});
         });
         uploadFlash.on("beforeFileQueued",function(file){
             var temp = $("#adv_flash_url").val();
             if(temp != null && temp != ""){
-                $.v5cms.tooltip({icon:"error",content:"您已经上传了Flash，请先删除在上传！",timeout:1000},function(){});
+                //$.v5cms.tooltip({icon:"error",content:"您已经上传了Flash，请先删除在上传！",timeout:1000},function(){});
+                layer.msg("您已经上传了Flash，请先删除在上传！", {icon: 2});
                 return false;
             }
             return true;
@@ -450,6 +460,73 @@
         $("#startUsing").chosen({disable_search_threshold: 10});
         $("#advPosId").chosen();
 
+        $("#advForm").Validform({
+            ajaxPost:true,
+            tiptype:function(msg,o,cssctl){
+                if(!o.obj.is("form")){
+                    var inputId = o.obj.attr('id');
+                    if(inputId === "advPosId"){
+                        inputId = inputId + "_chosen"
+                    }
+                    if(o.type == 2){
+                        layer.tips(msg, "#"+inputId,{time:0,tips:[2, '#78BA32']});
+                    }else{
+                        layer.tips(msg, "#"+inputId,{time:0});
+                    }
+                }else{
+                    layer.closeAll('tips');
+                }
+            },
+            beforeSubmit:function(curform){
+                var vailObj = {};
+                vailObj.advTypeVail = false;
+                var advType = $("#hidden_advType").val();
+                switch (advType){
+                    case "1":
+                        vailObj.advTypeVail = $("#adv_image_url").nonEmpty({id:"advImageUpload",content:"广告图片不能为空！"});
+                        vailObj.adv_image_width_vail = $("#adv_image_width").isNum();
+                        vailObj.adv_image_height_vail = $("#adv_image_height").isNum();
+                        vailObj.adv_image_link_vail = $("#adv_image_link").httpVail();
+                        break;
+                    case "2":
+                        vailObj.advTypeVail = $("#adv_flash_url").nonEmpty({content:"广告Flash不能为空！"});
+                        vailObj.adv_flash_width_vail = $("#adv_flash_width").isNum();
+                        vailObj.adv_flash_height_vail = $("#adv_flash_height").isNum();
+                        break;
+                    case "3":
+                        vailObj.advTypeVail = $("#adv_text_content").nonEmpty({content:"广告内容不能为空！"});
+                        vailObj.adv_text_link_vail = $("#adv_text_link").httpVail();
+                        break;
+                }
+
+                for(var k in vailObj){
+                    if(!vailObj[k]){
+                        return false;
+                    }
+                }
+
+                for(var i=0;i<curform.length;i++){
+                    if(curform[i].type === "file"){
+                        curform.splice(i,1);
+                    }
+                }
+            },
+            callback:function(data){
+                if(data.status === "1"){
+                    layer.msg(data.message, {
+                        icon: 1,
+                        time:2000
+                    },function(){
+                        location.href="<@spring.url '/manager/adv/list/1'/>";
+                    });
+                }else if(data.status === "0"){
+                    layer.msg(data.message, {icon: 2});
+                }else{
+                    layer.msg("错误代码："+data.status+" 错误消息："+data.statusText, {icon: 2});
+                }
+            }
+        });
+        <#--
         $('#advForm').ajaxForm({
             dataType : 'json',
             beforeSubmit:function(arr, $form, options){
@@ -492,17 +569,23 @@
             },
             success : function(data) {
                 if(data.status == "1"){
-                    $.v5cms.tooltip({icon:"succeed",content:data.message},function(){
+                    layer.msg(data.message, {
+                        icon: 1,
+                        time:2000
+                    },function(){
                         location.href="<@spring.url '/manager/adv/list/1'/>";
                     });
                 }else{
-                    $.v5cms.tooltip({icon:"error",content:data.message},function(){});
+                    //$.v5cms.tooltip({icon:"error",content:data.message},function(){});
+                    layer.msg(data.message, {icon: 2});
                 }
             },
             error:function(xhr, status, error){
-                $.v5cms.tooltip({icon:"error",content:"错误代码：" + status + " 错误消息：" + error},function(){});
+                //$.v5cms.tooltip({icon:"error",content:"错误代码：" + status + " 错误消息：" + error},function(){});
+                layer.msg("错误代码：" + status + " 错误消息：" + error, {icon: 2});
             }
         });
+        -->
 
         $("#saveAdvForm").click(function(){
             $("#advForm").submit();
@@ -535,7 +618,7 @@
         var path_context = $("#path_context").val();
 
         if(aiu != null && aiu != ""){
-            console.log(path_context+aiu);
+//            console.log(path_context+aiu);
 //            document.getElementById("adv_Image_display_img").onload = function(){
 //                $("#adv_Image_display_img").attr("src",(path_context+aiu));
 //            }

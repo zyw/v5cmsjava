@@ -148,6 +148,32 @@
         $("#nav_siteSetting").imitClick();
         $("#advPosId").chosen({allow_single_deselect: true});
         function deleteAdvs(advIds) {
+            layer.confirm('您确定要删除广告吗，删除后将不能恢复？', {icon: 3}, function(index){
+                var url = "<@spring.url '/manager/adv/delete'/>";
+                $.ajax({
+                    dataType:'json',
+                    type:'POST',
+                    url:url,
+                    data:{advIds:advIds},
+                    success:function(data){
+                        if(data.status === "1"){
+                            layer.msg(data.message, {
+                                icon: 1,
+                                time:2000
+                            },function(){
+                                location.reload();
+                            });
+                        }else{
+                            layer.msg(data.message, {icon: 2});
+                        }
+                    },
+                    error:function(XMLHttpRequest, textStatus, errorThrown){
+                        layer.msg("删除广告出错，"+textStatus+"，"+errorThrown, {icon: 2});
+                    }
+                });
+                layer.close(index);
+            });
+            <#--
             $.v5cms.confirm({icon:"question",content:"您确定要删除广告吗，删除后将不能恢复？",width:350,ok:function(){
                 var url = "<@spring.url '/manager/adv/delete'/>";
                 $.ajax({
@@ -157,29 +183,26 @@
                     data:{advIds:advIds},
                     success:function(data){
                         if(data.status == "1"){
-                            $.v5cms.tooltip({icon:"succeed","content":data.message},function(){
+                           /* $.v5cms.tooltip({icon:"succeed","content":data.message},function(){
+                                location.reload();
+                            });*/
+                            layer.msg(data.message, {
+                                icon: 1,
+                                time:2000
+                            },function(){
                                 location.reload();
                             });
                         }else{
-                            $.v5cms.tooltip({icon:"error","content":data.message},function(){});
+                            //$.v5cms.tooltip({icon:"error","content":data.message},function(){});
+                            layer.msg(data.message, {icon: 2});
                         }
                     },
                     error:function(XMLHttpRequest, textStatus, errorThrown){
-                        $.v5cms.tooltip({icon:"error","content":"删除广告出错，"+textStatus+"，"+errorThrown});
+                        //$.v5cms.tooltip({icon:"error","content":"删除广告出错，"+textStatus+"，"+errorThrown});
+                        layer.msg("删除广告出错，"+textStatus+"，"+errorThrown, {icon: 2});
                     }
                 });
-                /*$.post(url,{advIds:advIds},function(data){
-                    if(data.status == "1"){
-                        $.v5cms.tooltip({icon:"succeed","content":data.message},function(){
-                            location.reload();
-                        });
-                    }else{
-                        $.v5cms.tooltip({icon:"error","content":data.message},function(){
-                            location.reload();
-                        });
-                    }
-                },"json");*/
-            }});
+            }});-->
         }
 
         $("#addAdv").click(function(){
@@ -200,7 +223,8 @@
         $("#advBatchDelete").click(function(){
             var $chs = $(":checkbox[checked=checked]");
             if($chs.length == 0){
-                $.v5cms.tooltip({icon:"warning","content":"您还没有选中要操作的数据项！"},function(){});
+                //$.v5cms.tooltip({icon:"warning","content":"您还没有选中要操作的数据项！"},function(){});
+                layer.msg("您还没有选中要操作的数据项！", {icon: 0});
                 return;
             }
             var advIds = [];

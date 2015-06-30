@@ -48,7 +48,7 @@
                             <label for="columnName" class="col-sm-2 control-label">栏目名称 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" name="columnName" id="columnName"
-                                       placeholder="栏目名称" value="${column.columnName!""}">
+                                       placeholder="栏目名称" value="${column.columnName!""}" datatype="*" nullmsg="栏目名称不能为空！">
                                 <span class="help-block">设置版位的名称，方便日后管理。</span>
                             </div>
                         </div>
@@ -132,6 +132,36 @@
         $("#colTypeId").chosen({disable_search_threshold: 10,width:'100%'});
         $("#openWay").chosen({disable_search_threshold: 10,width:'100%'});
 
+        $("#columnForm").Validform({
+            ajaxPost:true,
+            tiptype:function(msg,o,cssctl){
+                if(!o.obj.is("form")){
+                    if(o.type == 2){
+                        layer.tips(msg, o.obj,{time:0,tips:[2, '#78BA32']});
+                    }else{
+                        layer.tips(msg, o.obj,{time:0});
+                    }
+                }else{
+                    layer.closeAll('tips');
+                }
+            },
+            callback:function(data){
+                if(data.status === "1"){
+                    layer.msg(data.message, {
+                        icon: 1,
+                        time:2000
+                    },function(){
+                        location.href="<@spring.url '/manager/column/list'/>";
+                    });
+                }else if(data.status === "0"){
+                    layer.msg(data.message, {icon: 2});
+                }else{
+                    layer.msg("错误代码："+data.status+" 错误消息："+data.statusText, {icon: 2});
+                }
+            }
+        });
+
+        <#--
         $("#columnForm").ajaxForm({
             dataType : 'json',
             success : function(data) {
@@ -147,10 +177,12 @@
                 $.v5cms.tooltip({icon:"error",content:("错误代码：" + status + " 错误消息：" + error)},function(){});
             }
         });
+        -->
 
         $("#saveColumnButton").click(function(){
-            var result = $("#columnName").nonEmpty({content:"栏目类型名称不能为空！"});
-            if(result) $("#columnForm").submit();
+            /*var result = $("#columnName").nonEmpty({content:"栏目类型名称不能为空！"});
+            if(result) $("#columnForm").submit();*/
+            $("#columnForm").submit();
         });
     });
 </script>

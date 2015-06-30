@@ -129,38 +129,62 @@
             $('.table-cb').iCheck('uncheck');
         });
        function deleteColType(ctIds) {
-             $.v5cms.confirm({icon:"question",content:"您确定要删除栏目类型吗，删除后将不能恢复？",width:350,ok:function(){
-                 var url = "<@spring.url '/manager/coltype/delete'/>";
-                 $.ajax({
-                     dataType:'json',
-                     type:'POST',
-                     url:url,
-                     data:{colTypeIds:ctIds},
-                     success:function(data){
-                         if(data.status == "1"){
-                             $.v5cms.tooltip({icon:"succeed","content":data.message},function(){
-                                 location.reload();
-                             });
-                         }else{
-                             $.v5cms.tooltip({icon:"error","content":data.message},function(){});
-                         }
-                     },
-                     error:function(XMLHttpRequest, textStatus, errorThrown){
-                         $.v5cms.tooltip({icon:"error","content":"删除栏目类型信息出错，"+textStatus+"，"+errorThrown});
+           layer.confirm('您确定要删除栏目类型吗，删除后将不能恢复？', {icon: 3}, function(index){
+               var url = "<@spring.url '/manager/coltype/delete'/>";
+               $.ajax({
+                   dataType:'json',
+                   type:'POST',
+                   url:url,
+                   data:{colTypeIds:ctIds},
+                   success:function(data){
+                       if(data.status == "1"){
+                           layer.msg(data.message, {
+                               icon: 1,
+                               time:2000
+                           },function(){
+                               location.reload();
+                           });
+                       }else{
+                           layer.msg(data.message, {icon: 2});
+                       }
+                   },
+                   error:function(XMLHttpRequest, textStatus, errorThrown){
+                       layer.msg("删除栏目类型信息出错，"+textStatus+"，"+errorThrown, {icon: 2});
+                   }
+               });
+               layer.close(index);
+           });
+           <#--
+         $.v5cms.confirm({icon:"question",content:"您确定要删除栏目类型吗，删除后将不能恢复？",width:350,ok:function(){
+             var url = "<@spring.url '/manager/coltype/delete'/>";
+             $.ajax({
+                 dataType:'json',
+                 type:'POST',
+                 url:url,
+                 data:{colTypeIds:ctIds},
+                 success:function(data){
+                     if(data.status == "1"){
+                         /*$.v5cms.tooltip({icon:"succeed","content":data.message},function(){
+                             location.reload();
+                         });*/
+                         layer.msg(data.message, {
+                             icon: 1,
+                             time:2000
+                         },function(){
+                             location.reload();
+                         });
+                     }else{
+                         //$.v5cms.tooltip({icon:"error","content":data.message},function(){});
+                         layer.msg(data.message, {icon: 2});
                      }
-                 });
-                /*$.post(url,{colTypeIds:ctIds},function(data){
-                    if(data.status == "1"){
-                        $.v5cms.tooltip({icon:"succeed","content":data.message},function(){
-                            location.reload();
-                        });
-                    }else{
-                        $.v5cms.tooltip({icon:"error","content":data.message},function(){
-                            location.reload();
-                        });
-                    }
-                },"json");*/
+                 },
+                 error:function(XMLHttpRequest, textStatus, errorThrown){
+                     //$.v5cms.tooltip({icon:"error","content":"删除栏目类型信息出错，"+textStatus+"，"+errorThrown});
+                     layer.msg("删除栏目类型信息出错，"+textStatus+"，"+errorThrown, {icon: 2});
+                 }
+             });
             }});
+            -->
         }
 
         $(".deleteColType").click(function(){
@@ -171,7 +195,8 @@
         $("#colTypeBatchDelete").click(function(){
             var $chs = $(":checkbox[checked=checked]");
             if($chs.length == 0){
-                $.v5cms.tooltip({icon:"warning","content":"您还没有选中要操作的数据项！"},function(){});
+                //$.v5cms.tooltip({icon:"warning","content":"您还没有选中要操作的数据项！"},function(){});
+                layer.msg("您还没有选中要操作的数据项！", {icon: 0});
                 return;
             }
             var colTypeIds = [];

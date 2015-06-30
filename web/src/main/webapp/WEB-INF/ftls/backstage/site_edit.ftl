@@ -39,7 +39,7 @@
                             <label for="inputEmail3" class="col-sm-2 control-label">站点名称 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" name="siteName" id="siteName"
-                                       placeholder="站点名称" value="${site.siteName!""}">
+                                       placeholder="站点名称" value="${site.siteName!""}" datatype="*" nullmsg="站点名称不能为空！">
                                 <span class="help-block">设置站点的标题，显示到title标签中。</span>
                             </div>
                         </div>
@@ -122,6 +122,37 @@
             location.href="<@spring.url '/manager/site/list'/>"
         });
         $("#isclosesite").chosen({disable_search_threshold: 10,width:'100%'});
+
+        $("#siteForm").Validform({
+            ajaxPost:true,
+            tiptype:function(msg,o,cssctl){
+                if(!o.obj.is("form")){
+                    if(o.type == 2){
+                        layer.tips(msg, o.obj,{time:0,tips:[2, '#78BA32']});
+                    }else{
+                        layer.tips(msg, o.obj,{time:0});
+                    }
+                }else{
+                    layer.closeAll('tips');
+                }
+            },
+            callback:function(data){
+                if(data.status === "1"){
+                    layer.msg(data.message, {
+                        icon: 1,
+                        time:2000
+                    },function(){
+                        location.href="<@spring.url '/manager/site/list'/>";
+                    });
+                }else if(data.status === "0"){
+                    layer.msg(data.message, {icon: 2});
+                }else{
+                    layer.msg("错误代码："+data.status+" 错误消息："+data.statusText, {icon: 2});
+                }
+            }
+        });
+
+        <#--
         $('#siteForm').ajaxForm({
             dataType : 'json',
             success : function(data) {
@@ -137,10 +168,12 @@
                 $.v5cms.tooltip({icon:"error",content:"错误代码：" + status + " 错误消息：" + error},function(){});
             }
         });
+        -->
 
         $("#saveSiteForm").click(function(){
-            var result = $("#siteName").nonEmpty({content:"网站名称不能为空！"});
-            if(result) $("#siteForm").submit();
+//            var result = $("#siteName").nonEmpty({content:"网站名称不能为空！"});
+//            if(result) $("#siteForm").submit();
+            $("#siteForm").submit();
         });
     });
 </script>

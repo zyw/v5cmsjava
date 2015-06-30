@@ -129,6 +129,32 @@
         });
 
         function deleteColumn(columnId) {
+            layer.confirm('您确定要删除栏目信息吗，删除后将不能恢复？', {icon: 3}, function(index){
+                var url = "<@spring.url '/manager/column/delete'/>";
+                $.ajax({
+                    dataType:'json',
+                    type:'POST',
+                    url:url,
+                    data:{columnId:columnId},
+                    success:function(data){
+                        if(data.status == "1"){
+                            layer.msg(data.message, {
+                                icon: 1,
+                                time:2000
+                            },function(){
+                                location.reload();
+                            });
+                        }else{
+                            layer.msg(data.message, {icon: 2});
+                        }
+                    },
+                    error:function(XMLHttpRequest, textStatus, errorThrown){
+                        layer.msg("删除栏目类型信息出错，"+textStatus+"，"+errorThrown, {icon: 2});
+                    }
+                });
+                layer.close(index);
+            });
+            <#--
             $.v5cms.confirm({icon:"question",content:"您确定要删除栏目信息吗，删除后将不能恢复？",width:350,ok:function(){
                 var url = "<@spring.url '/manager/column/delete'/>";
                 $.ajax({
@@ -150,6 +176,7 @@
                     }
                 });
             }});
+            -->
         }
 
         $(".delete-column").click(function(){
