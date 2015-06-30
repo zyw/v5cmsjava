@@ -88,7 +88,7 @@
                                 </#list>
                             <#else>
                             <tr>
-                                <td colspan="8"><h3>还没有内容数据！</h3></td>
+                                <td class="text-center" colspan="8"><h3>还没有内容数据！</h3></td>
                             </tr>
                             </#if>
                             </tbody>
