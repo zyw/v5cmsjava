@@ -116,17 +116,6 @@
             ajaxPost:true,
             showAllError:true,
             tiptype:2,
-            /*tiptype:function(msg,o,cssctl){
-                if(!o.obj.is("form")){
-                    if(o.type == 2){
-                        layer.tips(msg, o.obj,{tips:[2, '#78BA32']});
-                    }else{
-                        layer.tips(msg, o.obj,{time:0});
-                    }
-                }else{
-                    layer.closeAll('tips');
-                }
-            },*/
             callback:function(data){
                 if(data.status === "1"){
                     layer.msg(data.message, {
@@ -143,27 +132,7 @@
             }
         });
 
-        <#--
-        $('#colTypeForm').ajaxForm({
-            dataType : 'json',
-            success : function(data) {
-                if(data.status == "1"){
-                    $.v5cms.tooltip({icon:"succeed",content:data.message},function(){
-                        location.href="<@spring.url '/manager/coltype/list/1'/>";
-                    });
-                }else{
-                    $.v5cms.tooltip({icon:"error",content:data.message},function(){});
-                }
-            },
-            error:function(xhr, status, error){
-                $.v5cms.tooltip({icon:"error",content:"错误代码：" + status + " 错误消息：" + error},function(){});
-            }
-        });
-        -->
-
         $("#saveColTypeForm").click(function(){
-            /*var result = $("#colTypeName").nonEmpty({content:"栏目类型名称不能为空！"});
-            if(result) $("#colTypeForm").submit();*/
             $("#colTypeForm").submit();
         });
     });

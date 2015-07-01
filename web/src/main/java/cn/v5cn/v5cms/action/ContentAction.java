@@ -52,9 +52,7 @@ public class ContentAction {
         Site site = (Site)(SystemUtils.getSessionSite());
         content.setSiteId(site.getSiteId());
 
-//        Page<ColumnType> pageColumnTypes = columnTypeBiz.findColumnTypeByColTypeNamePageable(colType, p);
         Page<Content> pageContents = contentBiz.findContentPageable(content, p);
-        System.out.println(pageContents.getContent());
         modelMap.addAttribute("contents",pageContents.getContent());
         modelMap.addAttribute("pagination", SystemUtils.pagination(pageContents, HttpUtils.getContextPath(request) + "/manager/content/list"));
         return "content_list";

@@ -31,7 +31,7 @@ public class Content implements Serializable {
     private Integer stick;          //是否置顶，1：置顶，2：反之
     private Integer stickNum;       //置顶序号，只有是置顶状态，才起作用
     private String publishDT;         //原内容发布日期
-    private Integer state;          //是否是草稿，1：发布，0：草稿
+    private Integer state;          //内容状态，2：发布，1：待审核，0：草稿
     private String cpics;           //与文章关联的图片，多个使用逗号分割
     private String cattas;          //文章中使用的附件，多个使用丢号分割
     private String dispic;          //展示图

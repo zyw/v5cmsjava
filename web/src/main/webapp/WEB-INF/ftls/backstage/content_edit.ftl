@@ -26,10 +26,12 @@
                 <div class="box-header">
                     <!-- tools box -->
                     <div class="pull-right box-tools">
-                        <button id="saveContentButton" class="btn btn-success btn-sm" data-toggle="tooltip" title="保存">
-                            <i class="fa fa-save"></i> 保存</button>
+                        <button id="publishContentButton" class="btn btn-success btn-sm" data-toggle="tooltip" title="发布">
+                            <i class="fa fa-location-arrow"></i> 发布</button>
+                        <button id="submitContentButton" class="btn btn-success btn-sm" data-toggle="tooltip" title="提交">
+                            <i class="fa fa-save"></i> 提交</button>
                         <button id="saveContentDraftButton" class="btn btn-info btn-sm" data-toggle="tooltip" title="保存草稿箱">
-                            <i class="fa fa-save"></i> 保存草稿箱</button>
+                            <i class="fa fa-magic"></i> 保存草稿箱</button>
                         <button id="backContentList" class="btn btn-default btn-sm" data-toggle="tooltip" title="返回">
                             <i class="fa fa-mail-forward"></i> 返回</button>
                     </div><!-- /. tools -->
@@ -45,7 +47,7 @@
                             <label class="col-sm-2 control-label">栏目 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-4">
                                 <input type="text" id="columnTreeInput" class="form-control" value="" datatype="*" nullmsg="栏目类型不能为空！" readonly>
-                                <input type="hidden" id="columnId" name="columnId">
+                                <input type="hidden" id="columnId" name="column.colsId">
                                 <span class="glyphicon glyphicon-chevron-down form-control-feedback" aria-hidden="true"></span>
                                 <div id="columnTreeDiv" style="width:94.6%;background:#fff;display:none;position: absolute;border: 1px #c0c0c0 solid;z-index: 9999;">
                                     <ul id="columnTree" class="ztree"></ul>
@@ -173,7 +175,9 @@
                         <div class="form-group">
                             <label for="editor" class="col-sm-2 control-label">图片内容</label>
                             <div class="col-sm-10">
-                                <input value="添加或选择图片" id="uploadAndViewImage" class="btn btn-success">
+                                <button id="uploadAndViewImage" class="btn btn-success">
+                                    <i class="fa fa-plus"></i> 添加或选择图片
+                                </button>
                             </div>
                         </div>
                         <div class="form-group">
@@ -194,7 +198,7 @@
     <!-- /.content -->
 </aside><!-- /.right-side -->
 <div class="modal fade" id="addSelectImgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="width: 800px;">
+    <div class="modal-dialog" style="width:800px;margin-top:100px;">
         <div class="modal-content">
             <#--<div class="modal-header">-->
                 <#--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
@@ -243,7 +247,7 @@
                 </div>
             </div>
             <div class="modal-footer" style="margin-top: 0px;">
-                <button type="button" class="btn btn-primary">确定</button>
+                <button type="button" class="btn btn-success">确定</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
         </div>
@@ -322,10 +326,14 @@
             $("#content_state").val(contentState);
             if(result && cnameResult) $("#contentForm").submit();*/
 
+            $("#content_state").val(contentState);
             $("#contentForm").submit();
         }
 
-        $("#saveContentButton").click(function(){
+        $("#publishContentButton").click(function(){
+            saveContent(2);
+        });
+        $("#submitContentButton").click(function(){
             saveContent(1);
         });
         $("#saveContentDraftButton").click(function(){

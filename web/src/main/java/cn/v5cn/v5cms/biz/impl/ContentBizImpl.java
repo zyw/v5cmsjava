@@ -2,13 +2,10 @@ package cn.v5cn.v5cms.biz.impl;
 
 import cn.v5cn.v5cms.biz.ContentBiz;
 import cn.v5cn.v5cms.dao.ContentDao;
-import cn.v5cn.v5cms.entity.Adv;
-import cn.v5cn.v5cms.entity.AdvPos;
 import cn.v5cn.v5cms.entity.Column;
 import cn.v5cn.v5cms.entity.Content;
 import cn.v5cn.v5cms.util.PropertyUtils;
 import com.google.common.collect.Lists;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +51,7 @@ public class ContentBizImpl implements ContentBiz {
                 Path<Long> siteId = root.get("siteId");
                 ps.add(criteriaBuilder.equal(siteId,content.getSiteId()));
 
-                return criteriaBuilder.and(ps.toArray(new javax.persistence.criteria.Predicate[0]));
+                return criteriaBuilder.and(ps.toArray(new Predicate[ps.size()]));
             }
         },new PageRequest(currPage-1,pageSize,new Sort(Sort.Direction.DESC,"lastdt")));
     }

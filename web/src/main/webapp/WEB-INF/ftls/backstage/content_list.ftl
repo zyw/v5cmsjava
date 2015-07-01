@@ -75,14 +75,14 @@
                                     <td class="td-center">
                                         <input type="checkbox" class="table-cb" value="${content.contentId}"/>
                                     </td>
-                                    <td>${content.contentId}</td>
-                                    <td>${content.cname}</td>
-                                    <td>${content.column.columnName}</td>
-                                    <td>${content.lastdt}</td>
-                                    <td>${content.state}</td>
+                                    <td>${content.contentId!""}</td>
+                                    <td>${content.cname!""}</td>
+                                    <td>${content.column.columnName!""}</td>
+                                    <td>${content.lastdt!""}</td>
+                                    <td>${content.state!""}</td>
                                     <td>
-                                        <a href="<@spring.url '/manager/coltype/edit/'/>${content.contentId}">修改</a>&nbsp;&nbsp;
-                                        <a href="javascript:;" class="deleteColType" data-ctid="${content.contentId}">删除</a>
+                                        <a href="<@spring.url '/manager/coltype/edit/'/>${content.contentId!""}">修改</a>&nbsp;&nbsp;
+                                        <a href="javascript:;" class="deleteColType" data-ctid="${content.contentId!""}">删除</a>
                                     </td>
                                 </tr>
                                 </#list>
@@ -94,6 +94,9 @@
                             </tbody>
                         </table>
                     </div><!-- /.box-body -->
+                    <div class="box-footer clearfix">
+                        ${pagination}
+                    </div>
                 </div><!-- /.box -->
             </div><!-- /.col-xs-9 -->
         </div><!-- /.row -->
