@@ -51,6 +51,7 @@
                                        placeholder="栏目名称" value="${column.columnName!""}" datatype="*" nullmsg="栏目名称不能为空！">
                                 <span class="help-block">设置版位的名称，方便日后管理。</span>
                             </div>
+                            <div class="col-sm-3 Validform_checktip"></div>
                         </div>
                         <div class="form-group">
                             <label for="coltpl" class="col-sm-2 control-label">栏目类型</label>
@@ -67,9 +68,10 @@
                             <label for="sortNum" class="col-sm-2 control-label">显示顺序</label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" name="sortNum" id="sortNum"
-                                       placeholder="显示顺序" value="${column.sortNum!0}">
+                                       placeholder="显示顺序" value="${column.sortNum!0}" datatype="n" errormsg="显示顺序必须为数字！">
                                 <span class="help-block">栏目的显示顺序越小越靠前。</span>
                             </div>
+                            <div class="col-sm-3 Validform_checktip"></div>
                         </div>
                         <div class="form-group">
                             <label for="openWay" class="col-sm-2 control-label">打开方式</label>
@@ -92,9 +94,10 @@
                             <label for="columnOutside" class="col-sm-2 control-label">外链地址</label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" name="columnOutside" id="columnOutside"
-                                       placeholder="外链地址" value="${column.columnOutside!''}">
+                                       placeholder="外链地址" value="${column.columnOutside!''}" ignore="ignore" datatype="url" errormsg="外链地址格式不正确！">
                                 <span class="help-block">连接到其他站点。</span>
                             </div>
+                            <div class="col-sm-3 Validform_checktip"></div>
                         </div>
                         <div class="form-group">
                             <label for="isDisabled" class="col-sm-2 control-label">栏目状态</label>
@@ -134,7 +137,9 @@
 
         $("#columnForm").Validform({
             ajaxPost:true,
-            tiptype:function(msg,o,cssctl){
+            showAllError:true,
+            tiptype:2,
+            /*tiptype:function(msg,o,cssctl){
                 if(!o.obj.is("form")){
                     if(o.type == 2){
                         layer.tips(msg, o.obj,{tips:[2, '#78BA32']});
@@ -144,7 +149,7 @@
                 }else{
                     layer.closeAll('tips');
                 }
-            },
+            },*/
             callback:function(data){
                 if(data.status === "1"){
                     layer.msg(data.message, {

@@ -37,11 +37,12 @@
                         <input type="hidden" value="${site.siteId!""}" name="siteId">
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">站点名称 <span style="color: #ff0000">*</span></label>
-                            <div class="col-sm-4">
+                            <div class="col-sm-5">
                                 <input type="text" class="form-control" name="siteName" id="siteName"
                                        placeholder="站点名称" value="${site.siteName!""}" datatype="*" nullmsg="站点名称不能为空！">
                                 <span class="help-block">设置站点的标题，显示到title标签中。</span>
                             </div>
+                            <div class="col-sm-3 Validform_checktip"></div>
                         </div>
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">副标题</label>
@@ -125,7 +126,9 @@
 
         $("#siteForm").Validform({
             ajaxPost:true,
-            tiptype:function(msg,o,cssctl){
+            showAllError:true,
+            tiptype:2,
+            /*tiptype:function(msg,o,cssctl){
                 if(!o.obj.is("form")){
                     if(o.type == 2){
                         layer.tips(msg, o.obj,{tips:[2, '#78BA32']});
@@ -135,7 +138,7 @@
                 }else{
                     layer.closeAll('tips');
                 }
-            },
+            },*/
             callback:function(data){
                 if(data.status === "1"){
                     layer.msg(data.message, {

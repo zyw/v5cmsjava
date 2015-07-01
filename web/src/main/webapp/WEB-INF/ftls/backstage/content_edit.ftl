@@ -47,10 +47,11 @@
                                 <input type="text" id="columnTreeInput" class="form-control" value="" datatype="*" nullmsg="栏目类型不能为空！" readonly>
                                 <input type="hidden" id="columnId" name="columnId">
                                 <span class="glyphicon glyphicon-chevron-down form-control-feedback" aria-hidden="true"></span>
-                                <div id="columnTreeDiv" style="width: 92.6%;background:#fff;display: none;position: absolute;border: 1px #c0c0c0 solid;z-index: 9999;">
+                                <div id="columnTreeDiv" style="width:94.6%;background:#fff;display:none;position: absolute;border: 1px #c0c0c0 solid;z-index: 9999;">
                                     <ul id="columnTree" class="ztree"></ul>
                                 </div>
                             </div>
+                            <div class="col-sm-3 Validform_checktip"></div>
                         </div>
                         <div class="form-group">
                             <label for="columnName" class="col-sm-2 control-label">标题 <span style="color: #ff0000">*</span></label>
@@ -58,18 +59,23 @@
                                 <input type="text" class="form-control" name="cname" id="cname"
                                        placeholder="内容标题" value="" datatype="*" nullmsg="内容标题不能为空！">
                             </div>
+                            <div class="col-sm-3 Validform_checktip"></div>
                         </div>
                         <div class="form-group">
                             <label for="sortNum" class="col-sm-2 control-label" style="line-height: 30px;">外部链接</label>
                             <div class="col-sm-10">
-                                <label class="checkbox-inline" style="padding-left: 0px;width: 100px;">
+                                <label class="checkbox-inline col-sm-3" style="padding-left: 0px;width: 100px;">
                                     <select class="form-control" id="outside" name="outside">
                                         <option value="0">否</option>
                                         <option value="1">是</option>
                                     </select>
                                 </label>
-                                <label class="checkbox-inline" style="width: 300px;">
-                                    <input type="text" class="form-control" style="width:300px;" name="outsideURL" id="outsideURL" value="" placeholder="链接地址">
+                                <label class="checkbox-inline col-sm-5">
+                                    <input type="text" class="form-control"
+                                           name="outsideURL" id="outsideURL" value="" placeholder="链接地址" ignore="ignore" datatype="url" errormsg="外链地址格式不正确！">
+                                </label>
+                                <label class="checkbox-inline" style="width:200px;">
+                                    <div class="Validform_checktip"></div>
                                 </label>
                             </div>
                         </div>
@@ -117,22 +123,25 @@
                                     <input type="text" class="form-control" style="width:150px;" name="source" id="source" placeholder="来源">
                                 </label>
                                 <label class="checkbox-inline" style="width: 300px;">
-                                    <input type="text" class="form-control" style="width:300px;" name="sourceURL" id="sourceURL" placeholder="来源地址">
+                                    <input type="text" class="form-control" style="width:300px;"
+                                           name="sourceURL" id="sourceURL" placeholder="来源地址"
+                                           ignore="ignore" datatype="url" errormsg="来源地址格式不正确！">
+                                </label>
+                                <label class="checkbox-inline" style="width:200px;">
+                                    <div class="Validform_checktip"></div>
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="sortNum" class="col-sm-2 control-label" style="line-height: 30px;">是否置顶</label>
                             <div class="col-sm-10">
-                                <label class="checkbox-inline col-sm-4" style="padding-left: 0px;width: 80px;">
+                                <label class="checkbox-inline col-sm-3" style="padding-left: 0px;width: 100px;">
                                     <select class="form-control" id="stick" name="stick">
                                         <option value="0">否</option>
                                         <option value="1">是</option>
                                     </select>
                                 </label>
-                                <label class="checkbox-inline col-sm-2">
-                                    <input type="text" class="form-control" name="stickNum" id="stickNum" placeholder="置顶序号">
-                                </label>
+                                <!--
                                 <label class="checkbox-inline col-sm-3">
                                     <div class="input-group date date-picker">
                                         <input type="text" class="form-control date-picker" name="publishDT" placeholder="发布日期">
@@ -141,6 +150,24 @@
                                         </div>
                                     </div>
                                 </label>
+                                -->
+                                <label class="checkbox-inline col-sm-4">
+                                    <input type="text" class="form-control" name="stickNum" id="stickNum" placeholder="置顶序号" ignore="ignore" datatype="n" errormsg="序号必须为数字！">
+                                </label>
+                                <label class="checkbox-inline col-sm-3">
+                                    <div class="Validform_checktip"></div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sortNum" class="col-sm-2 control-label">发布日期</label>
+                            <div class="col-sm-5">
+                                <div class="input-group date date-picker">
+                                    <input type="text" class="form-control date-picker" name="publishDT" placeholder="发布日期">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -241,7 +268,9 @@
 
         $("#contentForm").Validform({
             ajaxPost:true,
-            tiptype:function(msg,o,cssctl){
+            showAllError:true,
+            tiptype:2,
+            /*tiptype:function(msg,o,cssctl){
                 if(!o.obj.is("form")){
                     if(o.type == 2){
                         layer.tips(msg, o.obj,{tips:[2, '#78BA32']});
@@ -251,7 +280,7 @@
                 }else{
                     layer.closeAll('tips');
                 }
-            },
+            },*/
             callback:function(data){
                 if(data.status === "1"){
                     layer.msg(data.message, {

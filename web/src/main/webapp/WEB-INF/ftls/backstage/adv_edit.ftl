@@ -44,6 +44,7 @@
                                        placeholder="广告名称" value="${adv.advName!""}" datatype="*" nullmsg="请输入广告名称！">
                                 <span class="help-block">设置广告名称。</span>
                             </div>
+                            <div class="col-sm-3 Validform_checktip"></div>
                         </div>
                         <div class="form-group">
                             <label for="advPosId" class="col-sm-2 control-label">广告版位 <span style="color: #ff0000">*</span></label>
@@ -63,10 +64,11 @@
                                     </#if>
                                 </select>
                             </div>
+                            <div class="col-sm-3 Validform_checktip"></div>
                         </div>
                         <div class="form-group">
                             <label for="advStartEndTime" class="col-sm-2 control-label">开始结束时间 <span style="color: #ff0000">*</span></label>
-                            <div class="col-sm-4 input-group" style="padding-left: 15px;">
+                            <div class="col-sm-4 input-group" style="padding-left:15px;float:left;">
                                 <input type="text" class="form-control" id="advStartEndTime"
                                        placeholder="开始结束时间" datatype="*" nullmsg="广告的开始和结束时间不能为空！" readonly>
                                 <input type="hidden" name="adv.advStartTime" value="${adv.advStartTime!""}" id="advStartTime">
@@ -75,6 +77,7 @@
                                     <i class="fa fa-calendar"></i>
                                 </div>
                             </div>
+                            <div class="col-sm-3 Validform_checktip"></div>
                         </div>
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">启用 </label>
@@ -462,7 +465,9 @@
 
         $("#advForm").Validform({
             ajaxPost:true,
-            tiptype:function(msg,o,cssctl){
+            showAllError:true,
+            tiptype:2,
+            /*tiptype:function(msg,o,cssctl){
                 if(!o.obj.is("form")){
                     var inputId = o.obj.attr('id');
                     if(inputId === "advPosId"){
@@ -476,7 +481,7 @@
                 }else{
                     layer.closeAll('tips');
                 }
-            },
+            },*/
             beforeSubmit:function(curform){
                 var vailObj = {};
                 vailObj.advTypeVail = false;

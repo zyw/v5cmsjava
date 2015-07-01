@@ -42,6 +42,7 @@
                                        placeholder="角色名称" value="${role.name!""}" datatype="*" nullmsg="请输入角色名称！">
                                 <span class="help-block">设置版位的名称，方便日后管理。</span>
                             </div>
+                            <div class="col-sm-3 Validform_checktip"></div>
                         </div>
                         <div class="form-group">
                             <label for="coltpl" class="col-sm-2 control-label">序号</label>
@@ -49,6 +50,7 @@
                                 <input type="text" name="sortNum" id="sortNum" class="form-control" placeholder="序号" value="0" datatype="n" errormsg="序号必须为数字！">
                                 <span class="help-block">对角色进行排序，越小越靠前。</span>
                             </div>
+                            <div class="col-sm-3 Validform_checktip"></div>
                         </div>
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">状态</label>
@@ -146,7 +148,9 @@
 
         $("#roleForm").Validform({
             ajaxPost:true,
-            tiptype:function(msg,o,cssctl){
+            showAllError:true,
+            tiptype:2,
+            /*tiptype:function(msg,o,cssctl){
                 if(!o.obj.is("form")){
                     if(o.type == 2){
                         layer.tips(msg, o.obj,{tips:[2, '#78BA32']});
@@ -156,7 +160,7 @@
                 }else{
                     layer.closeAll('tips');
                 }
-            },
+            },*/
             callback:function(data){
                 if(data.status === "1"){
                     layer.msg(data.message, {

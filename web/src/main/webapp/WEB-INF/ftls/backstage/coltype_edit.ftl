@@ -42,6 +42,7 @@
                                        placeholder="栏目类型名称" value="${columnType.colTypeName!""}" datatype="*" nullmsg="栏目类型名称不能为空！">
                                 <span class="help-block">设置版位的名称，方便日后管理。</span>
                             </div>
+                            <div class="col-sm-3 Validform_checktip"></div>
                         </div>
                         <div class="form-group">
                             <label for="coltpl" class="col-sm-2 control-label">栏目模板</label>
@@ -113,7 +114,9 @@
 
         $("#colTypeForm").Validform({
             ajaxPost:true,
-            tiptype:function(msg,o,cssctl){
+            showAllError:true,
+            tiptype:2,
+            /*tiptype:function(msg,o,cssctl){
                 if(!o.obj.is("form")){
                     if(o.type == 2){
                         layer.tips(msg, o.obj,{tips:[2, '#78BA32']});
@@ -123,7 +126,7 @@
                 }else{
                     layer.closeAll('tips');
                 }
-            },
+            },*/
             callback:function(data){
                 if(data.status === "1"){
                     layer.msg(data.message, {

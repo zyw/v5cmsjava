@@ -42,6 +42,7 @@
                                        placeholder="版位名称" value="${advpos.advPosName!""}" datatype="*" nullmsg="版位名称不能为空！"/>
                                 <span class="help-block">设置版位的名称，方便日后管理。</span>
                             </div>
+                            <div class="col-sm-3 Validform_checktip"></div>
                         </div>
                         <div class="form-group">
                             <label for="describe" class="col-sm-2 control-label">版位描述</label>
@@ -87,7 +88,9 @@
 
         $("#advPosForm").Validform({
             ajaxPost:true,
-            tiptype:function(msg,o,cssctl){
+            showAllError:true,
+            tiptype:2,
+            /*tiptype:function(msg,o,cssctl){
                 if(!o.obj.is("form")){
                     if(o.type == 2){
                         layer.tips(msg, o.obj,{tips:[2, '#78BA32']});
@@ -97,7 +100,7 @@
                 }else{
                     layer.closeAll('tips');
                 }
-            },
+            },*/
             callback:function(data){
                 if(data.status === "1"){
                     layer.msg(data.message, {
