@@ -4,7 +4,6 @@ import cn.v5cn.v5cms.biz.SystemRoleBiz;
 import cn.v5cn.v5cms.entity.SystemRole;
 import cn.v5cn.v5cms.util.HttpUtils;
 import cn.v5cn.v5cms.util.SystemUtils;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;

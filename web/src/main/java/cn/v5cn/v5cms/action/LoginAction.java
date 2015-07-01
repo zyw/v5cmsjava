@@ -1,9 +1,5 @@
 package cn.v5cn.v5cms.action;
 
-import cn.v5cn.v5cms.biz.ManagerBiz;
-import cn.v5cn.v5cms.entity.Manager;
-import cn.v5cn.v5cms.util.Md5AndSha1;
-import cn.v5cn.v5cms.util.SystemConstant;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -21,9 +17,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
-import java.util.List;
-
-import static cn.v5cn.v5cms.util.MessageSourceHelper.getMessage;
 
 /**
  * Created by ZYW on 2014/5/30.
