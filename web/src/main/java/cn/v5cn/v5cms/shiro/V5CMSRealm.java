@@ -1,18 +1,15 @@
 package cn.v5cn.v5cms.shiro;
 
-import cn.v5cn.v5cms.biz.SystemUserBiz;
+import cn.v5cn.v5cms.service.SystemUserBiz;
 import cn.v5cn.v5cms.entity.SystemUser;
 import cn.v5cn.v5cms.util.SystemConstant;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
-import org.apache.shiro.authc.credential.PasswordMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.security.auth.Subject;
 
 /**
  * Created by ZXF-PC1 on 2015/6/18.

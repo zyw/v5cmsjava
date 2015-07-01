@@ -1,6 +1,6 @@
 package cn.v5cn.v5cms.filter;
 
-import cn.v5cn.v5cms.biz.SiteBiz;
+import cn.v5cn.v5cms.service.SiteBiz;
 import cn.v5cn.v5cms.entity.Site;
 import com.google.common.collect.ImmutableList;
 import org.apache.commons.lang3.StringUtils;

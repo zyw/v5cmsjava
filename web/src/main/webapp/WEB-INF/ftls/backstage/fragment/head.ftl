@@ -388,6 +388,12 @@
                         <#--<li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i> Editors</a></li>-->
                     <#--</ul>-->
                 </li>
+                <li>
+                    <a href="<@spring.url '/manager/tpl/list'/>">
+                        <i class="fa fa-paste"></i> <span>资源管理</span>
+                    </a>
+                </li>
+                <!--
                 <li class="treeview">
                     <a href="javascript:;">
                         <i class="fa fa-paste"></i> <span>资源管理</span>
@@ -400,6 +406,7 @@
                         </li>
                     </ul>
                 </li>
+                -->
                 <li class="treeview" id="user_auth">
                     <a href="javascript:;">
                         <i class="fa fa-user"></i> <span>用户权限</span>
