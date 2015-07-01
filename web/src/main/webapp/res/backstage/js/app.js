@@ -1119,27 +1119,13 @@
     function _matching($obj,options){
         var value = $obj.val();
         if(value == null || $.trim(value) === "") return true;
-        // Render options
-        /*var settings = $.extend({
-            trigger: "hover ",
-            html:true,
-            pattern:"",
-            content:"模式不匹配！",
-            container:'body',
-            template:'<div class="popover"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content" style="color: #FF0000"></div></div>'
-        }, options);*/
+
         if(options.pattern == "") return false;
 
         var regExp = new RegExp(options.pattern,"g");
 
         if(regExp.test(value)) return true;
 
-        /*var iconHtml = "<span class='glyphicon glyphicon-remove form-control-feedback'></span>";
-        $obj.each(function(){
-            $(this).popover(settings);
-            $(this).parent().parent().addClass("has-error has-feedback");
-            $(this).after(iconHtml);
-        });*/
         layer.tips(options.content, $obj,{time:0});
         return false;
     }
@@ -1173,20 +1159,6 @@
     $.fn.nonEmpty = function(options){
         var value = this.val();
         if(value != null && $.trim(value) !== "") return true;
-        /*// Render options
-        var settings = $.extend({
-            trigger: "hover ",
-            html:true,
-            content:"不能为空！",
-            container:'body',
-            template:'<div class="popover"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content" style="color: #FF0000"></div></div>'
-        }, options);
-        var iconHtml = "<span class='glyphicon glyphicon-remove form-control-feedback'></span>";
-        this.each(function(){
-            $(this).popover(settings);
-            $(this).parent().parent().addClass("has-error has-feedback");
-            $(this).after(iconHtml);
-        });*/
         if(options.id !== undefined && options.id !== ""){
             layer.tips(options.content, "#"+options.id,{time:0});
         }else{
