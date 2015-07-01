@@ -132,12 +132,10 @@ public class SystemUtils {
         return htmlSb.toString();
     }
 
-//    public static Object getSessionSite(HttpServletRequest request){
-//        return getSessionSite(request.getSession());
-//    }
     public static Session getShiroSession(){
         return SecurityUtils.getSubject().getSession();
     }
+
     public static Object getSessionSite(){
         Object siteObj = SecurityUtils.getSubject().getSession().getAttribute(SystemConstant.SITE_SESSION_KEY);
         if(siteObj == null){
