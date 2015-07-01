@@ -11,7 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * Created by ZYW on 2014/7/28.
  */
-public interface AdvBiz {
+public interface AdvService {
     Adv save(AdvWrapper advWrapper) throws JsonProcessingException;
     Page<Adv> findAdvByAdvNamePageable(Adv adv,Integer currPage);
     Adv findOne(Long advId);

@@ -1,6 +1,6 @@
 package cn.v5cn.v5cms.shiro;
 
-import cn.v5cn.v5cms.service.SystemUserBiz;
+import cn.v5cn.v5cms.service.SystemUserService;
 import cn.v5cn.v5cms.entity.SystemUser;
 import cn.v5cn.v5cms.util.SystemConstant;
 import org.apache.shiro.SecurityUtils;
@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class V5CMSRealm extends AuthorizingRealm {
 
     @Autowired
-    private SystemUserBiz systemUserBiz;
+    private SystemUserService systemUserService;
 
     /**
      * 设置权限
@@ -33,7 +33,7 @@ public class V5CMSRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         String loginName = authenticationToken.getPrincipal().toString();
-        SystemUser systemUser = systemUserBiz.findByLoginname(loginName);
+        SystemUser systemUser = systemUserService.findByLoginname(loginName);
         if(systemUser == null){
             throw new UnknownAccountException();
         }

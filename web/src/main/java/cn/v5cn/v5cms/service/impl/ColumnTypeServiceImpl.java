@@ -1,6 +1,6 @@
 package cn.v5cn.v5cms.service.impl;
 
-import cn.v5cn.v5cms.service.ColumnTypeBiz;
+import cn.v5cn.v5cms.service.ColumnTypeService;
 import cn.v5cn.v5cms.dao.ColumnTypeDao;
 import cn.v5cn.v5cms.entity.ColumnType;
 import cn.v5cn.v5cms.util.PropertyUtils;
@@ -23,8 +23,8 @@ import java.util.List;
  * Created by ZYW on 2014/11/5.
  */
 
-@Service("columnTypeBiz")
-public class ColumnTypeBizImpl implements ColumnTypeBiz {
+@Service("columnTypeService")
+public class ColumnTypeServiceImpl implements ColumnTypeService {
 
     @Autowired
     private ColumnTypeDao columnTypeDao;

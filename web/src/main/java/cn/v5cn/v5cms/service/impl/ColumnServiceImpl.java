@@ -1,6 +1,6 @@
 package cn.v5cn.v5cms.service.impl;
 
-import cn.v5cn.v5cms.service.ColumnBiz;
+import cn.v5cn.v5cms.service.ColumnService;
 import cn.v5cn.v5cms.dao.ColumnDao;
 import cn.v5cn.v5cms.entity.Column;
 import cn.v5cn.v5cms.entity.wrapper.ZTreeNode;
@@ -14,8 +14,8 @@ import java.util.List;
 /**
  * Created by ZYW on 2014/10/31.
  */
-@Service("columnBiz")
-public class ColumnBizImpl implements ColumnBiz {
+@Service("columnService")
+public class ColumnServiceImpl implements ColumnService {
 
     @Autowired
     private ColumnDao columnDao;

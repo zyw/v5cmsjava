@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by ZYW on 2014/10/31.
  */
-public interface ColumnBiz {
+public interface ColumnService {
 
     Column save(Column column);
 

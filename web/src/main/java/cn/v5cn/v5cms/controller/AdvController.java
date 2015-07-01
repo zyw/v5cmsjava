@@ -1,7 +1,7 @@
 package cn.v5cn.v5cms.controller;
 
-import cn.v5cn.v5cms.service.AdvBiz;
-import cn.v5cn.v5cms.service.AdvPosBiz;
+import cn.v5cn.v5cms.service.AdvService;
+import cn.v5cn.v5cms.service.AdvPosService;
 import cn.v5cn.v5cms.entity.Adv;
 import cn.v5cn.v5cms.entity.AdvPos;
 import cn.v5cn.v5cms.entity.Site;
@@ -46,9 +46,9 @@ public class AdvController {
     private final static Logger LOGGER = LoggerFactory.getLogger(AdvController.class);
 
     @Autowired
-    private AdvPosBiz advPosBiz;
+    private AdvPosService advPosService;
     @Autowired
-    private AdvBiz advBiz;
+    private AdvService advService;
 
     @RequestMapping(value = "/list/{p}",method = {RequestMethod.GET,RequestMethod.POST})
     public String advList(Adv adv,@PathVariable Integer p,HttpSession session,HttpServletRequest request,ModelMap modelMap){
@@ -61,7 +61,7 @@ public class AdvController {
         }
         Object searchObj = session.getAttribute("advSearch");
 
-        Page<Adv> result =  advBiz.findAdvByAdvNamePageable((searchObj == null ? (new Adv()):((Adv)searchObj)),p);
+        Page<Adv> result =  advService.findAdvByAdvNamePageable((searchObj == null ? (new Adv()):((Adv)searchObj)),p);
 
 //        if(searchObj != null){
 //            result = advBiz.findAdvByAdvNamePageable(((Adv)searchObj),p);
@@ -81,7 +81,7 @@ public class AdvController {
         Page<Adv> pageListAdv =  advBiz.findAdvByAdvNamePageable((adv == null ? (new Adv()):adv),currPage);*/
         modelMap.addAttribute("advs",result);
         modelMap.addAttribute("pagination",SystemUtils.pagination(result,HttpUtils.getContextPath(request)+"/manager/adv/list"));
-        ImmutableList<AdvPos> advposes = advPosBiz.finadAll();
+        ImmutableList<AdvPos> advposes = advPosService.finadAll();
         modelMap.addAttribute("aps",advposes);
 
         return "setting/adv_list";
@@ -89,7 +89,7 @@ public class AdvController {
 
     @RequestMapping(value = "/edit",method = RequestMethod.GET)
     public String advPosaup(ModelMap model){
-        ImmutableList<AdvPos> advposes = advPosBiz.finadAll();
+        ImmutableList<AdvPos> advposes = advPosService.finadAll();
         model.addAttribute("aps",advposes);
         model.addAttribute(new Adv());
         model.addAttribute("advTypes", Maps.newHashMap());
@@ -98,9 +98,9 @@ public class AdvController {
 
     @RequestMapping(value = "/edit/{advId}",method = RequestMethod.GET)
     public String advEdit(@PathVariable Long advId,ModelMap model){
-        ImmutableList<AdvPos> advposes = advPosBiz.finadAll();
+        ImmutableList<AdvPos> advposes = advPosService.finadAll();
         model.addAttribute("aps",advposes);
-        Adv adv = advBiz.findOne(advId);
+        Adv adv = advService.findOne(advId);
 
         if(adv == null){
             LOGGER.error("通过ID为{}没有查到广告信息。",advId);
@@ -140,7 +140,7 @@ public class AdvController {
 
         if(advWrapper.getAdv().getAdvId() != null){
             try {
-                advBiz.update(advWrapper);
+                advService.update(advWrapper);
                 return ImmutableMap.<String,Object>of("status","1","message",getMessage("adv.updatesuccess.message"));
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
@@ -156,7 +156,7 @@ public class AdvController {
         }
         LOGGER.info("添加广告信息，{}",advWrapper);
         try {
-            Adv adv= advBiz.save(advWrapper);
+            Adv adv= advService.save(advWrapper);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             LOGGER.error("添加广告时转换JSON出错！{}",e.getMessage());
@@ -225,7 +225,7 @@ public class AdvController {
     public ImmutableMap<String,Object> deleteAdvs(Long[] advIds,HttpServletRequest request){
         LOGGER.info("删除广告信息，ID为{}",advIds);
         try {
-            advBiz.deleteAdvs(advIds,request);
+            advService.deleteAdvs(advIds,request);
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.error("删除广告信息失败，ID为{}",advIds);

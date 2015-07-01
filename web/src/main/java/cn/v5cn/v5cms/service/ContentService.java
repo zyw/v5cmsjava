@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 /**
  * Created by ZYW on 2014/11/19.
  */
-public interface ContentBiz {
+public interface ContentService {
     Content save(Content content);
     Page<Content> findContentPageable(Content content,Integer currPage);
 }

@@ -1,6 +1,6 @@
 package cn.v5cn.v5cms.service.impl;
 
-import cn.v5cn.v5cms.service.SystemRoleBiz;
+import cn.v5cn.v5cms.service.SystemRoleService;
 import cn.v5cn.v5cms.dao.SystemRoleDao;
 import cn.v5cn.v5cms.entity.SystemRes;
 import cn.v5cn.v5cms.entity.SystemRole;
@@ -22,8 +22,8 @@ import java.util.List;
 /**
  * Created by ZXF-PC1 on 2015/6/26.
  */
-@Service("systemRoleBiz")
-public class SystemRoleBizImpl implements SystemRoleBiz {
+@Service("systemRoleService")
+public class SystemRoleServiceImpl implements SystemRoleService {
 
     @Autowired
     private SystemRoleDao systemRoleDao;

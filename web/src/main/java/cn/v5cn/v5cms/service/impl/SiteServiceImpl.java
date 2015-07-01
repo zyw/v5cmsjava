@@ -1,6 +1,6 @@
 package cn.v5cn.v5cms.service.impl;
 
-import cn.v5cn.v5cms.service.SiteBiz;
+import cn.v5cn.v5cms.service.SiteService;
 import cn.v5cn.v5cms.dao.SiteDao;
 import cn.v5cn.v5cms.entity.Site;
 import cn.v5cn.v5cms.util.SystemUtils;
@@ -17,8 +17,8 @@ import java.util.List;
 /**
  * Created by ZYW on 2014/6/30.
  */
-@Service("siteBiz")
-public class SiteBizImpl implements SiteBiz {
+@Service("siteService")
+public class SiteServiceImpl implements SiteService {
 
     @Autowired
     private SiteDao siteDao;

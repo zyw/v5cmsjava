@@ -8,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * Created by ZYW on 2014/6/30.
  */
-public interface SiteBiz {
+public interface SiteService {
     Site findBySiteId(Long siteId);
 
     ImmutableList<Site> finadAll();

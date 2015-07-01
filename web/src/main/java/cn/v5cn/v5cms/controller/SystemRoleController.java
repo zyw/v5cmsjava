@@ -1,6 +1,6 @@
 package cn.v5cn.v5cms.controller;
 
-import cn.v5cn.v5cms.service.SystemRoleBiz;
+import cn.v5cn.v5cms.service.SystemRoleService;
 import cn.v5cn.v5cms.entity.SystemRole;
 import cn.v5cn.v5cms.util.HttpUtils;
 import cn.v5cn.v5cms.util.SystemUtils;
@@ -38,7 +38,7 @@ public class SystemRoleController {
     private static final Logger LOGGER = LoggerFactory.getLogger(SystemRoleController.class);
 
     @Autowired
-    private SystemRoleBiz systemRoleBiz;
+    private SystemRoleService systemRoleService;
 
     @RequestMapping(value = "/list/{p}",method = {RequestMethod.GET,RequestMethod.POST})
     public String roleList(SystemRole role,@PathVariable Integer p,HttpServletRequest request,ModelMap modelMap){
@@ -51,7 +51,7 @@ public class SystemRoleController {
         }
         Object searchObj = session.getAttribute("roleSearch");
 
-        Page<SystemRole> result =  systemRoleBiz.findRoleByRoleNamePageable((searchObj == null ? (new SystemRole()):((SystemRole)searchObj)),p);
+        Page<SystemRole> result =  systemRoleService.findRoleByRoleNamePageable((searchObj == null ? (new SystemRole()):((SystemRole)searchObj)),p);
 
         modelMap.addAttribute("roles",result);
         modelMap.addAttribute("pagination", SystemUtils.pagination(result, HttpUtils.getContextPath(request) + "/manager/role/list"));
@@ -77,7 +77,7 @@ public class SystemRoleController {
         }
         //新增操作
         if(role.getId() == null){
-            Long result = systemRoleBiz.save(role,resIds);
+            Long result = systemRoleService.save(role,resIds);
             if(result !=null && result != 0L){
                 LOGGER.info("新增角色成功，{}",role);
                 return ImmutableMap.<String, Object>of("status","1","message",getMessage("role.addsuccess.message"));
@@ -87,7 +87,7 @@ public class SystemRoleController {
         }
         //修改操作
         try {
-            systemRoleBiz.save(role,resIds);
+            systemRoleService.save(role,resIds);
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.error("修改角色失败，{},失败堆栈错误：{}",role,e.getMessage());

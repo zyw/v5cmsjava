@@ -1,6 +1,6 @@
 package cn.v5cn.v5cms.controller;
 
-import cn.v5cn.v5cms.service.AdvPosBiz;
+import cn.v5cn.v5cms.service.AdvPosService;
 import cn.v5cn.v5cms.entity.AdvPos;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
@@ -30,11 +30,11 @@ import static cn.v5cn.v5cms.util.MessageSourceHelper.getMessage;
 public class AdvPosController {
     private static final Logger LOGGER = LoggerFactory.getLogger(AdvPosController.class);
     @Autowired
-    private AdvPosBiz advPosBiz;
+    private AdvPosService advPosService;
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String advPosList(ModelMap model){
-        model.addAttribute("advposs", advPosBiz.finadAll());
+        model.addAttribute("advposs", advPosService.finadAll());
         return "setting/advpos_list";
     }
 
@@ -47,7 +47,7 @@ public class AdvPosController {
     @RequestMapping(value = "/edit/{advPosId}",method = RequestMethod.GET)
     public String advPosEdit(@PathVariable Long advPosId,ModelMap model){
 
-        AdvPos result = advPosBiz.findOne(advPosId);
+        AdvPos result = advPosService.findOne(advPosId);
         if(result == null){
             model.addAttribute("advpos",new AdvPos());
         }else{
@@ -73,7 +73,7 @@ public class AdvPosController {
         }
         //新增操作
         if(advPos.getAdvPosId() == null){
-            AdvPos result = advPosBiz.save(advPos);
+            AdvPos result = advPosService.save(advPos);
             if(result.getAdvPosId() !=null && result.getAdvPosId() != 0L){
                 LOGGER.info("新增广告版位成功，{}",result);
                 return ImmutableMap.<String, Object>of("status","1","message",getMessage("advpos.addsuccess.message"));
@@ -96,7 +96,7 @@ public class AdvPosController {
 //        }
         AdvPos updateAdvPos = null;
         try {
-            updateAdvPos = advPosBiz.save(advPos);
+            updateAdvPos = advPosService.save(advPos);
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.error("修改广告版位失败，{},失败堆栈错误：{}",advPos,e.getMessage());
@@ -111,7 +111,7 @@ public class AdvPosController {
     public ImmutableMap<String,String> deleteAdvPos(Long[] advPosIds){
         LOGGER.info("删除广告版位，ID为{}",advPosIds);
         try {
-            advPosBiz.deleteAdvPos(advPosIds);
+            advPosService.deleteAdvPos(advPosIds);
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.error("删除广告版位失败，ID为{}",advPosIds);

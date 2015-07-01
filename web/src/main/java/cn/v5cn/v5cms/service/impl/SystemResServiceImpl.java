@@ -1,6 +1,6 @@
 package cn.v5cn.v5cms.service.impl;
 
-import cn.v5cn.v5cms.service.SystemResBiz;
+import cn.v5cn.v5cms.service.SystemResService;
 import cn.v5cn.v5cms.dao.SystemResDao;
 import cn.v5cn.v5cms.entity.SystemRes;
 import cn.v5cn.v5cms.entity.wrapper.ZTreeNode;
@@ -13,8 +13,8 @@ import java.util.List;
 /**
  * Created by ZXF-PC1 on 2015/6/23.
  */
-@Service("systemResBiz")
-public class SystemResBizImpl implements SystemResBiz {
+@Service("systemResService")
+public class SystemResServiceImpl implements SystemResService {
 
     @Autowired
     private SystemResDao systemResDao;

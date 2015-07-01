@@ -6,7 +6,7 @@ import com.google.common.collect.ImmutableList;
 /**
  * Created by ZYW on 2014/7/23.
  */
-public interface AdvPosBiz {
+public interface AdvPosService {
     AdvPos save(AdvPos advPos);
 
     ImmutableList<AdvPos> finadAll();

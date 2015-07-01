@@ -1,6 +1,6 @@
 package cn.v5cn.v5cms.controller;
 
-import cn.v5cn.v5cms.service.ColumnTypeBiz;
+import cn.v5cn.v5cms.service.ColumnTypeService;
 import cn.v5cn.v5cms.entity.ColumnType;
 import cn.v5cn.v5cms.entity.Site;
 import cn.v5cn.v5cms.exception.V5CMSNullValueException;
@@ -40,7 +40,7 @@ public class ColumnTypeController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ColumnTypeController.class);
 
     @Autowired
-    private ColumnTypeBiz columnTypeBiz;
+    private ColumnTypeService columnTypeService;
 
     @RequestMapping(value = "/list/{p}",method = RequestMethod.GET)
     public String colTypeList(ColumnType columnType,@PathVariable Integer p,HttpServletRequest request,ModelMap modelMap){
@@ -58,7 +58,7 @@ public class ColumnTypeController {
         Site site = (Site)(SystemUtils.getSessionSite());
         colType.setSiteId(site.getSiteId());
 
-        Page<ColumnType> pageColumnTypes = columnTypeBiz.findColumnTypeByColTypeNamePageable(colType, p);
+        Page<ColumnType> pageColumnTypes = columnTypeService.findColumnTypeByColTypeNamePageable(colType, p);
         modelMap.addAttribute("cts",pageColumnTypes.getContent());
         modelMap.addAttribute("pagination", SystemUtils.pagination(pageColumnTypes, HttpUtils.getContextPath(request) + "/manager/coltype/list"));
         return "column/coltype_list";
@@ -75,7 +75,7 @@ public class ColumnTypeController {
             throw new V5CMSNullValueException("站点没有保存主题信息");
         }
         File templateFile = new File(templateBasePath+File.separator+themeName);
-        List<TwoTuple<String,String>> mapList = columnTypeBiz.templatePathAndName(templateFile);
+        List<TwoTuple<String,String>> mapList = columnTypeService.templatePathAndName(templateFile);
 
 
         List<TwoTuple<String,String>> result = Lists.newArrayList();
@@ -89,7 +89,7 @@ public class ColumnTypeController {
         if(colTypeId == 0){
             modelMap.addAttribute(new ColumnType());
         }else{
-            ColumnType columnType = columnTypeBiz.findOne(colTypeId);
+            ColumnType columnType = columnTypeService.findOne(colTypeId);
             if(columnType == null){
                 LOGGER.error("ID为{}的栏目类型数据没有查到！",colTypeId);
                 throw new V5CMSNullValueException("ID为"+colTypeId+"的栏目类型数据没有查到！");
@@ -108,7 +108,7 @@ public class ColumnTypeController {
         columnType.setSiteId(site.getSiteId());
         if(columnType.getColTypeId() == null){
 
-            ColumnType saveColType = columnTypeBiz.save(columnType);
+            ColumnType saveColType = columnTypeService.save(columnType);
             if(saveColType.getColTypeId() != null){
                 LOGGER.info("栏目类型添加成功，{}",saveColType);
                 return ImmutableMap.of("status","1","message",getMessage("column.type.addsuccess.message"));
@@ -130,7 +130,7 @@ public class ColumnTypeController {
 //        LOGGER.info("修改栏目类型成功，{}",columnType);
 //        return ImmutableMap.of("status","1","message",getMessage("column.type.updatesuccess.message"));
         try {
-            columnTypeBiz.save(columnType);
+            columnTypeService.save(columnType);
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.error("修改栏目类型失败，{},失败堆栈错误：{}",columnType,e.getMessage());
@@ -143,7 +143,7 @@ public class ColumnTypeController {
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public ImmutableMap<String,String> colTypeDelete(Long[] colTypeIds){
         try {
-            columnTypeBiz.deleteColType(colTypeIds);
+            columnTypeService.deleteColType(colTypeIds);
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.error("删除栏目类型信息失败，失败原因：{}",e.getMessage());

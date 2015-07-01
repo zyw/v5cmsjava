@@ -1,6 +1,6 @@
 package cn.v5cn.v5cms.service.impl;
 
-import cn.v5cn.v5cms.service.ManagerBiz;
+import cn.v5cn.v5cms.service.ManagerService;
 import cn.v5cn.v5cms.dao.ManagerDao;
 import cn.v5cn.v5cms.entity.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +11,8 @@ import java.util.List;
 /**
  * Created by ZYW on 2014/6/10.
  */
-@Service("managerBiz")
-public class ManagerBizImpl implements ManagerBiz {
+@Service("managerService")
+public class ManagerServiceImpl implements ManagerService {
     @Autowired
     private ManagerDao managerDao;
     @Override

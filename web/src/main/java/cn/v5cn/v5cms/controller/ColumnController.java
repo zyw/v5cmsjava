@@ -1,7 +1,7 @@
 package cn.v5cn.v5cms.controller;
 
-import cn.v5cn.v5cms.service.ColumnBiz;
-import cn.v5cn.v5cms.service.ColumnTypeBiz;
+import cn.v5cn.v5cms.service.ColumnService;
+import cn.v5cn.v5cms.service.ColumnTypeService;
 import cn.v5cn.v5cms.entity.Column;
 import cn.v5cn.v5cms.entity.ColumnType;
 import cn.v5cn.v5cms.entity.Site;
@@ -32,15 +32,15 @@ public class ColumnController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ColumnController.class);
 
     @Autowired
-    private ColumnBiz columnBiz;
+    private ColumnService columnService;
 
     @Autowired
-    private ColumnTypeBiz columnTypeBiz;
+    private ColumnTypeService columnTypeService;
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String columnList(ModelMap modelMap){
         Site site = (Site)SystemUtils.getSessionSite();
-        List<Column> columns = columnBiz.findOrderByParentIdsAndColsId(site.getSiteId());
+        List<Column> columns = columnService.findOrderByParentIdsAndColsId(site.getSiteId());
         modelMap.addAttribute("columns",columns);
         return "column/column_list";
     }
@@ -54,13 +54,13 @@ public class ColumnController {
             modelMap.addAttribute("column",column);
             modelMap.addAttribute("parentName",getMessage("column.first"));
         }else{
-            Column dbColumn = columnBiz.findOne(columnId);
+            Column dbColumn = columnService.findOne(columnId);
             column.setParentIds(dbColumn.getParentIds()+dbColumn.getColsId()+"/");
             column.setParentId(dbColumn.getColsId());
             modelMap.addAttribute("parentName",dbColumn.getColumnName());
             modelMap.addAttribute("column",column);
         }
-        List<ColumnType> colTypes = columnTypeBiz.findAll();
+        List<ColumnType> colTypes = columnTypeService.findAll();
         modelMap.addAttribute("colTypes",colTypes);
         return "column/column_edit";
     }
@@ -73,7 +73,7 @@ public class ColumnController {
             Site site = (Site)SystemUtils.getSessionSite();
             column.setSiteId(site.getSiteId());
 
-            column = columnBiz.save(column);
+            column = columnService.save(column);
             if(column.getColsId() != null){
                 LOGGER.info("栏目添加成功,{}",column);
                 return ImmutableMap.of("status","1","message",getMessage("column.addsuccess.message"));
@@ -83,7 +83,7 @@ public class ColumnController {
         }
         //修改
         try {
-            columnBiz.save(column);
+            columnService.save(column);
         } catch (Exception e) {
             LOGGER.error("栏目修改失败,{}",e);
             e.printStackTrace();
@@ -95,14 +95,14 @@ public class ColumnController {
 
     @RequestMapping(value = "/{colId}/update")
     public String columnUpdate(@PathVariable Long colId,ModelMap modelMap){
-        Column column = columnBiz.findOne(colId);
-        List<ColumnType> colTypes = columnTypeBiz.findAll();
+        Column column = columnService.findOne(colId);
+        List<ColumnType> colTypes = columnTypeService.findAll();
         modelMap.addAttribute("colTypes",colTypes);
         modelMap.addAttribute("column",column);
         if(column.getParentId() == 0){
             modelMap.addAttribute("parentName",getMessage("column.first"));
         }else{
-            Column parentColumn = columnBiz.findOne(column.getParentId());
+            Column parentColumn = columnService.findOne(column.getParentId());
             modelMap.addAttribute("parentName",parentColumn.getColumnName());
         }
         return "column/column_edit";
@@ -112,7 +112,7 @@ public class ColumnController {
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public ImmutableMap<String,String> columnDelete(Long columnId){
         try {
-            columnBiz.delete(columnId);
+            columnService.delete(columnId);
         } catch (Exception e) {
             LOGGER.info("栏目删除失败,ID:{}。失败信息：{}",columnId,e.getMessage());
             return ImmutableMap.of("status","0","message",getMessage("column.deletefailed.message"));
@@ -124,7 +124,7 @@ public class ColumnController {
     @ResponseBody
     @RequestMapping(value = "/tree/json",method = RequestMethod.POST)
     public List<ZTreeNode> columnTree(){
-        List<ZTreeNode> treeNodes = columnBiz.buildTreeNode(0L);
+        List<ZTreeNode> treeNodes = columnService.buildTreeNode(0L);
         LOGGER.debug("treeNodes: " + treeNodes);
         return treeNodes;
     }

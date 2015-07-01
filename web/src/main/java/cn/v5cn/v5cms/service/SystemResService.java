@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by ZXF-PC1 on 2015/6/23.
  */
-public interface SystemResBiz {
+public interface SystemResService {
     List<SystemRes> findOrderByPidsAndId();
     List<ZTreeNode> buildTreeNode(Long parentId);
 }

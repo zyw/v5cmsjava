@@ -1,6 +1,6 @@
 package cn.v5cn.v5cms.service.impl;
 
-import cn.v5cn.v5cms.service.ContentBiz;
+import cn.v5cn.v5cms.service.ContentService;
 import cn.v5cn.v5cms.dao.ContentDao;
 import cn.v5cn.v5cms.entity.Column;
 import cn.v5cn.v5cms.entity.Content;
@@ -21,10 +21,10 @@ import java.util.List;
 /**
  * Created by ZYW on 2014/11/19.
  */
-@Service("contentBiz")
-public class ContentBizImpl implements ContentBiz {
+@Service("contentService")
+public class ContentServiceImpl implements ContentService {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(ContentBizImpl.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(ContentServiceImpl.class);
 
     @Autowired
     private ContentDao contentDao;

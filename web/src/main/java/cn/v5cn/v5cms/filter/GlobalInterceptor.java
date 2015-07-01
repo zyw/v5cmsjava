@@ -1,6 +1,6 @@
 package cn.v5cn.v5cms.filter;
 
-import cn.v5cn.v5cms.service.SiteBiz;
+import cn.v5cn.v5cms.service.SiteService;
 import cn.v5cn.v5cms.entity.Site;
 import com.google.common.collect.ImmutableList;
 import org.apache.commons.lang3.StringUtils;
@@ -21,7 +21,7 @@ import static cn.v5cn.v5cms.util.SystemConstant.SITE_SESSION_KEY;
 public class GlobalInterceptor extends HandlerInterceptorAdapter {
 
     @Autowired
-    private SiteBiz siteBiz;
+    private SiteService siteService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse httpServletResponse, Object o) throws Exception {
@@ -30,14 +30,13 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter {
         HttpSession session = request.getSession();
         if(session.getAttribute(SITES_SESSION_KEY) != null) return true;
 
-        ImmutableList<Site> resultBiz = siteBiz.findByIsclosesite(1);
+        ImmutableList<Site> resultBiz = siteService.findByIsclosesite(1);
         Site temp = resultBiz.size() == 0 ? new Site(): resultBiz.get(0);
         session.setAttribute(SITES_SESSION_KEY,resultBiz);
         session.setAttribute(SITE_SESSION_KEY,temp);
 
         return true;
     }
-
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response,

@@ -1,6 +1,6 @@
 package cn.v5cn.v5cms.service.impl;
 
-import cn.v5cn.v5cms.service.SystemUserBiz;
+import cn.v5cn.v5cms.service.SystemUserService;
 import cn.v5cn.v5cms.dao.SystemUserDao;
 import cn.v5cn.v5cms.entity.SystemUser;
 import cn.v5cn.v5cms.util.PropertyUtils;
@@ -19,8 +19,8 @@ import java.util.List;
 /**
  * Created by ZXF-PC1 on 2015/6/18.
  */
-@Service("systemUserBiz")
-public class SystemUserBizImpl implements SystemUserBiz {
+@Service("systemUserService")
+public class SystemUserServiceImpl implements SystemUserService {
 
     @Autowired
     private SystemUserDao systemUserDao;

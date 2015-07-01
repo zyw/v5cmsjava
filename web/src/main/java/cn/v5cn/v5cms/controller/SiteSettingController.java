@@ -1,6 +1,6 @@
 package cn.v5cn.v5cms.controller;
 
-import cn.v5cn.v5cms.service.SiteBiz;
+import cn.v5cn.v5cms.service.SiteService;
 import cn.v5cn.v5cms.entity.Site;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -32,11 +32,11 @@ public class SiteSettingController {
     private static final Logger LOGGER = LoggerFactory.getLogger(SiteSettingController.class);
 
     @Autowired
-    private SiteBiz siteBiz;
+    private SiteService siteService;
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String siteInfo(ModelMap model){
-        ImmutableList<Site> result = siteBiz.finadAll();
+        ImmutableList<Site> result = siteService.finadAll();
         model.addAttribute("sites",result);
         LOGGER.debug("获取站点列表，length:"+result.size());
         return "setting/site_list";
@@ -50,7 +50,7 @@ public class SiteSettingController {
 
     @RequestMapping(value = "/update/{siteId}",method = RequestMethod.GET)
     public String updateSite(ModelMap model,@PathVariable Long siteId){
-        Site result = siteBiz.findBySiteId(siteId);
+        Site result = siteService.findBySiteId(siteId);
         model.addAttribute("site",result);
         model.addAttribute("page_title",getMessage("site.updatepage.title"));
         return "setting/site_edit";
@@ -81,7 +81,7 @@ public class SiteSettingController {
             }
             return ImmutableMap.<String, Object>of("status","1","message", getMessage("site.updatesuccess.message"));*/
             try {
-                siteBiz.addSite(site);
+                siteService.addSite(site);
             }catch (Exception e) {
                 LOGGER.error("Site更新异常：{}",e.getMessage());
                 return ImmutableMap.<String, Object>of("status","0","message", getMessage("site.updatefailed.message"));
@@ -89,7 +89,7 @@ public class SiteSettingController {
             return ImmutableMap.<String, Object>of("status","1","message", getMessage("site.updatesuccess.message"));
         }
         //新增操作
-        Long result = siteBiz.addSite(site);
+        Long result = siteService.addSite(site);
         if(result != 0L){
             return ImmutableMap.<String, Object>of("status","1","message",getMessage("site.addsuccess.message"));
         }
@@ -101,7 +101,7 @@ public class SiteSettingController {
     public ImmutableMap<String,String> deleteSite(Long[] siteIds){
         LOGGER.info("删除站点信息，ID为{}",siteIds);
         try {
-            siteBiz.deleteSite(siteIds);
+            siteService.deleteSite(siteIds);
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.error("删除站点信息失败，ID为{}",siteIds);

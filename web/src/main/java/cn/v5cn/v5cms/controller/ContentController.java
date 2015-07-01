@@ -1,7 +1,7 @@
 package cn.v5cn.v5cms.controller;
 
-import cn.v5cn.v5cms.service.ColumnBiz;
-import cn.v5cn.v5cms.service.ContentBiz;
+import cn.v5cn.v5cms.service.ColumnService;
+import cn.v5cn.v5cms.service.ContentService;
 import cn.v5cn.v5cms.entity.*;
 import cn.v5cn.v5cms.entity.wrapper.ZTreeNode;
 import cn.v5cn.v5cms.util.HttpUtils;
@@ -38,10 +38,10 @@ public class ContentController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ContentController.class);
 
     @Autowired
-    private ColumnBiz columnBiz;
+    private ColumnService columnService;
 
     @Autowired
-    private ContentBiz contentBiz;
+    private ContentService contentService;
 
     @RequestMapping(value = "/list/{cid}/{p}",method = {RequestMethod.GET,RequestMethod.POST})
     public String contentList(Content content,@PathVariable Long cid,@PathVariable Integer p,HttpServletRequest request,ModelMap modelMap){
@@ -65,11 +65,11 @@ public class ContentController {
         content.setSiteId(site.getSiteId());
 
         if(cid != 0L) {
-            Column column = columnBiz.findOne(cid);
+            Column column = columnService.findOne(cid);
             modelMap.addAttribute("colName",column.getColumnName());
         }
 
-        Page<Content> pageContents = contentBiz.findContentPageable(content, p);
+        Page<Content> pageContents = contentService.findContentPageable(content, p);
         modelMap.addAttribute("contents",pageContents.getContent());
         modelMap.addAttribute("pagination", SystemUtils.pagination(pageContents, HttpUtils.getContextPath(request) + "/manager/content/list"));
         return "content/content_list";
@@ -90,7 +90,7 @@ public class ContentController {
         Site site = (Site)(SystemUtils.getSessionSite());
         content.setSiteId(site.getSiteId());
 
-        Content result = contentBiz.save(content);
+        Content result = contentService.save(content);
         if(result != null && result.getContentId() != null){
             LOGGER.info("内容添加成功，内容ID{}",result.getContentId());
             return ImmutableMap.of("status","1","message",getMessage("content.addsuccess.message"));
@@ -103,7 +103,7 @@ public class ContentController {
     @ResponseBody
     @RequestMapping(value = "/tree/json",method = RequestMethod.POST)
     public ZTreeNode columnTree(){
-        List<ZTreeNode> treeNodes = columnBiz.buildTreeNode(0L);
+        List<ZTreeNode> treeNodes = columnService.buildTreeNode(0L);
         ZTreeNode rootNode = new ZTreeNode();
         rootNode.setId(0L);
         rootNode.setName("栏目树");

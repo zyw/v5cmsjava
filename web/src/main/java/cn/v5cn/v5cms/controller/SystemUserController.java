@@ -1,6 +1,6 @@
 package cn.v5cn.v5cms.controller;
 
-import cn.v5cn.v5cms.service.SystemUserBiz;
+import cn.v5cn.v5cms.service.SystemUserService;
 import cn.v5cn.v5cms.entity.SystemUser;
 import cn.v5cn.v5cms.util.HttpUtils;
 import cn.v5cn.v5cms.util.SystemUtils;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/manager/user")
 public class SystemUserController {
     @Autowired
-    private SystemUserBiz systemUserBiz;
+    private SystemUserService systemUserService;
 
     @RequestMapping(value = "/list/{p}",method = {RequestMethod.GET,RequestMethod.POST})
     public String userList(SystemUser user,@PathVariable Integer p,HttpServletRequest request,ModelMap modelMap){
@@ -36,7 +36,7 @@ public class SystemUserController {
         }
         Object searchObj = session.getAttribute("userSearch");
 
-        Page<SystemUser> result =  systemUserBiz.findUserByUserNamePageable((searchObj == null ? (new SystemUser()) : ((SystemUser) searchObj)), p);
+        Page<SystemUser> result =  systemUserService.findUserByUserNamePageable((searchObj == null ? (new SystemUser()) : ((SystemUser) searchObj)), p);
 
         modelMap.addAttribute("users",result);
         modelMap.addAttribute("pagination", SystemUtils.pagination(result, HttpUtils.getContextPath(request) + "/manager/user/list"));

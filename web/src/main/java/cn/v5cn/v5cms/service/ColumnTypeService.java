@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by ZYW on 2014/11/5.
  */
-public interface ColumnTypeBiz {
+public interface ColumnTypeService {
     ColumnType save(ColumnType columnType);
     List<TwoTuple<String,String>> templatePathAndName(File templatePath);
     Page<ColumnType> findColumnTypeByColTypeNamePageable(ColumnType columnType,Integer currPage);

@@ -28,7 +28,7 @@ public class LoginController {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
 //    @Autowired
-//    private ManagerBiz managerBiz;
+//    private ManagerService managerBiz;
 
     @Autowired
     private DefaultKaptcha captchaProducer;

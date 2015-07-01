@@ -1,6 +1,6 @@
 package cn.v5cn.v5cms.controller;
 
-import cn.v5cn.v5cms.service.SiteBiz;
+import cn.v5cn.v5cms.service.SiteService;
 import cn.v5cn.v5cms.entity.Site;
 import cn.v5cn.v5cms.util.SystemConstant;
 import cn.v5cn.v5cms.util.SystemUtils;
@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
     private static final Logger LOGGER = LoggerFactory.getLogger(IndexController.class);
     @Autowired
-    private SiteBiz siteBiz;
+    private SiteService siteService;
 
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String index(HttpSession session){

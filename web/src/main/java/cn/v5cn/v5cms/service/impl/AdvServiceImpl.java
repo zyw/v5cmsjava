@@ -1,6 +1,6 @@
 package cn.v5cn.v5cms.service.impl;
 
-import cn.v5cn.v5cms.service.AdvBiz;
+import cn.v5cn.v5cms.service.AdvService;
 import cn.v5cn.v5cms.dao.AdvDao;
 import cn.v5cn.v5cms.entity.Adv;
 import cn.v5cn.v5cms.entity.AdvPos;
@@ -39,10 +39,10 @@ import java.util.Map;
 /**
  * Created by ZYW on 2014/7/28.
  */
-@Service("advBiz")
-public class AdvBizImpl implements AdvBiz {
+@Service("advService")
+public class AdvServiceImpl implements AdvService {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(AdvBizImpl.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(AdvServiceImpl.class);
 
     @Autowired
     private AdvDao advDao;
