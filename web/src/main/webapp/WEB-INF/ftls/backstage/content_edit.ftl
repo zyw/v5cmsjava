@@ -287,7 +287,7 @@
                         icon: 1,
                         time:2000
                     },function(){
-                        location.href="<@spring.url '/manager/content/list'/>";
+                        location.href="<@spring.url '/manager/content/list/1'/>";
                     });
                 }else if(data.status === "0"){
                     layer.msg(data.message, {icon: 2});

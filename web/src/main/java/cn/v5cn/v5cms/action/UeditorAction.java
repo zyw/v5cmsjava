@@ -27,7 +27,7 @@ public class UeditorAction {
 
     @RequestMapping(value = "/config",method = {RequestMethod.GET,RequestMethod.POST})
     public void ueditorConfig(HttpServletRequest request,HttpServletResponse response) throws IOException {
-        Site site = (Site)(SystemUtils.getSessionSite(request));
+        Site site = (Site)(SystemUtils.getSessionSite());
         PrintWriter out = response.getWriter();
         response.setHeader("Content-Type" , "text/html");
 
@@ -39,7 +39,7 @@ public class UeditorAction {
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
     public void ueditorUpload(MultipartFile file,HttpServletRequest request,HttpServletResponse response) throws IOException {
 
-        Site site = (Site)(SystemUtils.getSessionSite(request));
+        Site site = (Site)(SystemUtils.getSessionSite());
 
         PrintWriter out = response.getWriter();
         response.setHeader("Content-Type" , "text/html");

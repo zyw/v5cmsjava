@@ -11,6 +11,7 @@ import cn.v5cn.v5cms.util.TwoTuple;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,8 @@ public class ColumnTypeAction {
     private ColumnTypeBiz columnTypeBiz;
 
     @RequestMapping(value = "/list/{p}",method = RequestMethod.GET)
-    public String colTypeList(ColumnType columnType,@PathVariable Integer p,HttpSession session,HttpServletRequest request,ModelMap modelMap){
+    public String colTypeList(ColumnType columnType,@PathVariable Integer p,HttpServletRequest request,ModelMap modelMap){
+        Session session = SystemUtils.getShiroSession();
         if(StringUtils.isNotBlank(columnType.getColTypeName())){
             session.setAttribute("columnTypeSearch",columnType);
             modelMap.addAttribute("colTypeNameSearch",columnType.getColTypeName());
@@ -53,7 +55,7 @@ public class ColumnTypeAction {
 
         ColumnType colType = searchObj == null ? (new ColumnType()) : ((ColumnType) searchObj);
 
-        Site site = (Site)(SystemUtils.getSessionSite(session));
+        Site site = (Site)(SystemUtils.getSessionSite());
         colType.setSiteId(site.getSiteId());
 
         Page<ColumnType> pageColumnTypes = columnTypeBiz.findColumnTypeByColTypeNamePageable(colType, p);
@@ -65,7 +67,7 @@ public class ColumnTypeAction {
     @RequestMapping(value = "/edit/{colTypeId}",method = RequestMethod.GET)
     public String columnTypeEdit(@PathVariable Long colTypeId,ModelMap modelMap,HttpSession session){
 
-        Site site = (Site)(SystemUtils.getSessionSite(session));
+        Site site = (Site)(SystemUtils.getSessionSite());
         String templateBasePath = session.getServletContext().getRealPath(SystemConstant.SITE_TEMPLATE_PATH);
         String themeName = site.getThemeName();
         if(StringUtils.isBlank(themeName)){
@@ -100,9 +102,9 @@ public class ColumnTypeAction {
 
     @ResponseBody
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
-    public ImmutableMap<String,String> columnTypeEdit(ColumnType columnType,HttpSession session){
+    public ImmutableMap<String,String> columnTypeEdit(ColumnType columnType){
         //设置站点ID
-        Site site = (Site)(SystemUtils.getSessionSite(session));
+        Site site = (Site)(SystemUtils.getSessionSite());
         columnType.setSiteId(site.getSiteId());
         if(columnType.getColTypeId() == null){
 

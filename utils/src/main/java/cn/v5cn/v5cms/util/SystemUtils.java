@@ -5,6 +5,8 @@ import cn.v5cn.v5cms.util.annotation.Ignore;
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -130,11 +132,14 @@ public class SystemUtils {
         return htmlSb.toString();
     }
 
-    public static Object getSessionSite(HttpServletRequest request){
-        return getSessionSite(request.getSession());
+//    public static Object getSessionSite(HttpServletRequest request){
+//        return getSessionSite(request.getSession());
+//    }
+    public static Session getShiroSession(){
+        return SecurityUtils.getSubject().getSession();
     }
-    public static Object getSessionSite(HttpSession session){
-        Object siteObj = session.getAttribute(SystemConstant.SITE_SESSION_KEY);
+    public static Object getSessionSite(){
+        Object siteObj = SecurityUtils.getSubject().getSession().getAttribute(SystemConstant.SITE_SESSION_KEY);
         if(siteObj == null){
             LOGGER.error("Session中存储的站点信息为空！");
             throw new V5CMSSessionValueNullException("Session中存储的站点信息为空！");

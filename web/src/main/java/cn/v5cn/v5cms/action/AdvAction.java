@@ -171,7 +171,7 @@ public class AdvAction {
         if(file.isEmpty()){
             return ImmutableMap.<String,Object>of("status","0","message",getMessage("global.uploadempty.message"));
         }
-        Site site = (Site)(SystemUtils.getSessionSite(request));
+        Site site = (Site)(SystemUtils.getSessionSite());
         String advPath = PathFormat.parseSiteId(SystemConstant.ADV_RES_PATH, site.getSiteId() + "");
         String realPath = HttpUtils.getRealPath(request, advPath);
 

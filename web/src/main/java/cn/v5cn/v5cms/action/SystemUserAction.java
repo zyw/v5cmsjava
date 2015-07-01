@@ -5,6 +5,7 @@ import cn.v5cn.v5cms.entity.SystemUser;
 import cn.v5cn.v5cms.util.HttpUtils;
 import cn.v5cn.v5cms.util.SystemUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,8 @@ public class SystemUserAction {
     private SystemUserBiz systemUserBiz;
 
     @RequestMapping(value = "/list/{p}",method = {RequestMethod.GET,RequestMethod.POST})
-    public String userList(SystemUser user,@PathVariable Integer p,HttpSession session,HttpServletRequest request,ModelMap modelMap){
+    public String userList(SystemUser user,@PathVariable Integer p,HttpServletRequest request,ModelMap modelMap){
+        Session session = SystemUtils.getShiroSession();
         if(StringUtils.isNotBlank(user.getName())){
             session.setAttribute("userSearch",user);
             modelMap.addAttribute("searchUser",user);

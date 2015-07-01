@@ -3,8 +3,10 @@ package cn.v5cn.v5cms.action;
 import cn.v5cn.v5cms.biz.SiteBiz;
 import cn.v5cn.v5cms.entity.Site;
 import cn.v5cn.v5cms.util.SystemConstant;
+import cn.v5cn.v5cms.util.SystemUtils;
 import com.google.common.collect.ImmutableList;
 import com.google.common.primitives.Longs;
+import org.apache.shiro.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,8 @@ public class IndexAction {
     }
 
     @RequestMapping(value="/switch/site/{siteId}",method = RequestMethod.GET)
-    public String switchSite(@PathVariable Long siteId,HttpSession session){
+    public String switchSite(@PathVariable Long siteId){
+        Session session = SystemUtils.getShiroSession();
         ImmutableList<Site> resultBiz = (ImmutableList<Site>)session.getAttribute(SystemConstant.SITES_SESSION_KEY);
         if(resultBiz != null){
             for(Site site : resultBiz){

@@ -8,6 +8,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,8 @@ public class SystemRoleAction {
     private SystemRoleBiz systemRoleBiz;
 
     @RequestMapping(value = "/list/{p}",method = {RequestMethod.GET,RequestMethod.POST})
-    public String roleList(SystemRole role,@PathVariable Integer p,HttpSession session,HttpServletRequest request,ModelMap modelMap){
+    public String roleList(SystemRole role,@PathVariable Integer p,HttpServletRequest request,ModelMap modelMap){
+        Session session = SystemUtils.getShiroSession();
         if(StringUtils.isNotBlank(role.getName())){
             session.setAttribute("roleSearch",role);
             modelMap.addAttribute("searchRole",role);

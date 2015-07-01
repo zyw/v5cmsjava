@@ -1,15 +1,13 @@
 package cn.v5cn.v5cms.action;
 
 import cn.v5cn.v5cms.biz.ContentBiz;
-import cn.v5cn.v5cms.entity.ColumnType;
-import cn.v5cn.v5cms.entity.Content;
-import cn.v5cn.v5cms.entity.Manager;
-import cn.v5cn.v5cms.entity.Site;
+import cn.v5cn.v5cms.entity.*;
 import cn.v5cn.v5cms.util.HttpUtils;
 import cn.v5cn.v5cms.util.SystemConstant;
 import cn.v5cn.v5cms.util.SystemUtils;
 import com.google.common.collect.ImmutableMap;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +38,8 @@ public class ContentAction {
     private ContentBiz contentBiz;
 
     @RequestMapping(value = "/list/{p}",method = {RequestMethod.GET,RequestMethod.POST})
-    public String contentList(Content content,@PathVariable Integer p,HttpSession session,HttpServletRequest request,ModelMap modelMap){
+    public String contentList(Content content,@PathVariable Integer p,HttpServletRequest request,ModelMap modelMap){
+        Session session = SecurityUtils.getSubject().getSession();
         if(content.getColumn() != null && content.getColumn().getColsId() != null){
             session.setAttribute("contentFilter",content);
             //modelMap.addAttribute("columnIdFilter",columnType.getColTypeName());
@@ -51,14 +50,14 @@ public class ContentAction {
 
         content = content_obj == null ? new Content() : ((Content) content_obj);
 
-        Site site = (Site)(SystemUtils.getSessionSite(session));
+        Site site = (Site)(SystemUtils.getSessionSite());
         content.setSiteId(site.getSiteId());
 
 //        Page<ColumnType> pageColumnTypes = columnTypeBiz.findColumnTypeByColTypeNamePageable(colType, p);
         Page<Content> pageContents = contentBiz.findContentPageable(content, p);
         System.out.println(pageContents.getContent());
         modelMap.addAttribute("contents",pageContents.getContent());
-        modelMap.addAttribute("pagination", SystemUtils.pagination(pageContents, HttpUtils.getContextPath(request) + "/manager/coltype/list"));
+        modelMap.addAttribute("pagination", SystemUtils.pagination(pageContents, HttpUtils.getContextPath(request) + "/manager/content/list"));
         return "content_list";
     }
 
@@ -69,11 +68,13 @@ public class ContentAction {
 
     @ResponseBody
     @RequestMapping(value = "/save",method = RequestMethod.POST)
-    public ImmutableMap<String,String> contentSave(Content content,HttpSession session){
-        Manager manager = (Manager)session.getAttribute(SystemConstant.SESSION_KEY);
-        content.setWriterId(manager.getManagerId());
+    public ImmutableMap<String,String> contentSave(Content content){
+        //Manager manager = (Manager)session.getAttribute(SystemConstant.SESSION_KEY);
+        Session session = SystemUtils.getShiroSession();
+        SystemUser user = (SystemUser)session.getAttribute(SystemConstant.SESSION_KEY);
+        content.setWriterId(user.getId());
         content.setLastdt(DateTime.now().toDate());
-        Site site = (Site)(SystemUtils.getSessionSite(session));
+        Site site = (Site)(SystemUtils.getSessionSite());
         content.setSiteId(site.getSiteId());
 
         Content result = contentBiz.save(content);

@@ -8,6 +8,8 @@ import cn.v5cn.v5cms.entity.Site;
 import cn.v5cn.v5cms.entity.wrapper.ZTreeNode;
 import cn.v5cn.v5cms.util.SystemUtils;
 import com.google.common.collect.ImmutableMap;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +41,8 @@ public class ColumnAction {
     private ColumnTypeBiz columnTypeBiz;
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
-    public String columnList(ModelMap modelMap,HttpSession session){
-        Site site = (Site)(SystemUtils.getSessionSite(session));
+    public String columnList(ModelMap modelMap){
+        Site site = (Site)SystemUtils.getSessionSite();
         List<Column> columns = columnBiz.findOrderByParentIdsAndColsId(site.getSiteId());
         modelMap.addAttribute("columns",columns);
         return "column_list";
@@ -68,10 +70,10 @@ public class ColumnAction {
 
     @ResponseBody
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
-    public ImmutableMap<String,String> columnEdits(Column column,HttpSession session){
+    public ImmutableMap<String,String> columnEdits(Column column){
         if(column.getColsId() == null || column.getColsId() == 0L){
             //设置站点ID
-            Site site = (Site)(SystemUtils.getSessionSite(session));
+            Site site = (Site)SystemUtils.getSessionSite();
             column.setSiteId(site.getSiteId());
 
             column = columnBiz.save(column);
