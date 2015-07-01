@@ -72,12 +72,12 @@ public class ContentAction {
         Page<Content> pageContents = contentBiz.findContentPageable(content, p);
         modelMap.addAttribute("contents",pageContents.getContent());
         modelMap.addAttribute("pagination", SystemUtils.pagination(pageContents, HttpUtils.getContextPath(request) + "/manager/content/list"));
-        return "content_list";
+        return "content/content_list";
     }
 
     @RequestMapping(value = "/edit",method = RequestMethod.GET)
     public String contentEdit(){
-        return "content_edit";
+        return "content/content_edit";
     }
 
     @ResponseBody

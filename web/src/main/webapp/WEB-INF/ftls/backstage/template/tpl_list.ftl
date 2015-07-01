@@ -1,4 +1,4 @@
-<#include "fragment/head.ftl">
+<#include "../fragment/head.ftl">
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side">
     <!-- Content Header (Page header) -->
@@ -36,7 +36,7 @@
                             <div class="thumbnail thumbnail-style">
                                 <a class="fancybox-button zoomer" data-rel="fancybox-button" title="模板图片" href="assets/img/main/9.jpg">
                                 <span class="overlay-zoom">
-                                    <img class="img-responsive" data-src="<@spring.url '/r/js/holder.js'/>/240x220/text:模板图片" alt="" />
+                                    <img class="img-responsive" data-src="<@spring.url '/r/js/holder.js'/>/100%x220/text:模板图片" alt="" />
                                     <span class="zoom-icon"></span>
                                 </span>
                                 </a>
@@ -60,7 +60,7 @@
                             <div class="thumbnail thumbnail-style">
                                 <a class="fancybox-button zoomer" data-rel="fancybox-button" title="模板图片" href="assets/img/main/9.jpg">
                                 <span class="overlay-zoom">
-                                    <img class="img-responsive" data-src="<@spring.url '/r/js/holder.js'/>/240x220/text:模板图片" alt="" />
+                                    <img class="img-responsive" data-src="<@spring.url '/r/js/holder.js'/>/100%x220/text:模板图片" alt="" />
                                     <span class="zoom-icon"></span>
                                 </span>
                                 </a>
@@ -84,7 +84,7 @@
                             <div class="thumbnail thumbnail-style">
                                 <a class="fancybox-button zoomer" data-rel="fancybox-button" title="模板图片" href="assets/img/main/9.jpg">
                                 <span class="overlay-zoom">
-                                    <img class="img-responsive" data-src="<@spring.url '/r/js/holder.js'/>/240x220/text:模板图片" alt="" />
+                                    <img class="img-responsive" data-src="<@spring.url '/r/js/holder.js'/>/100%x220/text:模板图片" alt="" />
                                     <span class="zoom-icon"></span>
                                 </span>
                                 </a>
@@ -108,7 +108,7 @@
                             <div class="thumbnail thumbnail-style">
                                 <a class="fancybox-button zoomer" data-rel="fancybox-button" title="模板图片" href="assets/img/main/9.jpg">
                                 <span class="overlay-zoom">
-                                    <img class="img-responsive" data-src="<@spring.url '/r/js/holder.js'/>/240x220/text:模板图片" alt="" />
+                                    <img class="img-responsive" data-src="<@spring.url '/r/js/holder.js'/>/100%x220/text:模板图片" alt="" />
                                     <span class="zoom-icon"></span>
                                 </span>
                                 </a>
@@ -133,7 +133,7 @@
                             <div class="thumbnail thumbnail-style">
                                 <a class="fancybox-button zoomer" data-rel="fancybox-button" title="模板图片" href="assets/img/main/9.jpg">
                                 <span class="overlay-zoom">
-                                    <img class="img-responsive" data-src="<@spring.url '/r/js/holder.js'/>/240x220/text:模板图片" alt="" />
+                                    <img class="img-responsive" data-src="<@spring.url '/r/js/holder.js'/>/100%x220/text:模板图片" alt="" />
                                     <span class="zoom-icon"></span>
                                 </span>
                                 </a>
@@ -159,7 +159,7 @@
         </div><!-- /.row -->
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
-<#include "fragment/footer.ftl">
+<#include "../fragment/footer.ftl">
 <script type="text/javascript">
     $(function(){
         $.v5cms.initFancybox();

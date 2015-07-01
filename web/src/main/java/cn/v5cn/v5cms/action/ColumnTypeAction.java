@@ -61,7 +61,7 @@ public class ColumnTypeAction {
         Page<ColumnType> pageColumnTypes = columnTypeBiz.findColumnTypeByColTypeNamePageable(colType, p);
         modelMap.addAttribute("cts",pageColumnTypes.getContent());
         modelMap.addAttribute("pagination", SystemUtils.pagination(pageColumnTypes, HttpUtils.getContextPath(request) + "/manager/coltype/list"));
-        return "coltype_list";
+        return "column/coltype_list";
     }
 
     @RequestMapping(value = "/edit/{colTypeId}",method = RequestMethod.GET)
@@ -97,7 +97,7 @@ public class ColumnTypeAction {
             modelMap.addAttribute(columnType);
         }
 
-        return "coltype_edit";
+        return "column/coltype_edit";
     }
 
     @ResponseBody

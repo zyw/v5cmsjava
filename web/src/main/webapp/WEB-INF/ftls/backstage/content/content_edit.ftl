@@ -1,4 +1,4 @@
-<#include "fragment/head.ftl">
+<#include "../fragment/head.ftl">
 <!-- webuploader -->
 <link href="<@spring.url '/res/backstage/webuploader/css/webuploader.css'/>" rel="stylesheet" type="text/css"/>
 <link href="<@spring.url '/res/backstage/webuploader/css/style.css'/>" rel="stylesheet" type="text/css"/>
@@ -253,7 +253,7 @@
         </div>
     </div>
 </div>
-<#include "fragment/footer.ftl">
+<#include "../fragment/footer.ftl">
 <!-- ueditor -->
 <script type="text/javascript" charset="utf-8" src="<@spring.url '/res/backstage/ueditor/ueditor.config.js'/>"></script>
 <script type="text/javascript" charset="utf-8" src="<@spring.url '/res/backstage/ueditor/ueditor.all.min.js'/>"> </script>

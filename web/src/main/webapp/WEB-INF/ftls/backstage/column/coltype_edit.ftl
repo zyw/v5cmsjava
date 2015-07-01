@@ -1,4 +1,4 @@
-<#include "fragment/head.ftl">
+<#include "../fragment/head.ftl">
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side">
     <!-- Content Header (Page header) -->
@@ -101,7 +101,7 @@
     </section>
     <!-- /.content -->
 </aside><!-- /.right-side -->
-<#include "fragment/footer.ftl">
+<#include "../fragment/footer.ftl">
 <script type="text/javascript">
     $(function(){
         $("#nav_columns").imitClick();

@@ -1,4 +1,4 @@
-<#include "fragment/head.ftl">
+<#include "../fragment/head.ftl">
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side">
     <!-- Content Header (Page header) -->
@@ -56,7 +56,7 @@
                                             >${ap.advPosName}</option>
                                 </#list>
                             <#else>
-                                <option value="-1">还没有版位信息</option>
+                                <option value="-1">还没有广告信息</option>
                             </#if>
                             </select>
                         </div>
@@ -121,8 +121,12 @@
                                 "<small class='badge bg-red'>关闭</small>")}
                                 </td>
                                 <td>
-                                    <a href="<@spring.url '/manager/adv/edit/'/>${adv.advId}">修改</a>&nbsp;&nbsp;
-                                    <a href="javascript:;" class="deleteAdv" data-advid="${adv.advId}">删除</a>
+                                    <a href="<@spring.url '/manager/adv/edit/'/>${adv.advId}" class="btn btn-primary btn-xs" data-toggle="tooltip" title="修改广告">
+                                        <i class="fa fa-edit"></i>
+                                    </a>&nbsp;&nbsp;
+                                    <a href="javascript:;" data-advid="${adv.advId}" class="btn btn-warning btn-xs delete-adv" data-toggle="tooltip" title="删除广告">
+                                        <i class="fa fa-times"></i>
+                                    </a>
                                 </td>
                             </tr>
                             </#list>
@@ -142,7 +146,7 @@
 
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
-<#include "fragment/footer.ftl">
+<#include "../fragment/footer.ftl">
 <script type="text/javascript">
     $(function(){
         $("#nav_siteSetting").imitClick();
@@ -209,7 +213,7 @@
             location.href="<@spring.url '/manager/adv/edit'/>";
         });
 
-        $(".deleteAdv").click(function(){
+        $(".delete-adv").click(function(){
             var advId = $(this).data("advid");
             deleteAdvs(advId);
         });

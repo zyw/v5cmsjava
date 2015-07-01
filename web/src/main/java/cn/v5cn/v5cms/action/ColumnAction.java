@@ -42,7 +42,7 @@ public class ColumnAction {
         Site site = (Site)SystemUtils.getSessionSite();
         List<Column> columns = columnBiz.findOrderByParentIdsAndColsId(site.getSiteId());
         modelMap.addAttribute("columns",columns);
-        return "column_list";
+        return "column/column_list";
     }
 
     @RequestMapping(value = "/edit/{columnId}",method = RequestMethod.GET)
@@ -62,7 +62,7 @@ public class ColumnAction {
         }
         List<ColumnType> colTypes = columnTypeBiz.findAll();
         modelMap.addAttribute("colTypes",colTypes);
-        return "column_edit";
+        return "column/column_edit";
     }
 
     @ResponseBody
@@ -105,7 +105,7 @@ public class ColumnAction {
             Column parentColumn = columnBiz.findOne(column.getParentId());
             modelMap.addAttribute("parentName",parentColumn.getColumnName());
         }
-        return "column_edit";
+        return "column/column_edit";
     }
 
     @ResponseBody

@@ -39,19 +39,13 @@ public class SiteSettingAction {
         ImmutableList<Site> result = siteBiz.finadAll();
         model.addAttribute("sites",result);
         LOGGER.debug("获取站点列表，length:"+result.size());
-        return "site_list";
+        return "setting/site_list";
     }
-
-/*    @RequestMapping(value = "/sitelist",method = RequestMethod.GET)
-    @ResponseBody
-    public List<Site> siteList(){
-        return siteBiz.findSize(-1).asList();
-    }*/
 
     @RequestMapping(value = "/edit",method = RequestMethod.GET)
     public String addSite(ModelMap model){
         model.addAttribute("site",new Site());
-        return "site_edit";
+        return "setting/site_edit";
     }
 
     @RequestMapping(value = "/update/{siteId}",method = RequestMethod.GET)
@@ -59,7 +53,7 @@ public class SiteSettingAction {
         Site result = siteBiz.findBySiteId(siteId);
         model.addAttribute("site",result);
         model.addAttribute("page_title",getMessage("site.updatepage.title"));
-        return "site_edit";
+        return "setting/site_edit";
     }
 
     @ResponseBody

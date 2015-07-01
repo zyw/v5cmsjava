@@ -84,7 +84,7 @@ public class AdvAction {
         ImmutableList<AdvPos> advposes = advPosBiz.finadAll();
         modelMap.addAttribute("aps",advposes);
 
-        return "adv_list";
+        return "setting/adv_list";
     }
 
     @RequestMapping(value = "/edit",method = RequestMethod.GET)
@@ -93,7 +93,7 @@ public class AdvAction {
         model.addAttribute("aps",advposes);
         model.addAttribute(new Adv());
         model.addAttribute("advTypes", Maps.newHashMap());
-        return "adv_edit";
+        return "setting/adv_edit";
     }
 
     @RequestMapping(value = "/edit/{advId}",method = RequestMethod.GET)
@@ -118,7 +118,7 @@ public class AdvAction {
         model.addAttribute(adv);
         model.addAttribute("advTypes",advTypeMap);
         model.addAttribute("page_title",getMessage("adv.updatepage.title"));
-        return "adv_edit";
+        return "setting/adv_edit";
     }
 
     @ResponseBody

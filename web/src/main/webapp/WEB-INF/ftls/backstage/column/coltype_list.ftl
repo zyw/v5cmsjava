@@ -1,4 +1,4 @@
-<#include "fragment/head.ftl">
+<#include "../fragment/head.ftl">
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side">
     <!-- Content Header (Page header) -->
@@ -59,7 +59,7 @@
                             <col class="col-xs-2">
                             <col class="col-xs-1">
                             <col class="col-xs-1">
-                            <col class="col-xs-2">
+                            <col class="col-xs-1">
                         </colgroup>
                         <thead>
                         <tr>
@@ -95,8 +95,12 @@
                                 "<small class='badge bg-red'>禁用</small>")}
                                 </td>
                                 <td>
-                                    <a href="<@spring.url '/manager/coltype/edit/'/>${ct.colTypeId}">修改</a>&nbsp;&nbsp;
-                                    <a href="javascript:;" class="deleteColType" data-ctid="${ct.colTypeId}">删除</a>
+                                    <a href="<@spring.url '/manager/coltype/edit/'/>${ct.colTypeId}" class="btn btn-primary btn-xs" data-toggle="tooltip" title="修改栏目类型">
+                                        <i class="fa fa-edit"></i>
+                                    </a>&nbsp;&nbsp;
+                                    <a href="javascript:;" data-ctid="${ct.colTypeId}" class="btn btn-warning btn-xs delete-coltype" data-toggle="tooltip" title="删除栏目类型">
+                                        <i class="fa fa-times"></i>
+                                    </a>
                                 </td>
                             </tr>
                             </#list>
@@ -115,7 +119,7 @@
         </div><!-- /.row -->
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
-<#include "fragment/footer.ftl">
+<#include "../fragment/footer.ftl">
 <script type="text/javascript">
     $(function(){
         $("#nav_columns").imitClick();
@@ -187,7 +191,7 @@
             -->
         }
 
-        $(".deleteColType").click(function(){
+        $(".delete-coltype").click(function(){
             var colTypeId = $(this).data("ctid");
             deleteColType(colTypeId);
         });
