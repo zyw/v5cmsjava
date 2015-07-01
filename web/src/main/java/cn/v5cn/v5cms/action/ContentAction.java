@@ -69,7 +69,6 @@ public class ContentAction {
     @ResponseBody
     @RequestMapping(value = "/save",method = RequestMethod.POST)
     public ImmutableMap<String,String> contentSave(Content content){
-        //Manager manager = (Manager)session.getAttribute(SystemConstant.SESSION_KEY);
         Session session = SystemUtils.getShiroSession();
         SystemUser user = (SystemUser)session.getAttribute(SystemConstant.SESSION_KEY);
         content.setWriterId(user.getId());
