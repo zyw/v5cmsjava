@@ -45,7 +45,7 @@ public class ContentBizImpl implements ContentBiz {
                 Join<Content,Column> columns = root.join("column", JoinType.INNER);
                 List<Predicate> ps = Lists.newArrayList();
                 if(content.getColumn() !=null && content.getColumn().getColsId() != null){
-                    Path<Long> columnId = columns.get("columnId");
+                    Path<Long> columnId = columns.get("colsId");
                     ps.add(criteriaBuilder.equal(columnId,content.getColumn().getColsId()));
                 }
                 Path<Long> siteId = root.get("siteId");

@@ -1,7 +1,9 @@
 package cn.v5cn.v5cms.action;
 
+import cn.v5cn.v5cms.biz.ColumnBiz;
 import cn.v5cn.v5cms.biz.ContentBiz;
 import cn.v5cn.v5cms.entity.*;
+import cn.v5cn.v5cms.entity.wrapper.ZTreeNode;
 import cn.v5cn.v5cms.util.HttpUtils;
 import cn.v5cn.v5cms.util.SystemConstant;
 import cn.v5cn.v5cms.util.SystemUtils;
@@ -22,6 +24,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.List;
+
 import static cn.v5cn.v5cms.util.MessageSourceHelper.getMessage;
 
 /**
@@ -34,15 +38,23 @@ public class ContentAction {
     private static final Logger LOGGER = LoggerFactory.getLogger(ContentAction.class);
 
     @Autowired
+    private ColumnBiz columnBiz;
+
+    @Autowired
     private ContentBiz contentBiz;
 
-    @RequestMapping(value = "/list/{p}",method = {RequestMethod.GET,RequestMethod.POST})
-    public String contentList(Content content,@PathVariable Integer p,HttpServletRequest request,ModelMap modelMap){
+    @RequestMapping(value = "/list/{cid}/{p}",method = {RequestMethod.GET,RequestMethod.POST})
+    public String contentList(Content content,@PathVariable Long cid,@PathVariable Integer p,HttpServletRequest request,ModelMap modelMap){
         Session session = SecurityUtils.getSubject().getSession();
-        if(content.getColumn() != null && content.getColumn().getColsId() != null){
+        if(content.getState() != null && content.getState() != 0){
             session.setAttribute("contentFilter",content);
-            //modelMap.addAttribute("columnIdFilter",columnType.getColTypeName());
-        }else {
+            modelMap.addAttribute("contentFilter", content);
+        } else if(cid != 0L) {
+            Column column = new Column();
+            column.setColsId(cid);
+            content.setColumn(column);
+            session.setAttribute("contentFilter", content);
+        } else {
             session.setAttribute("contentFilter",null);
         }
         Object content_obj = session.getAttribute("contentFilter");
@@ -51,6 +63,11 @@ public class ContentAction {
 
         Site site = (Site)(SystemUtils.getSessionSite());
         content.setSiteId(site.getSiteId());
+
+        if(cid != 0L) {
+            Column column = columnBiz.findOne(cid);
+            modelMap.addAttribute("colName",column.getColumnName());
+        }
 
         Page<Content> pageContents = contentBiz.findContentPageable(content, p);
         modelMap.addAttribute("contents",pageContents.getContent());
@@ -81,5 +98,17 @@ public class ContentAction {
 
         LOGGER.info("内容添加失败，内容标题{}",result.getCname());
         return ImmutableMap.of("status","0","message",getMessage("content.addfailed.message"));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/tree/json",method = RequestMethod.POST)
+    public ZTreeNode columnTree(){
+        List<ZTreeNode> treeNodes = columnBiz.buildTreeNode(0L);
+        ZTreeNode rootNode = new ZTreeNode();
+        rootNode.setId(0L);
+        rootNode.setName("栏目树");
+        rootNode.setChildren(treeNodes);
+        LOGGER.debug("treeNodes: " + treeNodes);
+        return rootNode;
     }
 }

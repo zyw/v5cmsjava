@@ -274,24 +274,13 @@
             ajaxPost:true,
             showAllError:true,
             tiptype:2,
-            /*tiptype:function(msg,o,cssctl){
-                if(!o.obj.is("form")){
-                    if(o.type == 2){
-                        layer.tips(msg, o.obj,{tips:[2, '#78BA32']});
-                    }else{
-                        layer.tips(msg, o.obj,{time:0});
-                    }
-                }else{
-                    layer.closeAll('tips');
-                }
-            },*/
             callback:function(data){
                 if(data.status === "1"){
                     layer.msg(data.message, {
                         icon: 1,
                         time:2000
                     },function(){
-                        location.href="<@spring.url '/manager/content/list/1'/>";
+                        location.href="<@spring.url '/manager/content/list/0/1'/>";
                     });
                 }else if(data.status === "0"){
                     layer.msg(data.message, {icon: 2});
@@ -301,31 +290,7 @@
             }
         });
 
-        <#--
-        $("#contentForm").ajaxForm({
-            dataType : 'json',
-            type:'POST',
-            success : function(data) {
-                if(data.status === "1"){
-                    $.v5cms.tooltip({icon:"succeed",content:data.message},function(){
-                        location.href="<@spring.url '/manager/content/list'/>";
-                    });
-                }else{
-                    $.v5cms.tooltip({icon:"error",content:data.message},function(){});
-                }
-            },
-            error:function(xhr, status, error){
-                $.v5cms.tooltip({icon:"error",content:("错误代码：" + status + " 错误消息：" + error)},function(){});
-            }
-        });
-        -->
-
         function saveContent(contentState){
-            /*var result = $("#columnId").nonEmpty({content:"栏目类型不能为空！"});
-            var cnameResult = $("#cname").nonEmpty({content:"内容标题不能为空！"});
-            $("#content_state").val(contentState);
-            if(result && cnameResult) $("#contentForm").submit();*/
-
             $("#content_state").val(contentState);
             $("#contentForm").submit();
         }
@@ -339,7 +304,9 @@
         $("#saveContentDraftButton").click(function(){
             saveContent(0);
         });
-        var ue = UE.getEditor('editor');
+
+        UE.getEditor('editor');
+
         var columnSetting = {
             view : {
                 dblClickExpand : false
@@ -375,11 +342,8 @@
         });
 
         $("#backContentList").click(function(){
-            location.href="<@spring.url '/manager/content/list/1'/>"
+            location.href="<@spring.url '/manager/content/list/0/1'/>"
         });
-
-//        $("#colTypeId").chosen({disable_search_threshold: 10,width:'100%'});
-//        $("#openWay").chosen({disable_search_threshold: 10,width:'100%'});
 
         $("#uploadAndViewImage").click(function(){
             $("#addSelectImgModal").modal('show');
