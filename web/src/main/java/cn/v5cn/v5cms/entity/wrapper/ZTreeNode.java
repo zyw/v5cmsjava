@@ -7,6 +7,13 @@ import java.util.List;
  * Created by ZYW on 2014/11/19.
  */
 public class ZTreeNode implements Serializable {
+
+    public ZTreeNode(){}
+
+    public ZTreeNode(Long id,String name){
+        this.id = id;
+        this.name = name;
+    }
     private Long id;
     private String name;
     private List<ZTreeNode> children;

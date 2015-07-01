@@ -388,8 +388,8 @@
                         <#--<li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i> Editors</a></li>-->
                     <#--</ul>-->
                 </li>
-                <li>
-                    <a href="<@spring.url '/manager/tpl/list'/>">
+                <li id="resource_columns">
+                    <a href="<@spring.url '/manager/resource/list'/>">
                         <i class="fa fa-paste"></i> <span>资源管理</span>
                     </a>
                 </li>
