@@ -44,55 +44,15 @@
                         <h3 class="box-title">资源列表&nbsp;<small style="font-size:6px;">${colName!"全部"}</small></h3>
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
-                        <table class="table table-hover table-bordered table-striped">
-                            <colgroup>
-                                <col class="col-xs-1 v5-col-xs-1">
-                                <col class="col-xs-2">
-                                <col class="col-xs-1">
-                                <col class="col-xs-1">
-                                <col class="col-xs-2">
-                                <col class="col-xs-1">
-                            </colgroup>
-                            <thead>
-                            <tr>
-                                <th class="td-center">
-                                    <input type="checkbox" id="thcheckbox"/>
-                                </th>
-                                <th>名称</th>
-                                <th>类型</th>
-                                <th>大小</th>
-                                <th>最后修改</th>
-                                <th>操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <#if files?size != 0>
-                                <#list files as file>
-                                <tr>
-                                    <td class="td-center">
-                                        <input type="checkbox" class="table-cb" value="${file.name!""}"/>
-                                    </td>
-                                    <td>${file.name!""}</td>
-                                    <td>${file.type!""}</td>
-                                    <td>${file.size!""}</td>
-                                    <td>${file.modifyDate!""}</td>
-                                    <td>
-                                        <a href="#" class="btn btn-primary btn-xs" data-toggle="tooltip" title="修改内容">
-                                            <i class="fa fa-edit"></i>
-                                        </a>&nbsp;&nbsp;
-                                        <a href="javascript:;" data-contentid="" class="btn btn-warning btn-xs delete-content" data-toggle="tooltip" title="删除内容">
-                                            <i class="fa fa-times"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                </#list>
-                            <#else>
-                            <tr>
-                                <td class="text-center" colspan="8"><h3>还没有资源数据！</h3></td>
-                            </tr>
-                            </#if>
-                            </tbody>
-                        </table>
+                        <#if editor == "yes">
+                            <pre id="editor" style="height:750px;font-size:14px;"></pre>
+                            <textarea name="resourceContent" id="resourceContent" style="display:none;">${content}</textarea>
+                        <#else>
+                            <div class="text-center">
+                                <img src="${webPath}" style="margin-top: 10px;margin-bottom: 10px;">
+                                <div>${fileName}</div>
+                            </div>
+                        </#if>
                     </div><!-- /.box-body -->
                     <div class="box-footer clearfix">
                         <#--${pagination}-->
@@ -106,6 +66,7 @@
     </form>
 </aside><!-- /.right-side -->
 <#include "../fragment/footer.ftl">
+<script type="text/javascript" charset="utf-8" src="<@spring.url '/res/backstage/ace/ace.js'/>"></script>
 <script type="text/javascript">
 
     $(function(){
@@ -127,6 +88,22 @@
             }
         };
         $.fn.zTree.init($("#columnTree"), columnSetting);
+
+        <#if editor == "yes">
+            var editor = ace.edit("editor");
+            editor.setTheme("ace/theme/tomorrow");
+            <#if extension == "js">
+                editor.session.setMode("ace/mode/javascript");
+            <#else>
+                editor.session.setMode("ace/mode/css");
+            </#if>
+            editor.setAutoScrollEditorIntoView(true);
+            editor.setValue($("#resourceContent").val());
+            editor.getSession().on('change', function(e) {
+                $("#resourceContent").val(editor.getValue());
+            });
+        </#if>
+
 
         $("#resource_columns").imitClick();
         $("#addContent").click(function(){

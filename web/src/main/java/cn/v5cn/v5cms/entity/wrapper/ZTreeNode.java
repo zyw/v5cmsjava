@@ -15,8 +15,8 @@ public class ZTreeNode implements Serializable {
         this.name = name;
     }
     private Long id;
-    private String name;
-    private List<ZTreeNode> children;
+    protected String name;
+    protected List<? extends ZTreeNode> children;
 
     public Long getId() {
         return id;
@@ -34,11 +34,11 @@ public class ZTreeNode implements Serializable {
         this.name = name;
     }
 
-    public List<ZTreeNode> getChildren() {
+    public List<? extends ZTreeNode> getChildren() {
         return children;
     }
 
-    public void setChildren(List<ZTreeNode> children) {
+    public void setChildren(List<? extends ZTreeNode> children) {
         this.children = children;
     }
 
