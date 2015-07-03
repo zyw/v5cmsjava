@@ -60,7 +60,7 @@
                         <thead>
                         <tr>
                             <th class="td-center">
-                                <input type="checkbox" id="thcheckbox"/>
+                                <input type="checkbox" id="thcheckbox" value="on"/>
                             </th>
                             <th><i class="fa fa-list-ol"></i> 序号</th>
                             <th><i class="fa fa-bullhorn"></i> 名称</th>
@@ -123,28 +123,31 @@
         $("#thcheckbox").on('ifUnchecked', function(event){
             $('.table-cb').iCheck('uncheck');
         });
-       function deleteRole(roleIds) {
-             $.v5cms.confirm({icon:"question",content:"您确定要删除栏目类型吗，删除后将不能恢复？",width:350,ok:function(){
-                 var url = "<@spring.url '/manager/coltype/delete'/>";
-                 $.ajax({
-                     dataType:'json',
-                     type:'POST',
-                     url:url,
-                     data:{roleIds:roleIds},
-                     success:function(data){
-                         if(data.status == "1"){
-                             $.v5cms.tooltip({icon:"succeed","content":data.message},function(){
-                                 location.reload();
-                             });
-                         }else{
-                             $.v5cms.tooltip({icon:"error","content":data.message},function(){});
-                         }
-                     },
-                     error:function(XMLHttpRequest, textStatus, errorThrown){
-                         $.v5cms.tooltip({icon:"error","content":"删除栏目类型信息出错，"+textStatus+"，"+errorThrown});
+        function deleteRole(roleIds) {
+            layer.confirm('您确定要删除角色信息吗，删除后将不能恢复？', {icon: 3}, function(index){
+                var url = "<@spring.url '/manager/coltype/delete'/>";
+                $.ajax({
+                 dataType:'json',
+                 type:'POST',
+                 url:url,
+                 data:{roleIds:roleIds},
+                 success:function(data){
+                     if(data.status == "1"){
+                         layer.msg(data.message, {
+                             icon: 1,
+                             time:2000
+                         },function(){
+                             location.reload();
+                         });
+                     }else{
+                         layer.msg(data.message, {icon: 2});
                      }
-                 });
-            }});
+                 },
+                 error:function(XMLHttpRequest, textStatus, errorThrown){
+                     layer.msg("删除角色出错，"+textStatus+"，"+errorThrown, {icon: 2});
+                 }
+                });
+            });
         }
 
         $(".deleteRole").click(function(){
@@ -153,9 +156,9 @@
         });
 
         $("#roleBatchDelete").click(function(){
-            var $chs = $(":checkbox[checked=checked]");
+            var $chs = $(":checkbox:checked");
             if($chs.length == 0){
-                $.v5cms.tooltip({icon:"warning","content":"您还没有选中要操作的数据项！"},function(){});
+                layer.msg("您还没有选中要操作的数据项！", {icon: 0});
                 return;
             }
             var roleIds = [];

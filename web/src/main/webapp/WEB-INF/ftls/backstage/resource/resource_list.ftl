@@ -26,7 +26,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body table-responsive v5-tree-div" style="padding-top: 0;">
-                        <ul id="columnTree" class="ztree"></ul>
+                        <ul id="resourceTree" class="ztree"></ul>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
             </div>
@@ -35,13 +35,23 @@
                     <div class="box-header">
                         <!-- tools box -->
                         <div class="pull-right box-tools">
-                            <button id="addContent" class="btn btn-success btn-sm" data-toggle="tooltip" title="添加资源">
+                            <button id="createFolder" class="btn btn-success btn-sm" data-toggle="tooltip" title="新建文件夹">
+                                <i class="fa fa-folder-open"></i> 新建文件夹</button>
+                            <button id="addResource" class="btn btn-success btn-sm" data-toggle="tooltip" title="添加资源">
                                 <i class="fa fa-plus"></i> 添加资源</button>
-                            <button id="contentBatchDelete" class="btn btn-warning btn-sm" data-toggle="tooltip" title="批量删除">
+                            <button id="fileBatchDelete" class="btn btn-warning btn-sm" data-toggle="tooltip" title="批量删除">
                                 <i class="fa fa-trash-o"></i> 批量删除</button>
                         </div><!-- /. tools -->
                         <i class="fa fa-table"></i>
-                        <h3 class="box-title">资源列表&nbsp;<small style="font-size:6px;">${colName!"全部"}</small></h3>
+                        <h3 class="box-title">资源列表&nbsp;
+                            <small style="font-size:6px;">
+                                <#if fileName == "front">
+                                    资源根目录
+                                <#else>
+                                    ${fileName!"资源根目录"}
+                                </#if>
+                            </small>
+                        </h3>
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
                         <table class="table table-hover table-bordered table-striped">
@@ -56,7 +66,7 @@
                             <thead>
                             <tr>
                                 <th class="td-center">
-                                    <input type="checkbox" id="thcheckbox"/>
+                                    <input type="checkbox" id="thcheckbox" value="on"/>
                                 </th>
                                 <th>名称</th>
                                 <th>类型</th>
@@ -70,17 +80,36 @@
                                 <#list files as file>
                                 <tr>
                                     <td class="td-center">
-                                        <input type="checkbox" class="table-cb" value="${file.name!""}"/>
+                                        <input type="checkbox" class="table-cb" value="${file.id!""}"/>
                                     </td>
                                     <td>${file.name!""}</td>
-                                    <td>${file.type!""}</td>
+                                    <td>
+                                        <#if file.type == "文件">
+                                            <small class="badge bg-light-blue">${file.type!""}</small>
+                                        <#else>
+                                            <small class="badge bg-info">${file.type!""}</small>
+                                        </#if>
+                                    </td>
                                     <td>${file.size!""}</td>
                                     <td>${file.modifyDate!""}</td>
                                     <td>
-                                        <a href="#" class="btn btn-primary btn-xs" data-toggle="tooltip" title="修改内容">
-                                            <i class="fa fa-edit"></i>
+                                        <#if file.type == "文件夹">
+                                            <a href="javascript:;" data-resourceid="${file.id!""}" class="btn btn-success btn-xs create-folder" data-toggle="tooltip" title="创建文件夹">
+                                                <i class="fa fa-folder-open"></i>
+                                            </a>&nbsp;&nbsp;
+                                            <a href="#" class="btn btn-success btn-xs" data-toggle="tooltip" title="添加资源">
+                                                <i class="fa fa-plus"></i>
+                                            </a>&nbsp;&nbsp;
+                                        <#else>
+                                            <a href="javascript:;" data-resourceid="${file.id!""}" class="btn btn-success btn-xs edit-resource" data-toggle="tooltip" title="编辑内容">
+                                                <i class="fa fa-edit"></i>
+                                            </a>&nbsp;&nbsp;
+                                        </#if>
+                                        <a href="javascript:;" data-resourceid="${file.id!""}" data-oldname="${file.name!""}" class="btn btn-primary btn-xs rename-resource" data-toggle="tooltip" title="重命名">
+                                            <i class="fa fa-magic"></i>
                                         </a>&nbsp;&nbsp;
-                                        <a href="javascript:;" data-contentid="" class="btn btn-warning btn-xs delete-content" data-toggle="tooltip" title="删除内容">
+
+                                        <a href="javascript:;" data-resourceid="${file.id!""}" class="btn btn-warning btn-xs delete-resource" data-toggle="tooltip" title="删除资源">
                                             <i class="fa fa-times"></i>
                                         </a>
                                     </td>
@@ -94,9 +123,6 @@
                             </tbody>
                         </table>
                     </div><!-- /.box-body -->
-                    <div class="box-footer clearfix">
-                        <#--${pagination}-->
-                    </div>
                 </div><!-- /.box -->
             </div><!-- /.col-xs-9 -->
         </div><!-- /.row -->
@@ -104,12 +130,13 @@
     <form id="resourceForm" method="post" action="<@spring.url '/manager/resource/list'/>">
         <input type="hidden" id="pathInput" name="path">
     </form>
+    <input type="hidden" id="pathUri" value="${path!"/"}">
 </aside><!-- /.right-side -->
 <#include "../fragment/footer.ftl">
 <script type="text/javascript">
 
     $(function(){
-        var columnSetting = {
+        var resourceSetting = {
             view : {
                 dblClickExpand : false
             },
@@ -126,21 +153,56 @@
                 }
             }
         };
-        $.fn.zTree.init($("#columnTree"), columnSetting);
+        $.fn.zTree.init($("#resourceTree"), resourceSetting);
 
         $("#resource_columns").imitClick();
-        $("#addContent").click(function(){
-            location.href="<@spring.url '/manager/content/edit'/>";
+        $("#addResource").click(function(){
+            <#--location.href="<@spring.url '/manager/content/edit'/>";-->
         });
 
-        function deleteContent(contentId) {
-            layer.confirm('您确定要删除内容信息吗，删除后将不能恢复？', {icon: 3}, function(index){
-                var url = "<@spring.url '/manager/content/delete'/>";
+        function createFolder(pathUri){
+            layer.open({
+                btn: ['确定','取消'],
+                content: '<div>文件夹名：<input type="text" id="folderName" name="folderName"></div>',
+                yes:function(index, layero){
+                    var folderName = $("#folderName").val();
+                    if(folderName == ""){
+                        layer.msg("文件名称不能为空！",{icon:2});
+                        return;
+                    }
+                    $.ajax({
+                        dataType:'json',
+                        type:'POST',
+                        url:"<@spring.url '/manager/resource/create/folder'/>",
+                        data:{pathUri:pathUri,folderName:folderName},
+                        success:function(data){
+                            if(data.status == "1"){
+                                layer.msg(data.message, {
+                                    icon: 1,
+                                    time:2000
+                                },function(){
+                                    location.reload();
+                                });
+                            }else{
+                                layer.msg(data.message, {icon: 2});
+                            }
+                        },
+                        error:function(XMLHttpRequest, textStatus, errorThrown){
+                            layer.msg("删除内容信息出错，"+textStatus+"，"+errorThrown, {icon: 2});
+                        }
+                    });
+                }
+            });
+        }
+
+        function deleteResource(resourceIds) {
+            layer.confirm('您确定要删除资源文件吗，删除后将不能恢复？', {icon: 3}, function(index){
+                var url = "<@spring.url '/manager/resource/delete/file'/>";
                 $.ajax({
                     dataType:'json',
                     type:'POST',
                     url:url,
-                    data:{contentId:contentId},
+                    data:{pathUris:resourceIds},
                     success:function(data){
                         if(data.status == "1"){
                             layer.msg(data.message, {
@@ -154,16 +216,65 @@
                         }
                     },
                     error:function(XMLHttpRequest, textStatus, errorThrown){
-                        layer.msg("删除内容信息出错，"+textStatus+"，"+errorThrown, {icon: 2});
+                        layer.msg("删除文件信息出错，"+textStatus+"，"+errorThrown, {icon: 2});
                     }
                 });
                 layer.close(index);
             });
         }
 
-        $(".delete-content").click(function(){
-            var contentId = $(this).data("contentid");
-            deleteContent(contentId);
+        $(".create-folder").click(function(){
+            var resourceId = $(this).data("resourceid");
+            createFolder(resourceId);
+        });
+
+        $(".rename-resource").click(function(){
+            var resourceId = $(this).data("resourceid");
+            var oldName = $(this).data("oldname");
+            var content = '<div>新文件夹名：<input type="text" id="folderName" name="folderName" value="'+oldName+'"></div>';
+            layer.open({
+                btn: ['确定','取消'],
+                content: content,
+                yes:function(index, layero){
+                    var folderName = $("#folderName").val();
+                    if(folderName == ""){
+                        layer.msg("文件名称不能为空！",{icon:2});
+                        return;
+                    }
+                    $.ajax({
+                        dataType:'json',
+                        type:'POST',
+                        url:"<@spring.url '/manager/resource/rename/file'/>",
+                        data:{pathUri:resourceId,folderName:folderName},
+                        success:function(data){
+                            if(data.status == "1"){
+                                layer.msg(data.message, {
+                                    icon: 1,
+                                    time:2000
+                                },function(){
+                                    location.reload();
+                                });
+                            }else{
+                                layer.msg(data.message, {icon: 2});
+                            }
+                        },
+                        error:function(XMLHttpRequest, textStatus, errorThrown){
+                            layer.msg("重命名文件名出错，"+textStatus+"，"+errorThrown, {icon: 2});
+                        }
+                    });
+                }
+            });
+        });
+
+        $(".edit-resource").click(function(){
+            var resourceId = $(this).data("resourceid");
+            $("#pathInput").val(resourceId);
+            $("#resourceForm").submit();
+        });
+
+        $(".delete-resource").click(function(){
+            var resourceId = $(this).data("resourceid");
+            deleteResource(resourceId);
         });
 
         $("#thcheckbox").on('ifChecked', function(event){
@@ -173,19 +284,24 @@
             $('.table-cb').iCheck('uncheck');
         });
 
-        $("#contentBatchDelete").click(function(){
-            var $chs = $(":checkbox[checked=checked]");
+        $("#fileBatchDelete").click(function(){
+            var $chs = $(":checkbox:checked");
             if($chs.length == 0){
                 layer.msg("您还没有选中要操作的数据项！", {icon: 0});
                 return;
             }
-            var contentIds = [];
+            var resourceIds = [];
             for(var i=0;i<$chs.length;i++){
                 var v = $($chs[i]).val();
                 if(v == "on") continue;
-                contentIds.push(v);
+                resourceIds.push(v);
             }
-            deleteContent(contentIds.join());
+            deleteResource(resourceIds.join());
+        });
+
+        $("#createFolder").click(function(){
+            var pathUri = $("#pathUri").val();
+            createFolder(pathUri);
         });
     });
 </script>

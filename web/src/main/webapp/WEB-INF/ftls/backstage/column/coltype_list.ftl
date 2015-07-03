@@ -64,7 +64,7 @@
                         <thead>
                         <tr>
                             <th class="td-center">
-                                <input type="checkbox" id="thcheckbox"/>
+                                <input type="checkbox" id="thcheckbox" value="on"/>
                             </th>
                             <th>序号</th>
                             <th>类型名称</th>
@@ -197,7 +197,7 @@
         });
 
         $("#colTypeBatchDelete").click(function(){
-            var $chs = $(":checkbox[checked=checked]");
+            var $chs = $(":checkbox:checked");
             if($chs.length == 0){
                 //$.v5cms.tooltip({icon:"warning","content":"您还没有选中要操作的数据项！"},function(){});
                 layer.msg("您还没有选中要操作的数据项！", {icon: 0});

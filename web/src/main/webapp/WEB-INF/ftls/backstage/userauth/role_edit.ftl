@@ -150,17 +150,6 @@
             ajaxPost:true,
             showAllError:true,
             tiptype:2,
-            /*tiptype:function(msg,o,cssctl){
-                if(!o.obj.is("form")){
-                    if(o.type == 2){
-                        layer.tips(msg, o.obj,{tips:[2, '#78BA32']});
-                    }else{
-                        layer.tips(msg, o.obj,{time:0});
-                    }
-                }else{
-                    layer.closeAll('tips');
-                }
-            },*/
             callback:function(data){
                 if(data.status === "1"){
                     layer.msg(data.message, {

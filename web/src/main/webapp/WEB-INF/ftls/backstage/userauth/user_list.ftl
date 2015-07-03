@@ -67,7 +67,7 @@
                         <thead>
                         <tr>
                             <th class="td-center">
-                                <input type="checkbox" id="thcheckbox"/>
+                                <input type="checkbox" id="thcheckbox" value="on"/>
                             </th>
                             <th><i class="fa fa-list-ol"></i> 序号</th>
                             <th><i class="fa fa-bullhorn"></i> 名称</th>
@@ -150,15 +150,18 @@
                      data:{userIds:userIds},
                      success:function(data){
                          if(data.status == "1"){
-                             $.v5cms.tooltip({icon:"succeed","content":data.message},function(){
+                             layer.msg(data.message, {
+                                 icon: 1,
+                                 time:2000
+                             },function(){
                                  location.reload();
                              });
                          }else{
-                             $.v5cms.tooltip({icon:"error","content":data.message},function(){});
+                             layer.msg(data.message, {icon: 2});
                          }
                      },
                      error:function(XMLHttpRequest, textStatus, errorThrown){
-                         $.v5cms.tooltip({icon:"error","content":"删除用户信息出错，"+textStatus+"，"+errorThrown});
+                         layer.msg("删除用户信息出错，"+textStatus+"，"+errorThrown, {icon: 2});
                      }
                  });
             }});
@@ -170,9 +173,9 @@
         });
 
         $("#userBatchDelete").click(function(){
-            var $chs = $(":checkbox[checked=checked]");
+            var $chs = $(":checkbox:checked");
             if($chs.length == 0){
-                $.v5cms.tooltip({icon:"warning","content":"您还没有选中要操作的数据项！"},function(){});
+                layer.msg("您还没有选中要操作的数据项！", {icon: 0});
                 return;
             }
             var userIds = [];

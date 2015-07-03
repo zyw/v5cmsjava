@@ -24,8 +24,8 @@
                     <div class="pull-right box-tools">
                         <button id="addRes" class="btn btn-success btn-sm" data-toggle="tooltip" title="添加资源">
                             <i class="fa fa-plus"></i> 添加资源</button>
-                        <button id="columnBatchDelete" class="btn btn-warning btn-sm" data-toggle="tooltip" title="批量删除">
-                            <i class="fa fa-trash-o"></i> 批量删除</button>
+                        <#--<button id="columnBatchDelete" class="btn btn-warning btn-sm" data-toggle="tooltip" title="批量删除">
+                            <i class="fa fa-trash-o"></i> 批量删除</button>-->
                     </div><!-- /. tools -->
                     <i class="fa fa-table"></i>
                     <h3 class="box-title">资源列表</h3>

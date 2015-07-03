@@ -58,7 +58,7 @@
                             <thead>
                             <tr>
                                 <th class="td-center">
-                                    <input type="checkbox" id="thcheckbox"/>
+                                    <input type="checkbox" id="thcheckbox" value="on"/>
                                 </th>
                                 <th>序号</th>
                                 <th>标题</th>
@@ -187,7 +187,7 @@
         });
 
         $("#contentBatchDelete").click(function(){
-            var $chs = $(":checkbox[checked=checked]");
+            var $chs = $(":checkbox:checked");
             if($chs.length == 0){
                 layer.msg("您还没有选中要操作的数据项！", {icon: 0});
                 return;
