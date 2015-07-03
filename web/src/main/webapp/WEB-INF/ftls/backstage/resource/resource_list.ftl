@@ -133,6 +133,8 @@
     <input type="hidden" id="pathUri" value="${path!"/"}">
 </aside><!-- /.right-side -->
 <#include "../fragment/footer.ftl">
+<!-- webuploader -->
+<script src="<@spring.url '/res/backstage/webuploader/webuploader.min.js'/>" type="text/javascript"></script>
 <script type="text/javascript">
 
     $(function(){

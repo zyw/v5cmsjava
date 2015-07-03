@@ -309,7 +309,6 @@
                 sCallBack:function(){}
             },options);
             if(settings.resPath == null || settings.resPath == ""){
-                //$.v5cms.tooltip({icon:"error",content:settings.errMessage,timeout:1000},function(){});
                 layer.msg(settings.errMessage, {icon: 2});
                 return;
             }
@@ -320,15 +319,12 @@
                 data:{if_path:settings.resPath},
                 success:function(data){
                     if(data.status == '0'){
-                        //$.v5cms.tooltip({icon:"error",content:data.message},function(){});
                         layer.msg(data.message, {icon: 2});
                         return;
                     }
-                    //$.v5cms.tooltip({icon:"succeed",content:data.message},settings.sCallBack());
                     layer.msg(data.message, {icon: 1,time:2000},settings.sCallBack());
                 },
                 error:function(XMLHttpRequest, textStatus, errorThrown){
-                    //$.v5cms.tooltip({icon:"error","content":"删除图片出错，"+textStatus+"，"+errorThrown});
                     layer.msg("删除图片出错，"+textStatus+"，"+errorThrown, {icon: 2});
                 }
             });
@@ -378,7 +374,6 @@
         });
         uploadImage.on( 'uploadSuccess', function( file,response ) {
             if(response.status == '0'){
-                //$.v5cms.tooltip({icon:"error",content:response.message},function(){});
                 layer.msg(response.message, {icon: 2});
                 return;
             }
@@ -387,13 +382,11 @@
         });
 
         uploadImage.on( 'uploadError', function( file,reason  ) {
-            //$.v5cms.tooltip({icon:"error",content:"上传图片出错！"},function(){});
             layer.msg("上传图片出错！", {icon: 2});
         });
         uploadImage.on("beforeFileQueued",function(file){
             var temp = $("#adv_image_url").val();
             if(temp != null && temp != ""){
-                //$.v5cms.tooltip({icon:"error",content:"您已经上传了一张图片，请先删除在上传！",timeout:1000},function(){});
                 layer.msg("您已经上传了一张图片，请先删除在上传！", {icon: 2});
                 return false;
             }
