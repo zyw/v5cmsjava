@@ -195,11 +195,6 @@
             <artifactId>shiro-spring</artifactId>
         </dependency>
 
-
-        <!--<dependency>-->
-            <!--<groupId>cn.dreampie</groupId>-->
-            <!--<artifactId>jfinal-shiro-freemarker</artifactId>-->
-        <!--</dependency>-->
         <!--./Shiro-->
 
         <dependency>

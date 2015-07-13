@@ -80,6 +80,10 @@
     width: 220px;
 }
 
+#addResource input[type=file]{
+    display: none;
+}
+
 /* 图片管理样式 */
 #online {
     width: 100%;

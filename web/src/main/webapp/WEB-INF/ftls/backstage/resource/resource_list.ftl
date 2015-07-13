@@ -97,9 +97,9 @@
                                             <a href="javascript:;" data-resourceid="${file.id!""}" class="btn btn-success btn-xs create-folder" data-toggle="tooltip" title="创建文件夹">
                                                 <i class="fa fa-folder-open"></i>
                                             </a>&nbsp;&nbsp;
-                                            <a href="#" class="btn btn-success btn-xs" data-toggle="tooltip" title="添加资源">
-                                                <i class="fa fa-plus"></i>
-                                            </a>&nbsp;&nbsp;
+                                            <#--<a href="javascript:;" class="btn btn-success btn-xs" data-toggle="tooltip" title="添加资源">-->
+                                                <#--<i class="fa fa-plus"></i>-->
+                                            <#--</a>&nbsp;&nbsp;-->
                                         <#else>
                                             <a href="javascript:;" data-resourceid="${file.id!""}" class="btn btn-success btn-xs edit-resource" data-toggle="tooltip" title="编辑内容">
                                                 <i class="fa fa-edit"></i>
@@ -158,8 +158,26 @@
         $.fn.zTree.init($("#resourceTree"), resourceSetting);
 
         $("#resource_columns").imitClick();
-        $("#addResource").click(function(){
+        /*$("#addResource").click(function(){
             <#--location.href="<@spring.url '/manager/content/edit'/>";-->
+        });*/
+
+        //上传资源
+        var uploadResource = WebUploader.create({
+            // swf文件路径
+            swf: "<@spring.url '/res/backstage/webuploader/Uploader.swf'/>",
+            auto: true,
+            // 文件接收服务端。
+            server: '<@spring.url '/manager/adv/upload?tt='/>'+new Date().getTime(),
+            // 选择文件的按钮。可选。
+            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+            pick: '#addResource',
+
+            accept: {
+                title: 'Images js css',
+                extensions: 'gif,jpg,jpeg,bmp,png,js,css',
+                mimeTypes: 'image/*,application/javascript,text/css'
+            }
         });
 
         function createFolder(pathUri){
