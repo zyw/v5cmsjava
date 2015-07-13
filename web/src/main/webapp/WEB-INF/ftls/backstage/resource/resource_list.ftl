@@ -176,9 +176,11 @@
                 mimeTypes: 'image/*,application/javascript,text/css'
             }
         });
+
         uploadResource.on( 'uploadBeforeSend', function( object,data,headers ) {
             data.uploadUri = $("#pathUri").val();
         });
+
         uploadResource.on( 'uploadSuccess', function( file,response ) {
             if(response.status == '0'){
                 layer.msg(response.message, {icon: 2});
