@@ -18,6 +18,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -167,6 +168,17 @@ public class ResourceController {
         List<ZTreeFileNode> nodeList = fileNdoes(resFile, realResPath);
         rootNode.setChildren(nodeList);
         return rootNode;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/res/upload",method = RequestMethod.POST)
+    public ImmutableMap<String,Object> uploadRes(MultipartFile file,String uploadUri,HttpServletRequest request){
+        String resPath = PropertyUtils.getValue("resource.path").or("/res/front");
+        String realResPath = request.getSession().getServletContext().getRealPath(resPath);
+        File uploadFile = new File(realResPath + uploadUri);
+        LOGGER.debug(uploadUri + "=======================");
+
+        return ImmutableMap.<String,Object>of("status","0","message",getMessage("adv.uploaderror.message"));
     }
 
     /**

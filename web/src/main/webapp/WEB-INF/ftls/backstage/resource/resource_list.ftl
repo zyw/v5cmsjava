@@ -165,7 +165,7 @@
             swf: "<@spring.url '/res/backstage/webuploader/Uploader.swf'/>",
             auto: true,
             // 文件接收服务端。
-            server: '<@spring.url '/manager/adv/upload?tt='/>'+new Date().getTime(),
+            server: '<@spring.url '/manager/resource/res/upload?tt='/>'+new Date().getTime(),
             // 选择文件的按钮。可选。
             // 内部根据当前运行是创建，可能是input元素，也可能是flash.
             pick: '#addResource',

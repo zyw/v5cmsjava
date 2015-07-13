@@ -29,7 +29,7 @@
         </rollingPolicy>
     </appender>
 
-    <logger name="cn.v5cn.v5cms" level="ERROR" />
+    <logger name="cn.v5cn.v5cms" level="DEBUGE" />
     <logger name="org.springframework" level="ERROR" />
     <logger name="log4j.logger.org.springframework.data" level="ERROR"/>
 
