@@ -22,7 +22,7 @@
     </context:component-scan>
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <context:property-placeholder file-encoding="UTF-8" location="WEB-INF/config/jdbc.properties"/>
+    <context:property-placeholder file-encoding="UTF-8" location="classpath:config/jdbc.properties"/>
 
     <!--<util:properties id="proper" location="classpath:sys_constant.properties"/>-->
     <!--

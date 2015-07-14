@@ -151,7 +151,8 @@ public final class ConfigManager {
 	}
 	
 	private String getConfigPath () {
-		return  this.rootPath + File.separator + "WEB-INF" + File.separator + "config" + File.separator + ConfigManager.configFileName;
+		String config = this.getClass().getResource("/").toString().replace("file:/","");
+		return config + "config" + File.separator + ConfigManager.configFileName;
 	}
 
 	private String[] getArray ( String key ) {
@@ -173,7 +174,7 @@ public final class ConfigManager {
 		
 		try {
 			
-			InputStreamReader reader = new InputStreamReader( new FileInputStream( path ), "UTF-8" );
+			InputStreamReader reader = new InputStreamReader( new FileInputStream( filter(path) ), "UTF-8" );
 			BufferedReader bfReader = new BufferedReader( reader );
 			
 			String tmpContent = null;

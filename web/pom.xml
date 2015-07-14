@@ -205,6 +205,16 @@
     </dependencies>
     <build>
         <finalName>v5cms</finalName>
+        <!-- 配置资源目录 -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
@@ -216,4 +226,18 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <pom.jdbc.driverClassName>com.mysql.jdbc.Driver</pom.jdbc.driverClassName>
+                <pom.jdbc.url>jdbc:mysql://192.168.0.45:3306/v5cms</pom.jdbc.url>
+                <pom.jdbc.username>root</pom.jdbc.username>
+                <pom.jdbc.password>root</pom.jdbc.password>
+            </properties>
+        </profile>
+    </profiles>
 </project>
