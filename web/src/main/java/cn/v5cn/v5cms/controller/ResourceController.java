@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -172,13 +173,21 @@ public class ResourceController {
 
     @ResponseBody
     @RequestMapping(value = "/res/upload",method = RequestMethod.POST)
-    public ImmutableMap<String,Object> uploadRes(MultipartFile file,String uploadUri,HttpServletRequest request){
+    public ImmutableMap<String,Object> uploadRes(MultipartHttpServletRequest multipartFile,String uploadUri,HttpServletRequest request){
         String resPath = PropertyUtils.getValue("resource.path").or("/res/front");
         String realResPath = request.getSession().getServletContext().getRealPath(resPath);
-        File uploadFile = new File(realResPath + uploadUri);
-        LOGGER.debug(uploadUri + "=======================");
 
-        return ImmutableMap.<String,Object>of("status","0","message",getMessage("adv.uploaderror.message"));
+        List<MultipartFile> files = multipartFile.getFiles("file");
+        try {
+            for(MultipartFile file : files){
+                file.transferTo(new File(realResPath + uploadUri + File.separator + file.getOriginalFilename()));
+            }
+        } catch (IOException e) {
+            LOGGER.error("上传资源出现异常：{}", e.getMessage());
+            return ImmutableMap.<String, Object>of("status", "0", "message", getMessage("res.uploadfailed.message"));
+        }
+
+        return ImmutableMap.<String,Object>of("status","1","message",getMessage("res.uploadsuccess.message"));
     }
 
     /**

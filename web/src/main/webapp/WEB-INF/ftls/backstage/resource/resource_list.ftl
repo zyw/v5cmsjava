@@ -168,7 +168,10 @@
             server: '<@spring.url '/manager/resource/res/upload?tt='/>'+new Date().getTime(),
             // 选择文件的按钮。可选。
             // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-            pick: '#addResource',
+            pick: {
+                id:'#addResource',
+                multiple:true
+            },
 
             accept: {
                 title: 'Images js css',
@@ -186,6 +189,9 @@
                 layer.msg(response.message, {icon: 2});
                 return;
             }
+            layer.msg(response.message, {icon: 1},function(){
+                location.reload();
+            });
         });
 
         uploadResource.on( 'uploadError', function( file,reason  ) {
