@@ -76,7 +76,21 @@ public class ContentController {
     }
 
     @RequestMapping(value = "/edit",method = RequestMethod.GET)
-    public String contentEdit(){
+    public String contentEdit(ModelMap modelMap){
+
+        modelMap.addAttribute(new Content());
+
+        return "content/content_edit";
+    }
+
+    @RequestMapping(value = "/edit/{cid}",method = RequestMethod.GET)
+    public String contentEdit(@PathVariable Long cid,ModelMap modelMap){
+        LOGGER.debug("内容ID：{}",cid);
+
+        Content content = contentService.findOne(cid);
+        modelMap.addAttribute(content);
+        modelMap.addAttribute("page_title","内容编辑");
+
         return "content/content_edit";
     }
 

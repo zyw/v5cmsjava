@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.*;
 import java.util.List;
@@ -30,6 +31,7 @@ public class ContentServiceImpl implements ContentService {
     private ContentDao contentDao;
 
     @Override
+    @Transactional
     public Content save(Content content) {
         return contentDao.save(content);
     }
@@ -54,5 +56,10 @@ public class ContentServiceImpl implements ContentService {
                 return criteriaBuilder.and(ps.toArray(new Predicate[ps.size()]));
             }
         },new PageRequest(currPage-1,pageSize,new Sort(Sort.Direction.DESC,"lastdt")));
+    }
+
+    @Override
+    public Content findOne(Long contentId) {
+        return contentDao.findOne(contentId);
     }
 }

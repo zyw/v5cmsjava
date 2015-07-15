@@ -9,4 +9,6 @@ import org.springframework.data.domain.Page;
 public interface ContentService {
     Content save(Content content);
     Page<Content> findContentPageable(Content content,Integer currPage);
+
+    Content findOne(Long contentId);
 }
