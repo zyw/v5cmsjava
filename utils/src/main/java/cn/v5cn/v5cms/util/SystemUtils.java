@@ -19,6 +19,7 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by ZYW on 2014/7/18.
@@ -137,11 +138,20 @@ public class SystemUtils {
     }
 
     public static Object getSessionSite(){
-        Object siteObj = SecurityUtils.getSubject().getSession().getAttribute(SystemConstant.SITE_SESSION_KEY);
+        Object siteObj = getShiroSession().getAttribute(SystemConstant.SITE_SESSION_KEY);
         if(siteObj == null){
             LOGGER.error("Session中存储的站点信息为空！");
             throw new V5CMSSessionValueNullException("Session中存储的站点信息为空！");
         }
         return siteObj;
+    }
+
+    public static Object getSessionUser(){
+        Object userObj = getShiroSession().getAttribute(SystemConstant.SESSION_KEY);
+        if(userObj == null) {
+            LOGGER.error("Session中存储的用户信息为空！");
+            throw new V5CMSSessionValueNullException("Session中存储的用户信息为空！");
+        }
+        return userObj;
     }
  }

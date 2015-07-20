@@ -40,7 +40,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form id="contentForm" action="<@spring.url '/manager/content/save'/>" class="form-horizontal" role="form" method="POST">
+                    <form id="contentForm" action="<@spring.url '/manager/content/edit'/>" class="form-horizontal" role="form" method="POST">
                         <input type="hidden" name="contentId" value="${content.contentId!""}">
                         <input type="hidden" name="state" id="content_state" value="${content.state!""}">
                         <div class="form-group has-feedback">

@@ -95,23 +95,34 @@ public class ContentController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/save",method = RequestMethod.POST)
+    @RequestMapping(value = "/edit",method = RequestMethod.POST)
     public ImmutableMap<String,String> contentSave(Content content){
-        Session session = SystemUtils.getShiroSession();
-        SystemUser user = (SystemUser)session.getAttribute(SystemConstant.SESSION_KEY);
-        content.setWriterId(user.getId());
-        content.setLastdt(DateTime.now().toDate());
+        SystemUser user = (SystemUser)SystemUtils.getSessionUser();
         Site site = (Site)(SystemUtils.getSessionSite());
+        content.setWriterId(user.getId());
         content.setSiteId(site.getSiteId());
+        content.setLastdt(DateTime.now().toDate());
+        if(content.getContentId() == null || content.getContentId() == 0L){
 
-        Content result = contentService.save(content);
-        if(result != null && result.getContentId() != null){
-            LOGGER.info("内容添加成功，内容ID{}",result.getContentId());
-            return ImmutableMap.of("status","1","message",getMessage("content.addsuccess.message"));
+            Content result = contentService.save(content);
+            if(result != null && result.getContentId() != null){
+                LOGGER.info("内容添加成功，内容ID{}",result.getContentId());
+                return ImmutableMap.of("status","1","message",getMessage("content.addsuccess.message"));
+            }
+
+            LOGGER.info("内容添加失败，内容标题{}",result.getCname());
+            return ImmutableMap.of("status","0","message",getMessage("content.addfailed.message"));
         }
-
-        LOGGER.info("内容添加失败，内容标题{}",result.getCname());
-        return ImmutableMap.of("status","0","message",getMessage("content.addfailed.message"));
+        //修改
+        try {
+            contentService.save(content);
+        } catch (Exception e) {
+            LOGGER.error("内容修改失败,{}",e);
+            e.printStackTrace();
+            return ImmutableMap.of("status","0","message",getMessage("content.updatefailed.message"));
+        }
+        LOGGER.info("内容添加成功,{}", content);
+        return ImmutableMap.of("status","1","message",getMessage("content.updatesuccess.message"));
     }
 
     @ResponseBody
