@@ -40,7 +40,7 @@ public class ResourceController {
 
     @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
     public String resourceView(String path,HttpServletRequest request,ModelMap modelMap) throws IOException {
-        String resPath = PropertyUtils.getValue("resource.path").or("/res/front");
+        String resPath = PropertyUtils.getValue("tpl.res.path").or("/res/front");
         String realResPath = request.getSession().getServletContext().getRealPath(resPath);
         if(path == null){
             List<FileInfo> fileInfos = fileInfos(new File(realResPath),realResPath);
@@ -82,7 +82,7 @@ public class ResourceController {
     @ResponseBody
     @RequestMapping(value = "/save/file",method = RequestMethod.POST)
     public ImmutableMap<String,Object> saveFile(String resourceContent,String fileid,HttpServletRequest request){
-        String resPath = PropertyUtils.getValue("resource.path").or("/res/front");
+        String resPath = PropertyUtils.getValue("tpl.res.path").or("/res/front");
         String realResPath = request.getSession().getServletContext().getRealPath(resPath);
         File file = new File(realResPath + fileid);
         try {
@@ -97,7 +97,7 @@ public class ResourceController {
     @ResponseBody
     @RequestMapping(value = "/create/folder",method = RequestMethod.POST)
     public ImmutableMap<String,Object> createFolder(String pathUri,String folderName,HttpServletRequest request){
-        String resPath = PropertyUtils.getValue("resource.path").or("/res/front");
+        String resPath = PropertyUtils.getValue("tpl.res.path").or("/res/front");
         String realResPath = request.getSession().getServletContext().getRealPath(resPath);
         File file = new File(realResPath + pathUri + "/" + folderName);
         if(file.exists()){
@@ -114,7 +114,7 @@ public class ResourceController {
     @ResponseBody
     @RequestMapping(value = "/rename/file",method = RequestMethod.POST)
     public ImmutableMap<String,Object> renameFile(String pathUri,String folderName,HttpServletRequest request){
-        String resPath = PropertyUtils.getValue("resource.path").or("/res/front");
+        String resPath = PropertyUtils.getValue("tpl.res.path").or("/res/front");
         String realResPath = request.getSession().getServletContext().getRealPath(resPath);
         File file = new File(realResPath + pathUri);// + "/" + folderName
         String oldName = file.getName();
@@ -128,7 +128,7 @@ public class ResourceController {
     @ResponseBody
     @RequestMapping(value = "/delete/file",method = RequestMethod.POST)
     public ImmutableMap<String,Object> deleteFile(String pathUris,HttpServletRequest request){
-        String resPath = PropertyUtils.getValue("resource.path").or("/res/front");
+        String resPath = PropertyUtils.getValue("tpl.res.path").or("/res/front");
         String realResPath = request.getSession().getServletContext().getRealPath(resPath);
         List<String> pathUriList = Splitter.on(",").splitToList(pathUris);
 
@@ -161,7 +161,7 @@ public class ResourceController {
     @ResponseBody
     @RequestMapping(value = "/tree/json",method = RequestMethod.POST)
     public ZTreeNode resourceTree(HttpServletRequest request){
-        String resPath = PropertyUtils.getValue("resource.path").or("/res/front");
+        String resPath = PropertyUtils.getValue("tpl.res.path").or("/res/front");
         ZTreeFileNode rootNode = new ZTreeFileNode("资源树","/",true);
         String realResPath = request.getSession().getServletContext().getRealPath(resPath);
 
@@ -174,7 +174,7 @@ public class ResourceController {
     @ResponseBody
     @RequestMapping(value = "/res/upload",method = RequestMethod.POST)
     public ImmutableMap<String,Object> uploadRes(MultipartHttpServletRequest multipartFile,String uploadUri,HttpServletRequest request){
-        String resPath = PropertyUtils.getValue("resource.path").or("/res/front");
+        String resPath = PropertyUtils.getValue("tpl.res.path").or("/res/front");
         String realResPath = request.getSession().getServletContext().getRealPath(resPath);
 
         List<MultipartFile> files = multipartFile.getFiles("file");

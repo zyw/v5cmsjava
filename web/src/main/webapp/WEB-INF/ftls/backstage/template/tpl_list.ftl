@@ -32,17 +32,22 @@
                 <!-- /.box-header -->
                 <div class="box-body table-responsive">
                     <div class="row">
+                        <#list tplInfos as tplInfo>
                         <div class="col-md-3">
                             <div class="thumbnail thumbnail-style">
-                                <a class="fancybox-button zoomer" data-rel="fancybox-button" title="模板图片" href="assets/img/main/9.jpg">
+                                <a class="fancybox-button zoomer" data-rel="fancybox-button" title="${tplInfo.name}" href="<@spring.url '/manager/tpl/thumb?tplFileName=${tplInfo.tplPath}&thumbName=${tplInfo.thumbnail}'/>">
                                 <span class="overlay-zoom">
-                                    <img class="img-responsive" data-src="<@spring.url '/r/js/holder.js'/>/100%x220/text:模板图片" alt="" />
+                                    <#if tplInfo.thumbnail=="">
+                                        <img class="img-responsive" data-src="<@spring.url '/r/js/holder.js'/>/100%x220/text:模板图片" alt="${tplInfo.name}" />
+                                    <#else>
+                                        <img class="img-responsive" src="<@spring.url '/manager/tpl/thumb?tplFileName=${tplInfo.tplPath}&thumbName=${tplInfo.thumbnail}'/>" width="100%" height="200" alt="${tplInfo.name}" />
+                                    </#if>
                                     <span class="zoom-icon"></span>
                                 </span>
                                 </a>
                                 <div class="caption">
-                                    <h3><a class="hover-effect" href="#">模板1</a></h3>
-                                    <p class="v5-p-word-wrap"><strong>简介：</strong>家居装修行业整站企业网站模板，全套模板，DIV+CSS布局，包含404.html，archives.html，article.html。</p>
+                                    <h3><a class="hover-effect" href="#">${tplInfo.name}</a></h3>
+                                    <p class="v5-p-word-wrap"><strong>简介：</strong>${tplInfo.summary}</p>
                                 </div>
                                 <div class="caption text-center">
                                     <button class="btn btn-warning tpl-edit" data-tplname="" style="margin-right: 10px;">
@@ -56,11 +61,12 @@
                                 </div>
                             </div>
                         </div>
+                        </#list>
                         <div class="col-md-3">
                             <div class="thumbnail thumbnail-style">
                                 <a class="fancybox-button zoomer" data-rel="fancybox-button" title="模板图片" href="assets/img/main/9.jpg">
                                 <span class="overlay-zoom">
-                                    <img class="img-responsive" data-src="<@spring.url '/r/js/holder.js'/>/100%x220/text:模板图片" alt="" />
+                                    <img class="img-responsive" data-src="<@spring.url '/r/js/holder.js'/>/100%x332/text:模板图片" alt="" />
                                     <span class="zoom-icon"></span>
                                 </span>
                                 </a>
@@ -84,7 +90,7 @@
                             <div class="thumbnail thumbnail-style">
                                 <a class="fancybox-button zoomer" data-rel="fancybox-button" title="模板图片" href="assets/img/main/9.jpg">
                                 <span class="overlay-zoom">
-                                    <img class="img-responsive" data-src="<@spring.url '/r/js/holder.js'/>/100%x220/text:模板图片" alt="" />
+                                    <img class="img-responsive" data-src="<@spring.url '/r/js/holder.js'/>/100%x332/text:模板图片" alt="" />
                                     <span class="zoom-icon"></span>
                                 </span>
                                 </a>
@@ -108,7 +114,7 @@
                             <div class="thumbnail thumbnail-style">
                                 <a class="fancybox-button zoomer" data-rel="fancybox-button" title="模板图片" href="assets/img/main/9.jpg">
                                 <span class="overlay-zoom">
-                                    <img class="img-responsive" data-src="<@spring.url '/r/js/holder.js'/>/100%x220/text:模板图片" alt="" />
+                                    <img class="img-responsive" data-src="<@spring.url '/r/js/holder.js'/>/100%x332/text:模板图片" alt="" />
                                     <span class="zoom-icon"></span>
                                 </span>
                                 </a>
@@ -133,7 +139,7 @@
                             <div class="thumbnail thumbnail-style">
                                 <a class="fancybox-button zoomer" data-rel="fancybox-button" title="模板图片" href="assets/img/main/9.jpg">
                                 <span class="overlay-zoom">
-                                    <img class="img-responsive" data-src="<@spring.url '/r/js/holder.js'/>/100%x220/text:模板图片" alt="" />
+                                    <img class="img-responsive" data-src="<@spring.url '/r/js/holder.js'/>/100%x332/text:模板图片" alt="" />
                                     <span class="zoom-icon"></span>
                                 </span>
                                 </a>
