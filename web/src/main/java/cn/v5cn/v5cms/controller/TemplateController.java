@@ -4,6 +4,8 @@ import cn.v5cn.v5cms.util.PropertyUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import net.coobird.thumbnailator.Thumbnailator;
+import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -80,9 +82,21 @@ public class TemplateController {
     @RequestMapping(value = "/thumb")
     public void thumbnail(HttpServletRequest request,HttpServletResponse response,
                           @Param("tplFileName") String tplFileName,@Param("thumbName") String thumbName){
-        String tplPath = PropertyUtils.getValue("tpl.path").or("/WEB-INF/ftls/front");
-        String realTplPath = request.getSession().getServletContext().getRealPath(tplPath);
-        File thumb = new File(realTplPath+File.separator+tplFileName+File.separator+thumbName);
+        File thumb = thumbReader(request,tplFileName,thumbName);
+
+        try {
+            ServletOutputStream outputStream = response.getOutputStream();
+            Thumbnails.of(thumb).height(220).toOutputStream(outputStream);
+            outputStream.flush();
+        } catch (IOException e) {
+            LOGGER.error("读取缩略图报错：{}", e.getMessage());
+            throw new RuntimeException("读取缩略图报错："+e.getMessage());
+        }
+    }
+    @RequestMapping(value = "/thumb/original")
+    public void thumbnailOriginal(HttpServletRequest request,HttpServletResponse response,
+                          @Param("tplFileName") String tplFileName,@Param("thumbName") String thumbName){
+        File thumb = thumbReader(request,tplFileName,thumbName);
         try {
             ServletOutputStream outputStream = response.getOutputStream();
             IOUtils.write(FileUtils.readFileToByteArray(thumb), outputStream);
@@ -91,5 +105,13 @@ public class TemplateController {
             LOGGER.error("读取缩略图报错：{}", e.getMessage());
             throw new RuntimeException("读取缩略图报错："+e.getMessage());
         }
+    }
+    private File thumbReader(HttpServletRequest request,String tplFileName,String thumbName){
+
+        String tplPath = PropertyUtils.getValue("tpl.path").or("/WEB-INF/ftls/front");
+        String realTplPath = request.getSession().getServletContext().getRealPath(tplPath);
+        File thumb = new File(realTplPath+File.separator+tplFileName+File.separator+thumbName);
+
+        return thumb;
     }
 }

@@ -295,7 +295,11 @@
                 <!--<version>0.2</version>-->
             <!--</dependency>-->
             <!--./Shiro-->
-
+            <dependency>
+                <groupId>net.coobird</groupId>
+                <artifactId>thumbnailator</artifactId>
+                <version>0.4.8</version>
+            </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
