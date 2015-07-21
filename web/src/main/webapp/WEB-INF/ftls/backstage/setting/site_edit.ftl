@@ -45,6 +45,26 @@
                             <div class="col-sm-3 Validform_checktip"></div>
                         </div>
                         <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">域名 <span style="color: #ff0000">*</span></label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="domain" id="domain"
+                                       placeholder="域名" value="${site.domain!""}" datatype="*"
+                                       nullmsg="站点域名不能为空！" ajaxurl="<@spring.url '/manager/site/domain/count'/><#if (site.siteId!0) != 0>?siteId=${site.siteId!0}</#if>">
+                                <span class="help-block">设置站点域名，例如：www.explame.com，域名必须唯一。</span>
+                            </div>
+                            <div class="col-sm-3 Validform_checktip"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">访问协议 <span style="color: #ff0000">*</span></label>
+                            <div class="col-sm-5">
+                                <select class="form-control" id="protocol" name="protocol">
+                                    <option value="http://" <#if (site.protocol!"http://")=="http://">selected</#if>>http://</option>
+                                    <option value="https://" <#if (site.protocol!"http://")=="https://">selected</#if>>https://</option>
+                                </select>
+                                <span class="help-block">站点访问的协议，http://或者https://</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">副标题</label>
                             <div class="col-sm-5">
                                 <input type="text" class="form-control" name="siteDeputyTitle" id="siteDeputyTitle"
@@ -122,23 +142,14 @@
         $("#backSiteList").click(function(){
             location.href="<@spring.url '/manager/site/list'/>"
         });
+
         $("#isclosesite").chosen({disable_search_threshold: 10,width:'100%'});
+        $("#protocol").chosen({disable_search_threshold: 10,width:'100%'});
 
         $("#siteForm").Validform({
             ajaxPost:true,
             showAllError:true,
             tiptype:2,
-            /*tiptype:function(msg,o,cssctl){
-                if(!o.obj.is("form")){
-                    if(o.type == 2){
-                        layer.tips(msg, o.obj,{tips:[2, '#78BA32']});
-                    }else{
-                        layer.tips(msg, o.obj,{time:0});
-                    }
-                }else{
-                    layer.closeAll('tips');
-                }
-            },*/
             callback:function(data){
                 if(data.status === "1"){
                     layer.msg(data.message, {
@@ -155,27 +166,7 @@
             }
         });
 
-        <#--
-        $('#siteForm').ajaxForm({
-            dataType : 'json',
-            success : function(data) {
-                if(data.status == "1"){
-                    $.v5cms.tooltip({icon:"succeed",content:data.message},function(){
-                        location.href="<@spring.url '/manager/site/list'/>";
-                    });
-                }else{
-                    $.v5cms.tooltip({icon:"error",content:data.message},function(){});
-                }
-            },
-            error:function(xhr, status, error){
-                $.v5cms.tooltip({icon:"error",content:"错误代码：" + status + " 错误消息：" + error},function(){});
-            }
-        });
-        -->
-
         $("#saveSiteForm").click(function(){
-//            var result = $("#siteName").nonEmpty({content:"网站名称不能为空！"});
-//            if(result) $("#siteForm").submit();
             $("#siteForm").submit();
         });
     });

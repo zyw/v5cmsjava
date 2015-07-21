@@ -67,4 +67,9 @@ public class SiteServiceImpl implements SiteService {
         }
         siteDao.delete(sites);
     }
+
+    @Override
+    public long countByDomainAndSiteIdNot(String domain,Long siteId) {
+        return siteDao.countByDomainAndSiteIdNot(domain,siteId);
+    }
 }

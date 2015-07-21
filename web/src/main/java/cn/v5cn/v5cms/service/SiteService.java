@@ -30,4 +30,9 @@ public interface SiteService {
      * 删除站点信息
      * */
     void deleteSite(Long[] siteIds);
+
+    /**
+     * 根据域名查询域名的个数
+     * */
+    long countByDomainAndSiteIdNot(String domain,Long siteId);
 }

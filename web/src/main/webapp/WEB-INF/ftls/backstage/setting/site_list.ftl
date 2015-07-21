@@ -35,9 +35,11 @@
                     <table class="table table-hover table-bordered table-striped">
                         <colgroup>
                             <col class="col-xs-1 v5-col-xs-1">
+                            <col class="col-xs-1">
                             <col class="col-xs-2">
-                            <col class="col-xs-3">
                             <col class="col-xs-2">
+                            <col class="col-xs-1">
+                            <col class="col-xs-1">
                             <col class="col-xs-2">
                             <col class="col-xs-2">
                         </colgroup>
@@ -47,7 +49,9 @@
                                 <input type="checkbox" id="thcheckbox" value="on"/>
                             </th>
                             <th>序号</th>
+                            <th>域名</th>
                             <th>名称</th>
+                            <th>协议</th>
                             <th>状态</th>
                             <th>创建时间</th>
                             <th>操作</th>
@@ -61,7 +65,9 @@
                                     <input type="checkbox" class="table-cb" value="${site.siteId}"/>
                                 </td>
                                 <td>${site.siteId}</td>
+                                <td>${site.domain}</td>
                                 <td>${site.siteName}</td>
+                                <td>${site.protocol}</td>
                                 <td>
                                     ${(site.isclosesite==1)?string("<small class='badge bg-green'>正常</small>",
                                     "<small class='badge bg-red'>关闭</small>")}

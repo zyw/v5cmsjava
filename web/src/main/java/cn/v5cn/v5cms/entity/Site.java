@@ -17,6 +17,8 @@ public class Site implements Serializable {
     private Long siteId;
     @NotEmpty
     private String siteName;
+    private String domain;
+    private String protocol;
     private String siteDeputyTitle;
     private String siteKey;
     private String siteDescribed;
@@ -42,6 +44,22 @@ public class Site implements Serializable {
 
     public void setSiteName(String siteName) {
         this.siteName = siteName;
+    }
+
+    public String getDomain() {
+        return domain;
+    }
+
+    public void setDomain(String domain) {
+        this.domain = domain;
+    }
+
+    public String getProtocol() {
+        return protocol;
+    }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
     }
 
     public String getSiteDeputyTitle() {

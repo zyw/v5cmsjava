@@ -19,4 +19,9 @@ public interface SiteDao extends JpaRepository<Site,Long> {
      * 根据运行状态值查询站点
      * */
     List<Site> findByIsclosesite(int isclosesite);
+
+    /**
+     * 根据域名查询域名的个数
+     * */
+    long countByDomainAndSiteIdNot(String domain,Long siteId);
 }

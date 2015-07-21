@@ -25,6 +25,8 @@ create table site
 (
 	siteId			BIGINT not null AUTO_INCREMENT,
 	siteName		    varchar(100) not null		comment '网站标题',
+	domain          varchar(200) not null   comment '网站域名，必须唯一',
+	protocol        varchar(100) not null   comment '访问协议，http://或者https://',
 	siteDeputyTitle varchar(200)				comment '网站副标题',
 	siteKey			    varchar(500)				comment '网站关键字',
 	siteDescribed	  varchar(1000)				comment '网站描述',

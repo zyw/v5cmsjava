@@ -5,6 +5,7 @@ import cn.v5cn.v5cms.entity.Site;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import org.jboss.logging.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class SiteSettingController {
 
     @RequestMapping(value = "/edit",method = RequestMethod.GET)
     public String addSite(ModelMap model){
-        model.addAttribute("site",new Site());
+        model.addAttribute("site", new Site());
         return "setting/site_edit";
     }
 
@@ -70,16 +71,6 @@ public class SiteSettingController {
         }
         //修改操作
         if(site.getSiteId() != null){
-            /*try {
-                siteBiz.updateSite(site);
-            }catch(InvocationTargetException ie){
-                LOGGER.error("Site更新异常：{}",ie.getMessage());
-                return ImmutableMap.<String, Object>of("status","0","message", getMessage("site.updatefailed.message"));
-            } catch (Exception e) {
-                LOGGER.error("Site更新异常：{}",e.getMessage());
-                return ImmutableMap.<String, Object>of("status","0","message", getMessage("site.updatefailed.message"));
-            }
-            return ImmutableMap.<String, Object>of("status","1","message", getMessage("site.updatesuccess.message"));*/
             try {
                 siteService.addSite(site);
             }catch (Exception e) {
@@ -108,5 +99,17 @@ public class SiteSettingController {
             return ImmutableMap.of("status","0","message",getMessage("site.deletefailed.message"));
         }
         return ImmutableMap.of("status","1","message",getMessage("site.deletesuccess.message"));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/domain/count",method = RequestMethod.POST)
+    public ImmutableMap<String,String> countDomain(String param,@Param Long siteId) {
+        if(siteId == null) siteId = 0L;
+        long domainCount = siteService.countByDomainAndSiteIdNot(param,siteId);
+        if(domainCount > 0){
+            return ImmutableMap.of("info","域名已存在！","status","n");
+        } else {
+            return ImmutableMap.of("info","验证通过！","status","y");
+        }
     }
 }
