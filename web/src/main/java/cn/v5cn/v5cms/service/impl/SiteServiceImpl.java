@@ -49,10 +49,8 @@ public class SiteServiceImpl implements SiteService {
 
     @Override
     @Transactional
-    public Site updateSite(Site site) throws InvocationTargetException, IllegalAccessException {
-        Site s = siteDao.findOne(site.getSiteId());
-        SystemUtils.copyProperties(s,site);
-        return s;
+    public Site updateTemplate(Site site) throws InvocationTargetException, IllegalAccessException {
+        return siteDao.save(site);
     }
 
     @Override

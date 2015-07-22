@@ -440,8 +440,7 @@
                         </li>
                         <li><a href="<@spring.url '/manager/adv/list/1'/>"><i class="fa fa-angle-double-right"></i> 广告管理</a></li>
                         <li><a href="<@spring.url '/manager/advpos/list'/>"><i class="fa fa-angle-double-right"></i> 广告版位</a></li>
-                        <li><a href="pages/examples/register.html"><i class="fa fa-angle-double-right"></i> 连接管理</a>
-                        </li>
+                        <li><a href="<@spring.url '/manager/link/list/1'/>"><i class="fa fa-angle-double-right"></i> 链接管理</a></li>
                         <!--
                         <li><a href="pages/examples/lockscreen.html"><i class="fa fa-angle-double-right"></i> Lockscreen</a></li>
                         <li><a href="pages/examples/404.html"><i class="fa fa-angle-double-right"></i> 404 Error</a></li>

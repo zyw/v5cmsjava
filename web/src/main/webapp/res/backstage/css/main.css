@@ -84,6 +84,19 @@
     display: none;
 }
 
+.tpl-list .thumbnail .caption {
+    padding-left: 0;
+    padding-right: 0;
+}
+.tpl-list .thumbnail .info {
+    padding-left: 9px;
+    padding-right: 9px;
+}
+.tpl-list .thumbnail .tpl-btn {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 /* 图片管理样式 */
 #online {
     width: 100%;

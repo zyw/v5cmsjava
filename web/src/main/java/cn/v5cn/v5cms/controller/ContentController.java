@@ -78,7 +78,9 @@ public class ContentController {
     @RequestMapping(value = "/edit",method = RequestMethod.GET)
     public String contentEdit(ModelMap modelMap){
 
-        modelMap.addAttribute(new Content());
+        Content content = new Content();
+        content.setColumn(new Column());
+        modelMap.addAttribute(content);
 
         return "content/content_edit";
     }

@@ -17,7 +17,9 @@ public class Site implements Serializable {
     private Long siteId;
     @NotEmpty
     private String siteName;
+    @NotEmpty
     private String domain;
+    @NotEmpty
     private String protocol;
     private String siteDeputyTitle;
     private String siteKey;

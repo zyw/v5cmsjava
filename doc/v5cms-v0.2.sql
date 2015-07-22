@@ -2,7 +2,7 @@ create database 'v5cms';
 
 use 'v5cms'
 
-/**创建用户名**/
+/**创建用户名
 create table manager
 (
 	managerId           BIGINT not null AUTO_INCREMENT,
@@ -18,7 +18,7 @@ create table manager
 	primary key (managerId)
 )ENGINE=INNODB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
 
-alter table manager comment '用户表';
+alter table manager comment '用户表';**/
 
 /**创建site表**/
 create table site

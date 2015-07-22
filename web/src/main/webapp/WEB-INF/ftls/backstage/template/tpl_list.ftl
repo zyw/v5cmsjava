@@ -33,7 +33,7 @@
                 <div class="box-body table-responsive">
                     <div class="row">
                         <#list tplInfos as tplInfo>
-                        <div class="col-md-2">
+                        <div class="col-md-2 tpl-list">
                             <div class="thumbnail thumbnail-style">
                                 <a class="fancybox-button zoomer" data-rel="fancybox-button" title="${tplInfo.name}" href="<@spring.url '/manager/tpl/thumb/original?tplFileName=${tplInfo.tplPath}&thumbName=${tplInfo.thumbnail}'/>">
                                 <span class="overlay-zoom">
@@ -45,24 +45,30 @@
                                     <span class="zoom-icon"></span>
                                 </span>
                                 </a>
-                                <div class="caption">
+                                <div class="caption info">
                                     <h3><a class="hover-effect" href="#">${tplInfo.name}</a></h3>
                                     <p class="v5-p-word-wrap"><strong>简介：</strong>${tplInfo.summary}</p>
                                 </div>
                                 <div class="caption text-center">
-                                    <button class="btn btn-warning tpl-edit" data-tplname="" style="margin-right: 10px;">
-                                        <i class="fa fa-edit"></i>
-                                        编辑
-                                    </button>
-                                    <button class="btn btn-primary">
-                                        <i class="fa fa-check-square-o"></i>
-                                        启用
-                                    </button>
+                                    <div class="col-md-12 col-lg-6 tpl-btn">
+                                        <a class="btn btn-warning tpl-edit" data-tplid="${tplInfo.tplPath}" href="javascript:;">
+                                            <i class="fa fa-edit"></i>
+                                            编辑
+                                        </a>
+                                    </div>
+                                    <div class="col-md-12 col-lg-6 tpl-btn">
+                                        <a class="btn btn-primary <#if (siteKey.themeName!"") == (tplInfo.id)>disabled</#if> tpl-start"
+                                           data-tplid="${tplInfo.tplPath}" href="javascript:;">
+                                            <i class="fa fa-check-square-o"></i>
+                                            启用
+                                        </a>
+                                    </div>
+                                    <div style="clear: both;"></div>
                                 </div>
                             </div>
                         </div>
                         </#list>
-                        <div class="col-md-2">
+                        <div class="col-md-2 tpl-list">
                             <div class="thumbnail thumbnail-style">
                                 <a class="fancybox-button zoomer" data-rel="fancybox-button" title="模板图片" href="assets/img/main/9.jpg">
                                 <span class="overlay-zoom">
@@ -70,23 +76,28 @@
                                     <span class="zoom-icon"></span>
                                 </span>
                                 </a>
-                                <div class="caption">
+                                <div class="caption info">
                                     <h3><a class="hover-effect" href="#">模板2</a></h3>
                                     <p class="v5-p-word-wrap"><strong>简介：</strong>家居装修行业整站企业网站模板，全套模板，DIV+CSS布局，包含404.html，archives.html，article.html。</p>
                                 </div>
                                 <div class="caption text-center">
-                                    <button class="btn btn-warning tpl-edit" data-tplname="" style="margin-right: 10px;">
-                                        <i class="fa fa-edit"></i>
-                                        编辑
-                                    </button>
-                                    <button class="btn btn-primary">
-                                        <i class="fa fa-check-square-o"></i>
-                                        启用
-                                    </button>
+                                    <div class="col-md-12 col-lg-6 tpl-btn">
+                                        <a class="btn btn-warning tpl-edit" data-tplname="">
+                                            <i class="fa fa-edit"></i>
+                                            编辑
+                                        </a>
+                                    </div>
+                                    <div class="col-md-12 col-lg-6 tpl-btn">
+                                        <a class="btn btn-primary">
+                                            <i class="fa fa-check-square-o"></i>
+                                            启用
+                                        </a>
+                                    </div>
+                                    <div style="clear: both;"></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 tpl-list">
                             <div class="thumbnail thumbnail-style">
                                 <a class="fancybox-button zoomer" data-rel="fancybox-button" title="模板图片" href="assets/img/main/9.jpg">
                                 <span class="overlay-zoom">
@@ -94,23 +105,28 @@
                                     <span class="zoom-icon"></span>
                                 </span>
                                 </a>
-                                <div class="caption">
+                                <div class="caption info">
                                     <h3><a class="hover-effect" href="#">模板3</a></h3>
                                     <p class="v5-p-word-wrap"><strong>简介：</strong>家居装修行业整站企业网站模板，全套模板，DIV+CSS布局，包含404.html，archives.html，article.html。</p>
                                 </div>
                                 <div class="caption text-center">
-                                    <button class="btn btn-warning tpl-edit" data-tplname="" style="margin-right: 10px;">
-                                        <i class="fa fa-edit"></i>
-                                        编辑
-                                    </button>
-                                    <button class="btn btn-primary">
-                                        <i class="fa fa-check-square-o"></i>
-                                        启用
-                                    </button>
+                                    <div class="col-md-12 col-lg-6 tpl-btn">
+                                        <a class="btn btn-warning tpl-edit" data-tplname="">
+                                            <i class="fa fa-edit"></i>
+                                            编辑
+                                        </a>
+                                    </div>
+                                    <div class="col-md-12 col-lg-6 tpl-btn">
+                                        <a class="btn btn-primary">
+                                            <i class="fa fa-check-square-o"></i>
+                                            启用
+                                        </a>
+                                    </div>
+                                    <div style="clear: both;"></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 tpl-list">
                             <div class="thumbnail thumbnail-style">
                                 <a class="fancybox-button zoomer" data-rel="fancybox-button" title="模板图片" href="assets/img/main/9.jpg">
                                 <span class="overlay-zoom">
@@ -118,24 +134,29 @@
                                     <span class="zoom-icon"></span>
                                 </span>
                                 </a>
-                                <div class="caption">
+                                <div class="caption info">
                                     <h3><a class="hover-effect" href="#">模板4</a></h3>
                                     <p class="v5-p-word-wrap"><strong>简介：</strong>家居装修行业整站企业网站模板，全套模板，DIV+CSS布局，包含404.html，archives.html，article.html。</p>
                                 </div>
                                 <div class="caption text-center">
-                                    <button class="btn btn-warning tpl-edit" data-tplname="" style="margin-right: 10px;">
-                                        <i class="fa fa-edit"></i>
-                                        编辑
-                                    </button>
-                                    <button class="btn btn-primary">
-                                        <i class="fa fa-check-square-o"></i>
-                                        启用
-                                    </button>
+                                    <div class="col-md-12 col-lg-6 tpl-btn">
+                                        <a class="btn btn-warning tpl-edit" data-tplname="">
+                                            <i class="fa fa-edit"></i>
+                                            编辑
+                                        </a>
+                                    </div>
+                                    <div class="col-md-12 col-lg-6 tpl-btn">
+                                        <a class="btn btn-primary">
+                                            <i class="fa fa-check-square-o"></i>
+                                            启用
+                                        </a>
+                                    </div>
+                                    <div style="clear: both;"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-2 tpl-list">
                             <div class="thumbnail thumbnail-style">
                                 <a class="fancybox-button zoomer" data-rel="fancybox-button" title="模板图片" href="assets/img/main/9.jpg">
                                 <span class="overlay-zoom">
@@ -143,19 +164,24 @@
                                     <span class="zoom-icon"></span>
                                 </span>
                                 </a>
-                                <div class="caption">
+                                <div class="caption info">
                                     <h3><a class="hover-effect" href="#">模板5</a></h3>
                                     <p class="v5-p-word-wrap"><strong>简介：</strong>家居装修行业整站企业网站模板，全套模板，DIV+CSS布局，包含404.html，archives.html，article.html。</p>
                                 </div>
                                 <div class="caption text-center">
-                                    <button class="btn btn-warning tpl-edit" data-tplname="" style="margin-right: 10px;">
-                                        <i class="fa fa-edit"></i>
-                                        编辑
-                                    </button>
-                                    <button class="btn btn-primary">
-                                        <i class="fa fa-check-square-o"></i>
-                                        启用
-                                    </button>
+                                    <div class="col-md-12 col-lg-6 tpl-btn">
+                                        <a class="btn btn-warning tpl-edit" data-tplname="">
+                                            <i class="fa fa-edit"></i>
+                                            编辑
+                                        </a>
+                                    </div>
+                                    <div class="col-md-12 col-lg-6 tpl-btn">
+                                        <a class="btn btn-primary">
+                                            <i class="fa fa-check-square-o"></i>
+                                            启用
+                                        </a>
+                                    </div>
+                                    <div style="clear: both;"></div>
                                 </div>
                             </div>
                         </div>
@@ -169,13 +195,42 @@
 <script type="text/javascript">
     $(function(){
         $.v5cms.initFancybox();
+
         $(".tpl-edit").click(function(){
-            var tplName = $(this).data('tplname');
-            location.href="<@spring.url '/manager/tpl/edit'/>"
+            var tplid = $(this).data('tplid');
+            console.log(tplid + "++++++++++++++++++++++++++++++++");
+            <#--location.href="<@spring.url '/manager/tpl/edit'/>"-->
         });
-        <#--$("#addColType").click(function(){-->
-            <#--location.href="<@spring.url '/manager/coltypeaup'/>";-->
-        <#--});-->
+
+        $(".tpl-start").click(function(){
+            var tplid = $(this).data("tplid");
+            console.log(tplid + "===========================");
+            var url = "<@spring.url '/manager/tpl/start'/>";
+            $.ajax({
+                dataType:'json',
+                type:'POST',
+                url:url,
+                data:{tplName:tplid},
+                success:function(data){
+                    if(data.status == "1"){
+                        layer.msg(data.message, {
+                            icon: 1,
+                            time:2000
+                        },function(){
+                            location.reload();
+                        });
+                    }else{
+                        layer.msg(data.message, {icon: 2});
+                    }
+                },
+                error:function(XMLHttpRequest, textStatus, errorThrown){
+                    layer.msg("设置站点模板出错，"+textStatus+"，"+errorThrown, {icon: 2});
+                }
+            });
+        });
+        <#--$("#addColType").click(function(){
+            location.href="<@spring.url '/manager/coltypeaup'/>";
+        });-->
 
         /*function deleteSites(siteIds) {
              $.v5cms.confirm({icon:"question",content:"您确定要删除站点信息吗，删除后将不能恢复？",width:350,ok:function(){

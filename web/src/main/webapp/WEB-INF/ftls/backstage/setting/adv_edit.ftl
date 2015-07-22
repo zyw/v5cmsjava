@@ -119,7 +119,7 @@
                                                         <div class="col-sm-7" style="padding-top: 5px;">
                                                             <input type="hidden" name="ati['adv_image_url']" value="${advTypes.adv_image_url!""}"
                                                                    id="adv_image_url">
-                                                            <div id="advImageUpload">图片上传</div>
+                                                            <div id="advImageUpload"><i class="fa fa-cloud-upload"></i> 图片上传</div>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -198,7 +198,7 @@
                                             <div class="form-group" style="margin-bottom: 0px;">
                                                 <label for="inputPassword3" class="col-sm-2 control-label">Flash上传</label>
                                                 <div class="col-sm-7" style="padding-top: 5px;">
-                                                    <div id="advFlashUpload">Flash上传</div>
+                                                    <div id="advFlashUpload"><i class="fa fa-cloud-upload"></i> Flash上传</div>
                                                 </div>
                                             </div>
                                             <div class="form-group" style="padding-bottom: 20px;">

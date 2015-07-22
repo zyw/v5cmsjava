@@ -91,12 +91,9 @@
                             </div>
                         </div>
                     </form>
-                </div>
-                <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
-        </div>
-        <!-- /.row -->
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div><!-- /.row -->
 
     </section>
     <!-- /.content -->

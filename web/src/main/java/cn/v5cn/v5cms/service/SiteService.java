@@ -24,7 +24,7 @@ public interface SiteService {
     /**
      * 修改站点信息
      * */
-    Site updateSite(Site site) throws InvocationTargetException, IllegalAccessException;
+    Site updateTemplate(Site site) throws InvocationTargetException, IllegalAccessException;
 
     /**
      * 删除站点信息

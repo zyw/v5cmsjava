@@ -30,11 +30,11 @@
                     </div><!-- /. tools -->
                     <i class="fa fa-globe"></i>
                     <h3 class="box-title">${page_title!"添加站点"}</h3>
-                </div>
-                <!-- /.box-header -->
+                </div><!-- /.box-header -->
                 <div class="box-body">
                     <form id="siteForm" action="<@spring.url '/manager/site/edit'/>" class="form-horizontal" role="form" method="POST">
                         <input type="hidden" value="${site.siteId!""}" name="siteId">
+                        <input type="hidden" value="${site.themeName!""}" name="themeName"/>
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">站点名称 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-5">
@@ -125,15 +125,11 @@
                             </div>
                         </div>
                     </form>
-                </div>
-                <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
-        </div>
-        <!-- /.row -->
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div><!-- /.row -->
 
-    </section>
-    <!-- /.content -->
+    </section><!-- /.content -->
 </aside><!-- /.right-side -->
 <#include "../fragment/footer.ftl">
 <script type="text/javascript">
