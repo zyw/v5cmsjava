@@ -91,7 +91,7 @@
                                     "<small class='badge bg-red'>禁用</small>")}
                                 </td>
                                 <td>
-                                    <a href="<@spring.url '/manager/link/update/${link.linkId}'/>" class="btn btn-primary btn-xs" data-toggle="tooltip" title="修改链接">
+                                    <a href="<@spring.url '/manager/link/edit/${link.linkId}'/>" class="btn btn-primary btn-xs" data-toggle="tooltip" title="修改链接">
                                         <i class="fa fa-edit"></i>
                                     </a>&nbsp;&nbsp;
                                     <a href="javascript:;" data-linkid="${link.linkId}" class="btn btn-warning btn-xs delete-link" data-toggle="tooltip" title="删除链接">
@@ -125,7 +125,7 @@
 
         function deleteLinks(linkIds) {
             layer.confirm('您确定要删除链接信息吗，删除后将不能恢复？', {icon: 3}, function(index){
-                var url = "<@spring.url '/manager/site/delete'/>";
+                var url = "<@spring.url '/manager/link/delete'/>";
                 $.ajax({
                     dataType:'json',
                     type:'POST',

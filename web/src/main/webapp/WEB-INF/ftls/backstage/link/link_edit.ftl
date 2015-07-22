@@ -34,7 +34,7 @@
                     <h3 class="box-title">${page_title!"添加链接"}</h3>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body">
+                <div class="box-body" style="position: relative;">
                     <form id="linkForm" action="<@spring.url '/manager/link/edit'/>" class="form-horizontal" role="form" method="POST">
                         <input type="hidden" value="${link.linkId!""}" name="linkId">
                         <div class="form-group">
@@ -59,9 +59,9 @@
                         <div class="form-group">
                             <label for="dvPosName" class="col-sm-2 control-label">链接图片 </label>
                             <div class="col-sm-4">
+                                <input type="hidden" id="linkPic" name="linkPic" value="${link.linkPic!""}">
                                 <div id="linkImageUpload"><i class="fa fa-cloud-upload"></i> 链接图片上传</div>
                             </div>
-                            <div class="col-sm-3 Validform_checktip"></div>
                         </div>
                         <div class="form-group">
                             <label for="advPosState" class="col-sm-2 control-label">打开方式</label>
@@ -88,6 +88,9 @@
                             </div>
                         </div>
                     </form>
+                    <div class="link-img-preview">
+                        <img id="linkImg" width="100%">
+                    </div>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
         </div><!-- /.row -->
@@ -98,11 +101,16 @@
 <script src="<@spring.url '/res/backstage/webuploader/webuploader.min.js'/>" type="text/javascript"></script>
 <script type="text/javascript">
     $(function(){
+        var linkPic = "${link.linkPic!""}";
+        if(linkPic != ""){
+            var contentPath = "<@spring.url '/'/>";
+            $("#linkImg").attr("src",contentPath+linkPic);
+        }
         $("#nav_siteSetting").imitClick();
+
         $("#backLinkList").click(function(){
             location.href="<@spring.url '/manager/link/list/1'/>"
         });
-        $("#advPosState").chosen({disable_search_threshold: 10});
 
         $("#linkForm").Validform({
             ajaxPost:true,
@@ -134,7 +142,7 @@
             swf: "<@spring.url '/res/backstage/webuploader/Uploader.swf'/>",
             auto: true,
             // 文件接收服务端。
-            server: '<@spring.url '/manager/adv/upload?tt='/>'+new Date().getTime(),
+            server: '<@spring.url '/manager/link/upload?tt='/>'+new Date().getTime(),
             // 选择文件的按钮。可选。
             // 内部根据当前运行是创建，可能是input元素，也可能是flash.
             pick: '#linkImageUpload',
@@ -151,8 +159,9 @@
                 layer.msg(response.message, {icon: 2});
                 return;
             }
-            $("#adv_image_url").val(response.filePath);
-            $("#adv_Image_display_img").attr("src",(response.contentPath+response.filePath));
+            layer.msg(response.message, {icon: 1});
+            $("#linkPic").val(response.filePath);
+            $("#linkImg").attr("src",response.contentPath + response.filePath)
         });
 
         uploadImage.on( 'uploadError', function( file,reason  ) {
@@ -160,12 +169,13 @@
         });
 
         uploadImage.on("beforeFileQueued",function(file){
-            var temp = $("#adv_image_url").val();
+            /*var temp = $("#adv_image_url").val();
             if(temp != null && temp != ""){
                 layer.msg("您已经上传了一张图片，请先删除在上传！", {icon: 2});
                 return false;
-            }
+            }*/
             return true;
         });
+
     });
 </script>

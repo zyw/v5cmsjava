@@ -63,22 +63,6 @@ public class AdvController {
 
         Page<Adv> result =  advService.findAdvByAdvNamePageable((searchObj == null ? (new Adv()):((Adv)searchObj)),p);
 
-//        if(searchObj != null){
-//            result = advBiz.findAdvByAdvNamePageable(((Adv)searchObj),p);
-//        }else{
-//            result = advBiz.findAdvByAdvNamePageable(new Adv(),p);
-//        }
-
-        /*if("GET".equalsIgnoreCase(request.getMethod())){
-            adv = (Adv)session.getAttribute("search_adv");
-        }
-        if("POST".equalsIgnoreCase(request.getMethod())){
-            session.setAttribute("search_adv",null);
-            if(StringUtils.isNotBlank(adv.getAdvName()) || adv.getAdvPos().getAdvPosId() != null){
-                session.setAttribute("search_adv",adv);
-            }
-        }
-        Page<Adv> pageListAdv =  advBiz.findAdvByAdvNamePageable((adv == null ? (new Adv()):adv),currPage);*/
         modelMap.addAttribute("advs",result);
         modelMap.addAttribute("pagination",SystemUtils.pagination(result,HttpUtils.getContextPath(request)+"/manager/adv/list"));
         ImmutableList<AdvPos> advposes = advPosService.finadAll();

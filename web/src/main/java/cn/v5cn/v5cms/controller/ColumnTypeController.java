@@ -116,19 +116,6 @@ public class ColumnTypeController {
             LOGGER.info("栏目类型添加失败，{}",saveColType);
             return ImmutableMap.of("status","0","message",getMessage("column.type.addfailed.message"));
         }
-//        try {
-//            columnTypeBiz.update(columnType);
-//        } catch (InvocationTargetException e) {
-//            e.printStackTrace();
-//            LOGGER.error("修改栏目类型失败，{},失败堆栈错误：{}",columnType,e.getMessage());
-//            return ImmutableMap.of("status","0","message",getMessage("column.type.updatefailed.message"));
-//        } catch (IllegalAccessException e) {
-//            e.printStackTrace();
-//            LOGGER.error("修改栏目类型失败，{},失败堆栈错误：{}",columnType,e.getMessage());
-//            return ImmutableMap.of("status","0","message",getMessage("column.type.updatefailed.message"));
-//        }
-//        LOGGER.info("修改栏目类型成功，{}",columnType);
-//        return ImmutableMap.of("status","1","message",getMessage("column.type.updatesuccess.message"));
         try {
             columnTypeService.save(columnType);
         } catch (Exception e) {
@@ -147,7 +134,7 @@ public class ColumnTypeController {
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.error("删除栏目类型信息失败，失败原因：{}",e.getMessage());
-            return ImmutableMap.of("status","1","message",getMessage("column.type.deletefailed.message"));
+            return ImmutableMap.of("status","0","message",getMessage("column.type.deletefailed.message"));
         }
         LOGGER.info("删除栏目类型信息，ID为{}",StringUtils.join(colTypeIds,","));
         return ImmutableMap.of("status","1","message",getMessage("column.type.deletesuccess.message"));

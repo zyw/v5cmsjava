@@ -97,6 +97,13 @@
     padding-right: 0;
 }
 
+.link-img-preview {
+    position: absolute;
+    width: 200px;
+    left: 540px;
+    top: 170px;
+}
+
 /* 图片管理样式 */
 #online {
     width: 100%;

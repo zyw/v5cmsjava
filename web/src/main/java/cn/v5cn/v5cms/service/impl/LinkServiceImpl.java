@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.*;
 import java.util.List;
@@ -45,5 +46,27 @@ public class LinkServiceImpl implements LinkService {
                 return ps.size() == 0 ? criteriaBuilder.conjunction():criteriaBuilder.or(ps.toArray(new Predicate[ps.size()]));
             }
         },new PageRequest(currPage-1,pageSize,new Sort(Sort.Direction.DESC,"linkId")));
+    }
+
+    @Override
+    @Transactional
+    public Link save(Link link) {
+        return linkDao.save(link);
+    }
+
+    @Override
+    public Link findOne(Long linkId) {
+        return linkDao.findOne(linkId);
+    }
+
+    @Override
+    @Transactional
+    public void deleteInBatch(Iterable<Link> linkIds) {
+        linkDao.deleteInBatch(linkIds);
+    }
+
+    @Override
+    public List<Link> findAll(Long[]  linkIds) {
+        return linkDao.findAll(Lists.newArrayList(linkIds));
     }
 }

@@ -98,25 +98,17 @@ public class ColumnTypeServiceImpl implements ColumnTypeService {
     @Override
     public void deleteColType(Long[] colTypeIds) {
         List<ColumnType> colTypes = Lists.newArrayList();
-        ColumnType columnType = null;
+        ColumnType columnType;
         for(Long colTypeId : colTypeIds){
             columnType = new ColumnType();
             columnType.setColTypeId(colTypeId);
             colTypes.add(columnType);
         }
-        columnTypeDao.delete(colTypes);
+        columnTypeDao.deleteInBatch(colTypes);
     }
 
     @Override
     public List<ColumnType> findAll() {
         return Lists.newArrayList(columnTypeDao.findAll());
     }
-
-//    @Override
-//    @Transactional
-//    public ColumnType update(ColumnType columnType) throws InvocationTargetException, IllegalAccessException {
-//        ColumnType dbct = findOne(columnType.getColTypeId());
-//        SystemUtils.copyProperties(dbct,columnType);
-//        return dbct;
-//    }
 }
