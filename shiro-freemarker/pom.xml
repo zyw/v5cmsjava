@@ -16,7 +16,6 @@
         <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
         <!--<jfinal.version>1.8</jfinal.version>-->
         <!--<jfinal-shiro.version>0.2</jfinal-shiro.version>-->
-        <freemarker.version>2.3.20</freemarker.version>
     </properties>
 
     <dependencies>
@@ -66,7 +65,6 @@
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
-            <version>${freemarker.version}</version>
         </dependency>
     </dependencies>
 </project>

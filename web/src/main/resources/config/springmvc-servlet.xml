@@ -48,8 +48,6 @@
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
 
-    <!--<bean id="shiroTags" class="cn.dreampie.shiro.freemarker.ShiroTags"></bean>-->
-
     <!-- 配置FreeMarker -->
     <bean id="freeMarkerConfig" class="cn.v5cn.v5cms.shiro.ShiroTagFreeMarkerConfigurer">
         <property name="templateLoaderPath" value="/WEB-INF/ftls/backstage/"/>
