@@ -1,6 +1,7 @@
 package cn.v5cn.v5cms.shiro.freemarker;
 
-import freemarker.template.ObjectWrapper;
+import freemarker.template.Configuration;
+import freemarker.template.DefaultObjectWrapperBuilder;
 import freemarker.template.SimpleHash;
 
 /**
@@ -10,7 +11,7 @@ import freemarker.template.SimpleHash;
  */
 public class ShiroTags extends SimpleHash {
   public ShiroTags() {
-    super((ObjectWrapper.DEFAULT_WRAPPER));
+    super(new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_23).build());
     put("authenticated", new AuthenticatedTag());
     put("guest", new GuestTag());
     put("hasAnyRoles", new HasAnyRolesTag());
