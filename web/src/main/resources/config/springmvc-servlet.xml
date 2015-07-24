@@ -79,12 +79,12 @@
         <property name="exposeSessionAttributes" value="true" />
         <property name="exposeSpringMacroHelpers" value="true" />
     </bean>
-    
+    <!-- ./配置FreeMarker -->
+
     <!--<mvc:interceptors>-->
         <!--<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>-->
     <!--</mvc:interceptors>-->
-    
-    <!-- ./配置FreeMarker -->
+
     <!-- 自定义拦截器interceptor -->
     <!--<mvc:interceptors>
         <mvc:interceptor>
