@@ -46,8 +46,8 @@
                         <div class="form-group has-feedback">
                             <label class="col-sm-2 control-label">栏目 <span style="color: #ff0000">*</span></label>
                             <div class="col-sm-4">
-                                <input type="text" id="columnTreeInput" class="form-control" value="${content.column.columnName!""}" datatype="*" nullmsg="栏目类型不能为空！" readonly>
-                                <input type="hidden" id="columnId" name="column.colsId" value="${content.column.colsId!""}">
+                                <input type="text" id="columnTreeInput" class="form-control" value="${(content.column.columnName)!""}" datatype="*" nullmsg="栏目类型不能为空！" readonly>
+                                <input type="hidden" id="columnId" name="column.colsId" value="${(content.column.colsId)!""}">
                                 <span class="glyphicon glyphicon-chevron-down form-control-feedback" aria-hidden="true"></span>
                                 <div id="columnTreeDiv" style="width:94.6%;background:#fff;display:none;position: absolute;border: 1px #c0c0c0 solid;z-index: 9999;">
                                     <ul id="columnTree" class="ztree"></ul>
