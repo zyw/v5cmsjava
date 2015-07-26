@@ -41,7 +41,7 @@ public class LinkServiceImpl implements LinkService {
                     Path<String> linkPath = root.get("link");
 
                     ps.add(criteriaBuilder.like(linkName, "%" + link.getLinkName() + "%"));
-                    ps.add(criteriaBuilder.like(linkPath, "%" + link.getLink() + "%"));
+                    ps.add(criteriaBuilder.like(linkPath, "%" + link.getLinkName() + "%"));
                 }
 
                 //criteriaBuilder.conjunction();  创建一个AND

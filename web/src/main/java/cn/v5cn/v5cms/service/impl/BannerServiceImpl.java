@@ -39,10 +39,10 @@ public class BannerServiceImpl implements BannerService {
                 List<Predicate> ps = Lists.newArrayList();
                 if(banner.getBannerName() != null && !"".equals(banner.getBannerName())) {
                     Path<String> bannerName = root.get("bannerName");
-                    //Path<String> bcontent = root.get("bcontent");
+                    Path<String> bcontent = root.get("bcontent");
 
                     ps.add(criteriaBuilder.like(bannerName,"%" + banner.getBannerName() + "%"));
-                    //ps.add(criteriaBuilder.like(bcontent,  "%" + banner.getBcontent() + "%"));
+                    ps.add(criteriaBuilder.like(bcontent,  "%" + banner.getBannerName() + "%"));
                 }
 
                 //criteriaBuilder.conjunction();  创建一个AND
