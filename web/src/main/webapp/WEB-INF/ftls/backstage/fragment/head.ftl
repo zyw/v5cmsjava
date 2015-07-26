@@ -352,8 +352,6 @@
                     <ul class="treeview-menu">
                         <li><a href="<@spring.url "/manager/content/list/0/1"/>"><i class="fa fa-angle-double-right"></i> 内容列表</a></li>
                         <li><a href="<@spring.url "/manager/content/edit"/>"><i class="fa fa-angle-double-right"></i> 添加内容</a></li>
-                        <#--<li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Inline
-                            charts</a></li>-->
                     </ul>
                 </li>
                 <li class="treeview" id="nav_columns">
@@ -365,9 +363,6 @@
                     <ul class="treeview-menu">
                         <li><a href="<@spring.url '/manager/column/list'/>"><i class="fa fa-angle-double-right"></i> 栏目</a></li>
                         <li><a href="<@spring.url '/manager/coltype/list/1'/>"><i class="fa fa-angle-double-right"></i> 栏目类型</a></li>
-                        <#--<li><a href="pages/UI/buttons.html"><i class="fa fa-angle-double-right"></i> Buttons</a></li>
-                        <li><a href="pages/UI/sliders.html"><i class="fa fa-angle-double-right"></i> Sliders</a></li>
-                        <li><a href="pages/UI/timeline.html"><i class="fa fa-angle-double-right"></i> Timeline</a></li>-->
                     </ul>
 
                 </li>
@@ -376,17 +371,6 @@
                         <i class="fa fa-edit"></i> <span>模板管理</span>
                         <small class="badge pull-right bg-green">new</small>
                     </a>
-                    <#--<a href="#">-->
-                        <#--<i class="fa fa-edit"></i> <span>模板管理</span>-->
-                        <#--<i class="fa fa-angle-left pull-right"></i>-->
-                    <#--</a>-->
-                    <#--<ul class="treeview-menu">-->
-                        <#--<li><a href="pages/forms/general.html"><i class="fa fa-angle-double-right"></i> General Elements</a>-->
-                        <#--</li>-->
-                        <#--<li><a href="pages/forms/advanced.html"><i class="fa fa-angle-double-right"></i> Advanced-->
-                            <#--Elements</a></li>-->
-                        <#--<li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i> Editors</a></li>-->
-                    <#--</ul>-->
                 </li>
                 <li id="resource_columns">
                     <a href="<@spring.url '/manager/resource/list'/>">
@@ -418,14 +402,6 @@
                         <li><a href="<@spring.url '/manager/res/list'/>"><i class="fa fa-angle-double-right"></i> 资源管理</a></li>
                     </ul>
                 </li>
-                <!--
-                <li>
-                    <a href="pages/calendar.html">
-                        <i class="fa fa-user"></i> <span>用户管理</span>
-                        <small class="badge pull-right bg-red">3</small>
-                    </a>
-                </li>
-                -->
                 <li class="treeview" id="nav_siteSetting">
                     <a href="javascript:;">
                         <i class="fa fa-wrench"></i> <span>站点设置</span>
@@ -441,12 +417,7 @@
                         <li><a href="<@spring.url '/manager/adv/list/1'/>"><i class="fa fa-angle-double-right"></i> 广告管理</a></li>
                         <li><a href="<@spring.url '/manager/advpos/list'/>"><i class="fa fa-angle-double-right"></i> 广告版位</a></li>
                         <li><a href="<@spring.url '/manager/link/list/1'/>"><i class="fa fa-angle-double-right"></i> 链接管理</a></li>
-                        <!--
-                        <li><a href="pages/examples/lockscreen.html"><i class="fa fa-angle-double-right"></i> Lockscreen</a></li>
-                        <li><a href="pages/examples/404.html"><i class="fa fa-angle-double-right"></i> 404 Error</a></li>
-                        <li><a href="pages/examples/500.html"><i class="fa fa-angle-double-right"></i> 500 Error</a></li>
-                        <li><a href="pages/examples/blank.html"><i class="fa fa-angle-double-right"></i> Blank Page</a></li>
-                        -->
+                        <li><a href="<@spring.url '/manager/banner/list/1'/>"><i class="fa fa-angle-double-right"></i> Banner管理</a></li>
                     </ul>
                 </li>
             </ul>

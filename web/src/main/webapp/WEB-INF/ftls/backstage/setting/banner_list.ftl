@@ -4,13 +4,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            链接管理
+            Banner管理
             <small>Control panel</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
             <li>站点设置</li>
-            <li class="active">链接管理</li>
+            <li class="active">Banner管理</li>
         </ol>
     </section>
 
@@ -22,21 +22,21 @@
                 <div class="box-header">
                     <!-- tools box -->
                     <div class="pull-right box-tools">
-                        <button id="addLink" class="btn btn-success btn-sm" data-toggle="tooltip" title="添加链接">
-                            <i class="fa fa-plus"></i> 添加链接</button>
-                        <button id="linkBatchDelete" class="btn btn-warning btn-sm" data-toggle="tooltip" title="批量删除">
+                        <button id="addBanner" class="btn btn-success btn-sm" data-toggle="tooltip" title="添加Banner">
+                            <i class="fa fa-plus"></i> 添加Banner</button>
+                        <button id="bannerBatchDelete" class="btn btn-warning btn-sm" data-toggle="tooltip" title="批量删除">
                             <i class="fa fa-trash-o"></i> 批量删除</button>
                     </div><!-- /. tools -->
                     <i class="fa fa-table"></i>
-                    <h3 class="box-title">链接列表</h3>
+                    <h3 class="box-title">Banner列表</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive">
                     <div class="container-fluid" style="margin-bottom: 8px;">
-                        <form method="POST" action="<@spring.url '/manager/link/list/1'/>">
+                        <form method="POST" action="<@spring.url '/manager/banner/list/1'/>">
                             <div class="col-xs-4">
-                                <input type="text" class="form-control" name="linkName"
-                                       value="<#if searchLink??>${searchLink.linkName!""}</#if>"
-                                       id="linkName" placeholder="查询">
+                                <input type="text" class="form-control" name="bannerName"
+                                       value="<#if searchBanner??>${searchBanner.bannerName!""}</#if>"
+                                       id="bannerName" placeholder="查询">
                             </div>
                             <div class="col-xs-2">
                                 <button type="submit" class="btn btn-success">
@@ -63,38 +63,35 @@
                                 <input type="checkbox" id="thcheckbox" value="on"/>
                             </th>
                             <th>序号</th>
-                            <th>链接名称</th>
-                            <th>链接地址</th>
-                            <th>链接图片</th>
-                            <th>打开方式</th>
+                            <th>Banner名称</th>
+                            <th>Banner图片</th>
+                            <th>Banner内容</th>
+                            <th>排序</th>
                             <th>状态</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <#if links?size != 0>
-                            <#list links as link>
+                        <#if banners?size != 0>
+                            <#list banners as banner>
                             <tr>
                                 <td class="td-center">
-                                    <input type="checkbox" class="table-cb" value="${link.linkId}"/>
+                                    <input type="checkbox" class="table-cb" value="${banner.bannerId}"/>
                                 </td>
-                                <td>${link.linkId}</td>
-                                <td>${link.linkName}</td>
-                                <td>${link.link}</td>
-                                <td>${link.linkPic}</td>
+                                <td>${banner.bannerId}</td>
+                                <td>${banner.bannerName}</td>
+                                <td>${banner.bannerPic}</td>
+                                <td>${banner.bcontent}</td>
+                                <td>${banner.bannerds}</td>
                                 <td>
-                                    ${(link.openType == "_blank")?string("<small class='badge bg-default'>新页面</small>",
-                                    "<small class='badge bg-aqua'>当前页面</small>")}
-                                </td>
-                                <td>
-                                    ${(link.isstart==1)?string("<small class='badge bg-green'>启用</small>",
+                                    ${(banner.isstart==1)?string("<small class='badge bg-green'>启用</small>",
                                     "<small class='badge bg-red'>禁用</small>")}
                                 </td>
                                 <td>
-                                    <a href="<@spring.url '/manager/link/edit/${link.linkId}'/>" class="btn btn-primary btn-xs" data-toggle="tooltip" title="修改链接">
+                                    <a href="<@spring.url '/manager/banner/edit/${banner.bannerId}'/>" class="btn btn-primary btn-xs" data-toggle="tooltip" title="修改Banner">
                                         <i class="fa fa-edit"></i>
                                     </a>&nbsp;&nbsp;
-                                    <a href="javascript:;" data-linkid="${link.linkId}" class="btn btn-warning btn-xs delete-link" data-toggle="tooltip" title="删除链接">
+                                    <a href="javascript:;" data-bannerid="${banner.bannerId}" class="btn btn-warning btn-xs delete-banner" data-toggle="tooltip" title="删除Banner">
                                         <i class="fa fa-times"></i>
                                     </a>
                                 </td>
@@ -102,14 +99,14 @@
                             </#list>
                         <#else>
                             <tr>
-                                <td colspan="8" class="text-center"><h3>还没有链接数据！</h3></td>
+                                <td colspan="8" class="text-center"><h3>还没有Banner数据！</h3></td>
                             </tr>
                         </#if>
                         </tbody>
                     </table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
-                <#if links?size != 0>
+                <#if banners?size != 0>
                     ${pagination}
                 </#if>
                 </div>
@@ -121,18 +118,18 @@
 <script type="text/javascript">
     $(function(){
         $("#nav_siteSetting").imitClick();
-        $("#addLink").click(function(){
-            location.href="<@spring.url '/manager/link/edit/0'/>";
+        $("#addBanner").click(function(){
+            location.href="<@spring.url '/manager/banner/edit/0'/>";
         });
 
-        function deleteLinks(linkIds) {
-            layer.confirm('您确定要删除链接信息吗，删除后将不能恢复？', {icon: 3}, function(index){
-                var url = "<@spring.url '/manager/link/delete'/>";
+        function deleteBanners(bannerIds) {
+            layer.confirm('您确定要删除Banner信息吗，删除后将不能恢复？', {icon: 3}, function(index){
+                var url = "<@spring.url '/manager/banner/delete'/>";
                 $.ajax({
                     dataType:'json',
                     type:'POST',
                     url:url,
-                    data:{linkIds:linkIds},
+                    data:{bannerIds:bannerIds},
                     success:function(data){
                         if(data.status == "1"){
                             layer.msg(data.message, {
@@ -146,15 +143,15 @@
                         }
                     },
                     error:function(XMLHttpRequest, textStatus, errorThrown){
-                        layer.msg("删除链接出错，"+textStatus+"，"+errorThrown, {icon: 2});
+                        layer.msg("删除Banner出错，"+textStatus+"，"+errorThrown, {icon: 2});
                     }
                 });
             });
         }
 
-        $(".delete-link").click(function(){
-            var linkId = $(this).data("linkid");
-            deleteLinks(linkId);
+        $(".delete-banner").click(function(){
+            var bannerId = $(this).data("bannerid");
+            deleteBanners(bannerId);
         });
 
         $("#thcheckbox").on('ifChecked', function(event){
@@ -164,19 +161,19 @@
             $('.table-cb').iCheck('uncheck');
         });
 
-        $("#linkBatchDelete").click(function(){
+        $("#bannerBatchDelete").click(function(){
             var $chs = $(":checkbox:checked");
             if($chs.length == 0){
                 layer.msg("您还没有选中要操作的数据项！", {icon: 0});
                 return;
             }
-            var linkIds = [];
+            var bannerIds = [];
             for(var i=0;i<$chs.length;i++){
                 var v = $($chs[i]).val();
                 if(v == "on") continue;
-                linkIds.push(v);
+                bannerIds.push(v);
             }
-            deleteLinks(linkIds.join());
+            deleteBanners(bannerIds.join());
         });
     });
 </script>

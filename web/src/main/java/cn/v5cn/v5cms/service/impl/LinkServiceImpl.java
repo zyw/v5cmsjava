@@ -27,7 +27,10 @@ public class LinkServiceImpl implements LinkService {
 
     @Override
     public Page<Link> findLinkPageable(final Link link, Integer currPage) {
+
         int pageSize = Integer.valueOf(PropertyUtils.getValue("page.size").or("0"));
+
+        if(currPage == null || currPage < 1) currPage = 1;
 
         return linkDao.findAll(new Specification<Link>(){
             @Override
