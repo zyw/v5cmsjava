@@ -1,7 +1,5 @@
 package cn.v5cn.v5cms.entity;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
