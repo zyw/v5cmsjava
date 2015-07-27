@@ -32,6 +32,7 @@ public class Content implements Serializable {
     private Integer stickNum;       //置顶序号，只有是置顶状态，才起作用
     private String publishDT;         //原内容发布日期
     private Integer state;          //内容状态，2：发布，1：待审核，0：草稿
+    private Integer allowComment;   //是否允许评论，1：运行 0：禁止
     private String cpics;           //与文章关联的图片，多个使用逗号分割
     private String cattas;          //文章中使用的附件，多个使用丢号分割
     private String dispic;          //展示图
@@ -48,14 +49,6 @@ public class Content implements Serializable {
     public void setContentId(Long contentId) {
         this.contentId = contentId;
     }
-
-//    public Long getColumnId() {
-//        return columnId;
-//    }
-//
-//    public void setColumnId(Long columnId) {
-//        this.columnId = columnId;
-//    }
 
     public String getCname() {
         return cname;
@@ -201,6 +194,14 @@ public class Content implements Serializable {
         this.state = state;
     }
 
+    public Integer getAllowComment() {
+        return allowComment;
+    }
+
+    public void setAllowComment(Integer allowComment) {
+        this.allowComment = allowComment;
+    }
+
     public String getCpics() {
         return cpics;
     }
@@ -247,7 +248,6 @@ public class Content implements Serializable {
     public String toString() {
         return "Content{" +
                 "contentId=" + contentId +
-                ", column=" + column +
                 ", cname='" + cname + '\'' +
                 ", cbody='" + cbody + '\'' +
                 ", outside=" + outside +
@@ -264,12 +264,14 @@ public class Content implements Serializable {
                 ", sourceURL='" + sourceURL + '\'' +
                 ", stick=" + stick +
                 ", stickNum=" + stickNum +
-                ", publishDT=" + publishDT +
+                ", publishDT='" + publishDT + '\'' +
                 ", state=" + state +
+                ", allowComment=" + allowComment +
                 ", cpics='" + cpics + '\'' +
                 ", cattas='" + cattas + '\'' +
                 ", dispic='" + dispic + '\'' +
-                ", siteId='" + siteId + '\'' +
+                ", siteId=" + siteId +
+                ", column=" + column +
                 '}';
     }
 }

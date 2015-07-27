@@ -95,12 +95,6 @@ create table cols
 (
   colsId        bigInt not null AUTO_INCREMENT ,
   columnName    varchar(200) not null       comment '栏目名称',
-
- /* columnlht     varchar(200)                comment '栏目列表页头模板',
-  columnlbt     varchar(200)                comment '栏目列表主体模板',
-  columncht     varchar(200)                comment '内容页头模板',
-  columncbt     varchar(200)                comment '内容也主体模板',*/
-
   colTypeId     bigint not null             comment '栏目类型',
 
   sortNum      int                         comment '栏目显示顺序',
@@ -163,6 +157,7 @@ create table content
   stickNum  int                     comment '置顶序号，只有是置顶状态，才起作用',
   publishDT varchar(10)             comment '原内容发布日期',
   state   int                       comment '是否是草稿，1：发布，0：草稿',
+  allowComment int                  comment '是否允许评论，1：运行 0：禁止',
   cpics     varchar(2000)           comment '与文章关联的图片，多个使用逗号分割',
   cattas    varchar(1000)           comment '文章中使用的附件，多个使用丢号分割',
   dispic    varchar(200)            comment '展示图',
