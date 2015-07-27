@@ -13,7 +13,6 @@ import java.util.Date;
 @Table(name = "content")
 public class Content implements Serializable {
     private Long contentId;
-//    private Long columnId;          //所属栏目ID
     private String cname;           //内容标题
     private String cbody;           //发布的内容
     private Integer outside;        //是否是外链，1：是，0：不是
