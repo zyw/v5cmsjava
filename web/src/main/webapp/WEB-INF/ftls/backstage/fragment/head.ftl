@@ -333,12 +333,12 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="active">
-                    <a href="<@spring.url "/manager/index"/>">
+                    <a href="<@spring.url "/manager/content/edit"/>">
                         <i class="fa fa-dashboard"></i> <span>仪表盘</span>
                     </a>
                 </li>
                 <li>
-                    <a href="pages/widgets.html">
+                    <a href="<@spring.url '/manager/content/edit'/>">
                         <i class="glyphicon glyphicon-send"></i> <span>内容发布</span>
                         <small class="badge pull-right bg-green">new</small>
                     </a>

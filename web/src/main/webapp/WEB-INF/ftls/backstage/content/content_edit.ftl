@@ -143,16 +143,6 @@
                                         <option value="1" <#if (content.stick!0) == 1>selected</#if>>是</option>
                                     </select>
                                 </label>
-                                <!--
-                                <label class="checkbox-inline col-sm-3">
-                                    <div class="input-group date date-picker">
-                                        <input type="text" class="form-control date-picker" name="publishDT" placeholder="发布日期">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                    </div>
-                                </label>
-                                -->
                                 <label class="checkbox-inline col-sm-4">
                                     <input type="text" class="form-control" name="stickNum" id="stickNum" placeholder="置顶序号"
                                            ignore="ignore" datatype="n" errormsg="序号必须为数字！" value="${content.stickNum!""}">
@@ -162,17 +152,24 @@
                                 </label>
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <label for="sortNum" class="col-sm-2 control-label">发布日期</label>
+                            <label for="sortNum" class="col-sm-2 control-label" style="padding-top: 15px;">允许评语</label>
                             <div class="col-sm-5">
-                                <div class="input-group date date-picker">
-                                    <input type="text" class="form-control date-picker" value="${content.publishDT!""}" name="publishDT" placeholder="发布日期">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
+                                <label class="checkbox-inline" style="padding-left: 0px;">
+                                    <input type="checkbox" id="allowComment" name="allowComment" checked value="1"> &nbsp;允许
+                                </label>
+                                <label class="checkbox-inline" style="padding-left: 0px;width: 420px;">
+                                    <div class="input-group date date-picker">
+                                        <input type="text" class="form-control date-picker" value="${content.publishDT!""}" name="publishDT" placeholder="原内容发布日期">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
                                     </div>
-                                </div>
+                                </label>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label for="editor" class="col-sm-2 control-label">图片内容</label>
                             <div class="col-sm-10">
@@ -260,10 +257,18 @@
 <script src="<@spring.url '/res/backstage/webuploader/upload.js'/>" type="text/javascript"></script>
 <script type="text/javascript">
     $(function(){
+        $("#nav_content").imitClick();
+
         $(".text-color").colorpicker();
+
         $('.date-picker').datepicker({
             format: "yyyy-mm-dd",
             language: "zh-CN"
+        });
+
+        $('#allowComment').on('ifChanged', function(event){
+            var allowComment = $(this).val();
+            $(this).val(allowComment == 1 ? 0 : 1);
         });
 
         $("#contentForm").Validform({
@@ -325,7 +330,6 @@
             }
         };
         $.fn.zTree.init($("#columnTree"), columnSetting);
-        $("#nav_content").imitClick();
 
         $("#columnTreeInput").click(function () {
             var display = $("#columnTreeDiv").css("display");
@@ -344,9 +348,11 @@
         $("#uploadAndViewImage").click(function(){
             $("#addSelectImgModal").modal('show');
         });
+
         $("#addSelectImgModal").on('shown.bs.modal',function(){
             $.v5cms.loadWebUploader();
         });
+
         $("#uploadBrowseImage").on("shown.bs.tab",function(e){
             var tabTitle = $(e.target).text();
             if(tabTitle === '浏览'){

@@ -81,7 +81,13 @@
                                 <td>${banner.bannerId}</td>
                                 <td>${banner.bannerName}</td>
                                 <td>${banner.bannerPic}</td>
-                                <td>${banner.bcontent}</td>
+                                <td>
+                                    <#if (banner.bcontent?html?length) gt 60>
+                                        ${banner.bcontent?html?substring(0,60)}...
+                                    <#else>
+                                        ${banner.bcontent?html}
+                                    </#if>
+                                </td>
                                 <td>${banner.bannerds}</td>
                                 <td>
                                     ${(banner.isstart==1)?string("<small class='badge bg-green'>启用</small>",
