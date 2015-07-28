@@ -1,6 +1,6 @@
 package cn.v5cn.v5cms.front.util;
 
-import cn.v5cn.v5cms.front.freemarker.V5CMSDirectives;
+import cn.v5cn.v5cms.front.freemarker.ColumnDirective;
 import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
@@ -12,12 +12,15 @@ import java.io.IOException;
  */
 public class FrontFreeMarkerConfigurer extends FreeMarkerConfigurer {
 
+//    @Autowired
+//    private V5CMSDirectives v5cmsDirectives;
+
     @Autowired
-    private V5CMSDirectives v5CMSDirectives;
+    private ColumnDirective columnDirective;
 
     @Override
     public void afterPropertiesSet() throws IOException, TemplateException {
         super.afterPropertiesSet();
-        getConfiguration().setSharedVariable("v5cms",v5CMSDirectives);
+        this.getConfiguration().setSharedVariable("column",columnDirective);
     }
 }

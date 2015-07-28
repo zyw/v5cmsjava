@@ -62,11 +62,15 @@
 			</div>
         </div>
         <!-- S top-toolbar -->
-        <@v5cms.column parentId="0"/>
+        <@column></@column>
+
+		<#--
 		<#list columns as column>
 			${column.columnName} ---- ${column.colsId}<br/>
 			<hr>
 		</#list>
+		-->
+
 		<!-- top-container -->
         <div class="top-container">
 			<div class="page-width clearfix">

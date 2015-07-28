@@ -21,8 +21,6 @@
                   p:supportedMediaTypes="text/html"/>
         </mvc:message-converters>
     </mvc:annotation-driven>
-    <!--<mvc:resources mapping="/r/**"
-                   location="/WEB-INF/ftls/backstage/static/,/WEB-INF/ftls/front/,/WEB-INF/uploads/"/>-->
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="10485760"/><!--10MB-->
@@ -30,7 +28,7 @@
     </bean>
 
     <!-- 配置FreeMarker -->
-    <bean id="freeMarkerConfig" class="cn.v5cn.v5cms.front.util.FrontFreeMarkerConfigurer">
+    <bean id="frontFreeMarkerConfig" class="cn.v5cn.v5cms.front.util.FrontFreeMarkerConfigurer">
         <property name="templateLoaderPath" value="/WEB-INF/ftls/front/"/>
         <property name="defaultEncoding" value="UTF-8" />
         <property name="freemarkerSettings">
@@ -48,7 +46,7 @@
             </props>
         </property>
     </bean>
-    <bean id="view" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+    <bean id="frontView" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="viewClass"
                   value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"></property>
         <property name="cache" value="false"/>
