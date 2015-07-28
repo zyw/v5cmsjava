@@ -66,7 +66,7 @@ CREATE TABLE advPos(
   PRIMARY KEY (advPosId)
 )ENGINE=INNODB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 COMMENT '广告版位';
 
---友情连接表
+/*友情连接表*/
 create table link
 (
   linkId    bigInt not null AUTO_INCREMENT ,
@@ -78,7 +78,7 @@ create table link
   primary key (linkId)
 )ENGINE=INNODB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 comment '友情连接表';
 
---banner表
+/*banner表*/
 create table banner
 (
   bannerId bigInt not null AUTO_INCREMENT ,
@@ -122,7 +122,7 @@ create table colType
   primary key (colTypeId)
 )ENGINE=INNODB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 comment '栏目类型表';
 
---标签表
+/*标签表*/
 
 create table label
 (
@@ -134,7 +134,7 @@ create table label
 
 alter table cols comment '文章标签表';
 
---创建内容表
+/*创建内容表*/
 create table content
 (
   contentId bigInt not null AUTO_INCREMENT ,
@@ -167,7 +167,7 @@ create table content
 
 alter table content comment '创建内容表';
 
---文章标签表
+/*文章标签表*/
 create table content_label
 (
   content_labelId   bigInt not null AUTO_INCREMENT ,
@@ -178,23 +178,53 @@ create table content_label
 
 alter table content_label comment '文章标签中间表';
 
---创建评语表
+/*创建评语表*/
 create table comments
 (
   commentsId      bigInt not null AUTO_INCREMENT,
-  contentId       int not null                   comment '评语所属内容ID',
+  contentId       bigInt not null                comment '评语所属内容ID',
   commentAuthor   varchar(100) not null          comment '评论者姓名',
   email           varchar(100) not null          comment '评论者的Email地址',
   commentContent  longtext not null              comment '评语内容',
+  reply           longtext                       comment '评论回复',
   siteURL         varchar(500)                   comment '评论者的站点URL',
   commentIP       varchar(200)                   comment '评语者的IP地址',
   commentDate     datetime                       comment '评语时间',
+  recommend       int     default 0              comment '是否推荐',
   commentApproved int     default 0              comment '评语是否批准 0:待审批，1:通过审批，2:垃圾评语',
-  commentParent   int     default 0              comment '父评语ID',
+  commentParent   bigInt  default 0              comment '父评语ID',
   primary key (commentsId)
 )ENGINE=INNODB auto_increment=1000 default charset=utf8;
 
 alter table comments comment '评语表';
+
+/*留言类型*/
+create table leave_word_type
+(
+  id           BIGINT NOT NULL AUTO_INCREMENT,
+  name         varchar(200) not null          comment '留言类型名称',
+  sortNum      int                            comment '留言类型顺序',
+  lwdes        varchar(2000)                  comment '留言类型描述',
+  primary key(id)
+)ENGINE=INNODB auto_increment=1000 default charset=utf8;
+
+/*留言*/
+create table leave_word
+(
+  id           BIGINT NOT NULL AUTO_INCREMENT,
+  lwtId        BIGINT                         comment '留言类型ID',
+  title        varchar(500) not null          comment '留言标题',
+  content      longtext not null              comment '留言内容',
+  reply        longtext                       comment '回复内容',
+  author       varchar(100)                   comment '留言作者',
+  email        varchar(200)                   comment '邮箱',
+  phone        varchar(20)                    comment '电话',
+  qq           varchar(50)                    comment 'QQ',
+  recommend    int     default 0              comment '是否推荐，1：推荐，0：不推荐',
+  approved     int     default 0              comment '留言是否批准 0:待审批，1:通过审批，2:垃圾评语',
+  lwtime       datetime                       comment '留言时间',
+  primary key(id)
+)ENGINE=INNODB auto_increment=1000 default charset=utf8;
 
 CREATE TABLE system_res (
   id BIGINT NOT NULL AUTO_INCREMENT,

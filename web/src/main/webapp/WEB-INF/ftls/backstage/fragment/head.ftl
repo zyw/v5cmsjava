@@ -352,6 +352,8 @@
                     <ul class="treeview-menu">
                         <li><a href="<@spring.url "/manager/content/list/0/1"/>"><i class="fa fa-angle-double-right"></i> 内容列表</a></li>
                         <li><a href="<@spring.url "/manager/content/edit"/>"><i class="fa fa-angle-double-right"></i> 添加内容</a></li>
+
+                        <li><a href="<@spring.url "/manager/comment/list/1"/>"><i class="fa fa-angle-double-right"></i> 评论管理</a></li>
                     </ul>
                 </li>
                 <li class="treeview" id="nav_columns">
@@ -366,6 +368,20 @@
                     </ul>
 
                 </li>
+
+                <li class="treeview" id="nav_lw">
+                    <a href="javascript:;">
+                        <i class="fa fa-comment"></i>
+                        <span>留言管理</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="<@spring.url '/manager/lw/list/1'/>"><i class="fa fa-angle-double-right"></i> 留言</a></li>
+                        <li><a href="<@spring.url '/manager/lwt/list/1'/>"><i class="fa fa-angle-double-right"></i> 留言类型</a></li>
+                    </ul>
+
+                </li>
+
                 <li>
                     <a href="<@spring.url '/manager/tpl/list'/>">
                         <i class="fa fa-edit"></i> <span>模板管理</span>
