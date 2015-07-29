@@ -11,6 +11,15 @@ import java.util.List;
  */
 @Repository("siteDao")
 public interface SiteDao extends JpaRepository<Site,Long> {
+
+    /**
+     * ==============================================================
+     *
+     * 后端方法
+     *
+     * ==============================================================
+     **/
+
     /**
      * 根据站点ID查询站点。
      * */
@@ -24,4 +33,18 @@ public interface SiteDao extends JpaRepository<Site,Long> {
      * 根据域名查询域名的个数
      * */
     long countByDomainAndSiteIdNot(String domain,Long siteId);
+
+    /**
+     * ==============================================================
+     *
+     * 前端方法
+     *
+     * ==============================================================
+     **/
+
+    /**
+     * 根据域名查询站点信息。
+     * @param domain 域名，例如：wwww.explatem.com
+     * */
+    Site findByDomain(String domain);
 }

@@ -9,6 +9,15 @@ import java.lang.reflect.InvocationTargetException;
  * Created by ZYW on 2014/6/30.
  */
 public interface SiteService {
+
+    /**
+     * ==============================================================
+     *
+     * 后端方法
+     *
+     * ==============================================================
+     **/
+
     Site findBySiteId(Long siteId);
 
     ImmutableList<Site> finadAll();
@@ -35,4 +44,18 @@ public interface SiteService {
      * 根据域名查询域名的个数
      * */
     long countByDomainAndSiteIdNot(String domain,Long siteId);
+
+    /**
+     * ==============================================================
+     *
+     * 前端方法
+     *
+     * ==============================================================
+     **/
+
+    /**
+     * 根据域名查询站点信息。
+     * @param domain 域名，例如：wwww.explatem.com
+     * */
+    Site findByDomain(String domain);
 }

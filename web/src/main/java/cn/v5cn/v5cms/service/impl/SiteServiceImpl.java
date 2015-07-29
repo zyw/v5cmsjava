@@ -23,6 +23,14 @@ public class SiteServiceImpl implements SiteService {
     @Autowired
     private SiteDao siteDao;
 
+    /**
+     * ==============================================================
+     *
+     * 后端方法
+     *
+     * ==============================================================
+     **/
+
     @Override
     public Site findBySiteId(Long siteId) {
         return siteDao.findBySiteId(siteId);
@@ -69,5 +77,18 @@ public class SiteServiceImpl implements SiteService {
     @Override
     public long countByDomainAndSiteIdNot(String domain,Long siteId) {
         return siteDao.countByDomainAndSiteIdNot(domain,siteId);
+    }
+
+    /**
+     * ==============================================================
+     *
+     * 前端方法
+     *
+     * ==============================================================
+     **/
+
+    @Override
+    public Site findByDomain(String domain) {
+        return siteDao.findByDomain(domain);
     }
 }

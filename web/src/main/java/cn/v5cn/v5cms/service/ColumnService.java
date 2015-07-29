@@ -10,6 +10,14 @@ import java.util.List;
  */
 public interface ColumnService {
 
+    /**
+     * ==============================================================
+     *
+     * 后端方法
+     *
+     * ==============================================================
+     **/
+
     Column save(Column column);
 
     List<Column> findAll();
@@ -21,4 +29,18 @@ public interface ColumnService {
     List<Column> findByParentId(Long parentId);
 
     List<ZTreeNode> buildTreeNode(Long parentId);
+
+    /**
+     * ==============================================================
+     *
+     * 前端方法
+     *
+     * ==============================================================
+     **/
+
+    /**
+     * 根据父栏目ID，站点ID，栏目显示和SortNum排序
+     * */
+    List<Column> findByParentId(Long parentId,Long siteId);
+
 }

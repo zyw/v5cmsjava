@@ -13,17 +13,16 @@ import java.io.Serializable;
 public class Column implements Serializable {
     private Long colsId;
     private String columnName;          //栏目名称
-//    private Long colTypeId;             //栏目类型
     private int sortNum;               //栏目显示顺序
-    private int columndisplay=1;          //是否显示
-    private String openWay;               //连接打开方式
-    private String columnOutside;       //外链地址
-    private String columnpic;           //栏目图片
-    private Long parentId;              //父栏目ID
-    private String parentIds;           //treetable排序使用
-    private Long siteId;                //站点ID
+    private int columndisplay=1;       //是否显示
+    private String openWay;            //连接打开方式
+    private String columnOutside;      //外链地址
+    private String columnpic;          //栏目图片
+    private Long parentId;             //父栏目ID
+    private String parentIds;          //treetable排序使用
+    private Long siteId;               //站点ID
 
-    private ColumnType columnType;
+    private ColumnType columnType;     //栏目类型
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

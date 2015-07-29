@@ -12,8 +12,29 @@ import java.util.List;
  */
 @Repository("columnDao")
 public interface ColumnDao extends PagingAndSortingRepository<Column,Long> {
+
+    /**
+     * ==============================================================
+     *
+     * 后端方法
+     *
+     * ==============================================================
+     **/
+
     @Query("select c from Column c where c.siteId=?1 order by CONCAT(c.parentIds,c.colsId)")
     List<Column> findOrderByParentIdsAndColsId(Long siteId);
 
     List<Column> findByParentId(Long parentId);
+
+    /**
+     * ==============================================================
+     *
+     * 前端方法
+     *
+     * ==============================================================
+     **/
+//    @Query("select c from Column c where c.parentId=?1 and c.siteId=?2 and c.columndisplay=1 order by c.sortNum asc ")
+//    List<Column> findByPIdAndCdObAsc();
+
+    List<Column> findByParentIdAndSiteIdAndColumndisplayOrderBySortNumAsc(Long parentId, Long siteId, int columndisplay);
 }

@@ -20,6 +20,14 @@ public class ColumnServiceImpl implements ColumnService {
     @Autowired
     private ColumnDao columnDao;
 
+    /**
+     * ==============================================================
+     *
+     * 后端方法
+     *
+     * ==============================================================
+     **/
+
     @Override
     @Transactional
     public Column save(Column column) {
@@ -71,5 +79,23 @@ public class ColumnServiceImpl implements ColumnService {
             treeNodes.add(treeNode);
         }
         return treeNodes;
+    }
+
+
+    /**
+     * ==============================================================
+     *
+     * 前端方法
+     *
+     * ==============================================================
+     **/
+
+    /**
+     * 根据父栏目ID，站点ID，栏目显示和SortNum排序
+     * */
+    @Override
+    public List<Column> findByParentId(Long parentId,Long siteId) {
+
+        return columnDao.findByParentIdAndSiteIdAndColumndisplayOrderBySortNumAsc(parentId,siteId,1);
     }
 }
