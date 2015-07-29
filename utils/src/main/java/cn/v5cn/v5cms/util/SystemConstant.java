@@ -20,4 +20,16 @@ public class SystemConstant {
     public static final String LINK_RES_PATH = "/res/uploads/{siteId}/linkfiles";
 
     public static final String SITE_TEMPLATE_PATH = "/WEB-INF/ftls/front/";
+
+
+
+    /**
+     * -----------------------------------------------------
+     * 前端常量
+     * -----------------------------------------------------
+     * */
+    /**
+     * 前端Site Sessoin Key
+     * */
+    public static final String FRONT_SITE_SESSION_KEY = "frontSiteKey";
 }

@@ -114,7 +114,7 @@
 								</ul>
 								-->
                             </li>
-							<@v5cms.column siteId=10005></@v5cms.column>
+							<@v5cms.column siteId=10005 maxSize=10></@v5cms.column>
 
 							<#list columns as column>
                                 <li class="">

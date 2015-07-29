@@ -23,6 +23,8 @@ public class ColumnDirective implements TemplateDirectiveModel {
 
     private static final String PARAM_NAME_SITEID = "siteId";
 
+    private static final String PARAM_NAME_MAXSIZE = "maxSize";
+
     public ColumnDirective(){
         columnService = SpringContextsUtil.getTypeBean("columnService", ColumnService.class);
     }
@@ -33,6 +35,7 @@ public class ColumnDirective implements TemplateDirectiveModel {
 
         long parentId = 0;
         long siteId = 0;
+        int maxSize = 0;
 
         Iterator paramIter = params.entrySet().iterator();
         while (paramIter.hasNext()) {
@@ -54,7 +57,7 @@ public class ColumnDirective implements TemplateDirectiveModel {
                             "The \"" + PARAM_NAME_PARENTID + "\" parameter "
                                     + "can't be negative.");
                 }
-            }else if(paramName.equals(PARAM_NAME_SITEID)){
+            } else if(paramName.equals(PARAM_NAME_SITEID)){
                 if (!(paramValue instanceof TemplateNumberModel)) {
                     throw new TemplateModelException(
                             "The \"" + PARAM_NAME_SITEID + "\" parameter "
@@ -67,14 +70,28 @@ public class ColumnDirective implements TemplateDirectiveModel {
                             "The \"" + PARAM_NAME_SITEID + "\" parameter "
                                     + "can't be negative.");
                 }
+            } else if(paramName.equals(PARAM_NAME_MAXSIZE)) {
+                if (!(paramValue instanceof TemplateNumberModel)) {
+                    throw new TemplateModelException(
+                            "The \"" + PARAM_NAME_MAXSIZE + "\" parameter "
+                                    + "must be a number.");
+                }
+                maxSize = ((TemplateNumberModel) paramValue).getAsNumber().intValue();
+
+                if (siteId < 0) {
+                    throw new TemplateModelException(
+                            "The \"" + PARAM_NAME_MAXSIZE + "\" parameter "
+                                    + "can't be negative.");
+                }
             } else {
                 throw new TemplateModelException(
                         "Unsupported parameter: " + paramName);
             }
         }
 
-        List<Column> columns = columnService.findByParentId(parentId,siteId);
+        List<Column> columns = columnService.findByParentId(parentId,siteId,maxSize);
         env.setVariable("columns", new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_22).build().wrap(columns));
+
         if(body != null){
             body.render(env.getOut());
         }

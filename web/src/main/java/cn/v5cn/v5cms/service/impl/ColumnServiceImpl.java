@@ -6,6 +6,8 @@ import cn.v5cn.v5cms.entity.Column;
 import cn.v5cn.v5cms.entity.wrapper.ZTreeNode;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -96,6 +98,19 @@ public class ColumnServiceImpl implements ColumnService {
     @Override
     public List<Column> findByParentId(Long parentId,Long siteId) {
 
-        return columnDao.findByParentIdAndSiteIdAndColumndisplayOrderBySortNumAsc(parentId,siteId,1);
+        return columnDao.findByParentIdAndSiteIdAndColumndisplay(parentId, siteId, 1, new Sort(Sort.Direction.ASC, "sortNum"));
+    }
+
+    /**
+     * 根据父栏目ID，站点ID，栏目显示，
+     * SortNum排序和最多显示的行数
+     * */
+    @Override
+    public List<Column> findByParentId(Long parentId,Long siteId,int maxSize) {
+
+        if (maxSize == 0) return findByParentId(parentId,siteId);
+
+        return columnDao.findByParentIdAndSiteIdAndColumndisplay(parentId, siteId, 1,
+                new PageRequest(0,maxSize,new Sort(Sort.Direction.ASC,"sortNum")));
     }
 }

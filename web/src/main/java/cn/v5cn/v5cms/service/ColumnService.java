@@ -43,4 +43,9 @@ public interface ColumnService {
      * */
     List<Column> findByParentId(Long parentId,Long siteId);
 
+    /**
+     * 根据父栏目ID，站点ID，栏目显示，
+     * SortNum排序和最多显示的行数
+     * */
+    List<Column> findByParentId(Long parentId,Long siteId,int maxSize);
 }
