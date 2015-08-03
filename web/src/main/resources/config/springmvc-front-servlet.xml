@@ -22,6 +22,16 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
+    <!-- 自定义拦截器interceptor -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/manager/**"/>
+            <bean class="cn.v5cn.v5cms.front.interceptor.FrontInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    <!-- ./自定义拦截器interceptor -->
+
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="10485760"/><!--10MB-->
         <property name="defaultEncoding" value="UTF-8"/>
@@ -70,13 +80,4 @@
     <!--<bean id="messageSourceHelper" class="cn.v5cn.v5cms.util.MessageSourceHelper">-->
         <!--<property name="messageSource" ref="messageSource"/>-->
     <!--</bean>-->
-
-    <!-- 自定义拦截器interceptor -->
-    <!--<mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean class="cn.v5cn.v5cms.filter.GlobalInterceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors>-->
-    <!-- ./自定义拦截器interceptor -->
 </beans>

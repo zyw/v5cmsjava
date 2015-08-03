@@ -28,20 +28,14 @@
     <!--<mvc:resources mapping="/r/**"-->
                    <!--location="/WEB-INF/ftls/backstage/static/,/WEB-INF/ftls/front/,/WEB-INF/uploads/"/>-->
 
-    <!--
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/jsp/"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>
-    -->
-
+    <!-- 自定义拦截器interceptor -->
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/manager/**"/>
             <bean class="cn.v5cn.v5cms.filter.GlobalInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
+    <!-- ./自定义拦截器interceptor -->
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="104857600"/><!--100MB-->
@@ -85,13 +79,5 @@
         <!--<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>-->
     <!--</mvc:interceptors>-->
 
-    <!-- 自定义拦截器interceptor -->
-    <!--<mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean class="cn.v5cn.v5cms.filter.GlobalInterceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors>-->
-    <!-- ./自定义拦截器interceptor -->
     <import resource="application-servlet-shiro.xml"/>
 </beans>

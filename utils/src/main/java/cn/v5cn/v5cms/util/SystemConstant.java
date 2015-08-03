@@ -31,5 +31,5 @@ public class SystemConstant {
     /**
      * 前端Site Sessoin Key
      * */
-    public static final String FRONT_SITE_SESSION_KEY = "frontSiteKey";
+    public static final String FRONT_SITE_SESSION_KEY = "frontSite";
 }

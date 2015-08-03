@@ -11,15 +11,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.beans.PropertyDescriptor;
 import java.io.File;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Created by ZYW on 2014/7/18.
@@ -153,5 +150,14 @@ public class SystemUtils {
             throw new V5CMSSessionValueNullException("Session中存储的用户信息为空！");
         }
         return userObj;
+    }
+    /**
+     * 格式化Uri将\exp.html替换成/exp.html
+     *
+     * */
+    public static String formatUri(String uri){
+        if(uri == null || uri.trim().equals("")|| uri.indexOf("\\") == -1) return uri;
+
+        return uri.replaceAll("\\\\","/");
     }
  }

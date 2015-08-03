@@ -13,6 +13,14 @@ public interface ColumnService {
     /**
      * ==============================================================
      *
+     * 通用方法
+     *
+     * ==============================================================
+     **/
+    Column findOne(Long columnId);
+    /**
+     * ==============================================================
+     *
      * 后端方法
      *
      * ==============================================================
@@ -22,7 +30,6 @@ public interface ColumnService {
 
     List<Column> findAll();
     List<Column> findOrderByParentIdsAndColsId(Long siteId);
-    Column findOne(Long columnId);
 
     void delete(Long columnId);
 

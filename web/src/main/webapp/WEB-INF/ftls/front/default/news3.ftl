@@ -1,142 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<#import "/spring.ftl" as spring/>
+<!doctype html>
+<html lang="zh">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Common Skin Demo - 企互动</title>
-<link rel="stylesheet" href="css/content.css" type="text/css" />
-<link rel="stylesheet" href="css/menu.css" type="text/css" />
-<link rel="stylesheet" href="css/jquery.fancybox-1.3.4.css" type="text/css" />
-<link rel="stylesheet" href="css/style.css" type="text/css" />
-
-<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="js/superfish.js"></script>
-<script type="text/javascript" src="js/jquery.carouFredSel.js"></script>
-<script type="text/javascript" src="js/jquery.tools.min.js"></script>
-<script type="text/javascript" src="js/jquery.fancybox-1.3.4.pack.js"></script>
-<script type="text/javascript" src="js/custom.js"></script>
-<!--[if IE 6]>
-	<script type="text/javascript" src="js/ie7.js"></script>
-	<script type="text/javascript" src="js/DD_belatedPNG.js"></script>	
-	<script type="text/javascript">
-		DD_belatedPNG.fix('.logo img, .Header img');
-	</script>
-<![endif]-->
+    <meta name="keywords" content="${frontSite.siteKey!""}" />
+    <meta name="description" content="${frontSite.siteDescribed!""}" />
+    <title>${(frontSite.siteName)!""} - ${(column.columnName)}</title>
+<#include "./frags/header.html"/>
 </head>
 
 <body>
-<div id="wrapper">	
-	
-    <!-- ==================== S Top ==================== -->
-    <div class="Top">
-		<!-- S top-toolbar -->
-        <div class="top-toolbar">
-	        <div class="page-width clearfix">
-				<!-- S top-area -->
-                <div class="top-area">
-                	<!-- S language-select -->
-					<div class="language-select float-right">	                	
-						<ul class="sf-menu">
-							<li>
-								<a href="#" class="first-level"><span class="language-ico" style="background-image:url(images/icon/zh-CN.png)">简体中文</span></a>
-								<ul>
-									<li><a href="#"><span class="language-ico" style="background-image:url(images/icon/zh-CN.png);">简体中文</span></a></li>
-									<li><a href="#"><span class="language-ico" style="background-image:url(images/icon/zh-HK.png);">繁体中文</span></a></li>
-									<li><a href="#"><span class="language-ico" style="background-image:url(images/icon/en-US.png);">English</span></a></li>							
-								</ul>
-							</li>					
-						</ul>
-					</div>
-					<!-- E language-select -->
-                </div>
-                <!-- E top-area -->
-			</div>
-        </div>
-        <!-- S top-toolbar -->
-        
-		<!-- top-container -->
-        <div class="top-container">
-			<div class="page-width clearfix">
-				<!-- S logo -->
-				<div class="logo">
-					<a href="index.html">
-                    	<img src="images/logo.png" alt="企互动" width="200" height="60" />
-                    </a>
-				</div>
-				<!-- E logo -->
-				
-				<!-- S top-container-widget -->
-				<div class="top-container-widget float-right">
-	            	<!-- S nav-area -->
-					<div class="nav-area clearfix">
-                        <ul class="sf-menu main-nav">                                                                             
-                            <li class="">
-                                <a href="index.html">网站首页</a>
-                                <ul>
-									<li>
-                                    	<a href="index.html">二级菜单 11</a>
-                                    	<ul>
-											<li><a href="index.html">三级菜单 11</a></li>
-											<li><a href="index.html">三级菜单 22</a></li>
-                                            <li><a href="index.html">三级菜单 11</a></li>
-											<li><a href="index.html">三级菜单 22</a></li>
-                                            <li><a href="index.html">三级菜单 11</a></li>
-											<li>
-                                              	<a href="index.html">三级菜单 22</a>
-		                                    	<ul>
-													<li><a href="index.html">四级菜单 11</a></li>
-													<li><a href="index.html">四级菜单 22</a></li>
-												</ul>
-                                            </li>
-										</ul>
-                                    </li>
-									<li><a href="index.html">二级菜单 22</a></li>
-								</ul>
-                            </li>
-                            <li class="">
-                                <a href="about.ftl">关于我们</a>
-                                <ul>
-									<li><a href="about.ftl">公司简介</a></li>
-									<li><a href="about.ftl">公司荣誉</a></li>
-                                    <li><a href="about.ftl">发展历程</a></li>
-                                    <li><a href="about.ftl">团队介绍</a></li>
-								</ul>					
-                            </li>
-                            <li class="">
-                                <a href="products.ftl">产品展示</a>
-                            </li>
-                            <li class="">
-                                <a href="showcase.ftl">工程案例 </a>
-                            </li>
-                            <li class="current">
-                                <a href="news.ftl">资讯中心</a>
-                                <ul>
-									<li><a href="news.ftl">公司新闻</a></li>
-									<li><a href="news2.ftl">行业动态</a></li>
-								</ul>
-                            </li>
-                            <li class="">
-                                <a href="contact.ftl">联系我们</a>
-                                <ul>
-									<li><a href="contact.ftl">联系方式</a></li>
-									<li><a href="message.ftl">在线留言</a></li>
-								</ul>				
-                            </li>
-                        </ul>
-					</div>
-					<!-- E nav-area -->             
-				</div>
-				<!-- E top-container-widget -->
-				
-				<div class="clear"></div>
-			</div>
-        </div>
-        <!-- top-container -->
-		
-	</div>
-    <!-- ==================== E Top ==================== -->
-    
-    
-    
+<div id="wrapper">
+
+	<#include "./frags/top.html"/>
     
     <!-- ==================== S Header ==================== -->
     <div class="Header">		

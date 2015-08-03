@@ -25,6 +25,17 @@ public class ColumnServiceImpl implements ColumnService {
     /**
      * ==============================================================
      *
+     * 通用方法
+     *
+     * ==============================================================
+     **/
+    @Override
+    public Column findOne(Long columnId) {
+        return columnDao.findOne(columnId);
+    }
+    /**
+     * ==============================================================
+     *
      * 后端方法
      *
      * ==============================================================
@@ -46,11 +57,6 @@ public class ColumnServiceImpl implements ColumnService {
     @Override
     public List<Column> findOrderByParentIdsAndColsId(Long siteId) {
         return columnDao.findOrderByParentIdsAndColsId(siteId);
-    }
-
-    @Override
-    public Column findOne(Long columnId) {
-        return columnDao.findOne(columnId);
     }
 
     @Override

@@ -49,7 +49,7 @@
                             <div class="col-sm-4">
                                 <select class="form-control" id="coltpl" name="coltpl">
                                     <#list templates as template>
-                                        <option value="${template.b!""}" <#if (columnType.coltpl!"")==(template.b!"")>selected</#if>>${template.a!""}</option>
+                                        <option value="${template!""}" <#if (columnType.coltpl!"")==(template!"")>selected</#if>>${template!""}</option>
                                     </#list>
                                 </select>
                                 <span class="help-block">设置栏目页面模板。</span>
@@ -60,7 +60,7 @@
                             <div class="col-sm-4">
                                 <select class="form-control" id="contenttpldd" name="contenttpl">
                                     <#list templates as template>
-                                        <option value="${template.b!""}" <#if (columnType.contenttpl!"")==(template.b!"")>selected</#if>>${template.a!""}</option>
+                                        <option value="${template!""}" <#if (columnType.contenttpl!"")==(template!"")>selected</#if>>${template!""}</option>
                                     </#list>
                                 </select>
                                 <span class="help-block">设置栏目内容模板。</span>

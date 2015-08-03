@@ -1,13 +1,12 @@
 package cn.v5cn.v5cms.controller;
 
-import cn.v5cn.v5cms.service.ColumnTypeService;
 import cn.v5cn.v5cms.entity.ColumnType;
 import cn.v5cn.v5cms.entity.Site;
 import cn.v5cn.v5cms.exception.V5CMSNullValueException;
+import cn.v5cn.v5cms.service.ColumnTypeService;
 import cn.v5cn.v5cms.util.HttpUtils;
 import cn.v5cn.v5cms.util.SystemConstant;
 import cn.v5cn.v5cms.util.SystemUtils;
-import cn.v5cn.v5cms.util.TwoTuple;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
@@ -75,13 +74,13 @@ public class ColumnTypeController {
             throw new V5CMSNullValueException("站点没有保存主题信息");
         }
         File templateFile = new File(templateBasePath+File.separator+themeName);
-        List<TwoTuple<String,String>> mapList = columnTypeService.templatePathAndName(templateFile);
+        List<String> mapList = columnTypeService.templatePathAndName(templateFile);
 
 
-        List<TwoTuple<String,String>> result = Lists.newArrayList();
-        for(TwoTuple<String,String> nameAndUri : mapList){
-            String uri = StringUtils.remove(nameAndUri.b, templateBasePath + File.separator + themeName);
-            result.add(new TwoTuple<String, String>(nameAndUri.a,uri));
+        List<String> result = Lists.newArrayList();
+        for(String absUri : mapList){
+            String uri = StringUtils.remove(absUri, templateBasePath + File.separator + themeName + File.separator);
+            result.add(SystemUtils.formatUri(uri));
         }
 
         modelMap.addAttribute("templates",result);

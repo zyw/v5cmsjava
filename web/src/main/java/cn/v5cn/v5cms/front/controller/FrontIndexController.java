@@ -22,11 +22,7 @@ public class FrontIndexController {
     @RequestMapping(value = "index.htm",method = RequestMethod.GET)
     public String index(HttpServletRequest request){
 
-        String serverName = request.getServerName();
-        int serverPort = request.getServerPort();
-        Site site = siteService.findByDomain(serverName + ":" + serverPort);
-
-        request.getSession().setAttribute(SystemConstant.FRONT_SITE_SESSION_KEY,site);
+        Site site = (Site)request.getSession().getAttribute(SystemConstant.FRONT_SITE_SESSION_KEY);
 
         return site.getThemeName()+"/index";
     }

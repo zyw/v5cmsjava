@@ -4,6 +4,7 @@ import cn.v5cn.v5cms.service.ColumnTypeService;
 import cn.v5cn.v5cms.dao.ColumnTypeDao;
 import cn.v5cn.v5cms.entity.ColumnType;
 import cn.v5cn.v5cms.util.PropertyUtils;
+import cn.v5cn.v5cms.util.SystemUtils;
 import cn.v5cn.v5cms.util.TwoTuple;
 import com.google.common.collect.Lists;
 import org.apache.commons.io.FilenameUtils;
@@ -36,16 +37,17 @@ public class ColumnTypeServiceImpl implements ColumnTypeService {
     }
 
     @Override
-    public List<TwoTuple<String,String>> templatePathAndName(File templatePath) {
+    public List<String> templatePathAndName(File templatePath) {
         File[] files = templatePath.listFiles();
 
-        List<TwoTuple<String,String>> result = null;
+        List<String> result = null;
 
         for(File file : files){
-//            if(file.isDirectory() && "assets".equalsIgnoreCase(file.getName())) continue;
+
+            if(file.isDirectory() && "frags".equals(file.getName())) continue;
 
             if(file.isDirectory()){
-                List<TwoTuple<String,String>> temp = this.templatePathAndName(file);
+                List<String> temp = this.templatePathAndName(file);
                 if(result == null){
                     result = temp;
                 }else{
@@ -60,13 +62,10 @@ public class ColumnTypeServiceImpl implements ColumnTypeService {
 
             String fileName = file.getName();
             String extensionName = FilenameUtils.getExtension(fileName);
-            if(!"ftl".equalsIgnoreCase(extensionName)) continue;
 
-            /*Map<String,String> fileNameAndUri = Maps.newHashMap();
+            if(!"ftl".equalsIgnoreCase(extensionName) && !"html".equalsIgnoreCase(extensionName)) continue;
 
-            fileNameAndUri.put(fileName, file.getAbsolutePath());*/
-
-            result.add(new TwoTuple<String,String>(fileName,file.getAbsolutePath()));
+            result.add(file.getAbsolutePath());
         }
         return result;
     }
