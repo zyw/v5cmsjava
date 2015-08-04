@@ -30,6 +30,13 @@ public class ContentServiceImpl implements ContentService {
     @Autowired
     private ContentDao contentDao;
 
+    /**
+     * ==============================================================
+     *
+     * 后端方法
+     *
+     * ==============================================================
+     **/
     @Override
     @Transactional
     public Content save(Content content) {
@@ -61,5 +68,59 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public Content findOne(Long contentId) {
         return contentDao.findOne(contentId);
+    }
+
+
+    /**
+     * ==============================================================
+     *
+     * 前端方法
+     *
+     * ==============================================================
+     **/
+    @Override
+    public Page<Content> findContentPageable(final Long colId, Integer currPage, Integer maxSize) {
+
+        Page<Content> contentPage = contentDao.findAll(new Specification<Content>() {
+
+            @Override
+            public Predicate toPredicate(Root<Content> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                Join<Content, Column> columns = root.join("column", JoinType.INNER);
+                List<Predicate> ps = Lists.newArrayList();
+                if (colId != null && colId != 0) {
+                    Path<Long> columnId = columns.get("colsId");
+                    ps.add(criteriaBuilder.equal(columnId, colId));
+                }
+                Path<Integer> state = root.get("state");
+                ps.add(criteriaBuilder.equal(state, 2));
+                Path<Integer> stick = root.get("stick");
+                ps.add(criteriaBuilder.equal(stick, 0));
+
+                return criteriaBuilder.and(ps.toArray(new Predicate[ps.size()]));
+            }
+        }, new PageRequest(currPage - 1, maxSize, new Sort(Sort.Direction.DESC, "lastdt")));
+
+        return contentPage;
+    }
+
+    @Override
+    public List<Content> findStickContents(final Long colId) {
+        return contentDao.findAll(new Specification<Content>() {
+            @Override
+            public Predicate toPredicate(Root<Content> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                Join<Content, Column> columns = root.join("column", JoinType.INNER);
+                List<Predicate> ps = Lists.newArrayList();
+                if (colId != null && colId != 0) {
+                    Path<Long> columnId = columns.get("colsId");
+                    ps.add(criteriaBuilder.equal(columnId, colId));
+                }
+                Path<Integer> state = root.get("state");
+                ps.add(criteriaBuilder.equal(state, 2));
+                Path<Integer> stick = root.get("stick");
+                ps.add(criteriaBuilder.equal(stick, 1));
+
+                return criteriaBuilder.and(ps.toArray(new Predicate[ps.size()]));
+            }
+        }, new Sort(Sort.Direction.ASC, "stickNum"));
     }
 }

@@ -11,6 +11,9 @@ public class V5CMSDirectives extends SimpleHash {
 
     public V5CMSDirectives() {
         super(new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_23).build());
-        put("column",new ColumnDirective());
+
+        put("column", new ColumnDirective());
+
+        put("content",new ContentDirective());
     }
 }
