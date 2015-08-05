@@ -17,10 +17,7 @@
     <div class="Header">		
     </div>
     <!-- ==================== E Header ==================== -->
-    
-    
-    
-    
+
     <!-- ==================== S ContentArea ==================== -->
     <div class="ContentArea">    	
     	<!-- S page-title -->
@@ -50,10 +47,13 @@
 	                        	<!-- S article -->
 	                            <div class="article">
 	                            	<ul class="article-list-row">
+										<@v5cms.content colId=(column.colsId) currentPage=1 maxSize=10/>
+											<#list pageContent.content as content>
 	                                    <li>
-	                                    	<span class="float-right">2013-08-06</span>
-	                                    	<a href="news-detail.ftl">2013集体拓展训练</a>
+	                                    	<span class="float-right">${content.lastdt}</span>
+	                                    	<a href="news-detail.ftl">${content.cname}</a>
 	                                    </li>
+											</#list>
 	                                    <li><span class="float-right">2013-08-06</span><a href="news-detail.ftl">移动互联网向左，社区向右</a></li>
 	                                    <li><span class="float-right">2013-08-06</span><a href="news-detail.ftl">社交产品的真正使命是消灭"朋友"</a></li>
 	                                    <li><span class="float-right">2013-08-06</span><a href="news-detail.ftl">在注册之前，能让我先试用一下产品吗？</a></li>

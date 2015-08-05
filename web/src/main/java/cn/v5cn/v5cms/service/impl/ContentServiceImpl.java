@@ -93,12 +93,11 @@ public class ContentServiceImpl implements ContentService {
                 }
                 Path<Integer> state = root.get("state");
                 ps.add(criteriaBuilder.equal(state, 2));
-                Path<Integer> stick = root.get("stick");
-                ps.add(criteriaBuilder.equal(stick, 0));
 
                 return criteriaBuilder.and(ps.toArray(new Predicate[ps.size()]));
             }
-        }, new PageRequest(currPage - 1, maxSize, new Sort(Sort.Direction.DESC, "lastdt")));
+        }, new PageRequest(currPage - 1, maxSize,
+                new Sort(new Sort.Order(Sort.Direction.ASC,"stickNum"),new Sort.Order(Sort.Direction.DESC, "lastdt"))));
 
         return contentPage;
     }

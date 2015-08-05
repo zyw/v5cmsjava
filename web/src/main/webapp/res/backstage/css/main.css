@@ -103,8 +103,91 @@
     left: 540px;
     top: 170px;
 }
+.v5-required {
+    color: #ff0000;
+}
+/** 内容编辑页 **/
+.v5-content-outside .control-label {
+    line-height: 30px;
+}
+.v5-content-outside .col-sm-3 {
+    padding-left: 0;
+    width: 100px;
+}
+.v5-content-outside .vail-message {
+    width:200px;
+}
+.v5-content-title-style .control-label {
+    line-height: 40px;
+}
+.v5-content-title-style .title-color {
+    padding-left: 0;
+    width: 150px;
+}
+.v5-content-title-style .title-color>.text-color{
+    padding-top: 5px;
+    padding-left: 0;
+}
+.v5-content-title-style .plz,
+.v5-content-comment .plz {
+    padding-left: 0;
+}
+.v5-content-author .control-label {
+    line-height: 30px;
+}
+.v5-content-author .author {
+    padding-left: 0;
+    width: 150px;
+}
+.v5-content-author .w150px {
+    width:150px;
+}
+.v5-content-author .w300px {
+    width: 300px;
+}
+.v5-content-stick .control-label {
+    line-height: 30px;
+}
+.v5-content-stick .stick {
+    padding-left: 0;
+    padding-right:0;
+    width: 68px;
+    line-height: 32px;
+}
+.v5-content-stick .stick-num {
+    padding-left: 0;
+    margin-left: 0;
+}
+.v5-content-comment .control-label {
+    padding-top: 15px;
+}
+.v5-content-comment .publishdt {
+    padding-left: 0;
+    width: 321px;
+}
+.v5-content-img .modal-dialog {
+    width:800px;
+    margin-top:100px;
+}
+.v5-content-img .modal-body {
+    padding: 5px 0 0 0;
+}
+.v5-content-img .nav-tabs-custom {
+    margin-bottom: 0;
+}
+.v5-content-img .modal-title {
+    line-height: 35px;
+    margin-left: 10px;
+}
+.v5-content-img #imageList {
+    text-align: center;
+}
+.v5-content-img #wrapper {
+    margin: 0;
+}
+/** ./内容编辑页 **/
 
-/* 图片管理样式 */
+    /* 图片管理样式 */
 #online {
     width: 100%;
     height: 336px;

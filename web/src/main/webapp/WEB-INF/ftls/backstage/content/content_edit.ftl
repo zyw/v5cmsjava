@@ -44,7 +44,7 @@
                         <input type="hidden" name="contentId" value="${content.contentId!""}">
                         <input type="hidden" name="state" id="content_state" value="${content.state!""}">
                         <div class="form-group has-feedback">
-                            <label class="col-sm-2 control-label">栏目 <span style="color: #ff0000">*</span></label>
+                            <label class="col-sm-2 control-label">栏目 <span class="v5-required">*</span></label>
                             <div class="col-sm-4">
                                 <input type="text" id="columnTreeInput" class="form-control" value="${(content.column.columnName)!""}" datatype="*" nullmsg="栏目类型不能为空！" readonly>
                                 <input type="hidden" id="columnId" name="column.colsId" value="${(content.column.colsId)!""}">
@@ -56,17 +56,17 @@
                             <div class="col-sm-3 Validform_checktip"></div>
                         </div>
                         <div class="form-group">
-                            <label for="columnName" class="col-sm-2 control-label">标题 <span style="color: #ff0000">*</span></label>
+                            <label for="columnName" class="col-sm-2 control-label">标题 <span class="v5-required">*</span></label>
                             <div class="col-sm-5">
                                 <input type="text" class="form-control" name="cname" id="cname"
                                        placeholder="内容标题" value="${content.cname!""}" datatype="*" nullmsg="内容标题不能为空！">
                             </div>
                             <div class="col-sm-3 Validform_checktip"></div>
                         </div>
-                        <div class="form-group">
-                            <label for="sortNum" class="col-sm-2 control-label" style="line-height: 30px;">外部链接</label>
+                        <div class="form-group v5-content-outside">
+                            <label for="sortNum" class="col-sm-2 control-label">外部链接</label>
                             <div class="col-sm-10">
-                                <label class="checkbox-inline col-sm-3" style="padding-left: 0px;width: 100px;">
+                                <label class="checkbox-inline col-sm-3">
                                     <select class="form-control" id="outside" name="outside">
                                         <option value="0" <#if (content.outside!0) == 0>selected</#if>>否</option>
                                         <option value="1" <#if (content.outside!0) == 1>selected</#if>>是</option>
@@ -74,18 +74,19 @@
                                 </label>
                                 <label class="checkbox-inline col-sm-5">
                                     <input type="text" class="form-control"
-                                           name="outsideURL" id="outsideURL" value="${content.outsideURL!""}" placeholder="链接地址" ignore="ignore" datatype="url" errormsg="外链地址格式不正确！">
+                                           name="outsideURL" id="outsideURL" value="${content.outsideURL!""}"
+                                           placeholder="链接地址" ignore="ignore" datatype="url" errormsg="外链地址格式不正确！">
                                 </label>
-                                <label class="checkbox-inline" style="width:200px;">
+                                <label class="checkbox-inline vail-message">
                                     <div class="Validform_checktip"></div>
                                 </label>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="sortNum" class="col-sm-2 control-label" style="line-height: 40px;">标题样式</label>
+                        <div class="form-group v5-content-title-style">
+                            <label for="sortNum" class="col-sm-2 control-label">标题样式</label>
                             <div class="col-sm-10">
-                                <label class="checkbox-inline" style="padding-left: 0px;width: 150px;">
-                                    <div class="input-group text-color col-sm-12" style="padding-top: 5px;padding-left: 0px;">
+                                <label class="checkbox-inline title-color">
+                                    <div class="input-group text-color col-sm-12">
                                         <input type="text" id="titleColor" name="titleColor"
                                                value="${content.titleColor!""}"
                                                class="form-control" placeholder="标题颜色">
@@ -94,10 +95,10 @@
                                         </div>
                                     </div>
                                 </label>
-                                <label class="checkbox-inline" style="padding-left: 0px;">
+                                <label class="checkbox-inline plz">
                                     <input type="checkbox" name="titleBold" <#if content.titleBold!0 == 1>checked</#if> value="1"> 加粗
                                 </label>
-                                <label class="checkbox-inline" style="padding-left: 0px;">
+                                <label class="checkbox-inline plz">
                                     <input type="checkbox" name="titleItalic" <#if content.titleItalic!0 == 1>checked</#if> value="1"> 斜体
                                 </label>
                             </div>
@@ -115,17 +116,19 @@
                                 <textarea class="form-control" name="contentDes" id="contentDes" placeholder="文章的简单摘要" rows="4">${content.contentDes!""}</textarea>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="sortNum" class="col-sm-2 control-label" style="line-height: 30px;">作者</label>
+                        <div class="form-group v5-content-author">
+                            <label for="sortNum" class="col-sm-2 control-label">作者</label>
                             <div class="col-sm-10">
-                                <label class="checkbox-inline" style="padding-left: 0px;width: 150px;">
-                                    <input type="text" class="form-control" style="width:150px;" name="author" value="${content.author!""}" id="author" placeholder="作者">
+                                <label class="checkbox-inline author">
+                                    <input type="text" class="form-control w150px" name="author"
+                                           value="${content.author!""}" id="author" placeholder="作者">
                                 </label>
-                                <label class="checkbox-inline" style="width: 150px;">
-                                    <input type="text" class="form-control" style="width:150px;" name="source" id="source" value="${content.source!""}" placeholder="来源">
+                                <label class="checkbox-inline w150px">
+                                    <input type="text" class="form-control w150px" name="source" id="source"
+                                           value="${content.source!""}" placeholder="来源">
                                 </label>
-                                <label class="checkbox-inline" style="width: 300px;">
-                                    <input type="text" class="form-control" style="width:300px;"
+                                <label class="checkbox-inline w300px">
+                                    <input type="text" class="form-control w300px"
                                            name="sourceURL" id="sourceURL" placeholder="来源地址"
                                            ignore="ignore" datatype="url" errormsg="来源地址格式不正确！" value="${content.sourceURL!""}">
                                 </label>
@@ -134,18 +137,15 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="sortNum" class="col-sm-2 control-label" style="line-height: 30px;">是否置顶</label>
+                        <div class="form-group v5-content-stick">
+                            <label for="sortNum" class="col-sm-2 control-label">是否置顶</label>
                             <div class="col-sm-10">
-                                <label class="checkbox-inline col-sm-3" style="padding-left: 0px;width: 100px;">
-                                    <select class="form-control" id="stick" name="stick">
-                                        <option value="0" <#if (content.stick!0) == 0>selected</#if>>否</option>
-                                        <option value="1" <#if (content.stick!0) == 1>selected</#if>>是</option>
-                                    </select>
+                                <label class="checkbox-inline col-sm-1 stick">
+                                    <input type="checkbox" id="stick" name="stick" <#if ((content.stick)!0) == 1>checked</#if> value="${(content.stick)!0}"> &nbsp;置顶
                                 </label>
-                                <label class="checkbox-inline col-sm-4">
+                                <label class="checkbox-inline col-sm-3 stick-num">
                                     <input type="text" class="form-control" name="stickNum" id="stickNum" placeholder="置顶序号"
-                                           ignore="ignore" datatype="n" errormsg="序号必须为数字！" value="${content.stickNum!""}">
+                                           ignore="ignore" datatype="n" errormsg="序号必须为数字！" readonly value="${content.stickNum!""}">
                                 </label>
                                 <label class="checkbox-inline col-sm-3">
                                     <div class="Validform_checktip"></div>
@@ -153,13 +153,14 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="sortNum" class="col-sm-2 control-label" style="padding-top: 15px;">允许评语</label>
+                        <div class="form-group v5-content-comment">
+                            <label for="sortNum" class="col-sm-2 control-label">允许评语</label>
                             <div class="col-sm-5">
-                                <label class="checkbox-inline" style="padding-left: 0px;">
-                                    <input type="checkbox" id="allowComment" name="allowComment" checked value="1"> &nbsp;允许
+                                <label class="checkbox-inline plz">
+                                    <input type="checkbox" id="allowComment" name="allowComment"
+                                           <#if ((content.allowComment)!1) == 1>checked</#if> value="${(content.allowComment)!1}"> &nbsp;允许
                                 </label>
-                                <label class="checkbox-inline" style="padding-left: 0px;width: 420px;">
+                                <label class="checkbox-inline publishdt">
                                     <div class="input-group date date-picker">
                                         <input type="text" class="form-control date-picker" value="${content.publishDT!""}" name="publishDT" placeholder="原内容发布日期">
                                         <div class="input-group-addon">
@@ -190,29 +191,29 @@
         </div><!-- /.row -->
     </section><!-- /.content -->
 </aside><!-- /.right-side -->
-<div class="modal fade" id="addSelectImgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="width:800px;margin-top:100px;">
+<div class="modal fade v5-content-img" id="addSelectImgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <#--<div class="modal-header">-->
                 <#--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
                 <#--<h4 class="modal-title" id="myModalLabel">添加或选择图片</h4>-->
             <#--</div>-->
-            <div class="modal-body" style="padding: 5px 0 0 0;">
-                <div class="nav-tabs-custom" style="margin-bottom: 0px;">
+            <div class="modal-body">
+                <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs pull-right" id="uploadBrowseImage">
                         <li class=""><a data-toggle="tab" href="#tab_1">浏览</a></li>
                         <li class="active"><a data-toggle="tab" href="#tab_2">上传</a></li>
 
-                        <li class="pull-left"><h4 class="modal-title" style="line-height: 35px;margin-left: 10px;">添加或选择图片</h4></li>
+                        <li class="pull-left"><h4 class="modal-title">添加或选择图片</h4></li>
                     </ul>
                     <div class="tab-content">
                         <div id="tab_1" class="tab-pane">
                             <div id="online">
-                                <div id="imageList" style="text-align: center;"><img src="<@spring.url '/res/backstage/images/ajax-loader1.gif'/>"></div>
+                                <div id="imageList"><img src="<@spring.url '/res/backstage/images/ajax-loader1.gif'/>"></div>
                             </div>
                         </div><!-- /.tab-pane -->
                         <div id="tab_2" class="tab-pane active">
-                            <div id="wrapper" style="margin: 0;">
+                            <div id="wrapper">
                                 <div id="container">
                                     <!--头部，相册选择和格式选择-->
 
@@ -239,7 +240,7 @@
                     </div><!-- /.tab-content -->
                 </div>
             </div>
-            <div class="modal-footer" style="margin-top: 0px;">
+            <div class="modal-footer" style="margin-top: 0;">
                 <button type="button" class="btn btn-success">确定</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
@@ -269,6 +270,16 @@
         $('#allowComment').on('ifChanged', function(event){
             var allowComment = $(this).val();
             $(this).val(allowComment == 1 ? 0 : 1);
+        });
+        $('#stick').on('ifChanged', function(event){
+            var stick = $(this).val();
+            if(stick == 1){
+                $(this).val(0);
+                $("#stickNum").attr("readonly","readonly").val(0);
+            }else{
+                $(this).val(1);
+                $("#stickNum").removeAttr("readonly").val("");
+            }
         });
 
         $("#contentForm").Validform({

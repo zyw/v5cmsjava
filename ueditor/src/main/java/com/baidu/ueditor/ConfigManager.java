@@ -3,6 +3,8 @@ package com.baidu.ueditor;
 import com.baidu.ueditor.define.ActionMap;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.HashMap;
@@ -14,6 +16,8 @@ import java.util.Map;
  *
  */
 public final class ConfigManager {
+
+	private final static Logger LOGGER = LoggerFactory.getLogger(ConfigManager.class);
 
 	private final String rootPath;
 	private final String contextPath;
@@ -50,6 +54,7 @@ public final class ConfigManager {
 		try {
 			return new ConfigManager(rootPath, contextPath);
 		} catch ( Exception e ) {
+			LOGGER.error("实例化ConfigManager错误：错误原因：{}",e.getMessage());
 			return null;
 		}
 		
@@ -145,19 +150,26 @@ public final class ConfigManager {
 			JSONObject jsonConfig = new JSONObject( configContent );
 			this.jsonConfig = jsonConfig;
 		} catch ( Exception e ) {
+			LOGGER.error("UEditor配置文件解析错误，错误原因：{}",e.getMessage());
 			this.jsonConfig = null;
 		}
 		
 	}
 	
 	private String getConfigPath () {
-		String config = this.getClass().getResource("/").toString().replace("file:/","");
+		String osName = System.getProperty("os.name").toLowerCase();
+		String config;
+		if(osName.contains("windows")){
+			config = this.getClass().getResource("/").toString().replace("file:/","");
+		} else {
+			config = this.getClass().getResource("/").toString().replace("file:","");
+		}
 		return config + "config" + File.separator + ConfigManager.configFileName;
 	}
 
-	private String[] getArray ( String key ) {
+	private String[] getArray(String key ) {
 		
-		JSONArray jsonArray = this.jsonConfig.getJSONArray( key );
+		JSONArray jsonArray = this.jsonConfig.getJSONArray(key);
 		String[] result = new String[ jsonArray.length() ];
 		
 		for ( int i = 0, len = jsonArray.length(); i < len; i++ ) {
@@ -186,7 +198,7 @@ public final class ConfigManager {
 			bfReader.close();
 			
 		} catch ( UnsupportedEncodingException e ) {
-			// 忽略
+			LOGGER.error("UEditor读取配置文件错误，错误原因：{}",e.getMessage());
 		}
 		
 		return this.filter( builder.toString() );
