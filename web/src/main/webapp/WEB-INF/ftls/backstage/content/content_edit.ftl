@@ -144,7 +144,7 @@
                                     <input type="checkbox" id="stick" name="stick" <#if ((content.stick)!0) == 1>checked</#if> value="${(content.stick)!0}"> &nbsp;置顶
                                 </label>
                                 <label class="checkbox-inline col-sm-3 stick-num">
-                                    <input type="text" class="form-control" name="stickNum" id="stickNum" placeholder="置顶序号"
+                                    <input type="text" class="form-control" name="stickNum" id="stickNum" placeholder="置顶序号，越大越靠前。"
                                            ignore="ignore" datatype="n" errormsg="序号必须为数字！" readonly value="${content.stickNum!""}">
                                 </label>
                                 <label class="checkbox-inline col-sm-3">

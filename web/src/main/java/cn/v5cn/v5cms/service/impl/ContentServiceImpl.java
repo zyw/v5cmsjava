@@ -97,8 +97,8 @@ public class ContentServiceImpl implements ContentService {
                 return criteriaBuilder.and(ps.toArray(new Predicate[ps.size()]));
             }
         }, new PageRequest(currPage - 1, maxSize,
-                new Sort(new Sort.Order(Sort.Direction.ASC,"stickNum"),new Sort.Order(Sort.Direction.DESC, "lastdt"))));
-
+                new Sort(Sort.Direction.DESC,"stickNum","lastdt")));
+        //new Sort(new Sort.Order(Sort.Direction.ASC,"stickNum"),new Sort.Order(Sort.Direction.DESC, "lastdt"))
         return contentPage;
     }
 
