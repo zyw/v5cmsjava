@@ -46,7 +46,7 @@ public class JCaptchaValidateFilter extends AccessControlFilter {
         //3、此时是表单提交，验证验证码是否正确
         String captchaSession = (String)httpRequest.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
 
-        return captchaSession.equalsIgnoreCase(httpRequest.getParameter(jcaptchaParam));
+        return (httpRequest.getParameter(jcaptchaParam)).equalsIgnoreCase(captchaSession);
     }
 
     @Override

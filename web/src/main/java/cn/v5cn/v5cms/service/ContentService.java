@@ -9,6 +9,15 @@ import java.util.List;
  * Created by ZYW on 2014/11/19.
  */
 public interface ContentService {
+
+    /**
+     * ==============================================================
+     *
+     * 通用方法
+     *
+     * ==============================================================
+     **/
+    Content findOne(Long contentId);
     /**
      * ==============================================================
      *
@@ -18,9 +27,6 @@ public interface ContentService {
      **/
     Content save(Content content);
     Page<Content> findContentPageable(Content content,Integer currPage);
-
-    Content findOne(Long contentId);
-
     /**
      * ==============================================================
      *

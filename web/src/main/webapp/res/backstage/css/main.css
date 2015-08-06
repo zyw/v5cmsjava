@@ -107,6 +107,14 @@
     color: #ff0000;
 }
 /** 内容编辑页 **/
+.v5-content-column #columnTreeDiv {
+    width:94.6%;
+    background:#fff;
+    display:none;
+    position: absolute;
+    border: 1px #c0c0c0 solid;
+    z-index: 9999;
+}
 .v5-content-outside .control-label {
     line-height: 30px;
 }
@@ -144,6 +152,9 @@
 }
 .v5-content-author .w300px {
     width: 300px;
+}
+.v5-content-author .w200px {
+    width: 200px;
 }
 .v5-content-stick .control-label {
     line-height: 30px;

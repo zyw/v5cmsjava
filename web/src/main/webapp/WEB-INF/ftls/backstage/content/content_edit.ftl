@@ -43,13 +43,13 @@
                     <form id="contentForm" action="<@spring.url '/manager/content/edit'/>" class="form-horizontal" role="form" method="POST">
                         <input type="hidden" name="contentId" value="${content.contentId!""}">
                         <input type="hidden" name="state" id="content_state" value="${content.state!""}">
-                        <div class="form-group has-feedback">
+                        <div class="form-group has-feedback v5-content-column">
                             <label class="col-sm-2 control-label">栏目 <span class="v5-required">*</span></label>
                             <div class="col-sm-4">
                                 <input type="text" id="columnTreeInput" class="form-control" value="${(content.column.columnName)!""}" datatype="*" nullmsg="栏目类型不能为空！" readonly>
                                 <input type="hidden" id="columnId" name="column.colsId" value="${(content.column.colsId)!""}">
                                 <span class="glyphicon glyphicon-chevron-down form-control-feedback" aria-hidden="true"></span>
-                                <div id="columnTreeDiv" style="width:94.6%;background:#fff;display:none;position: absolute;border: 1px #c0c0c0 solid;z-index: 9999;">
+                                <div id="columnTreeDiv">
                                     <ul id="columnTree" class="ztree"></ul>
                                 </div>
                             </div>
@@ -132,7 +132,7 @@
                                            name="sourceURL" id="sourceURL" placeholder="来源地址"
                                            ignore="ignore" datatype="url" errormsg="来源地址格式不正确！" value="${content.sourceURL!""}">
                                 </label>
-                                <label class="checkbox-inline" style="width:200px;">
+                                <label class="checkbox-inline w200px">
                                     <div class="Validform_checktip"></div>
                                 </label>
                             </div>
@@ -141,11 +141,12 @@
                             <label for="sortNum" class="col-sm-2 control-label">是否置顶</label>
                             <div class="col-sm-10">
                                 <label class="checkbox-inline col-sm-1 stick">
-                                    <input type="checkbox" id="stick" name="stick" <#if ((content.stick)!0) == 1>checked</#if> value="${(content.stick)!0}"> &nbsp;置顶
+                                    <input type="checkbox" id="stickCheckbox" <#if ((content.stick)!0) == 1>checked</#if>> &nbsp;置顶
+                                    <input type="hidden" id="stick" name="stick" value="${(content.stick)!0}">
                                 </label>
                                 <label class="checkbox-inline col-sm-3 stick-num">
                                     <input type="text" class="form-control" name="stickNum" id="stickNum" placeholder="置顶序号，越大越靠前。"
-                                           ignore="ignore" datatype="n" errormsg="序号必须为数字！" readonly value="${content.stickNum!""}">
+                                           ignore="ignore" datatype="n" errormsg="序号必须为数字！" readonly value="${(content.stickNum)!0}">
                                 </label>
                                 <label class="checkbox-inline col-sm-3">
                                     <div class="Validform_checktip"></div>
@@ -157,8 +158,9 @@
                             <label for="sortNum" class="col-sm-2 control-label">允许评语</label>
                             <div class="col-sm-5">
                                 <label class="checkbox-inline plz">
-                                    <input type="checkbox" id="allowComment" name="allowComment"
-                                           <#if ((content.allowComment)!1) == 1>checked</#if> value="${(content.allowComment)!1}"> &nbsp;允许
+                                    <input type="checkbox" id="allowCommentCheckbox"
+                                           <#if ((content.allowComment)!1) == 1>checked</#if>> &nbsp;允许
+                                    <input type="hidden" id="allowComment" name="allowComment" value="${(content.allowComment)!1}">
                                 </label>
                                 <label class="checkbox-inline publishdt">
                                     <div class="input-group date date-picker">
@@ -267,17 +269,17 @@
             language: "zh-CN"
         });
 
-        $('#allowComment').on('ifChanged', function(event){
-            var allowComment = $(this).val();
-            $(this).val(allowComment == 1 ? 0 : 1);
+        $('#allowCommentCheckbox').on('ifChanged', function(event){
+            var allowComment = $("#allowComment").val();
+            $("#allowComment").val(allowComment == 1 ? 0 : 1);
         });
-        $('#stick').on('ifChanged', function(event){
-            var stick = $(this).val();
+        $('#stickCheckbox').on('ifChanged', function(event){
+            var stick = $("#stick").val();
             if(stick == 1){
-                $(this).val(0);
+                $("#stick").val(0);
                 $("#stickNum").attr("readonly","readonly").val(0);
             }else{
-                $(this).val(1);
+                $("#stick").val(1);
                 $("#stickNum").removeAttr("readonly").val("");
             }
         });
