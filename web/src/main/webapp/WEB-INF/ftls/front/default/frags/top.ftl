@@ -31,7 +31,6 @@
     </div>
     <!-- S top-toolbar -->
 
-
     <#--
     <#list columns as column>
     ${column.columnName} ---- ${column.colsId}<br/>

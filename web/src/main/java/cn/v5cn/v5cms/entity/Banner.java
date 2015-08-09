@@ -13,6 +13,7 @@ public class Banner implements Serializable {
     private Long bannerId;
     private String bannerName;          //banner名称
     private String bannerPic;           //banner图片
+    private String bannerLink;          //banner跳转链接
     private Integer isstart;            //是否启用，1：启用，0：不启用
     private Integer bannerds;           //banner显示顺序
     private String bcontent;            //设置banner上显示的文本
@@ -43,6 +44,14 @@ public class Banner implements Serializable {
         this.bannerPic = bannerPic;
     }
 
+    public String getBannerLink() {
+        return bannerLink;
+    }
+
+    public void setBannerLink(String bannerLink) {
+        this.bannerLink = bannerLink;
+    }
+
     public Integer getIsstart() {
         return isstart;
     }
@@ -65,5 +74,18 @@ public class Banner implements Serializable {
 
     public void setBcontent(String bcontent) {
         this.bcontent = bcontent;
+    }
+
+    @Override
+    public String toString() {
+        return "Banner{" +
+                "bannerId=" + bannerId +
+                ", bannerName='" + bannerName + '\'' +
+                ", bannerPic='" + bannerPic + '\'' +
+                ", bannerLink='" + bannerLink + '\'' +
+                ", isstart=" + isstart +
+                ", bannerds=" + bannerds +
+                ", bcontent='" + bcontent + '\'' +
+                '}';
     }
 }

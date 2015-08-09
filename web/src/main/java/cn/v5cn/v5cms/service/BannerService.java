@@ -9,5 +9,6 @@ import org.springframework.data.domain.Page;
 public interface BannerService {
 
     Page<Banner> findBannerPageable(Banner banner,Integer currPage);
+    Banner findOne(Long bannerId);
 
 }

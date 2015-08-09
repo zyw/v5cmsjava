@@ -43,4 +43,15 @@ public class BannerController {
         modelMap.addAttribute("pagination", SystemUtils.pagination(result, HttpUtils.getContextPath(request) + "/manager/banner/list"));
         return "setting/banner_list";
     }
+
+    @RequestMapping(value = "/edit/{bannerId}",method = RequestMethod.GET)
+    public String linkEdit(@PathVariable Long bannerId,ModelMap modelMap){
+        if(bannerId == null || bannerId == 0){
+            modelMap.addAttribute(new Banner());
+            return "setting/banner_edit";
+        }
+        Banner banner = bannerService.findOne(bannerId);
+        modelMap.addAttribute(banner);
+        return "setting/banner_edit";
+    }
 }

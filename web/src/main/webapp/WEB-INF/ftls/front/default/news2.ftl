@@ -5,13 +5,13 @@
     <meta name="keywords" content="${frontSite.siteKey!""}" />
     <meta name="description" content="${frontSite.siteDescribed!""}" />
     <title>${(frontSite.siteName)!""} - ${(column.columnName)}</title>
-	<#include "./frags/header.html"/>
+	<#include "frags/header.ftl"/>
 </head>
 
 <body>
 <div id="wrapper">
 
-	<#include "./frags/top.html"/>
+	<#include "frags/top.ftl"/>
     
     <!-- ==================== S Header ==================== -->
     <div class="Header">		
@@ -139,23 +139,8 @@
 	                                    </div>
 	                                </div>
 	                                <!-- E article-list-item -->
-	                                
-	                                <!-- S pagination -->
-	                                <div class="pagination pagination-default">
-	                                    <span title="首页" class="page_first disabled">首页</span>
-	                                    <span title="上一页" class="page_prev disabled">上一页</span>
-	                                    <span class="current">1</span>
-	                                    <a href="#?page=2">2</a>
-	                                    <a href="#?page=3">3</a>
-	                                    <a href="#?page=4">4</a>
-	                                    <a href="#?page=5">5</a>
-	                                    ...
-	                                    <a href="#?page=199">199</a>
-	                                    <a href="#?page=200">200</a>
-	                                    <a title="下一页" href="#?page=2" class="page_next">下一页</a>
-	                                    <a title="末页" href="#?page=200" class="page_last">末页</a>
-	                                </div>
-	                                <!-- E pagination -->
+
+									<#include "frags/pagination.ftl"/>
 	                                
 	                            </div>
 	                            <!-- E article -->
@@ -199,7 +184,7 @@
     </div>
     <!-- ==================== E ContentArea ==================== -->
 
-	<#include './frags/footer.html'/>
+	<#include 'frags/footer.ftl'/>
     
 </div>
 </body>

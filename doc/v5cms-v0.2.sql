@@ -84,6 +84,7 @@ create table banner
   bannerId bigInt not null AUTO_INCREMENT ,
   bannerName  varchar(200) not null      comment 'banner名称',
   bannerPic   varchar(1000) not null     comment 'banner图片',
+  bannerLink  varchar(200)               comment 'banner跳转链接',
   bannerds    int                        comment 'banner显示顺序',
   isstart     int  default 0             comment '是否启用，1：启用，0：不启用',
   bcontent    text                       comment '设置banner上显示的文本',

@@ -51,4 +51,9 @@ public class BannerServiceImpl implements BannerService {
             }
         },new PageRequest(currPage-1,pageSize,new Sort(Sort.Direction.ASC,"bannerds")));
     }
+
+    @Override
+    public Banner findOne(Long bannerId) {
+        return bannerDao.findOne(bannerId);
+    }
 }

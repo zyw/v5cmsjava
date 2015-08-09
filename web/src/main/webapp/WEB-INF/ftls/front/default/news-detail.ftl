@@ -6,13 +6,13 @@
     <meta name="keywords" content="${(content.contentKey)!""}" />
     <meta name="description" content="${(content.contentDes)!""}" />
     <title>${(frontSite.siteName)!""} - ${(content.cname)!""}</title>
-<#include "./frags/header.html"/>
+<#include "frags/header.ftl"/>
 </head>
 
 <body>
 <div id="wrapper">
 
-	<#include "./frags/top.html"/>
+	<#include "frags/top.ftl"/>
     
     <!-- ==================== S Header ==================== -->
     <div class="Header">		
@@ -84,9 +84,7 @@
                     <!-- -->
                 </div>
                 <!-- E main-cont -->
-                
-                
-                
+
             </div>
             <!-- E Main -->
         
@@ -123,7 +121,7 @@
     </div>
     <!-- ==================== E ContentArea ==================== -->
 
-	<#include './frags/footer.html'/>
+	<#include 'frags/footer.ftl'/>
     
 </div>
 </body>
