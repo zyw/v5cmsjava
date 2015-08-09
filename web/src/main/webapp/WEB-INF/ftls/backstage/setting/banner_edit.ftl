@@ -12,7 +12,7 @@
         <ol class="breadcrumb">
             <li><a href="<@spring.url '/manager/index'/>"><i class="fa fa-dashboard"></i> 首页</a></li>
             <li>站点设置</li>
-            <li><a href="<@spring.url '/manager/advpos/list'/>">Banner管理</a></li>
+            <li><a href="<@spring.url '/manager/banner/list/1'/>">Banner管理</a></li>
             <li class="active">${page_title!"添加Banner"}</li>
         </ol>
     </section>
@@ -51,13 +51,17 @@
                             <div class="col-sm-4">
                                 <input type="hidden" id="bannerPic" name="bannerPic" value="${banner.bannerPic!""}">
                                 <div id="bannerImageUpload"><i class="fa fa-cloud-upload"></i> Banner图片上传</div>
+
+                                <div class="banner-img-preview">
+                                    <img id="bannerImg" width="100%">
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="dvPosName" class="col-sm-2 control-label">Banner地址</label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" name="bannerLink" id="bannerLink"
-                                       placeholder="Banner地址" value="${banner.bannerLink!"http://"}" datatype="url" nullmsg="Banner地址不能为空！"
+                                       placeholder="Banner地址，例如：http://www.expleme.com" value="${banner.bannerLink!""}" ignore="ignore" datatype="url"
                                        errormsg="Banner地址格式不正确！"/>
                                 <span class="help-block">设置Banner地址，必须以http://或者https://开头。</span>
                             </div>
@@ -87,13 +91,10 @@
                         <div class="form-group">
                             <label for="columnName" class="col-sm-2 control-label">显示文本</label>
                             <div class="col-sm-5">
-                                <textarea class="form-control" name="contentDes" id="contentDes" placeholder="Banner显示的文本" rows="4">${banner.bcontent!""}</textarea>
+                                <textarea class="form-control" name="bcontent" id="bcontent" placeholder="Banner显示的文本" rows="6">${banner.bcontent!""}</textarea>
                             </div>
                         </div>
                     </form>
-                    <div class="link-img-preview">
-                        <img id="bannerImg" width="100%">
-                    </div>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
         </div><!-- /.row -->

@@ -19,6 +19,8 @@ public class SystemConstant {
 
     public static final String LINK_RES_PATH = "/res/uploads/{siteId}/linkfiles";
 
+    public static final String BANNER_RES_PATH = "/res/uploads/{siteId}/bannerfiles";
+
     public static final String SITE_TEMPLATE_PATH = "/WEB-INF/ftls/front/";
 
 

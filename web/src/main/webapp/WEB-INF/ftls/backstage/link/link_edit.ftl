@@ -12,7 +12,7 @@
         <ol class="breadcrumb">
             <li><a href="<@spring.url '/manager/index'/>"><i class="fa fa-dashboard"></i> 首页</a></li>
             <li>站点设置</li>
-            <li><a href="<@spring.url '/manager/advpos/list'/>">链接管理</a></li>
+            <li><a href="<@spring.url '/manager/link/list/1'/>">链接管理</a></li>
             <li class="active">${page_title!"添加链接"}</li>
         </ol>
     </section>

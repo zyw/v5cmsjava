@@ -56,4 +56,19 @@ public class BannerServiceImpl implements BannerService {
     public Banner findOne(Long bannerId) {
         return bannerDao.findOne(bannerId);
     }
+
+    @Override
+    public Banner save(Banner banner) {
+        return bannerDao.save(banner);
+    }
+
+    @Override
+    public void deleteInBatch(Iterable<Banner> banners) {
+        bannerDao.deleteInBatch(banners);
+    }
+
+    @Override
+    public List<Banner> findAll(Long[] bannerIds) {
+        return bannerDao.findAll(Lists.newArrayList(bannerIds));
+    }
 }
