@@ -333,7 +333,7 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="active">
-                    <a href="<@spring.url "/manager/content/edit"/>">
+                    <a href="<@spring.url "/manager/index"/>">
                         <i class="fa fa-dashboard"></i> <span>仪表盘</span>
                     </a>
                 </li>

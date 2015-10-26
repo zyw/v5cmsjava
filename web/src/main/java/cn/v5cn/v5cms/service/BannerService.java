@@ -10,6 +10,15 @@ import java.util.List;
  */
 public interface BannerService {
 
+
+    /**
+     * ==============================================================
+     *
+     * 后端方法
+     *
+     * ==============================================================
+     **/
+
     Page<Banner> findBannerPageable(Banner banner,Integer currPage);
     Banner findOne(Long bannerId);
 
@@ -19,4 +28,14 @@ public interface BannerService {
 
     List<Banner> findAll(Long[] bannerIds);
 
+
+    /**
+     * ==============================================================
+     *
+     * 前端方法
+     *
+     * ==============================================================
+     **/
+
+    Page<Banner> findBannerByMaxSize(int maxSize);
 }

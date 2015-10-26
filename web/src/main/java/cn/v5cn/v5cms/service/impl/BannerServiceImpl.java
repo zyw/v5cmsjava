@@ -24,6 +24,13 @@ public class BannerServiceImpl implements BannerService {
     @Autowired
     private BannerDao bannerDao;
 
+    /**
+     * ==============================================================
+     *
+     * 后端方法
+     *
+     * ==============================================================
+     **/
     @Override
     public Page<Banner> findBannerPageable(final Banner banner, Integer currPage) {
 
@@ -70,5 +77,33 @@ public class BannerServiceImpl implements BannerService {
     @Override
     public List<Banner> findAll(Long[] bannerIds) {
         return bannerDao.findAll(Lists.newArrayList(bannerIds));
+    }
+
+
+    /**
+     * ==============================================================
+     *
+     * 前端方法
+     *
+     * ==============================================================
+     **/
+    @Override
+    public Page<Banner> findBannerByMaxSize(final int maxSize) {
+        return bannerDao.findAll(new Specification<Banner>(){
+
+            @Override
+            public Predicate toPredicate(Root<Banner> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+
+                List<Predicate> ps = Lists.newArrayList();
+
+                Path<Integer> isstart = root.get("isstart");
+
+                ps.add(criteriaBuilder.equal(isstart,1));
+
+                //criteriaBuilder.conjunction();  创建一个AND
+                //criteriaBuilder.disjunction();  创建一个OR
+                return ps.size() == 0 ? criteriaBuilder.conjunction():criteriaBuilder.or(ps.toArray(new Predicate[ps.size()]));
+            }
+        },new PageRequest(0,maxSize,new Sort(Sort.Direction.ASC,"bannerds")));
     }
 }

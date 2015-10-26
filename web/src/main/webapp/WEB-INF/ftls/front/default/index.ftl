@@ -26,6 +26,21 @@
                     	<div class="full-page">                        	
 			                <div class="slideshow carousel clearfix">
 			                    <div id="slideshow-01">
+									<@v5cms.banner maxSize=3></@v5cms.banner>
+									<#list banners as banner>
+										<div class="carousel-item">
+											<a class="carousel-img" href="javascript:;" style="background:url(<@spring.url '/${banner.bannerPic}'/>) no-repeat top center;">
+												<img width="1000" height="440" alt="" src="<@spring.url '/${banner.bannerPic}'/>">
+											</a>
+											<div class="carousel-info">
+												<div class="carousel-info-inner">
+													<h4><a href="#">小米手机3 TD--------${banner.bannerName}</a></h4>
+													<p>迄今为止最快的小米手机，顶级双平台全球首发</p>
+												</div>
+											</div>
+										</div>
+									</#list>
+
 			                        <div class="carousel-item">
 			                            <a class="carousel-img" href="javascript:;" style="background:url(<@spring.url '/res/front/${frontSite.themeName!"default"}/images/upload/banner-01.jpg'/>) no-repeat top center;">
                                             <img width="1000" height="440" alt="" src="<@spring.url '/res/front/${frontSite.themeName!"default"}/images/upload/banner-01.jpg'/>">

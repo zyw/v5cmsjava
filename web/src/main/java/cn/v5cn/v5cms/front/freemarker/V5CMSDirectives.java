@@ -15,5 +15,7 @@ public class V5CMSDirectives extends SimpleHash {
         put("column", new ColumnDirective());
 
         put("content",new ContentDirective());
+
+        put("banner",new BannerDirective());
     }
 }
