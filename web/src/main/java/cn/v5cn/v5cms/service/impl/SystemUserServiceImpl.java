@@ -52,4 +52,14 @@ public class SystemUserServiceImpl implements SystemUserService {
 
         return users;
     }
+
+    @Override
+    public SystemUser save(SystemUser user) {
+        return systemUserDao.save(user);
+    }
+
+    @Override
+    public SystemUser findOne(Long id) {
+        return systemUserDao.findOne(id);
+    }
 }

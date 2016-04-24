@@ -132,7 +132,7 @@
     $(function(){
         $("#user_auth").imitClick();
         $("#addUser").click(function(){
-            location.href="<@spring.url '/manager/coltype/edit/0'/>";
+            location.href="<@spring.url '/manager/user/edit/0'/>";
         });
         $("#thcheckbox").on('ifChecked', function(event){
             $('.table-cb').iCheck('check');

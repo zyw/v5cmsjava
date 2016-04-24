@@ -9,4 +9,7 @@ import org.springframework.data.domain.Page;
 public interface SystemUserService {
     SystemUser findByLoginname(String loginname);
     Page<SystemUser> findUserByUserNamePageable(SystemUser user,Integer currPage);
+
+    SystemUser save(SystemUser user);
+    SystemUser findOne(Long id);
 }

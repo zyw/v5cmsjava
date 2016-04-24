@@ -278,6 +278,16 @@
     border: 3px solid #1094fa;
     background-position: 72px 72px;
 }
+
+#originalPicImageUpload .webuploader-pick,
+#originalPicImageUpload .webuploader-pick-hover {
+    background-color: #FFFFFF;
+}
+.upload-img {
+    width: 80px;
+    box-shadow: #2aabd2;
+}
+
 /*Fancybox
 ------------------------------------*/
 /*For Topbar*/

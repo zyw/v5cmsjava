@@ -27,7 +27,7 @@ public class IndexController {
     @Autowired
     private SiteService siteService;
 
-    @RequestMapping(value = "/index",method = RequestMethod.GET)
+    @RequestMapping(value = {"/","/index"},method = RequestMethod.GET)
     public String index(HttpSession session){
 
         LOGGER.info("站点信息初始化成功！");
