@@ -12,4 +12,6 @@ public interface SystemUserService {
 
     SystemUser save(SystemUser user);
     SystemUser findOne(Long id);
+
+    void deleteUsers(Long[] userIds);
 }

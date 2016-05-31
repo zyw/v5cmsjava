@@ -62,4 +62,16 @@ public class SystemUserServiceImpl implements SystemUserService {
     public SystemUser findOne(Long id) {
         return systemUserDao.findOne(id);
     }
+
+    @Override
+    public void deleteUsers(Long[] userIds) {
+        List<SystemUser> systemUsers = Lists.newArrayList();
+        SystemUser systemUser = null;
+        for(Long userId : userIds){
+            systemUser = new SystemUser();
+            systemUser.setId(userId);
+            systemUsers.add(systemUser);
+        }
+        systemUserDao.delete(systemUsers);
+    }
 }

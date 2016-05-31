@@ -81,23 +81,35 @@ public class SystemUserController {
             return ImmutableMap.<String, Object>builder().putAll(errorMessage).build();
         }
 
-        //TODO 修改提示语为用户添加
         if(user.getId() == null || user.getId() == 0){
             SystemUser result = systemUserService.save(user);
             if(result == null || result.getId() == null || result.getId() == 0){
                 LOGGER.warn("添加用户失败，用户{}",result);
-                return ImmutableMap.<String, Object>of("status","0","message",getMessage("link.addfailed.message"));
+                return ImmutableMap.<String, Object>of("status","0","message",getMessage("user.addfailed.message"));
             }
             LOGGER.info("用户添加成功，用户ID{}",result.getId());
-            return ImmutableMap.<String, Object>of("status","1","message",getMessage("link.addsuccess.message"));
+            return ImmutableMap.<String, Object>of("status","1","message",getMessage("user.addsuccess.message"));
         }
         try {
             systemUserService.save(user);
         } catch (Exception e) {
             LOGGER.error("用户修改失败,{}", e);
-            return ImmutableMap.<String, Object>of("status","0","message",getMessage("link.updatefailed.message"));
+            return ImmutableMap.<String, Object>of("status","0","message",getMessage("user.updatefailed.message"));
         }
         LOGGER.info("用户修改成功,{}", user);
-        return ImmutableMap.<String, Object>of("status","1","message",getMessage("link.updatesuccess.message"));
+        return ImmutableMap.<String, Object>of("status","1","message",getMessage("user.updatesuccess.message"));
+    }
+    @ResponseBody
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    public ImmutableMap<String,String> deleteUser(Long[] userIds){
+        LOGGER.info("删除用户，ID为{}",userIds);
+        try {
+            systemUserService.deleteUsers(userIds);
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.error("删除用户嘻信息失败，ID为{}",userIds);
+            return ImmutableMap.of("status","0","message",getMessage("user.deletefailed.message"));
+        }
+        return ImmutableMap.of("status","1","message",getMessage("user.deletesuccess.message"));
     }
 }

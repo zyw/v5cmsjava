@@ -142,7 +142,7 @@
         });
        function deleteUser(userIds) {
              $.v5cms.confirm({icon:"question",content:"您确定要删除用户吗，删除后将不能恢复？",width:350,ok:function(){
-                 var url = "<@spring.url '/manager/coltype/delete'/>";
+                 var url = "<@spring.url '/manager/user/delete'/>";
                  $.ajax({
                      dataType:'json',
                      type:'POST',
