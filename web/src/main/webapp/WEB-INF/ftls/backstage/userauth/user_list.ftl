@@ -118,7 +118,6 @@
                         </tr>
                         </#if>
                         </tbody>
-
                     </table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
