@@ -238,6 +238,7 @@ CREATE TABLE system_res (
   pids varchar(100)       comment 'TreeTable排序',
   TYPE INT(1) DEFAULT '2' COMMENT '1 菜单 2 按钮',
   available INT DEFAULT 1 COMMENT '1 可用 0 不可用',
+  createAt datetime DEFAULT CURRENT_TIMESTAMP comment '创建时间',
   des VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (id)
 ) ENGINE=INNODB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
@@ -249,8 +250,10 @@ CREATE TABLE system_role (
   pid BIGINT DEFAULT '0',
   des VARCHAR(55) DEFAULT NULL,
   available INT DEFAULT 1 COMMENT '1 可用 0 不可用',
+  createAt datetime DEFAULT CURRENT_TIMESTAMP comment '创建时间',
   PRIMARY KEY (id)
 ) ENGINE=INNODB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE SYSTEM_USER
 (
@@ -266,6 +269,7 @@ CREATE TABLE SYSTEM_USER
 	lastLoginTime        DATETIME								COMMENT '最后登录时间',
 	originalPic          VARCHAR(200)							COMMENT '头像',
 	available INT(1) DEFAULT '1' COMMENT '#1 不在线 2.封号状态 ',
+	createAt datetime DEFAULT CURRENT_TIMESTAMP comment '创建时间',
 	PRIMARY KEY (id)
 )ENGINE=INNODB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
 

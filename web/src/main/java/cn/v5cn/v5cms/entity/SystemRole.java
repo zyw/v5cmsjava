@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -18,6 +19,7 @@ public class SystemRole implements Serializable {
     private Long pid;
     private String des;
     private Integer available;
+    private Date createAt;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -69,6 +71,14 @@ public class SystemRole implements Serializable {
         this.available = available;
     }
 
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
 
     private Set<SystemRes> reses = Sets.newHashSet();
 

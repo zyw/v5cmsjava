@@ -103,6 +103,9 @@
                                 "<small class='badge bg-red'>禁用</small>")}
                                 </td>
                                 <td>
+                                    <a href="<@spring.url '/manager/user/edit/'/>${user.id}" class="btn btn-primary btn-xs" data-toggle="tooltip" title="分配角色">
+                                        <i class="fa fa-shield"></i>
+                                    </a>&nbsp;&nbsp;
                                     <a href="<@spring.url '/manager/user/edit/'/>${user.id}" class="btn btn-primary btn-xs" data-toggle="tooltip" title="修改用户">
                                         <i class="fa fa-edit"></i>
                                     </a>&nbsp;&nbsp;

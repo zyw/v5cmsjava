@@ -24,6 +24,7 @@ public class SystemUser implements Serializable {
     private Date lastLoginTime;    //最后登录时间',
     private String originalPic;      //头像',
     private Integer available;             //#1 不在线 2.封号状态 ',
+    private Date createAt;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -121,6 +122,14 @@ public class SystemUser implements Serializable {
 
     public void setAvailable(Integer available) {
         this.available = available;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
     }
 
     @Override

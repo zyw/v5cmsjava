@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -24,6 +24,7 @@ public class SystemRes implements Serializable {
     private Integer type;       //1 菜单 2 按钮
     private Integer available;  //1 可用 0 不可用
     private String des;
+    private Date createAt;
 
 //    private List<SystemRes> children;
 
@@ -117,6 +118,14 @@ public class SystemRes implements Serializable {
 
     public void setDes(String des) {
         this.des = des;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
     }
 
     /*public boolean getIsParent() {
