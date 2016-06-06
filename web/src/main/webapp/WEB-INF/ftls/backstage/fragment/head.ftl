@@ -389,7 +389,7 @@
                     </a>
                 </li>
                 <li id="resource_columns">
-                    <a href="<@spring.url '/manager/resource/list'/>">
+                    <a href="<@spring.url '/manager/resource/view'/>">
                         <i class="fa fa-paste"></i> <span>资源管理</span>
                     </a>
                 </li>

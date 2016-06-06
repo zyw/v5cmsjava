@@ -5,6 +5,7 @@ import cn.v5cn.v5cms.entity.wrapper.ZTreeFileNode;
 import cn.v5cn.v5cms.entity.wrapper.ZTreeNode;
 import cn.v5cn.v5cms.util.PropertyUtils;
 import com.google.common.base.Splitter;
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import org.apache.commons.io.FileUtils;
@@ -38,11 +39,16 @@ import static cn.v5cn.v5cms.util.MessageSourceHelper.getMessage;
 public class ResourceController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ResourceController.class);
 
+    @RequestMapping(value = "/view",method = RequestMethod.GET)
+    public String resWapperView(){
+        return "resource/resource";
+    }
+
     @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
     public String resourceView(String path,HttpServletRequest request,ModelMap modelMap) throws IOException {
         String resPath = PropertyUtils.getValue("tpl.res.path").or("/res/front");
         String realResPath = request.getSession().getServletContext().getRealPath(resPath);
-        if(path == null){
+        if(Strings.isNullOrEmpty(path)){
             List<FileInfo> fileInfos = fileInfos(new File(realResPath),realResPath);
             modelMap.put("files",fileInfos);
             modelMap.put("path","/");

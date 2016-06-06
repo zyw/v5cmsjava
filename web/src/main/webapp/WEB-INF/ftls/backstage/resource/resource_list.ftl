@@ -1,163 +1,103 @@
-<#include "../fragment/head.ftl">
-<!-- Right side column. Contains the navbar and content of the page -->
-<aside class="right-side">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1>
-            资源管理
-            <small>Control panel</small>
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
-            <li class="active">资源列表</li>
-        </ol>
-    </section>
+<#import "/spring.ftl" as spring/>
+<div class="box box-info">
+    <div class="box-header">
+        <!-- tools box -->
+        <div class="pull-right box-tools">
+            <button id="createFolder" class="btn btn-success btn-sm" data-toggle="tooltip" title="新建文件夹">
+                <i class="fa fa-folder-open"></i> 新建文件夹</button>
+            <button id="addResource" class="btn btn-success btn-sm" data-toggle="tooltip" title="添加资源">
+                <i class="fa fa-plus"></i> 添加资源</button>
+            <button id="fileBatchDelete" class="btn btn-warning btn-sm" data-toggle="tooltip" title="批量删除">
+                <i class="fa fa-trash-o"></i> 批量删除</button>
+        </div><!-- /. tools -->
+        <i class="fa fa-table"></i>
+        <h3 class="box-title">资源列表&nbsp;
+            <small style="font-size:6px;">
+                <#if fileName == "front">
+                    资源根目录
+                <#else>
+                    ${fileName!"资源根目录"}
+                </#if>
+            </small>
+        </h3>
+    </div><!-- /.box-header -->
+    <div class="box-body table-responsive">
+        <table class="table table-hover table-bordered table-striped">
+            <colgroup>
+                <col class="col-xs-1 v5-col-xs-1">
+                <col class="col-xs-2">
+                <col class="col-xs-1">
+                <col class="col-xs-1">
+                <col class="col-xs-2">
+                <col class="col-xs-2">
+            </colgroup>
+            <thead>
+            <tr>
+                <th class="td-center">
+                    <input type="checkbox" id="thcheckbox" value="on"/>
+                </th>
+                <th>名称</th>
+                <th>类型</th>
+                <th>大小</th>
+                <th>最后修改</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <#if files?size != 0>
+                <#list files as file>
+                <tr>
+                    <td class="td-center">
+                        <input type="checkbox" class="table-cb" value="${file.id!""}"/>
+                    </td>
+                    <td>${file.name!""}</td>
+                    <td>
+                        <#if file.type == "文件">
+                            <small class="badge bg-light-blue">${file.type!""}</small>
+                        <#else>
+                            <small class="badge bg-info">${file.type!""}</small>
+                        </#if>
+                    </td>
+                    <td>${file.size!""}</td>
+                    <td>${file.modifyDate!""}</td>
+                    <td>
+                        <#if file.type == "文件夹">
+                            <a href="javascript:;" data-resourceid="${file.id!""}" class="btn btn-success btn-xs create-folder" data-toggle="tooltip" title="创建文件夹">
+                                <i class="fa fa-folder-open"></i>
+                            </a>&nbsp;&nbsp;
+                            <#--<a href="javascript:;" class="btn btn-success btn-xs" data-toggle="tooltip" title="添加资源">-->
+                                <#--<i class="fa fa-plus"></i>-->
+                            <#--</a>&nbsp;&nbsp;-->
+                        <#else>
+                            <a href="javascript:;" data-resourceid="${file.id!""}" class="btn btn-success btn-xs edit-resource" data-toggle="tooltip" title="编辑内容">
+                                <i class="fa fa-edit"></i>
+                            </a>&nbsp;&nbsp;
+                        </#if>
+                        <a href="javascript:;" data-resourceid="${file.id!""}" data-oldname="${file.name!""}" class="btn btn-primary btn-xs rename-resource" data-toggle="tooltip" title="重命名">
+                            <i class="fa fa-magic"></i>
+                        </a>&nbsp;&nbsp;
 
-    <!-- Main content -->
-    <section class="content">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-            <div class="col-sm-2" style="padding-left: 0;padding-right: 0;">
-                <div class="box box-info">
-                    <div class="box-header">
-                        <!-- tools box -->
-                        <i class="fa fa-sitemap"></i>
-                        <h3 class="box-title">资源树</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body table-responsive v5-tree-div" style="padding-top: 0;">
-                        <ul id="resourceTree" class="ztree"></ul>
-                    </div><!-- /.box-body -->
-                </div><!-- /.box -->
-            </div>
-            <div class="col-sm-10" style="padding-right: 0;">
-                <div class="box box-info">
-                    <div class="box-header">
-                        <!-- tools box -->
-                        <div class="pull-right box-tools">
-                            <button id="createFolder" class="btn btn-success btn-sm" data-toggle="tooltip" title="新建文件夹">
-                                <i class="fa fa-folder-open"></i> 新建文件夹</button>
-                            <button id="addResource" class="btn btn-success btn-sm" data-toggle="tooltip" title="添加资源">
-                                <i class="fa fa-plus"></i> 添加资源</button>
-                            <button id="fileBatchDelete" class="btn btn-warning btn-sm" data-toggle="tooltip" title="批量删除">
-                                <i class="fa fa-trash-o"></i> 批量删除</button>
-                        </div><!-- /. tools -->
-                        <i class="fa fa-table"></i>
-                        <h3 class="box-title">资源列表&nbsp;
-                            <small style="font-size:6px;">
-                                <#if fileName == "front">
-                                    资源根目录
-                                <#else>
-                                    ${fileName!"资源根目录"}
-                                </#if>
-                            </small>
-                        </h3>
-                    </div><!-- /.box-header -->
-                    <div class="box-body table-responsive">
-                        <table class="table table-hover table-bordered table-striped">
-                            <colgroup>
-                                <col class="col-xs-1 v5-col-xs-1">
-                                <col class="col-xs-2">
-                                <col class="col-xs-1">
-                                <col class="col-xs-1">
-                                <col class="col-xs-2">
-                                <col class="col-xs-2">
-                            </colgroup>
-                            <thead>
-                            <tr>
-                                <th class="td-center">
-                                    <input type="checkbox" id="thcheckbox" value="on"/>
-                                </th>
-                                <th>名称</th>
-                                <th>类型</th>
-                                <th>大小</th>
-                                <th>最后修改</th>
-                                <th>操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <#if files?size != 0>
-                                <#list files as file>
-                                <tr>
-                                    <td class="td-center">
-                                        <input type="checkbox" class="table-cb" value="${file.id!""}"/>
-                                    </td>
-                                    <td>${file.name!""}</td>
-                                    <td>
-                                        <#if file.type == "文件">
-                                            <small class="badge bg-light-blue">${file.type!""}</small>
-                                        <#else>
-                                            <small class="badge bg-info">${file.type!""}</small>
-                                        </#if>
-                                    </td>
-                                    <td>${file.size!""}</td>
-                                    <td>${file.modifyDate!""}</td>
-                                    <td>
-                                        <#if file.type == "文件夹">
-                                            <a href="javascript:;" data-resourceid="${file.id!""}" class="btn btn-success btn-xs create-folder" data-toggle="tooltip" title="创建文件夹">
-                                                <i class="fa fa-folder-open"></i>
-                                            </a>&nbsp;&nbsp;
-                                            <#--<a href="javascript:;" class="btn btn-success btn-xs" data-toggle="tooltip" title="添加资源">-->
-                                                <#--<i class="fa fa-plus"></i>-->
-                                            <#--</a>&nbsp;&nbsp;-->
-                                        <#else>
-                                            <a href="javascript:;" data-resourceid="${file.id!""}" class="btn btn-success btn-xs edit-resource" data-toggle="tooltip" title="编辑内容">
-                                                <i class="fa fa-edit"></i>
-                                            </a>&nbsp;&nbsp;
-                                        </#if>
-                                        <a href="javascript:;" data-resourceid="${file.id!""}" data-oldname="${file.name!""}" class="btn btn-primary btn-xs rename-resource" data-toggle="tooltip" title="重命名">
-                                            <i class="fa fa-magic"></i>
-                                        </a>&nbsp;&nbsp;
-
-                                        <a href="javascript:;" data-resourceid="${file.id!""}" class="btn btn-warning btn-xs delete-resource" data-toggle="tooltip" title="删除资源">
-                                            <i class="fa fa-times"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                </#list>
-                            <#else>
-                            <tr>
-                                <td class="text-center" colspan="8"><h3>还没有资源数据！</h3></td>
-                            </tr>
-                            </#if>
-                            </tbody>
-                        </table>
-                    </div><!-- /.box-body -->
-                </div><!-- /.box -->
-            </div><!-- /.col-xs-9 -->
-        </div><!-- /.row -->
-    </section><!-- /.content -->
-    <form id="resourceForm" method="post" action="<@spring.url '/manager/resource/list'/>">
-        <input type="hidden" id="pathInput" name="path">
-    </form>
-    <input type="hidden" id="pathUri" value="${path!"/"}">
-</aside><!-- /.right-side -->
-<#include "../fragment/footer.ftl">
+                        <a href="javascript:;" data-resourceid="${file.id!""}" class="btn btn-warning btn-xs delete-resource" data-toggle="tooltip" title="删除资源">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </td>
+                </tr>
+                </#list>
+            <#else>
+            <tr>
+                <td class="text-center" colspan="8"><h3>还没有资源数据！</h3></td>
+            </tr>
+            </#if>
+            </tbody>
+        </table>
+    </div><!-- /.box-body -->
+</div><!-- /.box -->
+<input type="hidden" id="pathUri" value="${path!"/"}">
 <!-- webuploader -->
 <script src="<@spring.url '/res/backstage/webuploader/webuploader.min.js'/>" type="text/javascript"></script>
 <script type="text/javascript">
 
     $(function(){
-        var resourceSetting = {
-            view : {
-                dblClickExpand : false
-            },
-            async : {
-                enable : true,
-                dataType : "json",
-                url : "<@spring.url "/manager/resource/tree/json"/>"
-            },
-            callback : {
-                onClick:function(event, treeId, treeNode){
-                    var fileUri = treeNode.fileUri;
-                    $("#pathInput").val(fileUri);
-                    $("#resourceForm").submit();
-                }
-            }
-        };
-        $.fn.zTree.init($("#resourceTree"), resourceSetting);
-
-        $("#resource_columns").imitClick();
 
         //上传资源
         var uploadResource = WebUploader.create({
