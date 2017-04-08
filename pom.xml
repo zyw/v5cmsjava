@@ -10,15 +10,18 @@
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>utils</module>
-        <module>web</module>
+        <module>v5cms-commons</module>
+        <module>v5cms-backend</module>
         <module>ueditor</module>
         <module>shiro-freemarker</module>
+        <module>v5cms-entity</module>
+        <module>v5cms-dao</module>
+        <module>v5cms-service</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>4.1.1.RELEASE</spring.version>
+        <spring.version>4.3.7.RELEASE</spring.version>
         <shiro.version>1.2.3</shiro.version>
     </properties>
 
@@ -27,17 +30,7 @@
             <!--Spring-->
             <dependency>
                 <groupId>org.springframework</groupId>
-                <artifactId>spring-core</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-beans</artifactId>
                 <version>${spring.version}</version>
             </dependency>
             <dependency>
@@ -71,15 +64,15 @@
                 <version>${spring.version}</version>
             </dependency>
 
-            <dependency>
+            <!--<dependency>
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-jpa</artifactId>
                 <version>1.6.1.RELEASE</version>
-            </dependency>
+            </dependency>-->
             <!--Spring End-->
 
             <!-- Hibernate JPA -->
-            <dependency>
+            <!--<dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-entitymanager</artifactId>
                 <version>4.3.5.Final</version>
@@ -88,7 +81,7 @@
                 <groupId>org.hibernate.javax.persistence</groupId>
                 <artifactId>hibernate-jpa-2.0-api</artifactId>
                 <version>1.0.1.Final</version>
-            </dependency>
+            </dependency>-->
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-validator</artifactId>
@@ -96,17 +89,27 @@
             </dependency>
             <!--./-->
 
-            <!--MyBatis Start
+            <!--MyBatis Start -->
             <dependency>
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis</artifactId>
-                <version>3.2.7</version>
+                <version>3.4.2</version>
             </dependency>
             <dependency>
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis-spring</artifactId>
-                <version>1.2.2</version>
-            </dependency>-->
+                <version>1.3.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>5.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper</artifactId>
+                <version>3.4.0</version>
+            </dependency>
             <!--MyBatis End-->
 
             <!-- apache -->
@@ -231,11 +234,6 @@
 
             <dependency>
                 <groupId>cn.v5cn.v5cms</groupId>
-                <artifactId>common-utils</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.v5cn.v5cms</groupId>
                 <artifactId>shiro-freemarker</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
@@ -244,6 +242,27 @@
                 <artifactId>ueditor</artifactId>
                 <version>1.4.3</version>
             </dependency>
+            <dependency>
+                <groupId>cn.v5cn.v5cms</groupId>
+                <artifactId>v5cms-entity</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.v5cn.v5cms</groupId>
+                <artifactId>v5cms-dao</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.v5cn.v5cms</groupId>
+                <artifactId>v5cms-service</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.v5cn.v5cms</groupId>
+                <artifactId>v5cms-commons</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>servlet-api</artifactId>
@@ -287,12 +306,6 @@
                 <artifactId>shiro-spring</artifactId>
                 <version>${shiro.version}</version>
             </dependency>
-
-            <!--<dependency>-->
-                <!--<groupId>cn.dreampie</groupId>-->
-                <!--<artifactId>jfinal-shiro-freemarker</artifactId>-->
-                <!--<version>0.2</version>-->
-            <!--</dependency>-->
             <!--./Shiro-->
             <dependency>
                 <groupId>net.coobird</groupId>
@@ -317,8 +330,8 @@
                     <version>3.2</version>
                     <configuration>
                         <encoding>UTF-8</encoding>
-                        <source>1.7</source>
-                        <target>1.7</target>
+                        <source>1.8</source>
+                        <target>1.8</target>
                         <meminitial>512m</meminitial>
                         <maxmem>1024m</maxmem>
                         <fork>true</fork>

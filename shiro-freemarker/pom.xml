@@ -14,23 +14,9 @@
     <properties>
         <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
-        <!--<jfinal.version>1.8</jfinal.version>-->
-        <!--<jfinal-shiro.version>0.2</jfinal-shiro.version>-->
     </properties>
 
     <dependencies>
-        <!--jfinal
-        <dependency>
-            <groupId>com.jfinal</groupId>
-            <artifactId>jfinal</artifactId>
-            <version>${jfinal.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>cn.dreampie</groupId>
-            <artifactId>jfinal-shiro</artifactId>
-            <version>${jfinal-shiro.version}</version>
-        </dependency>-->
 
         <!--Shiro-->
         <dependency>
@@ -53,12 +39,6 @@
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
         </dependency>
-
-
-        <!--<dependency>-->
-        <!--<groupId>cn.dreampie</groupId>-->
-        <!--<artifactId>jfinal-shiro-freemarker</artifactId>-->
-        <!--</dependency>-->
         <!--./Shiro-->
 
         <!--freemarker界面模板-->

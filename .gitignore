@@ -5,3 +5,4 @@ rebel.xml
 */target
 /.idea
 /log
+/.sonar
