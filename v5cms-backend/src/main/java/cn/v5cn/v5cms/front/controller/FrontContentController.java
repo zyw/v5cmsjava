@@ -31,7 +31,7 @@ public class FrontContentController {
 
         modelMap.addAttribute("content",content);
 
-        String contpl = FilenameUtils.removeExtension(SystemUtils.formatUri(content.getColumn().getColumnType().getContenttpl()));
-        return site.getThemeName() + "/" + contpl;
+        //String contpl = FilenameUtils.removeExtension(SystemUtils.formatUri(content.getColumn().getColumnType().getContenttpl()));
+        return "";//site.getThemeName() + "/" + contpl;
     }
 }

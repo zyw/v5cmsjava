@@ -1,13 +1,10 @@
 package cn.v5cn.v5cms.service.impl;
 
+import cn.v5cn.v5cms.dao.SystemRoleMapper;
 import cn.v5cn.v5cms.service.SystemRoleService;
-import cn.v5cn.v5cms.dao.SystemRoleDao;
 import cn.v5cn.v5cms.entity.SystemRes;
 import cn.v5cn.v5cms.entity.SystemRole;
-import cn.v5cn.v5cms.util.PropertyUtils;
 import com.google.common.base.Splitter;
-import com.google.common.collect.Lists;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +18,7 @@ import java.util.List;
 public class SystemRoleServiceImpl implements SystemRoleService {
 
     @Autowired
-    private SystemRoleDao systemRoleDao;
+    private SystemRoleMapper systemRoleMapper;
 
 /*    @Override
     public Page<SystemRole> findRoleByRoleNamePageable(final SystemRole role, Integer currPage) {
@@ -56,7 +53,7 @@ public class SystemRoleServiceImpl implements SystemRoleService {
             for(String resId : resIdList){
                 res = new SystemRes();
                 res.setId(Long.valueOf(resId));
-                role.getReses().add(res);
+                //role.getReses().add(res);
             }
         }
         role = null;//systemRoleDao.save(role);

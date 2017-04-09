@@ -1,9 +1,9 @@
 package cn.v5cn.v5cms.service.impl;
 
+import cn.v5cn.v5cms.dao.SystemResMapper;
 import cn.v5cn.v5cms.service.SystemResService;
-import cn.v5cn.v5cms.dao.SystemResDao;
 import cn.v5cn.v5cms.entity.SystemRes;
-import cn.v5cn.v5cms.entity.wrapper.ZTreeNode;
+//import cn.v5cn.v5cms.entity.wrapper.ZTreeNode;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,16 +17,16 @@ import java.util.List;
 public class SystemResServiceImpl implements SystemResService {
 
     @Autowired
-    private SystemResDao systemResDao;
+    private SystemResMapper systemResMapper;
 
     @Override
     public List<SystemRes> findOrderByPidsAndId() {
-        return systemResDao.findOrderByPidsAndId();
+        return null;//systemResDao.findOrderByPidsAndId();
     }
 
-    @Override
-    public List<ZTreeNode> buildTreeNode(Long parentId) {
-        List<SystemRes> rootNode = systemResDao.findByPid(parentId);
+    @Override //ZTreeNode
+    public List<Object> buildTreeNode(Long parentId) {
+        /*List<SystemRes> rootNode = systemResDao.findByPid(parentId);
         if(rootNode == null || rootNode.size() < 1) return null;
 
         List<ZTreeNode> treeNodes = Lists.newArrayList();
@@ -40,6 +40,7 @@ public class SystemResServiceImpl implements SystemResService {
                 treeNode.setChildren(treeNodes1);
             treeNodes.add(treeNode);
         }
-        return treeNodes;
+        return treeNodes;*/
+        return null;
     }
 }

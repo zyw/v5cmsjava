@@ -1,14 +1,10 @@
 package cn.v5cn.v5cms.service.impl;
 
-import cn.v5cn.v5cms.dao.LeaveWordTypeDao;
+import cn.v5cn.v5cms.dao.LeaveWordTypeMapper;
 import cn.v5cn.v5cms.entity.LeaveWordType;
 import cn.v5cn.v5cms.service.LeaveWordTypeService;
-import cn.v5cn.v5cms.util.PropertyUtils;
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Created by ZXF-PC1 on 2015/7/28.
@@ -17,7 +13,7 @@ import java.util.List;
 public class LeaveWordTypeServiceImpl implements LeaveWordTypeService {
 
     @Autowired
-    private LeaveWordTypeDao leaveWordTypeDao;
+    private LeaveWordTypeMapper leaveWordTypeMapper;
 
     /*@Override
     public Page<LeaveWordType> findLeaveWordTypePageable(final LeaveWordType leaveWordType, Integer currPage) {

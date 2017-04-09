@@ -1,7 +1,6 @@
 package cn.v5cn.v5cms.service;
 
-import cn.v5cn.v5cms.entity.Column;
-import cn.v5cn.v5cms.entity.wrapper.ZTreeNode;
+import cn.v5cn.v5cms.entity.Cols;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public interface ColumnService {
      *
      * ==============================================================
      **/
-    Column findOne(Long columnId);
+    Cols findOne(Long columnId);
     /**
      * ==============================================================
      *
@@ -26,16 +25,16 @@ public interface ColumnService {
      * ==============================================================
      **/
 
-    Column save(Column column);
+    Cols save(Cols column);
 
-    List<Column> findAll();
-    List<Column> findOrderByParentIdsAndColsId(Long siteId);
+    List<Cols> findAll();
+    List<Cols> findOrderByParentIdsAndColsId(Long siteId);
 
     void delete(Long columnId);
 
-    List<Column> findByParentId(Long parentId);
-
-    List<ZTreeNode> buildTreeNode(Long parentId);
+    List<Cols> findByParentId(Long parentId);
+    //ZTreeNode
+    List<Object> buildTreeNode(Long parentId);
 
     /**
      * ==============================================================
@@ -48,11 +47,11 @@ public interface ColumnService {
     /**
      * 根据父栏目ID，站点ID，栏目显示和SortNum排序
      * */
-    List<Column> findByParentId(Long parentId,Long siteId);
+    List<Cols> findByParentId(Long parentId,Long siteId);
 
     /**
      * 根据父栏目ID，站点ID，栏目显示，
      * SortNum排序和最多显示的行数
      * */
-    List<Column> findByParentId(Long parentId,Long siteId,int maxSize);
+    List<Cols> findByParentId(Long parentId,Long siteId,int maxSize);
 }

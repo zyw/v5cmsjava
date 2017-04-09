@@ -1,178 +1,248 @@
 package cn.v5cn.v5cms.entity;
 
-import com.google.common.collect.Sets;
-
-import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+import javax.persistence.*;
 
-/**
- * Created by ZYW on 2014/10/14.
- */
-@Entity
 @Table(name = "system_res")
-public class SystemRes implements Serializable {
-    private Long id;
-    private Long pid;
-    private String name;
-    private String permission;
-    private String url;
-    private Integer sortNum;        /*排序*/
-    private String icon;
-    private String pids;            /*TreeTable排序*/
-    private Integer type;       //1 菜单 2 按钮
-    private Integer available;  //1 可用 0 不可用
-    private String des;
-    private Date createAt;
-
-//    private List<SystemRes> children;
-
-//    private boolean isParent = false;
-
+public class SystemRes {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private Long pid;
+
+    private String name;
+
+    private String permission;
+
+    private String url;
+
+    @Column(name = "sortNum")
+    private Integer sortnum;
+
+    private String icon;
+
+    /**
+     * TreeTable排序
+     */
+    private String pids;
+
+    /**
+     * 1 菜单 2 按钮
+     */
+    private Integer type;
+
+    /**
+     * 1 可用 0 不可用
+     */
+    private Integer available;
+
+    private String des;
+
+    @Column(name = "isParent")
+    private Boolean isparent;
+
+    /**
+     * 创建时间
+     */
+    @Column(name = "createAt")
+    private Date createat;
+
+    /**
+     * @return id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * @return pid
+     */
     public Long getPid() {
         return pid;
     }
 
+    /**
+     * @param pid
+     */
     public void setPid(Long pid) {
         this.pid = pid;
     }
 
+    /**
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * @return permission
+     */
     public String getPermission() {
         return permission;
     }
 
+    /**
+     * @param permission
+     */
     public void setPermission(String permission) {
         this.permission = permission;
     }
 
+    /**
+     * @return url
+     */
     public String getUrl() {
         return url;
     }
 
+    /**
+     * @param url
+     */
     public void setUrl(String url) {
         this.url = url;
     }
 
-    public Integer getSortNum() {
-        return sortNum;
+    /**
+     * @return sortNum
+     */
+    public Integer getSortnum() {
+        return sortnum;
     }
 
-    public void setSortNum(Integer sortNum) {
-        this.sortNum = sortNum;
+    /**
+     * @param sortnum
+     */
+    public void setSortnum(Integer sortnum) {
+        this.sortnum = sortnum;
     }
 
+    /**
+     * @return icon
+     */
     public String getIcon() {
         return icon;
     }
 
+    /**
+     * @param icon
+     */
     public void setIcon(String icon) {
         this.icon = icon;
     }
 
+    /**
+     * 获取TreeTable排序
+     *
+     * @return pids - TreeTable排序
+     */
     public String getPids() {
         return pids;
     }
 
+    /**
+     * 设置TreeTable排序
+     *
+     * @param pids TreeTable排序
+     */
     public void setPids(String pids) {
         this.pids = pids;
     }
 
+    /**
+     * 获取1 菜单 2 按钮
+     *
+     * @return type - 1 菜单 2 按钮
+     */
     public Integer getType() {
         return type;
     }
 
+    /**
+     * 设置1 菜单 2 按钮
+     *
+     * @param type 1 菜单 2 按钮
+     */
     public void setType(Integer type) {
         this.type = type;
     }
 
+    /**
+     * 获取1 可用 0 不可用
+     *
+     * @return available - 1 可用 0 不可用
+     */
     public Integer getAvailable() {
         return available;
     }
 
+    /**
+     * 设置1 可用 0 不可用
+     *
+     * @param available 1 可用 0 不可用
+     */
     public void setAvailable(Integer available) {
         this.available = available;
     }
 
+    /**
+     * @return des
+     */
     public String getDes() {
         return des;
     }
 
+    /**
+     * @param des
+     */
     public void setDes(String des) {
         this.des = des;
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    /**
+     * @return isParent
+     */
+    public Boolean getIsparent() {
+        return isparent;
     }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    /**
+     * @param isparent
+     */
+    public void setIsparent(Boolean isparent) {
+        this.isparent = isparent;
     }
 
-    /*public boolean getIsParent() {
-        return isParent;
+    /**
+     * 获取创建时间
+     *
+     * @return createAt - 创建时间
+     */
+    public Date getCreateat() {
+        return createat;
     }
 
-    public void setIsParent(boolean isParent) {
-        this.isParent = isParent;
-    }
-
-    public String catPids(){
-        return this.pids+this.getId()+"/";
-    }*/
-
-    /*public List<SystemRes> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<SystemRes> children) {
-        this.children = children;
-    }*/
-
-    private Set<SystemRole> roles = Sets.newHashSet();
-
-    @ManyToMany(mappedBy = "reses")
-    public Set<SystemRole> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<SystemRole> roles) {
-        this.roles = roles;
-    }
-
-    @Override
-    public String toString() {
-        return "SystemRes{" +
-                "id=" + id +
-                ", pid=" + pid +
-                ", name='" + name + '\'' +
-                ", permission='" + permission + '\'' +
-                ", url='" + url + '\'' +
-                ", sortNum=" + sortNum +
-                ", icon=" + icon +
-                ", pids=" + pids +
-                ", type=" + type +
-                ", available=" + available +
-                ", des='" + des + '\'' +
-                '}';
+    /**
+     * 设置创建时间
+     *
+     * @param createat 创建时间
+     */
+    public void setCreateat(Date createat) {
+        this.createat = createat;
     }
 }

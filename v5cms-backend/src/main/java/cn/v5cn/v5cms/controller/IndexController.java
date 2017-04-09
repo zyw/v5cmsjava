@@ -40,13 +40,13 @@ public class IndexController {
         ImmutableList<Site> resultBiz = (ImmutableList<Site>)session.getAttribute(SystemConstant.SITES_SESSION_KEY);
         if(resultBiz != null){
             for(Site site : resultBiz){
-                if(Longs.compare(site.getSiteId(),siteId) == 0){
+                /*if(Longs.compare(site.getSiteId(),siteId) == 0){
                     LOGGER.info("站点切换成功，切换的站点名称:{}",site.getSiteName());
                     session.setAttribute(SystemConstant.SITE_SESSION_KEY,site);
                     break;
                 }else{
                     LOGGER.info("站点切换失败，没有找到ID为{}的站点。",siteId);
-                }
+                }*/
             }
         }
         return "redirect:/manager/index";

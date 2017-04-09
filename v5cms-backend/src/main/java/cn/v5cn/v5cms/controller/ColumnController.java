@@ -2,10 +2,9 @@ package cn.v5cn.v5cms.controller;
 
 import cn.v5cn.v5cms.service.ColumnService;
 import cn.v5cn.v5cms.service.ColumnTypeService;
-import cn.v5cn.v5cms.entity.Column;
-import cn.v5cn.v5cms.entity.ColumnType;
+import cn.v5cn.v5cms.entity.Cols;
+import cn.v5cn.v5cms.entity.Coltype;
 import cn.v5cn.v5cms.entity.Site;
-import cn.v5cn.v5cms.entity.wrapper.ZTreeNode;
 import cn.v5cn.v5cms.util.SystemUtils;
 import com.google.common.collect.ImmutableMap;
 import org.slf4j.Logger;
@@ -37,7 +36,7 @@ public class ColumnController {
     @Autowired
     private ColumnTypeService columnTypeService;
 
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
+   /* @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String columnList(ModelMap modelMap){
         Site site = (Site)SystemUtils.getSessionSite();
         List<Column> columns = columnService.findOrderByParentIdsAndColsId(site.getSiteId());
@@ -127,5 +126,5 @@ public class ColumnController {
         List<ZTreeNode> treeNodes = columnService.buildTreeNode(0L);
         LOGGER.debug("treeNodes: " + treeNodes);
         return treeNodes;
-    }
+    }*/
 }

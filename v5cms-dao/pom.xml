@@ -12,6 +12,17 @@
     <artifactId>v5cms-dao</artifactId>
 
     <dependencies>
+        <!--数据库驱动连接池-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jolbox</groupId>
+            <artifactId>bonecp</artifactId>
+        </dependency>
+        <!--./数据库驱动连接池-->
+
         <!--MyBatis Start-->
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -20,6 +31,10 @@
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.pagehelper</groupId>

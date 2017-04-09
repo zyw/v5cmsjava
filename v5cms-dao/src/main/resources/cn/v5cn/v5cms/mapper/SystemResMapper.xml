@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.v5cn.v5cms.dao.SystemResMapper">
+  <resultMap id="BaseResultMap" type="cn.v5cn.v5cms.entity.SystemRes">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="pid" jdbcType="BIGINT" property="pid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="permission" jdbcType="VARCHAR" property="permission" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="sortNum" jdbcType="INTEGER" property="sortnum" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="pids" jdbcType="VARCHAR" property="pids" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="available" jdbcType="INTEGER" property="available" />
+    <result column="des" jdbcType="VARCHAR" property="des" />
+    <result column="isParent" jdbcType="BIT" property="isparent" />
+    <result column="createAt" jdbcType="TIMESTAMP" property="createat" />
+  </resultMap>
+</mapper>

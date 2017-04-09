@@ -1,6 +1,6 @@
 package cn.v5cn.v5cms.front.controller;
 
-import cn.v5cn.v5cms.entity.Column;
+import cn.v5cn.v5cms.entity.Cols;
 import cn.v5cn.v5cms.entity.Site;
 import cn.v5cn.v5cms.service.ColumnService;
 import cn.v5cn.v5cms.util.SystemConstant;
@@ -27,10 +27,10 @@ public class FrontColumnController {
     @RequestMapping(value = "/{navId}.htm")
     public String columnList(@PathVariable Long navId,HttpServletRequest request,ModelMap modelMap){
         Site site = (Site)request.getSession().getAttribute(SystemConstant.FRONT_SITE_SESSION_KEY);
-        Column column = columnService.findOne(navId);
+        Cols column = columnService.findOne(navId);
         modelMap.addAttribute(column);
 
-        String coltpl = FilenameUtils.removeExtension(SystemUtils.formatUri(column.getColumnType().getColtpl()));
-        return site.getThemeName() + "/" + coltpl;
+        //String coltpl = FilenameUtils.removeExtension(SystemUtils.formatUri(column.getColumnType().getColtpl()));
+        return null;//site.getThemeName() + "/" + coltpl;
     }
 }

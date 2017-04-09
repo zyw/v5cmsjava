@@ -3,9 +3,8 @@ package cn.v5cn.v5cms.controller;
 import cn.v5cn.v5cms.service.AdvService;
 import cn.v5cn.v5cms.service.AdvPosService;
 import cn.v5cn.v5cms.entity.Adv;
-import cn.v5cn.v5cms.entity.AdvPos;
+import cn.v5cn.v5cms.entity.Advpos;
 import cn.v5cn.v5cms.entity.Site;
-import cn.v5cn.v5cms.entity.wrapper.AdvWrapper;
 import cn.v5cn.v5cms.exception.V5CMSNullValueException;
 import cn.v5cn.v5cms.util.HttpUtils;
 import cn.v5cn.v5cms.util.SystemConstant;
@@ -49,7 +48,7 @@ public class AdvController {
     @Autowired
     private AdvService advService;
 
-    @RequestMapping(value = "/list/{p}",method = {RequestMethod.GET,RequestMethod.POST})
+    /*@RequestMapping(value = "/list/{p}",method = {RequestMethod.GET,RequestMethod.POST})
     public String advList(Adv adv,@PathVariable Integer p,HttpSession session,HttpServletRequest request,ModelMap modelMap){
         if(StringUtils.isNotBlank(adv.getAdvName())
                 || (adv.getAdvPos() != null && adv.getAdvPos().getAdvPosId() != null)){
@@ -60,26 +59,26 @@ public class AdvController {
         }
         Object searchObj = session.getAttribute("advSearch");
 
-        /*Page<Adv> result =  advService.findAdvByAdvNamePageable((searchObj == null ? (new Adv()):((Adv)searchObj)),p);
+        *//*Page<Adv> result =  advService.findAdvByAdvNamePageable((searchObj == null ? (new Adv()):((Adv)searchObj)),p);
 
         modelMap.addAttribute("advs",result);
         modelMap.addAttribute("pagination",SystemUtils.pagination(result,HttpUtils.getContextPath(request)+"/manager/adv/list"));
         ImmutableList<AdvPos> advposes = advPosService.finadAll();
-        modelMap.addAttribute("aps",advposes);*/
+        modelMap.addAttribute("aps",advposes);*//*
 
         return "setting/adv_list";
-    }
+    }*/
 
-    @RequestMapping(value = "/edit",method = RequestMethod.GET)
+    /*@RequestMapping(value = "/edit",method = RequestMethod.GET)
     public String advPosaup(ModelMap model){
         ImmutableList<AdvPos> advposes = advPosService.finadAll();
         model.addAttribute("aps",advposes);
         model.addAttribute(new Adv());
         model.addAttribute("advTypes", Maps.newHashMap());
         return "setting/adv_edit";
-    }
+    }*/
 
-    @RequestMapping(value = "/edit/{advId}",method = RequestMethod.GET)
+    /*@RequestMapping(value = "/edit/{advId}",method = RequestMethod.GET)
     public String advEdit(@PathVariable Long advId,ModelMap model){
         ImmutableList<AdvPos> advposes = advPosService.finadAll();
         model.addAttribute("aps",advposes);
@@ -169,7 +168,7 @@ public class AdvController {
         }
         return ImmutableMap.<String,Object>of("status","1","message",getMessage("adv.uploadsuccess.message"),
                 "filePath",advPath+timeFileName,"contentPath", HttpUtils.getBasePath(request));
-    }
+    }*/
 
     @ResponseBody
     @RequestMapping(value = "/delete/if",method = RequestMethod.POST)

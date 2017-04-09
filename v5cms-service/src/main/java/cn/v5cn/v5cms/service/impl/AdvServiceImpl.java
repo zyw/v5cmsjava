@@ -1,18 +1,13 @@
 package cn.v5cn.v5cms.service.impl;
 
+import cn.v5cn.v5cms.dao.AdvMapper;
 import cn.v5cn.v5cms.service.AdvService;
-import cn.v5cn.v5cms.dao.AdvDao;
 import cn.v5cn.v5cms.entity.Adv;
-import cn.v5cn.v5cms.entity.AdvPos;
-import cn.v5cn.v5cms.entity.wrapper.AdvWrapper;
-import cn.v5cn.v5cms.util.HttpUtils;
-import cn.v5cn.v5cms.util.PropertyUtils;
-import cn.v5cn.v5cms.util.SystemConstant;
+import cn.v5cn.v5cms.entity.Advpos;
 import cn.v5cn.v5cms.util.SystemUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Predicate;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -39,29 +34,29 @@ public class AdvServiceImpl implements AdvService {
     private final static Logger LOGGER = LoggerFactory.getLogger(AdvServiceImpl.class);
 
     @Autowired
-    private AdvDao advDao;
+    private AdvMapper advMapper;
 
     @Override
     @Transactional
-    public Adv save(AdvWrapper advWrapper) throws JsonProcessingException {
-        Adv adv = advWrapper.getAdv();
-        String advTypeJson = advTypeJson(advWrapper.getAti(), adv.getAdvType());
-
-        adv.setAdvTypeInfo(advTypeJson);
-        adv.setCreateDate(DateTime.now().toDate());
+    public Adv save(Object advWrapper) throws JsonProcessingException {
+//        Adv adv = advWrapper.getAdv();
+//        String advTypeJson = advTypeJson(advWrapper.getAti(), adv.getAdvType());
+//
+//        adv.setAdvTypeInfo(advTypeJson);
+//        adv.setCreateDate(DateTime.now().toDate());
         return null;//advDao.save(adv);
     }
 
     @Override
     @Transactional
-    public Adv update(AdvWrapper advWrapper) throws JsonProcessingException
+    public Adv update(Object advWrapper) throws JsonProcessingException
     ,IllegalAccessException, InvocationTargetException {
-        Adv fontAdv = advWrapper.getAdv();
-        String advTypeJson = advTypeJson(advWrapper.getAti(), fontAdv.getAdvType());
-        fontAdv.setAdvTypeInfo(advTypeJson);
+//        Adv fontAdv = advWrapper.getAdv();
+//        String advTypeJson = advTypeJson(advWrapper.getAti(), fontAdv.getAdvType());
+//        fontAdv.setAdvTypeInfo(advTypeJson);
 
         Adv dbAdv = null;//advDao.findOne(fontAdv.getAdvId());
-        SystemUtils.copyProperties(dbAdv,fontAdv);
+//        SystemUtils.copyProperties(dbAdv,fontAdv);
         return dbAdv;
     }
 
@@ -72,11 +67,11 @@ public class AdvServiceImpl implements AdvService {
 //        String realPath = HttpUtils.getRealPath(request, SystemConstant.ADV_RES_PATH);
         ObjectMapper objectMapper = new ObjectMapper();
         for(Adv adv : deleteAdvs){
-            if(adv.getAdvType() == 3 || adv.getAdvType() == 4){
-                continue;
-            }
+//            if(adv.getAdvType() == 3 || adv.getAdvType() == 4){
+//                continue;
+//            }
             try {
-                Map<String,String> advTypeInfo = objectMapper.readValue(adv.getAdvTypeInfo(),Map.class);
+                Map<String,String> advTypeInfo = null;//objectMapper.readValue(adv.getAdvTypeInfo(),Map.class);
                 if(advTypeInfo.containsKey("adv_image_url") && StringUtils.isNotBlank(advTypeInfo.get("adv_image_url"))){
                     String fileName = FilenameUtils.getName(advTypeInfo.get("adv_image_url"));
                     boolean result = FileUtils.deleteQuietly(new File(realPath+"/"+fileName));
@@ -91,7 +86,7 @@ public class AdvServiceImpl implements AdvService {
                         LOGGER.warn("删除Flash资源失败，Flash名称{}",fileName);
                     }
                 }
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 LOGGER.error("转换JSON字符串到Map异常{}",e.getMessage());
                 throw new RuntimeException("转换JSON字符串到Map异常",e);

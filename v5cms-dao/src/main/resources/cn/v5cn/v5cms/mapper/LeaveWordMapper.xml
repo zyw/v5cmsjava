@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.v5cn.v5cms.dao.LeaveWordMapper">
+  <resultMap id="BaseResultMap" type="cn.v5cn.v5cms.entity.LeaveWord">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="lwtId" jdbcType="BIGINT" property="lwtid" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="recommend" jdbcType="INTEGER" property="recommend" />
+    <result column="approved" jdbcType="INTEGER" property="approved" />
+    <result column="lwtime" jdbcType="TIMESTAMP" property="lwtime" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="reply" jdbcType="LONGVARCHAR" property="reply" />
+  </resultMap>
+</mapper>

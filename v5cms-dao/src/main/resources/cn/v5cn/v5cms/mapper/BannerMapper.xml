@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.v5cn.v5cms.dao.BannerMapper">
+  <resultMap id="BaseResultMap" type="cn.v5cn.v5cms.entity.Banner">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="bannerId" jdbcType="BIGINT" property="bannerid" />
+    <result column="bannerName" jdbcType="VARCHAR" property="bannername" />
+    <result column="bannerPic" jdbcType="VARCHAR" property="bannerpic" />
+    <result column="bannerLink" jdbcType="VARCHAR" property="bannerlink" />
+    <result column="isstart" jdbcType="INTEGER" property="isstart" />
+    <result column="bannerds" jdbcType="INTEGER" property="bannerds" />
+    <result column="bcontent" jdbcType="LONGVARCHAR" property="bcontent" />
+  </resultMap>
+</mapper>

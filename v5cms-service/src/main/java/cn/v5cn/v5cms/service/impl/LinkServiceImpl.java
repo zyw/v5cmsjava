@@ -1,10 +1,8 @@
 package cn.v5cn.v5cms.service.impl;
 
-import cn.v5cn.v5cms.dao.LinkDao;
+import cn.v5cn.v5cms.dao.LinkMapper;
 import cn.v5cn.v5cms.entity.Link;
 import cn.v5cn.v5cms.service.LinkService;
-import cn.v5cn.v5cms.util.PropertyUtils;
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +16,7 @@ import java.util.List;
 public class LinkServiceImpl implements LinkService {
 
     @Autowired
-    private LinkDao linkDao;
+    private LinkMapper linkMapper;
 
    /* @Override
     public Page<Link> findLinkPageable(final Link link, Integer currPage) {

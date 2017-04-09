@@ -1,145 +1,285 @@
 package cn.v5cn.v5cms.entity;
 
-import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.*;
 
-/**
- * Created by ZXF-PC1 on 2015/7/28.
- */
-@Entity
-@Table
-public class Comments implements Serializable {
-
-    private Long commentsId;
-    private String commentAuthor;    //评论者姓名
-    private String email;            //评论者的Email地址
-    private String commentContent;   //评语内容
-    private String reply;            //评论回复
-    private String siteURL;          //评论者的站点URL
-    private String commentIP;        //评语者的IP地址
-    private Date commentDate;        //评语时间
-    private Integer recommend;       //是否推荐
-    private Integer commentApproved; //评语是否批准 0:待审批，1:通过审批，2:垃圾评语
-    private Long commentParent;      //父评语ID
-
-    private Content content;         //评语所属内容
-
+public class Comments {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long getCommentsId() {
-        return commentsId;
+    @Column(name = "commentsId")
+    private Long commentsid;
+
+    /**
+     * 评语所属内容ID
+     */
+    @Column(name = "contentId")
+    private Long contentid;
+
+    /**
+     * 评论者姓名
+     */
+    @Column(name = "commentAuthor")
+    private String commentauthor;
+
+    /**
+     * 评论者的Email地址
+     */
+    private String email;
+
+    /**
+     * 评论者的站点URL
+     */
+    @Column(name = "siteURL")
+    private String siteurl;
+
+    /**
+     * 评语者的IP地址
+     */
+    @Column(name = "commentIP")
+    private String commentip;
+
+    /**
+     * 评语时间
+     */
+    @Column(name = "commentDate")
+    private Date commentdate;
+
+    /**
+     * 是否推荐
+     */
+    private Integer recommend;
+
+    /**
+     * 评语是否批准 0:待审批，1:通过审批，2:垃圾评语
+     */
+    @Column(name = "commentApproved")
+    private Integer commentapproved;
+
+    /**
+     * 父评语ID
+     */
+    @Column(name = "commentParent")
+    private Long commentparent;
+
+    /**
+     * 评语内容
+     */
+    @Column(name = "commentContent")
+    private String commentcontent;
+
+    /**
+     * 评论回复
+     */
+    private String reply;
+
+    /**
+     * @return commentsId
+     */
+    public Long getCommentsid() {
+        return commentsid;
     }
 
-    public void setCommentsId(Long commentsId) {
-        this.commentsId = commentsId;
+    /**
+     * @param commentsid
+     */
+    public void setCommentsid(Long commentsid) {
+        this.commentsid = commentsid;
     }
 
-    public String getCommentAuthor() {
-        return commentAuthor;
+    /**
+     * 获取评语所属内容ID
+     *
+     * @return contentId - 评语所属内容ID
+     */
+    public Long getContentid() {
+        return contentid;
     }
 
-    public void setCommentAuthor(String commentAuthor) {
-        this.commentAuthor = commentAuthor;
+    /**
+     * 设置评语所属内容ID
+     *
+     * @param contentid 评语所属内容ID
+     */
+    public void setContentid(Long contentid) {
+        this.contentid = contentid;
     }
 
+    /**
+     * 获取评论者姓名
+     *
+     * @return commentAuthor - 评论者姓名
+     */
+    public String getCommentauthor() {
+        return commentauthor;
+    }
+
+    /**
+     * 设置评论者姓名
+     *
+     * @param commentauthor 评论者姓名
+     */
+    public void setCommentauthor(String commentauthor) {
+        this.commentauthor = commentauthor;
+    }
+
+    /**
+     * 获取评论者的Email地址
+     *
+     * @return email - 评论者的Email地址
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * 设置评论者的Email地址
+     *
+     * @param email 评论者的Email地址
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getCommentContent() {
-        return commentContent;
+    /**
+     * 获取评论者的站点URL
+     *
+     * @return siteURL - 评论者的站点URL
+     */
+    public String getSiteurl() {
+        return siteurl;
     }
 
-    public void setCommentContent(String commentContent) {
-        this.commentContent = commentContent;
+    /**
+     * 设置评论者的站点URL
+     *
+     * @param siteurl 评论者的站点URL
+     */
+    public void setSiteurl(String siteurl) {
+        this.siteurl = siteurl;
     }
 
-    public String getReply() {
-        return reply;
+    /**
+     * 获取评语者的IP地址
+     *
+     * @return commentIP - 评语者的IP地址
+     */
+    public String getCommentip() {
+        return commentip;
     }
 
-    public void setReply(String reply) {
-        this.reply = reply;
+    /**
+     * 设置评语者的IP地址
+     *
+     * @param commentip 评语者的IP地址
+     */
+    public void setCommentip(String commentip) {
+        this.commentip = commentip;
     }
 
-    public String getSiteURL() {
-        return siteURL;
+    /**
+     * 获取评语时间
+     *
+     * @return commentDate - 评语时间
+     */
+    public Date getCommentdate() {
+        return commentdate;
     }
 
-    public void setSiteURL(String siteURL) {
-        this.siteURL = siteURL;
+    /**
+     * 设置评语时间
+     *
+     * @param commentdate 评语时间
+     */
+    public void setCommentdate(Date commentdate) {
+        this.commentdate = commentdate;
     }
 
-    public String getCommentIP() {
-        return commentIP;
-    }
-
-    public void setCommentIP(String commentIP) {
-        this.commentIP = commentIP;
-    }
-
-    public Date getCommentDate() {
-        return commentDate;
-    }
-
-    public void setCommentDate(Date commentDate) {
-        this.commentDate = commentDate;
-    }
-
+    /**
+     * 获取是否推荐
+     *
+     * @return recommend - 是否推荐
+     */
     public Integer getRecommend() {
         return recommend;
     }
 
+    /**
+     * 设置是否推荐
+     *
+     * @param recommend 是否推荐
+     */
     public void setRecommend(Integer recommend) {
         this.recommend = recommend;
     }
 
-    public Integer getCommentApproved() {
-        return commentApproved;
+    /**
+     * 获取评语是否批准 0:待审批，1:通过审批，2:垃圾评语
+     *
+     * @return commentApproved - 评语是否批准 0:待审批，1:通过审批，2:垃圾评语
+     */
+    public Integer getCommentapproved() {
+        return commentapproved;
     }
 
-    public void setCommentApproved(Integer commentApproved) {
-        this.commentApproved = commentApproved;
+    /**
+     * 设置评语是否批准 0:待审批，1:通过审批，2:垃圾评语
+     *
+     * @param commentapproved 评语是否批准 0:待审批，1:通过审批，2:垃圾评语
+     */
+    public void setCommentapproved(Integer commentapproved) {
+        this.commentapproved = commentapproved;
     }
 
-    public Long getCommentParent() {
-        return commentParent;
+    /**
+     * 获取父评语ID
+     *
+     * @return commentParent - 父评语ID
+     */
+    public Long getCommentparent() {
+        return commentparent;
     }
 
-    public void setCommentParent(Long commentParent) {
-        this.commentParent = commentParent;
+    /**
+     * 设置父评语ID
+     *
+     * @param commentparent 父评语ID
+     */
+    public void setCommentparent(Long commentparent) {
+        this.commentparent = commentparent;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "contentId")
-    public Content getContent() {
-        return content;
+    /**
+     * 获取评语内容
+     *
+     * @return commentContent - 评语内容
+     */
+    public String getCommentcontent() {
+        return commentcontent;
     }
 
-    public void setContent(Content content) {
-        this.content = content;
+    /**
+     * 设置评语内容
+     *
+     * @param commentcontent 评语内容
+     */
+    public void setCommentcontent(String commentcontent) {
+        this.commentcontent = commentcontent;
     }
 
-    @Override
-    public String toString() {
-        return "Comments{" +
-                "commentsId=" + commentsId +
-                ", commentAuthor='" + commentAuthor + '\'' +
-                ", email='" + email + '\'' +
-                ", commentContent='" + commentContent + '\'' +
-                ", reply='" + reply + '\'' +
-                ", siteURL='" + siteURL + '\'' +
-                ", commentIP='" + commentIP + '\'' +
-                ", commentDate=" + commentDate +
-                ", recommend=" + recommend +
-                ", commentApproved=" + commentApproved +
-                ", commentParent=" + commentParent +
-                ", content=" + content +
-                '}';
+    /**
+     * 获取评论回复
+     *
+     * @return reply - 评论回复
+     */
+    public String getReply() {
+        return reply;
+    }
+
+    /**
+     * 设置评论回复
+     *
+     * @param reply 评论回复
+     */
+    public void setReply(String reply) {
+        this.reply = reply;
     }
 }

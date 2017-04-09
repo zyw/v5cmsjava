@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.v5cn.v5cms.dao.AdvMapper">
+  <resultMap id="BaseResultMap" type="cn.v5cn.v5cms.entity.Adv">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="advId" jdbcType="BIGINT" property="advid" />
+    <result column="advName" jdbcType="VARCHAR" property="advname" />
+    <result column="advType" jdbcType="INTEGER" property="advtype" />
+    <result column="advPosId" jdbcType="BIGINT" property="advposid" />
+    <result column="advCode" jdbcType="VARCHAR" property="advcode" />
+    <result column="advStartTime" jdbcType="DATE" property="advstarttime" />
+    <result column="advEndTime" jdbcType="DATE" property="advendtime" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createdate" />
+    <result column="advTypeInfo" jdbcType="VARCHAR" property="advtypeinfo" />
+    <result column="startUsing" jdbcType="INTEGER" property="startusing" />
+  </resultMap>
+</mapper>

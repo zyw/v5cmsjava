@@ -69,7 +69,7 @@ public class SiteSettingController {
             return ImmutableMap.<String, Object>builder().putAll(errorMessage).build();
         }
         //修改操作
-        if(site.getSiteId() != null){
+        /*if(site.getSiteId() != null){
             try {
                 siteService.addSite(site);
             }catch (Exception e) {
@@ -77,7 +77,7 @@ public class SiteSettingController {
                 return ImmutableMap.<String, Object>of("status","0","message", getMessage("site.updatefailed.message"));
             }
             return ImmutableMap.<String, Object>of("status","1","message", getMessage("site.updatesuccess.message"));
-        }
+        }*/
         //新增操作
         Long result = siteService.addSite(site);
         if(result != 0L){

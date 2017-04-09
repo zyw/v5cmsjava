@@ -3,7 +3,6 @@ package cn.v5cn.v5cms.controller;
 import cn.v5cn.v5cms.service.ColumnService;
 import cn.v5cn.v5cms.service.ContentService;
 import cn.v5cn.v5cms.entity.*;
-import cn.v5cn.v5cms.entity.wrapper.ZTreeNode;
 import cn.v5cn.v5cms.util.HttpUtils;
 import cn.v5cn.v5cms.util.SystemUtils;
 import com.google.common.collect.ImmutableMap;
@@ -43,7 +42,7 @@ public class ContentController {
 
     @RequestMapping(value = "/list/{cid}/{p}",method = {RequestMethod.GET,RequestMethod.POST})
     public String contentList(Content content,@PathVariable Long cid,@PathVariable Integer p,HttpServletRequest request,ModelMap modelMap){
-        Session session = SecurityUtils.getSubject().getSession();
+        /*Session session = SecurityUtils.getSubject().getSession();
         if(content.getState() != null && content.getState() != 0){
             session.setAttribute("contentFilter",content);
             modelMap.addAttribute("contentFilter", content);
@@ -65,7 +64,7 @@ public class ContentController {
         if(cid != 0L) {
             Column column = columnService.findOne(cid);
             modelMap.addAttribute("colName",column.getColumnName());
-        }
+        }*/
 
 //        Page<Content> pageContents = contentService.findContentPageable(content, p);
 //        modelMap.addAttribute("contents",pageContents.getContent());
@@ -76,9 +75,9 @@ public class ContentController {
     @RequestMapping(value = "/edit",method = RequestMethod.GET)
     public String contentEdit(ModelMap modelMap){
 
-        Content content = new Content();
-        content.setColumn(new Column());
-        modelMap.addAttribute(content);
+//        Content content = new Content();
+//        content.setColumn(new Column());
+//        modelMap.addAttribute(content);
 
         return "content/content_edit";
     }
@@ -94,7 +93,7 @@ public class ContentController {
         return "content/content_edit";
     }
 
-    @ResponseBody
+    /*@ResponseBody
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
     public ImmutableMap<String,String> contentSave(Content content){
         SystemUser user = (SystemUser)SystemUtils.getSessionUser();
@@ -123,9 +122,9 @@ public class ContentController {
         }
         LOGGER.info("内容添加成功,{}", content);
         return ImmutableMap.of("status","1","message",getMessage("content.updatesuccess.message"));
-    }
+    }*/
 
-    @ResponseBody
+    /*@ResponseBody
     @RequestMapping(value = "/tree/json",method = RequestMethod.POST)
     public ZTreeNode columnTree(){
         List<ZTreeNode> treeNodes = columnService.buildTreeNode(0L);
@@ -135,5 +134,5 @@ public class ContentController {
         rootNode.setChildren(treeNodes);
         LOGGER.debug("treeNodes: " + treeNodes);
         return rootNode;
-    }
+    }*/
 }

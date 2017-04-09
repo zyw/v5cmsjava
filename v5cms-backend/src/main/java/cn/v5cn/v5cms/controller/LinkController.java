@@ -51,14 +51,14 @@ public class LinkController {
 
     @RequestMapping(value = "/list/{p}",method = {RequestMethod.GET,RequestMethod.POST})
     public String linkList(Link link,@PathVariable Integer p,HttpServletRequest request,ModelMap modelMap){
-        Session session = SystemUtils.getShiroSession();
+        /*Session session = SystemUtils.getShiroSession();
         if(StringUtils.isNotBlank(link.getLinkName())){
             session.setAttribute("linkSearch",link);
             modelMap.addAttribute("searchLink",link);
         }else{
             session.setAttribute("linkSearch",null);
         }
-        Object searchObj = session.getAttribute("linkSearch");
+        Object searchObj = session.getAttribute("linkSearch");*/
 
 //        Page<Link> result =  linkService.findLinkPageable((searchObj == null ? (new Link()) : ((Link) searchObj)), p);
 //
@@ -91,7 +91,7 @@ public class LinkController {
             return ImmutableMap.<String, Object>builder().putAll(errorMessage).build();
         }
 
-        if(link.getLinkId() == null || link.getLinkId() == 0){
+        /*if(link.getLinkId() == null || link.getLinkId() == 0){
             Link result = linkService.save(link);
             if(result == null || result.getLinkId() == null || result.getLinkId() == 0){
                 LOGGER.warn("内容链接失败，链接{}",result);
@@ -99,7 +99,7 @@ public class LinkController {
             }
             LOGGER.info("内容添加成功，链接ID{}",result.getLinkId());
             return ImmutableMap.<String, Object>of("status","1","message",getMessage("link.addsuccess.message"));
-        }
+        }*/
         try {
             linkService.save(link);
         } catch (Exception e) {
@@ -117,8 +117,8 @@ public class LinkController {
             return ImmutableMap.of("status", "0", "message", getMessage("global.uploadempty.message"));
         }
         Site site = (Site)(SystemUtils.getSessionSite());
-        String linkPath = PathFormat.parseSiteId(SystemConstant.LINK_RES_PATH, site.getSiteId() + "");
-        String realPath = HttpUtils.getRealPath(request, linkPath);
+        String linkPath = "";//PathFormat.parseSiteId(SystemConstant.LINK_RES_PATH, site.getSiteId() + "");
+        String realPath = "";//HttpUtils.getRealPath(request, linkPath);
 
         SystemUtils.isNotExistCreate(realPath);
 
@@ -145,11 +145,11 @@ public class LinkController {
             String realPath = session.getServletContext().getRealPath("");
             List<File> deleteFiles = Lists.newArrayList();
             File deleteFile;
-            for(Link link : links){
-                if(link.getLinkPic() == null || "".equals(link.getLinkPic())) continue;
-                deleteFile = new File(realPath + link.getLinkPic());
-                deleteFiles.add(deleteFile);
-            }
+//            for(Link link : links){
+//                if(link.getLinkPic() == null || "".equals(link.getLinkPic())) continue;
+//                deleteFile = new File(realPath + link.getLinkPic());
+//                deleteFiles.add(deleteFile);
+//            }
             linkService.deleteInBatch(links);
             deleteLinkRes(deleteFiles);
         } catch (Exception e) {

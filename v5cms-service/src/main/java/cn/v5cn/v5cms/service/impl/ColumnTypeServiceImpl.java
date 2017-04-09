@@ -1,14 +1,10 @@
 package cn.v5cn.v5cms.service.impl;
 
+import cn.v5cn.v5cms.dao.ColtypeMapper;
 import cn.v5cn.v5cms.service.ColumnTypeService;
-import cn.v5cn.v5cms.dao.ColumnTypeDao;
-import cn.v5cn.v5cms.entity.ColumnType;
-import cn.v5cn.v5cms.util.PropertyUtils;
-import cn.v5cn.v5cms.util.SystemUtils;
-import cn.v5cn.v5cms.util.TwoTuple;
+import cn.v5cn.v5cms.entity.Coltype;
 import com.google.common.collect.Lists;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,11 +20,11 @@ import java.util.List;
 public class ColumnTypeServiceImpl implements ColumnTypeService {
 
     @Autowired
-    private ColumnTypeDao columnTypeDao;
+    private ColtypeMapper coltypeMapper;
 
     @Override
     @Transactional
-    public ColumnType save(ColumnType columnType) {
+    public Coltype save(Coltype columnType) {
         return null;//columnTypeDao.save(columnType);
     }
 
@@ -86,24 +82,24 @@ public class ColumnTypeServiceImpl implements ColumnTypeService {
     }*/
 
     @Override
-    public ColumnType findOne(Long colTypeId) {
+    public Coltype findOne(Long colTypeId) {
         return null;//columnTypeDao.findOne(colTypeId);
     }
 
     @Override
     public void deleteColType(Long[] colTypeIds) {
-        List<ColumnType> colTypes = Lists.newArrayList();
-        ColumnType columnType;
+        List<Coltype> colTypes = Lists.newArrayList();
+        Coltype columnType;
         for(Long colTypeId : colTypeIds){
-            columnType = new ColumnType();
-            columnType.setColTypeId(colTypeId);
+            columnType = new Coltype();
+            //columnType.setColTypeId(colTypeId);
             colTypes.add(columnType);
         }
         //columnTypeDao.deleteInBatch(colTypes);
     }
 
     @Override
-    public List<ColumnType> findAll() {
+    public List<Coltype> findAll() {
         return null;//Lists.newArrayList(columnTypeDao.findAll());
     }
 }

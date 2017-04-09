@@ -1,127 +1,240 @@
 package cn.v5cn.v5cms.entity;
 
-import cn.v5cn.v5cms.util.annotation.Ignore;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.*;
 
-/**
- * Created by ZYW on 2014/7/28.
- */
-@Table
-@Entity
-public class Adv implements Serializable {
-    private Long advId;
-    private String advName;
-    private String advStartTime;
-    private String advEndTime;
-    private int startUsing;         //1：启用 0：关闭
-    private int advType;            //1: 图片，2：Flash，3：文本，4：代码
-    private Date createDate;        //创建时间
-    private String advCode;         //广告代码
-    private String advTypeInfo;     //包含广告类型信息的JSON字符串
-
-    private AdvPos advPos;
-
+public class Adv {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long getAdvId() {
-        return advId;
+    @Column(name = "advId")
+    private Long advid;
+
+    /**
+     * 广告名称
+     */
+    @Column(name = "advName")
+    private String advname;
+
+    /**
+     * 广告类型1:图片，2：Flash，3：文字，4：代码
+     */
+    @Column(name = "advType")
+    private Integer advtype;
+
+    /**
+     * 广告版位ID
+     */
+    @Column(name = "advPosId")
+    private Long advposid;
+
+    /**
+     * 广告代码
+     */
+    @Column(name = "advCode")
+    private String advcode;
+
+    /**
+     * 广告开始时间
+     */
+    @Column(name = "advStartTime")
+    private Date advstarttime;
+
+    /**
+     * 广告结束时间
+     */
+    @Column(name = "advEndTime")
+    private Date advendtime;
+
+    /**
+     * 创建时间
+     */
+    @Column(name = "createDate")
+    private Date createdate;
+
+    /**
+     * 广告类型信息JSON字符串
+     */
+    @Column(name = "advTypeInfo")
+    private String advtypeinfo;
+
+    /**
+     * 广告状态1：启用，0：关闭
+     */
+    @Column(name = "startUsing")
+    private Integer startusing;
+
+    /**
+     * @return advId
+     */
+    public Long getAdvid() {
+        return advid;
     }
 
-    public void setAdvId(Long advId) {
-        this.advId = advId;
+    /**
+     * @param advid
+     */
+    public void setAdvid(Long advid) {
+        this.advid = advid;
     }
 
-    public String getAdvName() {
-        return advName;
+    /**
+     * 获取广告名称
+     *
+     * @return advName - 广告名称
+     */
+    public String getAdvname() {
+        return advname;
     }
 
-    public void setAdvName(String advName) {
-        this.advName = advName;
+    /**
+     * 设置广告名称
+     *
+     * @param advname 广告名称
+     */
+    public void setAdvname(String advname) {
+        this.advname = advname;
     }
 
-    public String getAdvStartTime() {
-        return advStartTime;
+    /**
+     * 获取广告类型1:图片，2：Flash，3：文字，4：代码
+     *
+     * @return advType - 广告类型1:图片，2：Flash，3：文字，4：代码
+     */
+    public Integer getAdvtype() {
+        return advtype;
     }
 
-    public void setAdvStartTime(String advStartTime) {
-        this.advStartTime = advStartTime;
+    /**
+     * 设置广告类型1:图片，2：Flash，3：文字，4：代码
+     *
+     * @param advtype 广告类型1:图片，2：Flash，3：文字，4：代码
+     */
+    public void setAdvtype(Integer advtype) {
+        this.advtype = advtype;
     }
 
-    public String getAdvEndTime() {
-        return advEndTime;
+    /**
+     * 获取广告版位ID
+     *
+     * @return advPosId - 广告版位ID
+     */
+    public Long getAdvposid() {
+        return advposid;
     }
 
-    public void setAdvEndTime(String advEndTime) {
-        this.advEndTime = advEndTime;
+    /**
+     * 设置广告版位ID
+     *
+     * @param advposid 广告版位ID
+     */
+    public void setAdvposid(Long advposid) {
+        this.advposid = advposid;
     }
 
-    public int getStartUsing() {
-        return startUsing;
+    /**
+     * 获取广告代码
+     *
+     * @return advCode - 广告代码
+     */
+    public String getAdvcode() {
+        return advcode;
     }
 
-    public void setStartUsing(int startUsing) {
-        this.startUsing = startUsing;
+    /**
+     * 设置广告代码
+     *
+     * @param advcode 广告代码
+     */
+    public void setAdvcode(String advcode) {
+        this.advcode = advcode;
     }
 
-    public int getAdvType() {
-        return advType;
+    /**
+     * 获取广告开始时间
+     *
+     * @return advStartTime - 广告开始时间
+     */
+    public Date getAdvstarttime() {
+        return advstarttime;
     }
 
-    public void setAdvType(int advType) {
-        this.advType = advType;
-    }
-    @Ignore
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    /**
+     * 设置广告开始时间
+     *
+     * @param advstarttime 广告开始时间
+     */
+    public void setAdvstarttime(Date advstarttime) {
+        this.advstarttime = advstarttime;
     }
 
-    public String getAdvCode() {
-        return advCode;
+    /**
+     * 获取广告结束时间
+     *
+     * @return advEndTime - 广告结束时间
+     */
+    public Date getAdvendtime() {
+        return advendtime;
     }
 
-    public void setAdvCode(String advCode) {
-        this.advCode = advCode;
+    /**
+     * 设置广告结束时间
+     *
+     * @param advendtime 广告结束时间
+     */
+    public void setAdvendtime(Date advendtime) {
+        this.advendtime = advendtime;
     }
 
-    public String getAdvTypeInfo() {
-        return advTypeInfo;
+    /**
+     * 获取创建时间
+     *
+     * @return createDate - 创建时间
+     */
+    public Date getCreatedate() {
+        return createdate;
     }
 
-    public void setAdvTypeInfo(String advTypeInfo) {
-        this.advTypeInfo = advTypeInfo;
+    /**
+     * 设置创建时间
+     *
+     * @param createdate 创建时间
+     */
+    public void setCreatedate(Date createdate) {
+        this.createdate = createdate;
     }
 
-    @ManyToOne()
-    @JoinColumn(name = "advPosId")
-    public AdvPos getAdvPos() {
-        return advPos;
+    /**
+     * 获取广告类型信息JSON字符串
+     *
+     * @return advTypeInfo - 广告类型信息JSON字符串
+     */
+    public String getAdvtypeinfo() {
+        return advtypeinfo;
     }
 
-    public void setAdvPos(AdvPos advPos) {
-        this.advPos = advPos;
+    /**
+     * 设置广告类型信息JSON字符串
+     *
+     * @param advtypeinfo 广告类型信息JSON字符串
+     */
+    public void setAdvtypeinfo(String advtypeinfo) {
+        this.advtypeinfo = advtypeinfo;
     }
 
-    @Override
-    public String toString() {
-        return "Adv{" +
-                "advId=" + advId +
-                ", advName='" + advName + '\'' +
-                ", advStartTime='" + advStartTime + '\'' +
-                ", advEndTime='" + advEndTime + '\'' +
-                ", startUsing=" + startUsing +
-                ", advType=" + advType +
-                ", createDate=" + createDate +
-                ", advCode='" + advCode + '\'' +
-                ", advTypeInfo='" + advTypeInfo + '\'' +
-                ", advPos=" + advPos +
-                '}';
+    /**
+     * 获取广告状态1：启用，0：关闭
+     *
+     * @return startUsing - 广告状态1：启用，0：关闭
+     */
+    public Integer getStartusing() {
+        return startusing;
+    }
+
+    /**
+     * 设置广告状态1：启用，0：关闭
+     *
+     * @param startusing 广告状态1：启用，0：关闭
+     */
+    public void setStartusing(Integer startusing) {
+        this.startusing = startusing;
     }
 }

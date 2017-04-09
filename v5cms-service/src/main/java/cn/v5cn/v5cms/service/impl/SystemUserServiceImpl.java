@@ -1,11 +1,9 @@
 package cn.v5cn.v5cms.service.impl;
 
+import cn.v5cn.v5cms.dao.SystemUserMapper;
 import cn.v5cn.v5cms.service.SystemUserService;
-import cn.v5cn.v5cms.dao.SystemUserDao;
 import cn.v5cn.v5cms.entity.SystemUser;
-import cn.v5cn.v5cms.util.PropertyUtils;
 import com.google.common.collect.Lists;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +16,11 @@ import java.util.List;
 public class SystemUserServiceImpl implements SystemUserService {
 
     @Autowired
-    private SystemUserDao systemUserDao;
+    private SystemUserMapper systemUserMapper;
 
     @Override
     public SystemUser findByLoginname(String loginname) {
-        return systemUserDao.findByLoginname(loginname);
+        return null;//systemUserDao.findByLoginname(loginname);
     }
 
     /*@Override

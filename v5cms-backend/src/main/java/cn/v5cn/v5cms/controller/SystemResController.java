@@ -2,7 +2,6 @@ package cn.v5cn.v5cms.controller;
 
 import cn.v5cn.v5cms.service.SystemResService;
 import cn.v5cn.v5cms.entity.SystemRes;
-import cn.v5cn.v5cms.entity.wrapper.ZTreeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,11 +32,11 @@ public class SystemResController {
         return "userauth/res_list";
     }
 
-    @ResponseBody
+    /*@ResponseBody
     @RequestMapping(value = "/tree/json",method = RequestMethod.POST)
     public List<ZTreeNode> columnTree(){
         List<ZTreeNode> treeNodes = systemResService.buildTreeNode(0L);
         LOGGER.debug("treeNodes: " + treeNodes);
         return treeNodes;
-    }
+    }*/
 }

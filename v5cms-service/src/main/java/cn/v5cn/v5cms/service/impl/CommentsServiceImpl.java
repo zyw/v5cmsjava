@@ -1,14 +1,10 @@
 package cn.v5cn.v5cms.service.impl;
 
-import cn.v5cn.v5cms.dao.CommentsDao;
+import cn.v5cn.v5cms.dao.CommentsMapper;
 import cn.v5cn.v5cms.entity.Comments;
 import cn.v5cn.v5cms.service.CommentsService;
-import cn.v5cn.v5cms.util.PropertyUtils;
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Created by ZXF-PC1 on 2015/7/28.
@@ -17,7 +13,7 @@ import java.util.List;
 public class CommentsServiceImpl implements CommentsService {
 
     @Autowired
-    private CommentsDao commentsDao;
+    private CommentsMapper commentsMapper;
 
     /*@Override
     public Page<Comments> findCommentsPageable(final Comments comment, Integer currPage) {

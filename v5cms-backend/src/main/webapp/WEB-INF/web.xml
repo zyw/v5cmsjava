@@ -58,7 +58,7 @@
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
 
-    <!-- JPA Filter -->
+    <!-- JPA Filter
     <filter>
         <filter-name>openEntityManagerInViewFilter</filter-name>
         <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
@@ -68,7 +68,7 @@
         <filter-name>openEntityManagerInViewFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
+ -->
 
     <filter>
         <filter-name>encodingFilter</filter-name>

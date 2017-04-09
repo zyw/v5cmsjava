@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.v5cn.v5cms.dao.ContentLabelMapper">
+  <resultMap id="BaseResultMap" type="cn.v5cn.v5cms.entity.ContentLabel">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="content_labelId" jdbcType="BIGINT" property="contentLabelid" />
+    <result column="contentId" jdbcType="INTEGER" property="contentid" />
+    <result column="labelId" jdbcType="INTEGER" property="labelid" />
+  </resultMap>
+</mapper>

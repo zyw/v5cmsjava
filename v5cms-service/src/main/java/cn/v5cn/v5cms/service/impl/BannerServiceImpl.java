@@ -1,10 +1,8 @@
 package cn.v5cn.v5cms.service.impl;
 
-import cn.v5cn.v5cms.dao.BannerDao;
+import cn.v5cn.v5cms.dao.BannerMapper;
 import cn.v5cn.v5cms.entity.Banner;
 import cn.v5cn.v5cms.service.BannerService;
-import cn.v5cn.v5cms.util.PropertyUtils;
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +15,7 @@ import java.util.List;
 public class BannerServiceImpl implements BannerService {
 
     @Autowired
-    private BannerDao bannerDao;
+    private BannerMapper bannerMapper;
 
     /**
      * ==============================================================

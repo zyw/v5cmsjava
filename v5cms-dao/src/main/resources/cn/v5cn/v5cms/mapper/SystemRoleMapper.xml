@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.v5cn.v5cms.dao.SystemRoleMapper">
+  <resultMap id="BaseResultMap" type="cn.v5cn.v5cms.entity.SystemRole">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sortNum" jdbcType="INTEGER" property="sortnum" />
+    <result column="pid" jdbcType="BIGINT" property="pid" />
+    <result column="des" jdbcType="VARCHAR" property="des" />
+    <result column="available" jdbcType="INTEGER" property="available" />
+    <result column="createAt" jdbcType="TIMESTAMP" property="createat" />
+  </resultMap>
+</mapper>

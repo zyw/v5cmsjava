@@ -24,6 +24,6 @@ public class FrontIndexController {
 
         Site site = (Site)request.getSession().getAttribute(SystemConstant.FRONT_SITE_SESSION_KEY);
 
-        return site.getThemeName()+"/index";
+        return "";//site.getThemeName()+"/index";
     }
 }

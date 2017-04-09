@@ -1,8 +1,8 @@
 package cn.v5cn.v5cms.service.impl;
 
+import cn.v5cn.v5cms.dao.AdvposMapper;
 import cn.v5cn.v5cms.service.AdvPosService;
-import cn.v5cn.v5cms.dao.AdvPosDao;
-import cn.v5cn.v5cms.entity.AdvPos;
+import cn.v5cn.v5cms.entity.Advpos;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,21 +18,21 @@ import java.util.List;
 public class AdvPosServiceImpl implements AdvPosService {
 
     @Autowired
-    private AdvPosDao advPosDao;
+    private AdvposMapper advposMapper;
 
     @Override
     @Transactional
-    public AdvPos save(AdvPos advPos) {
+    public Advpos save(Advpos advPos) {
         return null;//advPosDao.save(advPos);
     }
 
     @Override
-    public ImmutableList<AdvPos> finadAll() {
+    public ImmutableList<Advpos> finadAll() {
         return null;//ImmutableList.<AdvPos>builder().addAll(advPosDao.findAll()).build();
     }
 
     @Override
-    public AdvPos findOne(Long advPosId) {
+    public Advpos findOne(Long advPosId) {
         return null;//advPosDao.findOne(advPosId);
     }
 
@@ -46,11 +46,11 @@ public class AdvPosServiceImpl implements AdvPosService {
 
     @Override
     public void deleteAdvPos(Long[] advPosIds) {
-        List<AdvPos> advPoses = Lists.newArrayList();
-        AdvPos advPos = null;
+        List<Advpos> advPoses = Lists.newArrayList();
+        Advpos advPos = null;
         for(Long advPosId : advPosIds){
-            advPos = new AdvPos();
-            advPos.setAdvPosId(advPosId);
+            advPos = new Advpos();
+            //advPos.setAdvPosId(advPosId);
             advPoses.add(advPos);
         }
 //        advPosDao.delete(advPoses);

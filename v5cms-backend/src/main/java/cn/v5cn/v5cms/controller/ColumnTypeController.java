@@ -1,10 +1,9 @@
 package cn.v5cn.v5cms.controller;
 
-import cn.v5cn.v5cms.entity.ColumnType;
+import cn.v5cn.v5cms.entity.Coltype;
 import cn.v5cn.v5cms.entity.Site;
 import cn.v5cn.v5cms.exception.V5CMSNullValueException;
 import cn.v5cn.v5cms.service.ColumnTypeService;
-import cn.v5cn.v5cms.util.HttpUtils;
 import cn.v5cn.v5cms.util.SystemConstant;
 import cn.v5cn.v5cms.util.SystemUtils;
 import com.google.common.collect.ImmutableMap;
@@ -41,8 +40,8 @@ public class ColumnTypeController {
     private ColumnTypeService columnTypeService;
 
     @RequestMapping(value = "/list/{p}",method = RequestMethod.GET)
-    public String colTypeList(ColumnType columnType,@PathVariable Integer p,HttpServletRequest request,ModelMap modelMap){
-        Session session = SystemUtils.getShiroSession();
+    public String colTypeList(Coltype columnType,@PathVariable Integer p,HttpServletRequest request,ModelMap modelMap){
+        /*Session session = SystemUtils.getShiroSession();
         if(StringUtils.isNotBlank(columnType.getColTypeName())){
             session.setAttribute("columnTypeSearch",columnType);
             modelMap.addAttribute("colTypeNameSearch",columnType.getColTypeName());
@@ -54,7 +53,7 @@ public class ColumnTypeController {
         ColumnType colType = searchObj == null ? (new ColumnType()) : ((ColumnType) searchObj);
 
         Site site = (Site)(SystemUtils.getSessionSite());
-        colType.setSiteId(site.getSiteId());
+        colType.setSiteId(site.getSiteId());*/
 
 //        Page<ColumnType> pageColumnTypes = columnTypeService.findColumnTypeByColTypeNamePageable(colType, p);
 //        modelMap.addAttribute("cts",pageColumnTypes.getContent());
@@ -65,7 +64,7 @@ public class ColumnTypeController {
     @RequestMapping(value = "/edit/{colTypeId}",method = RequestMethod.GET)
     public String columnTypeEdit(@PathVariable Long colTypeId,ModelMap modelMap,HttpSession session){
 
-        Site site = (Site)(SystemUtils.getSessionSite());
+        /*Site site = (Site)(SystemUtils.getSessionSite());
         String templateBasePath = session.getServletContext().getRealPath(SystemConstant.SITE_TEMPLATE_PATH);
         String themeName = site.getThemeName();
         if(StringUtils.isBlank(themeName)){
@@ -93,16 +92,16 @@ public class ColumnTypeController {
                 throw new V5CMSNullValueException("ID为"+colTypeId+"的栏目类型数据没有查到！");
             }
             modelMap.addAttribute(columnType);
-        }
+        }*/
 
         return "column/coltype_edit";
     }
 
     @ResponseBody
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
-    public ImmutableMap<String,String> columnTypeEdit(ColumnType columnType){
+    public ImmutableMap<String,String> columnTypeEdit(Coltype columnType){
         //设置站点ID
-        Site site = (Site)(SystemUtils.getSessionSite());
+        /*Site site = (Site)(SystemUtils.getSessionSite());
         columnType.setSiteId(site.getSiteId());
         if(columnType.getColTypeId() == null){
 
@@ -120,7 +119,7 @@ public class ColumnTypeController {
             e.printStackTrace();
             LOGGER.error("修改栏目类型失败，{},失败堆栈错误：{}",columnType,e.getMessage());
             return ImmutableMap.of("status","0","message",getMessage("column.type.updatefailed.message"));
-        }
+        }*/
         return ImmutableMap.of("status","1","message",getMessage("column.type.updatesuccess.message"));
     }
 

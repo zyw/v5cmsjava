@@ -125,7 +125,7 @@ public class TemplateController {
         }
         try {
             Site site = (Site)SystemUtils.getSessionSite();
-            site.setThemeName(tplName);
+            //site.setThemeName(tplName);
             siteService.updateTemplate(site);
             return ImmutableMap.of("status","1","message",getMessage("tpl.updatetplsuccess.message"));
         } catch (Exception e){

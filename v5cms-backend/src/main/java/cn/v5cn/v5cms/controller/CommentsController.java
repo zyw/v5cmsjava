@@ -32,12 +32,12 @@ public class CommentsController {
     @RequestMapping(value = "/list/{p}",method = {RequestMethod.GET,RequestMethod.POST})
     public String commentsList(Comments comment,@PathVariable Integer p,HttpServletRequest request,ModelMap modelMap){
         Session session = SystemUtils.getShiroSession();
-        if(StringUtils.isNotBlank(comment.getCommentContent())){
+        /*if(StringUtils.isNotBlank(comment.getCommentContent())){
             session.setAttribute("commentsSearch",comment);
             modelMap.addAttribute("searchComments",comment);
         }else{
             session.setAttribute("commentsSearch",null);
-        }
+        }*/
         Object searchObj = session.getAttribute("commentsSearch");
 
 //        Page<Comments> result =  commentsService.findCommentsPageable((searchObj == null ? (new Comments()) : ((Comments) searchObj)), p);

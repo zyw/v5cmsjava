@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.v5cn.v5cms.dao.ColsMapper">
+  <resultMap id="BaseResultMap" type="cn.v5cn.v5cms.entity.Cols">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="colsId" jdbcType="BIGINT" property="colsid" />
+    <result column="columnName" jdbcType="VARCHAR" property="columnname" />
+    <result column="colTypeId" jdbcType="BIGINT" property="coltypeid" />
+    <result column="sortNum" jdbcType="INTEGER" property="sortnum" />
+    <result column="columndisplay" jdbcType="INTEGER" property="columndisplay" />
+    <result column="openWay" jdbcType="VARCHAR" property="openway" />
+    <result column="columnOutside" jdbcType="VARCHAR" property="columnoutside" />
+    <result column="columnpic" jdbcType="VARCHAR" property="columnpic" />
+    <result column="parentId" jdbcType="INTEGER" property="parentid" />
+    <result column="parentIds" jdbcType="VARCHAR" property="parentids" />
+    <result column="siteId" jdbcType="BIGINT" property="siteid" />
+  </resultMap>
+</mapper>

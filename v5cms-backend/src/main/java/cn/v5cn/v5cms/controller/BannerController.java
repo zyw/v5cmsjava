@@ -50,12 +50,12 @@ public class BannerController {
     @RequestMapping(value = "/list/{p}",method = {RequestMethod.GET,RequestMethod.POST})
     public String bannerList(Banner banner,@PathVariable Integer p,HttpServletRequest request,ModelMap modelMap){
         Session session = SystemUtils.getShiroSession();
-        if(StringUtils.isNotBlank(banner.getBannerName())){
+        /*if(StringUtils.isNotBlank(banner.getBannerName())){
             session.setAttribute("bannerSearch",banner);
             modelMap.addAttribute("searchBanner",banner);
         }else{
             session.setAttribute("bannerSearch",null);
-        }
+        }*/
         Object searchObj = session.getAttribute("bannerSearch");
 
 //        Page<Banner> result =  bannerService.findBannerPageable((searchObj == null ? (new Banner()) : ((Banner) searchObj)), p);
@@ -89,7 +89,7 @@ public class BannerController {
             return ImmutableMap.<String, Object>builder().putAll(errorMessage).build();
         }
 
-        if(banner.getBannerId() == null || banner.getBannerId() == 0){
+        /*if(banner.getBannerId() == null || banner.getBannerId() == 0){
             Banner result = bannerService.save(banner);
             if(result == null || result.getBannerId() == null || result.getBannerId() == 0){
                 LOGGER.warn("Banner添加失败，链接{}",result);
@@ -97,7 +97,7 @@ public class BannerController {
             }
             LOGGER.info("Banner添加成功，链接ID{}",result.getBannerds());
             return ImmutableMap.<String, Object>of("status","1","message",getMessage("banner.addsuccess.message"));
-        }
+        }*/
         try {
             bannerService.save(banner);
         } catch (Exception e) {
@@ -115,7 +115,7 @@ public class BannerController {
             return ImmutableMap.of("status", "0", "message", getMessage("global.uploadempty.message"));
         }
         Site site = (Site)(SystemUtils.getSessionSite());
-        String bannerPath = PathFormat.parseSiteId(SystemConstant.BANNER_RES_PATH, site.getSiteId() + "");
+        String bannerPath = null;//PathFormat.parseSiteId(SystemConstant.BANNER_RES_PATH, site.getSiteId() + "");
         String realPath = HttpUtils.getRealPath(request, bannerPath);
 
         SystemUtils.isNotExistCreate(realPath);
@@ -143,11 +143,11 @@ public class BannerController {
             String realPath = session.getServletContext().getRealPath("");
             List<File> deleteFiles = Lists.newArrayList();
             File deleteFile;
-            for(Banner banner : banners){
+            /*for(Banner banner : banners){
                 if(banner.getBannerPic() == null || "".equals(banner.getBannerPic())) continue;
                 deleteFile = new File(realPath + banner.getBannerPic());
                 deleteFiles.add(deleteFile);
-            }
+            }*/
             bannerService.deleteInBatch(banners);
             deleteBannerRes(deleteFiles);
         } catch (Exception e) {

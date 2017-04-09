@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.v5cn.v5cms.dao.ColtypeMapper">
+  <resultMap id="BaseResultMap" type="cn.v5cn.v5cms.entity.Coltype">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="colTypeId" jdbcType="BIGINT" property="coltypeid" />
+    <result column="colTypeName" jdbcType="VARCHAR" property="coltypename" />
+    <result column="coltpl" jdbcType="VARCHAR" property="coltpl" />
+    <result column="contenttpl" jdbcType="VARCHAR" property="contenttpl" />
+    <result column="colsort" jdbcType="INTEGER" property="colsort" />
+    <result column="hasContent" jdbcType="INTEGER" property="hascontent" />
+    <result column="isDisabled" jdbcType="INTEGER" property="isdisabled" />
+    <result column="siteId" jdbcType="BIGINT" property="siteid" />
+  </resultMap>
+</mapper>

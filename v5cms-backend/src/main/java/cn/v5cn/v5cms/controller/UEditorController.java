@@ -32,7 +32,7 @@ public class UEditorController {
         response.setHeader("Content-Type" , "text/html");
 
         String realPath = HttpUtils.getRealPath(request,"/");//request.getSession().getServletContext().getRealPath("/");
-        out.write(new ActionEnter(null,request,realPath,site.getSiteId()+"").exec());
+        //out.write(new ActionEnter(null,request,realPath,site.getSiteId()+"").exec());
         out.flush();
     }
 
@@ -45,7 +45,7 @@ public class UEditorController {
         response.setHeader("Content-Type" , "text/html");
 
         String realPath = HttpUtils.getRealPath(request,"/");//request.getSession().getServletContext().getRealPath("/");
-        String uploadFileInfo = new ActionEnter(file, request, realPath,site.getSiteId()+"").exec();
+        String uploadFileInfo = null;///new ActionEnter(file, request, realPath,site.getSiteId()+"").exec();
         out.write(uploadFileInfo);
         out.flush();
     }

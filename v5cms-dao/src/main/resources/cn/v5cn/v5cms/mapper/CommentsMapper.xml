@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.v5cn.v5cms.dao.CommentsMapper">
+  <resultMap id="BaseResultMap" type="cn.v5cn.v5cms.entity.Comments">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="commentsId" jdbcType="BIGINT" property="commentsid" />
+    <result column="contentId" jdbcType="BIGINT" property="contentid" />
+    <result column="commentAuthor" jdbcType="VARCHAR" property="commentauthor" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="siteURL" jdbcType="VARCHAR" property="siteurl" />
+    <result column="commentIP" jdbcType="VARCHAR" property="commentip" />
+    <result column="commentDate" jdbcType="TIMESTAMP" property="commentdate" />
+    <result column="recommend" jdbcType="INTEGER" property="recommend" />
+    <result column="commentApproved" jdbcType="INTEGER" property="commentapproved" />
+    <result column="commentParent" jdbcType="BIGINT" property="commentparent" />
+    <result column="commentContent" jdbcType="LONGVARCHAR" property="commentcontent" />
+    <result column="reply" jdbcType="LONGVARCHAR" property="reply" />
+  </resultMap>
+</mapper>

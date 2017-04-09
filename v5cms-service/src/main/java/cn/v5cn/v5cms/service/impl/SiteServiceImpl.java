@@ -1,9 +1,8 @@
 package cn.v5cn.v5cms.service.impl;
 
+import cn.v5cn.v5cms.dao.SiteMapper;
 import cn.v5cn.v5cms.service.SiteService;
-import cn.v5cn.v5cms.dao.SiteDao;
 import cn.v5cn.v5cms.entity.Site;
-import cn.v5cn.v5cms.util.SystemUtils;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import org.joda.time.DateTime;
@@ -21,7 +20,7 @@ import java.util.List;
 public class SiteServiceImpl implements SiteService {
 
     @Autowired
-    private SiteDao siteDao;
+    private SiteMapper siteMapper;
 
     /**
      * ==============================================================
@@ -33,7 +32,7 @@ public class SiteServiceImpl implements SiteService {
 
     @Override
     public Site findBySiteId(Long siteId) {
-        return siteDao.findBySiteId(siteId);
+        return null;//siteDao.findBySiteId(siteId);
     }
 
     @Override
@@ -44,13 +43,13 @@ public class SiteServiceImpl implements SiteService {
     @Override
     public ImmutableList<Site> findByIsclosesite(int isclosesite) {
 
-        return ImmutableList.<Site>builder().addAll(siteDao.findByIsclosesite(isclosesite)).build();
+        return null;//ImmutableList.<Site>builder().addAll(siteDao.findByIsclosesite(isclosesite)).build();
     }
 
     @Override
     @Transactional
     public Long addSite(Site site) {
-        site.setCreateDate(DateTime.now().toDate());
+        //site.setCreateDate(DateTime.now().toDate());
 
         return null;//siteDao.save(site).getSiteId();
     }
@@ -68,7 +67,7 @@ public class SiteServiceImpl implements SiteService {
         Site site = null;
         for(Long siteId : siteIds){
             site = new Site();
-            site.setSiteId(siteId);
+            //site.setSiteId(siteId);
             sites.add(site);
         }
 //        siteDao.delete(sites);
@@ -76,7 +75,7 @@ public class SiteServiceImpl implements SiteService {
 
     @Override
     public long countByDomainAndSiteIdNot(String domain,Long siteId) {
-        return siteDao.countByDomainAndSiteIdNot(domain,siteId);
+        return 0L;//siteDao.countByDomainAndSiteIdNot(domain,siteId);
     }
 
     /**
@@ -89,6 +88,6 @@ public class SiteServiceImpl implements SiteService {
 
     @Override
     public Site findByDomain(String domain) {
-        return siteDao.findByDomain(domain);
+        return null;//siteDao.findByDomain(domain);
     }
 }

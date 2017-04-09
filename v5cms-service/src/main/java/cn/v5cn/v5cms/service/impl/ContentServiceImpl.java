@@ -1,11 +1,9 @@
 package cn.v5cn.v5cms.service.impl;
 
+import cn.v5cn.v5cms.dao.ContentMapper;
 import cn.v5cn.v5cms.service.ContentService;
-import cn.v5cn.v5cms.dao.ContentDao;
-import cn.v5cn.v5cms.entity.Column;
+import cn.v5cn.v5cms.entity.Cols;
 import cn.v5cn.v5cms.entity.Content;
-import cn.v5cn.v5cms.util.PropertyUtils;
-import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +21,7 @@ public class ContentServiceImpl implements ContentService {
     private final static Logger LOGGER = LoggerFactory.getLogger(ContentServiceImpl.class);
 
     @Autowired
-    private ContentDao contentDao;
+    private ContentMapper contentMapper;
 
     /**
      * ==============================================================

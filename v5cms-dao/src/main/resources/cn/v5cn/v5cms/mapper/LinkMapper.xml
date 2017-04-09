@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.v5cn.v5cms.dao.LinkMapper">
+  <resultMap id="BaseResultMap" type="cn.v5cn.v5cms.entity.Link">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="linkId" jdbcType="BIGINT" property="linkid" />
+    <result column="linkName" jdbcType="VARCHAR" property="linkname" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="linkPic" jdbcType="VARCHAR" property="linkpic" />
+    <result column="openType" jdbcType="VARCHAR" property="opentype" />
+    <result column="isstart" jdbcType="INTEGER" property="isstart" />
+  </resultMap>
+</mapper>

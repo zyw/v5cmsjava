@@ -1,8 +1,5 @@
 package cn.v5cn.v5cms.controller;
 
-import cn.v5cn.v5cms.entity.wrapper.FileInfo;
-import cn.v5cn.v5cms.entity.wrapper.ZTreeFileNode;
-import cn.v5cn.v5cms.entity.wrapper.ZTreeNode;
 import cn.v5cn.v5cms.util.PropertyUtils;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
@@ -49,8 +46,8 @@ public class ResourceController {
         String resPath = PropertyUtils.getValue("tpl.res.path").or("/res/front");
         String realResPath = request.getSession().getServletContext().getRealPath(resPath);
         if(Strings.isNullOrEmpty(path)){
-            List<FileInfo> fileInfos = fileInfos(new File(realResPath),realResPath);
-            modelMap.put("files",fileInfos);
+            //List<FileInfo> fileInfos = fileInfos(new File(realResPath),realResPath);
+            //modelMap.put("files",fileInfos);
             modelMap.put("path","/");
             modelMap.put("fileName","资源根目录");
             return "resource/resource_list";
@@ -77,8 +74,8 @@ public class ResourceController {
 
             return "resource/resource_open";
         }else{
-            List<FileInfo> fileInfos = fileInfos(file,realResPath);
-            modelMap.put("files", fileInfos);
+//            List<FileInfo> fileInfos = fileInfos(file,realResPath);
+//            modelMap.put("files", fileInfos);
             modelMap.put("path",path);
             modelMap.put("fileName",file.getName());
             return "resource/resource_list";
@@ -164,18 +161,18 @@ public class ResourceController {
         }
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/tree/json",method = RequestMethod.POST)
-    public ZTreeNode resourceTree(HttpServletRequest request){
-        String resPath = PropertyUtils.getValue("tpl.res.path").or("/res/front");
-        ZTreeFileNode rootNode = new ZTreeFileNode("资源树","/",true);
-        String realResPath = request.getSession().getServletContext().getRealPath(resPath);
-
-        File resFile = new File(realResPath);
-        List<ZTreeFileNode> nodeList = fileNdoes(resFile, realResPath);
-        rootNode.setChildren(nodeList);
-        return rootNode;
-    }
+//    @ResponseBody
+//    @RequestMapping(value = "/tree/json",method = RequestMethod.POST)
+//    public ZTreeNode resourceTree(HttpServletRequest request){
+//        String resPath = PropertyUtils.getValue("tpl.res.path").or("/res/front");
+//        ZTreeFileNode rootNode = new ZTreeFileNode("资源树","/",true);
+//        String realResPath = request.getSession().getServletContext().getRealPath(resPath);
+//
+//        File resFile = new File(realResPath);
+//        List<ZTreeFileNode> nodeList = fileNdoes(resFile, realResPath);
+//        rootNode.setChildren(nodeList);
+//        return rootNode;
+//    }
 
     @ResponseBody
     @RequestMapping(value = "/res/upload",method = RequestMethod.POST)
@@ -199,50 +196,50 @@ public class ResourceController {
     /**
      * 资源树加载
      * */
-    private List<ZTreeFileNode> fileNdoes(File file,String basePath){
-        List<ZTreeFileNode> nodeList = Lists.newArrayList();
-        ZTreeFileNode fileNode;
-        if(file.isFile()){
-            fileNode = new ZTreeFileNode();
-            fileNode.setName(file.getName());
-            fileNode.setFileUri(StringUtils.remove(file.getAbsolutePath(), basePath));
-            nodeList.add(fileNode);
-
-            return nodeList;
-        }
-        File[] files = file.listFiles();
-        for(File temp : files){
-            fileNode = new ZTreeFileNode();
-            fileNode.setName(temp.getName());
-            fileNode.setFileUri(StringUtils.remove(temp.getAbsolutePath(), basePath));
-            fileNode.setOrder(2);
-            if(temp.isDirectory()){
-                fileNode.setOrder(1);
-                fileNode.setChildren(fileNdoes(temp,basePath));
-            }
-            nodeList.add(fileNode);
-        }
-        //对资源进行排序文件夹显示在上面，文件显示在下面
-        Collections.sort(nodeList, new Comparator<ZTreeFileNode>() {
-            @Override
-            public int compare(ZTreeFileNode o1, ZTreeFileNode o2) {
-                if (o1.getOrder() == 1) {
-                    return -1;
-                } else if (o1.getOrder() == 2) {
-                    return 1;
-                } else {
-                    return 0;
-                }
-            }
-        });
-
-        return nodeList;
-    }
+//    private List<ZTreeFileNode> fileNdoes(File file,String basePath){
+//        List<ZTreeFileNode> nodeList = Lists.newArrayList();
+//        ZTreeFileNode fileNode;
+//        if(file.isFile()){
+//            fileNode = new ZTreeFileNode();
+//            fileNode.setName(file.getName());
+//            fileNode.setFileUri(StringUtils.remove(file.getAbsolutePath(), basePath));
+//            nodeList.add(fileNode);
+//
+//            return nodeList;
+//        }
+//        File[] files = file.listFiles();
+//        for(File temp : files){
+//            fileNode = new ZTreeFileNode();
+//            fileNode.setName(temp.getName());
+//            fileNode.setFileUri(StringUtils.remove(temp.getAbsolutePath(), basePath));
+//            fileNode.setOrder(2);
+//            if(temp.isDirectory()){
+//                fileNode.setOrder(1);
+//                fileNode.setChildren(fileNdoes(temp,basePath));
+//            }
+//            nodeList.add(fileNode);
+//        }
+//        //对资源进行排序文件夹显示在上面，文件显示在下面
+//        Collections.sort(nodeList, new Comparator<ZTreeFileNode>() {
+//            @Override
+//            public int compare(ZTreeFileNode o1, ZTreeFileNode o2) {
+//                if (o1.getOrder() == 1) {
+//                    return -1;
+//                } else if (o1.getOrder() == 2) {
+//                    return 1;
+//                } else {
+//                    return 0;
+//                }
+//            }
+//        });
+//
+//        return nodeList;
+//    }
 
     /**
      * 文件信息初始化
      * */
-    private List<FileInfo> fileInfos(File file,String basePath){
+    /*private List<FileInfo> fileInfos(File file,String basePath){
         List<FileInfo> result = Lists.newArrayList();
         FileInfo fileInfo;
 
@@ -270,7 +267,7 @@ public class ResourceController {
         }
 
         return result;
-    }
+    }*/
 
     /**
      * 文件夹大小

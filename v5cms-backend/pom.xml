@@ -80,16 +80,6 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
         </dependency>
-        <!--数据库驱动连接池-->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.jolbox</groupId>
-            <artifactId>bonecp</artifactId>
-        </dependency>
-        <!--./数据库驱动连接池-->
 
         <dependency>
             <groupId>com.github.axet</groupId>

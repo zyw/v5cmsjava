@@ -1,6 +1,6 @@
 package cn.v5cn.v5cms.front.freemarker;
 
-import cn.v5cn.v5cms.entity.Column;
+import cn.v5cn.v5cms.entity.Cols;
 import cn.v5cn.v5cms.front.util.SpringContextsUtil;
 import cn.v5cn.v5cms.service.ColumnService;
 import freemarker.core.Environment;
@@ -89,7 +89,7 @@ public class ColumnDirective implements TemplateDirectiveModel {
             }
         }
 
-        List<Column> columns = columnService.findByParentId(parentId,siteId,maxSize);
+        List<Cols> columns = columnService.findByParentId(parentId,siteId,maxSize);
         env.setVariable("columns", new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_22).build().wrap(columns));
 
         if(body != null){

@@ -1,7 +1,6 @@
 package cn.v5cn.v5cms.service;
 
 import cn.v5cn.v5cms.entity.SystemRes;
-import cn.v5cn.v5cms.entity.wrapper.ZTreeNode;
 
 import java.util.List;
 
@@ -10,5 +9,5 @@ import java.util.List;
  */
 public interface SystemResService {
     List<SystemRes> findOrderByPidsAndId();
-    List<ZTreeNode> buildTreeNode(Long parentId);
+    List<Object> buildTreeNode(Long parentId);
 }

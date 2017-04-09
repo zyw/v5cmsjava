@@ -1,106 +1,137 @@
 package cn.v5cn.v5cms.entity;
 
-import com.google.common.collect.Sets;
-
-import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+import javax.persistence.*;
 
-/**
- * Created by ZXF-PC1 on 2015/6/26.
- */
-@Entity
 @Table(name = "system_role")
-public class SystemRole implements Serializable {
-    private Long id;
-    private String name;
-    private Integer sortNum;
-    private Long pid;
-    private String des;
-    private Integer available;
-    private Date createAt;
-
+public class SystemRole {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @Column(name = "sortNum")
+    private Integer sortnum;
+
+    private Long pid;
+
+    private String des;
+
+    /**
+     * 1 可用 0 不可用
+     */
+    private Integer available;
+
+    /**
+     * 创建时间
+     */
+    @Column(name = "createAt")
+    private Date createat;
+
+    /**
+     * @return id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
-    public Integer getSortNum() {
-        return sortNum;
+    /**
+     * @return sortNum
+     */
+    public Integer getSortnum() {
+        return sortnum;
     }
 
-    public void setSortNum(Integer sortNum) {
-        this.sortNum = sortNum;
+    /**
+     * @param sortnum
+     */
+    public void setSortnum(Integer sortnum) {
+        this.sortnum = sortnum;
     }
 
+    /**
+     * @return pid
+     */
     public Long getPid() {
         return pid;
     }
 
+    /**
+     * @param pid
+     */
     public void setPid(Long pid) {
         this.pid = pid;
     }
 
+    /**
+     * @return des
+     */
     public String getDes() {
         return des;
     }
 
+    /**
+     * @param des
+     */
     public void setDes(String des) {
         this.des = des;
     }
 
+    /**
+     * 获取1 可用 0 不可用
+     *
+     * @return available - 1 可用 0 不可用
+     */
     public Integer getAvailable() {
         return available;
     }
 
+    /**
+     * 设置1 可用 0 不可用
+     *
+     * @param available 1 可用 0 不可用
+     */
     public void setAvailable(Integer available) {
         this.available = available;
     }
 
-
-    public Date getCreateAt() {
-        return createAt;
+    /**
+     * 获取创建时间
+     *
+     * @return createAt - 创建时间
+     */
+    public Date getCreateat() {
+        return createat;
     }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
-    }
-
-    private Set<SystemRes> reses = Sets.newHashSet();
-
-    @ManyToMany
-    @JoinTable(name = "system_role_res",joinColumns = @JoinColumn(name = "role_id"),inverseJoinColumns = @JoinColumn(name = "res_id"))
-    public Set<SystemRes> getReses() {
-        return reses;
-    }
-
-    public void setReses(Set<SystemRes> reses) {
-        this.reses = reses;
-    }
-
-    @Override
-    public String toString() {
-        return "SystemRole{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", sortNum=" + sortNum +
-                ", pid=" + pid +
-                ", des='" + des + '\'' +
-                ", available=" + available +
-                '}';
+    /**
+     * 设置创建时间
+     *
+     * @param createat 创建时间
+     */
+    public void setCreateat(Date createat) {
+        this.createat = createat;
     }
 }

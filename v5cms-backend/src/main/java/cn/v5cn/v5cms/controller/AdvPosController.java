@@ -1,7 +1,7 @@
 package cn.v5cn.v5cms.controller;
 
 import cn.v5cn.v5cms.service.AdvPosService;
-import cn.v5cn.v5cms.entity.AdvPos;
+import cn.v5cn.v5cms.entity.Advpos;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import org.slf4j.Logger;
@@ -40,16 +40,16 @@ public class AdvPosController {
 
     @RequestMapping(value = "/edit",method = RequestMethod.GET)
     public String advPosEdit(ModelMap model){
-        model.addAttribute("advpos",new AdvPos());
+        model.addAttribute("advpos",new Advpos());
         return "setting/advpos_edit";
     }
 
     @RequestMapping(value = "/edit/{advPosId}",method = RequestMethod.GET)
     public String advPosEdit(@PathVariable Long advPosId,ModelMap model){
 
-        AdvPos result = advPosService.findOne(advPosId);
+        Advpos result = advPosService.findOne(advPosId);
         if(result == null){
-            model.addAttribute("advpos",new AdvPos());
+            model.addAttribute("advpos",new Advpos());
         }else{
             model.addAttribute("advpos",result);
         }
@@ -60,7 +60,7 @@ public class AdvPosController {
 
     @ResponseBody
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
-    public ImmutableMap<String,Object> addUpdateAdvPos(@Valid AdvPos advPos,BindingResult bindingResult){
+    public ImmutableMap<String,Object> addUpdateAdvPos(@Valid Advpos advPos,BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
             Map<String, Object> errorMessage = Maps.newHashMap();
@@ -72,7 +72,7 @@ public class AdvPosController {
             return ImmutableMap.<String, Object>builder().putAll(errorMessage).build();
         }
         //新增操作
-        if(advPos.getAdvPosId() == null){
+        /*if(advPos.getAdvPosId() == null){
             AdvPos result = advPosService.save(advPos);
             if(result.getAdvPosId() !=null && result.getAdvPosId() != 0L){
                 LOGGER.info("新增广告版位成功，{}",result);
@@ -80,7 +80,7 @@ public class AdvPosController {
             }
             LOGGER.warn("新增广告版位失败，{}",result);
             return ImmutableMap.<String, Object>of("status","0","message",getMessage("advpos.addfailed.message"));
-        }
+        }*/
         //修改操作
 //        AdvPos updateAdvPos = null;
 //        try {
@@ -94,7 +94,7 @@ public class AdvPosController {
 //            LOGGER.error("修改广告版位失败，{},失败堆栈错误：{}",advPos,e.getMessage());
 //            return ImmutableMap.<String, Object>of("status","0","message",getMessage("advpos.updatefailed.message"));
 //        }
-        AdvPos updateAdvPos = null;
+        Advpos updateAdvPos = null;
         try {
             updateAdvPos = advPosService.save(advPos);
         } catch (Exception e) {

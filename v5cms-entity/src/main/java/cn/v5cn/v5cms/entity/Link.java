@@ -1,80 +1,141 @@
 package cn.v5cn.v5cms.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
-/**
- * Created by ZXF-PC1 on 2015/7/22.
- */
-@Entity
-@Table
-public class Link implements Serializable {
-    private Long linkId;
-    private String linkName;        //连接名称
-    private String link;            //连接
-    private String linkPic;         //连接图片
-    private String openType;        //打开方式
-    private Integer isstart;        //是否启用，1：启用，0：不启用
-
+public class Link {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long getLinkId() {
-        return linkId;
+    @Column(name = "linkId")
+    private Long linkid;
+
+    /**
+     * 连接名称
+     */
+    @Column(name = "linkName")
+    private String linkname;
+
+    /**
+     * 连接
+     */
+    private String link;
+
+    /**
+     * 连接图片
+     */
+    @Column(name = "linkPic")
+    private String linkpic;
+
+    /**
+     * 打开方式
+     */
+    @Column(name = "openType")
+    private String opentype;
+
+    /**
+     * 是否启用。1：启用，2：不启用
+     */
+    private Integer isstart;
+
+    /**
+     * @return linkId
+     */
+    public Long getLinkid() {
+        return linkid;
     }
 
-    public void setLinkId(Long linkId) {
-        this.linkId = linkId;
+    /**
+     * @param linkid
+     */
+    public void setLinkid(Long linkid) {
+        this.linkid = linkid;
     }
 
-    public String getLinkName() {
-        return linkName;
+    /**
+     * 获取连接名称
+     *
+     * @return linkName - 连接名称
+     */
+    public String getLinkname() {
+        return linkname;
     }
 
-    public void setLinkName(String linkName) {
-        this.linkName = linkName;
+    /**
+     * 设置连接名称
+     *
+     * @param linkname 连接名称
+     */
+    public void setLinkname(String linkname) {
+        this.linkname = linkname;
     }
 
+    /**
+     * 获取连接
+     *
+     * @return link - 连接
+     */
     public String getLink() {
         return link;
     }
 
+    /**
+     * 设置连接
+     *
+     * @param link 连接
+     */
     public void setLink(String link) {
         this.link = link;
     }
 
-    public String getLinkPic() {
-        return linkPic;
+    /**
+     * 获取连接图片
+     *
+     * @return linkPic - 连接图片
+     */
+    public String getLinkpic() {
+        return linkpic;
     }
 
-    public void setLinkPic(String linkPic) {
-        this.linkPic = linkPic;
+    /**
+     * 设置连接图片
+     *
+     * @param linkpic 连接图片
+     */
+    public void setLinkpic(String linkpic) {
+        this.linkpic = linkpic;
     }
 
-    public String getOpenType() {
-        return openType;
+    /**
+     * 获取打开方式
+     *
+     * @return openType - 打开方式
+     */
+    public String getOpentype() {
+        return opentype;
     }
 
-    public void setOpenType(String openType) {
-        this.openType = openType;
+    /**
+     * 设置打开方式
+     *
+     * @param opentype 打开方式
+     */
+    public void setOpentype(String opentype) {
+        this.opentype = opentype;
     }
 
+    /**
+     * 获取是否启用。1：启用，2：不启用
+     *
+     * @return isstart - 是否启用。1：启用，2：不启用
+     */
     public Integer getIsstart() {
         return isstart;
     }
 
+    /**
+     * 设置是否启用。1：启用，2：不启用
+     *
+     * @param isstart 是否启用。1：启用，2：不启用
+     */
     public void setIsstart(Integer isstart) {
         this.isstart = isstart;
-    }
-
-    @Override
-    public String toString() {
-        return "Link{" +
-                "linkId=" + linkId +
-                ", linkName='" + linkName + '\'' +
-                ", link='" + link + '\'' +
-                ", linkPic='" + linkPic + '\'' +
-                ", openType='" + openType + '\'' +
-                ", isstart=" + isstart +
-                '}';
     }
 }
