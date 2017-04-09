@@ -19,4 +19,14 @@
     <result column="isclosesite" jdbcType="INTEGER" property="isclosesite" />
     <result column="themeName" jdbcType="VARCHAR" property="themename" />
   </resultMap>
+
+  <resultMap id="RoleIdResultType" type="cn.v5cn.v5cms.entity.Site" extends="BaseResultMap">
+    <result column="role_id" jdbcType="BIGINT" property="roleId"/>
+  </resultMap>
+
+  <select id="findByUserNotCloseSite" resultMap="RoleIdResultType">
+    select s.*,usr.`role_id` from site s inner join user_site_role usr
+    on s.`siteId`=usr.`site_id` where usr.`user_id`=#{userId} and s.`isclosesite`=1
+  </select>
+
 </mapper>

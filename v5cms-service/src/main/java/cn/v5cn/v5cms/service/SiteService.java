@@ -24,7 +24,7 @@ public interface SiteService {
     /**
      * 根据运行状态值查询站点
      * */
-    ImmutableList<Site> findByIsclosesite(int isclosesite);
+    ImmutableList<Site> findByUserNotCloseSite(long userId);
     /**
      * 添加站点信息
      * */

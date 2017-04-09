@@ -76,6 +76,12 @@ public class Site {
     private String themename;
 
     /**
+     * 角色ID
+     */
+    @Transient
+    private Long roleId;
+
+    /**
      * @return siteId
      */
     public Long getSiteid() {
@@ -303,5 +309,33 @@ public class Site {
      */
     public void setThemename(String themename) {
         this.themename = themename;
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
+    @Override
+    public String toString() {
+        return "Site{" +
+                "siteid=" + siteid +
+                ", sitename='" + sitename + '\'' +
+                ", domain='" + domain + '\'' +
+                ", protocol='" + protocol + '\'' +
+                ", sitedeputytitle='" + sitedeputytitle + '\'' +
+                ", sitekey='" + sitekey + '\'' +
+                ", sitedescribed='" + sitedescribed + '\'' +
+                ", createdate='" + createdate + '\'' +
+                ", siteicp='" + siteicp + '\'' +
+                ", sitestatisticcode='" + sitestatisticcode + '\'' +
+                ", sitefooterinfo='" + sitefooterinfo + '\'' +
+                ", isclosesite=" + isclosesite +
+                ", themename='" + themename + '\'' +
+                ", roleId=" + roleId +
+                '}';
     }
 }

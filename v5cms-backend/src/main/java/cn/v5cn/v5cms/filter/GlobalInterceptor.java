@@ -1,7 +1,9 @@
 package cn.v5cn.v5cms.filter;
 
+import cn.v5cn.v5cms.entity.SystemUser;
 import cn.v5cn.v5cms.service.SiteService;
 import cn.v5cn.v5cms.entity.Site;
+import cn.v5cn.v5cms.util.SystemConstant;
 import com.google.common.collect.ImmutableList;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,9 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter {
         HttpSession session = request.getSession();
         if(session.getAttribute(SITES_SESSION_KEY) != null) return true;
 
-        ImmutableList<Site> resultBiz = siteService.findByIsclosesite(1);
+        SystemUser systemUser = (SystemUser) session.getAttribute(SystemConstant.SESSION_KEY);
+
+        ImmutableList<Site> resultBiz = siteService.findByUserNotCloseSite(systemUser.getId());
         Site temp = resultBiz.size() == 0 ? new Site(): resultBiz.get(0);
         session.setAttribute(SITES_SESSION_KEY,resultBiz);
         session.setAttribute(SITE_SESSION_KEY,temp);

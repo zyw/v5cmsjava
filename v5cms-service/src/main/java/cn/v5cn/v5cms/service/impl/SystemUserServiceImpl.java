@@ -19,8 +19,10 @@ public class SystemUserServiceImpl implements SystemUserService {
     private SystemUserMapper systemUserMapper;
 
     @Override
-    public SystemUser findByLoginname(String loginname) {
-        return null;//systemUserDao.findByLoginname(loginname);
+    public SystemUser findByLoginName(String loginName) {
+        SystemUser systemUser = new SystemUser();
+        systemUser.setLoginname(loginName);
+        return systemUserMapper.selectOne(systemUser);
     }
 
     /*@Override

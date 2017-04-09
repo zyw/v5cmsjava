@@ -33,7 +33,7 @@ public class V5CMSRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         String loginName = authenticationToken.getPrincipal().toString();
-        SystemUser systemUser = systemUserService.findByLoginname(loginName);
+        SystemUser systemUser = systemUserService.findByLoginName(loginName);
         if(systemUser == null){
             throw new UnknownAccountException();
         }

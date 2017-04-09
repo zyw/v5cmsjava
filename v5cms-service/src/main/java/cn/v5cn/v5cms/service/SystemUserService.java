@@ -6,7 +6,12 @@ import cn.v5cn.v5cms.entity.SystemUser;
  * Created by ZXF-PC1 on 2015/6/18.
  */
 public interface SystemUserService {
-    SystemUser findByLoginname(String loginname);
+    /**
+     * 根据用户名查询用户信息
+     * @param loginName 用户名
+     * @return 返回一条用户信息
+     */
+    SystemUser findByLoginName(String loginName);
 //    Page<SystemUser> findUserByUserNamePageable(SystemUser user,Integer currPage);
 
 //    SystemUser save(SystemUser user);

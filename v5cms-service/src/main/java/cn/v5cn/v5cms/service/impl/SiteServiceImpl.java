@@ -41,9 +41,8 @@ public class SiteServiceImpl implements SiteService {
     }
 
     @Override
-    public ImmutableList<Site> findByIsclosesite(int isclosesite) {
-
-        return null;//ImmutableList.<Site>builder().addAll(siteDao.findByIsclosesite(isclosesite)).build();
+    public ImmutableList<Site> findByUserNotCloseSite(long userId) {
+        return ImmutableList.<Site>builder().addAll(siteMapper.findByUserNotCloseSite(userId)).build();
     }
 
     @Override

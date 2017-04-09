@@ -1,11 +1,13 @@
 package cn.v5cn.v5cms.controller;
 
+import cn.v5cn.v5cms.entity.SystemUser;
 import cn.v5cn.v5cms.service.SiteService;
 import cn.v5cn.v5cms.entity.Site;
 import cn.v5cn.v5cms.util.SystemConstant;
 import cn.v5cn.v5cms.util.SystemUtils;
 import com.google.common.collect.ImmutableList;
 import com.google.common.primitives.Longs;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +31,6 @@ public class IndexController {
 
     @RequestMapping(value = {"/","/index"},method = RequestMethod.GET)
     public String index(HttpSession session){
-
         LOGGER.info("站点信息初始化成功！");
         return "index";
     }

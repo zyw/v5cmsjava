@@ -41,7 +41,7 @@
 <header class="header">
 <a href="index" class="logo">
     <!-- Add the class icon to your logo image or logo icon to add the margining -->
-    ${siteKey.siteName!"没有站点"}
+    ${siteKey.sitename!"没有站点"}
 </a>
 <!-- Header Navbar: style can be found in header.less -->
 <nav class="navbar navbar-static-top" role="navigation">
@@ -58,7 +58,7 @@
 <li style="line-height: 50px;">
     <select class="form-control" id="site-manager">
         <#list sitesKey as site>
-            <option value="${site.siteId}" <#if siteKey == site>selected</#if>>${site.siteName}</option>
+            <option value="${site.siteid}" <#if siteKey == site>selected</#if>>${site.sitename}</option>
         </#list>
     </select>
 </li>
