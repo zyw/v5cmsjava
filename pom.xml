@@ -17,6 +17,7 @@
         <module>v5cms-entity</module>
         <module>v5cms-dao</module>
         <module>v5cms-service</module>
+        <module>v5cms-frontend</module>
     </modules>
 
     <properties>

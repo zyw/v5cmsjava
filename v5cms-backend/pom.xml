@@ -160,8 +160,8 @@
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
         </dependency>
-
         <!--./Shiro-->
+
         <dependency>
             <groupId>net.coobird</groupId>
             <artifactId>thumbnailator</artifactId>
@@ -173,7 +173,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>v5cms</finalName>
+        <finalName>v5cms-backend</finalName>
         <!-- 配置资源目录 -->
         <resources>
             <resource>
