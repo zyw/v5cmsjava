@@ -1,0 +1,524 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="zyw (generated)" id="1491746853219-1">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="adv" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createTable tableName="adv">
+            <column autoIncrement="true" name="advId" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="advName" remarks="广告名称" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="advType" remarks="广告类型1:图片，2：Flash，3：文字，4：代码" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="advPosId" remarks="广告版位ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="advCode" remarks="广告代码" type="VARCHAR(3000)"/>
+            <column name="advStartTime" remarks="广告开始时间" type="date"/>
+            <column name="advEndTime" remarks="广告结束时间" type="date"/>
+            <column name="createDate" remarks="创建时间" type="datetime(6)"/>
+            <column name="advTypeInfo" remarks="广告类型信息JSON字符串" type="VARCHAR(3000)"/>
+            <column defaultValueNumeric="0" name="startUsing" remarks="广告状态1：启用，0：关闭" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-2">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="advpos" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createTable tableName="advpos">
+            <column autoIncrement="true" name="advPosId" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="advPosName" remarks="版位名称" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="advPosState" remarks="状态0:关闭，1:启用" type="INT"/>
+            <column name="advPosDes" remarks="描述" type="VARCHAR(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-3">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="banner" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createTable tableName="banner">
+            <column autoIncrement="true" name="bannerId" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="bannerName" remarks="banner名称" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bannerPic" remarks="banner图片" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bannerLink" remarks="banner跳转链接" type="VARCHAR(200)"/>
+            <column defaultValueNumeric="0" name="isstart" remarks="是否启用，1：启用，0：不启用" type="INT"/>
+            <column name="bannerds" remarks="banner显示顺序" type="INT"/>
+            <column name="bcontent" remarks="设置banner上显示的文本" type="TEXT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-4">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="cols" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createTable tableName="cols">
+            <column autoIncrement="true" name="colsId" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="columnName" remarks="栏目名称" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="colTypeId" remarks="栏目类型" type="BIGINT"/>
+            <column name="sortNum" remarks="栏目显示顺序" type="INT"/>
+            <column name="columndisplay" remarks="是否显示" type="INT"/>
+            <column name="openWay" remarks="连接打开方式" type="VARCHAR(20)"/>
+            <column name="columnOutside" remarks="外链地址" type="VARCHAR(1000)"/>
+            <column name="columnpic" remarks="栏目图片" type="VARCHAR(200)"/>
+            <column name="parentId" remarks="父栏目ID" type="INT"/>
+            <column name="parentIds" remarks="treetable排序使用" type="VARCHAR(200)"/>
+            <column name="siteId" remarks="栏目所属站点" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-5">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="coltype" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createTable tableName="coltype">
+            <column autoIncrement="true" name="colTypeId" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="colTypeName" remarks="类型名称" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="coltpl" remarks="栏目模板名称" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contenttpl" remarks="内容模板名称" type="VARCHAR(200)"/>
+            <column defaultValueNumeric="0" name="colsort" remarks="栏目排序" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="hasContent" remarks="是否有内容页" type="INT"/>
+            <column name="isDisabled" remarks="是否可用" type="INT"/>
+            <column name="siteId" remarks="栏目类型所属站点" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-6">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="comments" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createTable tableName="comments">
+            <column autoIncrement="true" name="commentsId" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="contentId" remarks="评语所属内容ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="commentAuthor" remarks="评论者姓名" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" remarks="评论者的Email地址" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="commentContent" remarks="评语内容" type="LONGTEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reply" remarks="评论回复" type="LONGTEXT"/>
+            <column name="siteURL" remarks="评论者的站点URL" type="VARCHAR(500)"/>
+            <column name="commentIP" remarks="评语者的IP地址" type="VARCHAR(200)"/>
+            <column name="commentDate" remarks="评语时间" type="datetime(6)"/>
+            <column defaultValueNumeric="0" name="recommend" remarks="是否推荐" type="INT"/>
+            <column defaultValueNumeric="0" name="commentApproved" remarks="评语是否批准 0:待审批，1:通过审批，2:垃圾评语" type="INT"/>
+            <column defaultValueNumeric="0" name="commentParent" remarks="父评语ID" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-7">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="content" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createTable tableName="content">
+            <column autoIncrement="true" name="contentId" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="columnId" remarks="所属栏目ID" type="BIGINT"/>
+            <column name="cname" remarks="内容标题" type="VARCHAR(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cbody" remarks="发布的内容" type="TEXT"/>
+            <column name="lastdt" remarks="最后更新的时间" type="datetime(6)"/>
+            <column name="stick" remarks="是否置顶，1：置顶，0：反之" type="INT"/>
+            <column name="stickNum" remarks="置顶序号，只有是置顶状态，才起作用" type="INT"/>
+            <column name="cpics" remarks="与文章关联的图片" type="VARCHAR(2000)"/>
+            <column name="cattas" remarks="文章中使用的附件，多个使用丢号分割" type="VARCHAR(1000)"/>
+            <column name="dispic" remarks="展示图" type="VARCHAR(200)"/>
+            <column name="writerId" remarks="作者ID" type="BIGINT"/>
+            <column name="author" type="VARCHAR(255)"/>
+            <column name="contentDes" type="VARCHAR(255)"/>
+            <column name="contentKey" type="VARCHAR(255)"/>
+            <column name="outside" type="INT"/>
+            <column name="outsideURL" type="VARCHAR(255)"/>
+            <column name="publishDT" type="VARCHAR(255)"/>
+            <column name="siteId" type="BIGINT"/>
+            <column name="source" type="VARCHAR(255)"/>
+            <column name="sourceURL" type="VARCHAR(255)"/>
+            <column name="state" remarks="内容状态，2：发布，1：待审核，0：草稿" type="INT"/>
+            <column defaultValueNumeric="0" name="allowComment" remarks="是否允许评论，1：运行 0：禁止" type="INT"/>
+            <column name="titleBold" type="INT"/>
+            <column name="titleColor" type="VARCHAR(255)"/>
+            <column name="titleItalic" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-8">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="content_label" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createTable tableName="content_label">
+            <column autoIncrement="true" name="content_labelId" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="contentId" type="INT"/>
+            <column name="labelId" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-9">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="label" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createTable tableName="label">
+            <column autoIncrement="true" name="labelId" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="labelName" remarks="标签名称" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="alias" remarks="标签别名" type="VARCHAR(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-10">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="leave_word" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createTable tableName="leave_word">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="lwtId" remarks="留言类型ID" type="BIGINT"/>
+            <column name="title" remarks="留言标题" type="VARCHAR(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="content" remarks="留言内容" type="LONGTEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reply" remarks="回复内容" type="LONGTEXT"/>
+            <column name="author" remarks="留言作者" type="VARCHAR(100)"/>
+            <column name="email" remarks="邮箱" type="VARCHAR(200)"/>
+            <column name="phone" remarks="电话" type="VARCHAR(20)"/>
+            <column name="qq" remarks="QQ" type="VARCHAR(50)"/>
+            <column defaultValueNumeric="0" name="recommend" remarks="是否推荐，1：推荐，0：不推荐" type="INT"/>
+            <column defaultValueNumeric="0" name="approved" remarks="留言是否批准 0:待审批，1:通过审批，2:垃圾评语" type="INT"/>
+            <column name="lwtime" remarks="留言时间" type="datetime(6)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-11">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="leave_word_type" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createTable tableName="leave_word_type">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" remarks="留言类型名称" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sortNum" remarks="留言类型顺序" type="INT"/>
+            <column name="lwdes" remarks="留言类型描述" type="VARCHAR(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-12">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="link" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createTable tableName="link">
+            <column autoIncrement="true" name="linkId" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="linkName" remarks="连接名称" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="link" remarks="连接" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="linkPic" remarks="连接图片" type="VARCHAR(200)"/>
+            <column name="openType" remarks="打开方式" type="VARCHAR(50)"/>
+            <column name="isstart" remarks="是否启用。1：启用，2：不启用" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-13">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="site" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createTable tableName="site">
+            <column autoIncrement="true" name="siteId" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="siteName" remarks="网站标题" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="domain" remarks="网站域名，必须唯一" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="protocol" remarks="访问协议，http://或者https://" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="siteDeputyTitle" remarks="网站副标题" type="VARCHAR(200)"/>
+            <column name="siteKey" remarks="网站关键字" type="VARCHAR(500)"/>
+            <column name="siteDescribed" remarks="网站描述" type="VARCHAR(1000)"/>
+            <column name="createDate" remarks="创建时间" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="siteicp" remarks="网站备案号" type="VARCHAR(100)"/>
+            <column name="siteStatisticCode" remarks="统计代码" type="VARCHAR(3000)"/>
+            <column name="siteFooterInfo" remarks="网站底部信息" type="VARCHAR(3000)"/>
+            <column defaultValueNumeric="1" name="isclosesite" remarks="网站是否关闭 1 开启   0 关闭" type="INT"/>
+            <column defaultValue="default" name="themeName" remarks="使用的网站主题名称" type="VARCHAR(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-14">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="system_res" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createTable tableName="system_res">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="pid" type="BIGINT"/>
+            <column name="name" type="VARCHAR(111)"/>
+            <column name="permission" type="VARCHAR(100)"/>
+            <column name="url" type="VARCHAR(255)"/>
+            <column defaultValueNumeric="1" name="sortNum" type="INT"/>
+            <column name="icon" type="VARCHAR(100)"/>
+            <column name="pids" remarks="TreeTable排序" type="VARCHAR(100)"/>
+            <column defaultValueNumeric="2" name="type" remarks="1 菜单 2 按钮" type="INT"/>
+            <column defaultValueNumeric="1" name="available" remarks="1 可用 0 不可用" type="INT"/>
+            <column name="des" type="VARCHAR(255)"/>
+            <column name="isParent" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="createAt" remarks="创建时间" type="datetime(6)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-15">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="system_role" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createTable tableName="system_role">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(55)"/>
+            <column defaultValueNumeric="1" name="sortNum" type="INT"/>
+            <column defaultValueNumeric="0" name="pid" type="BIGINT"/>
+            <column name="des" type="VARCHAR(55)"/>
+            <column defaultValueNumeric="1" name="available" remarks="1 可用 0 不可用" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="createAt" remarks="创建时间" type="datetime(6)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-16">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="system_role_res" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createTable tableName="system_role_res">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="res_id" type="BIGINT"/>
+            <column name="role_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-17">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="system_user" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createTable tableName="system_user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="loginname" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="salt" type="VARCHAR(100)"/>
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="sex" remarks="1:男，0:女" type="INT"/>
+            <column name="mobilephone" remarks="移动电话" type="VARCHAR(11)"/>
+            <column defaultValueNumeric="0" name="loginCount" remarks="登录次数" type="INT"/>
+            <column name="lastLoginTime" remarks="最后登录时间" type="datetime(6)"/>
+            <column name="originalPic" remarks="头像" type="VARCHAR(200)"/>
+            <column defaultValueNumeric="1" name="available" remarks="#1 不在线 2.封号状态" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="createAt" remarks="创建时间" type="datetime(6)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-18">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="system_user_role" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createTable tableName="system_user_role">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BIGINT"/>
+            <column name="role_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-19">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="user_site_role" schemaName="public"/>
+            </not>
+        </preConditions>
+        <createTable tableName="user_site_role">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BIGINT"/>
+            <column name="site_id" type="BIGINT"/>
+            <column name="role_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-20">
+        <createIndex indexName="FK_38p04ou19ne63k5bm55k0bl55" tableName="adv">
+            <column name="advPosId"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-21">
+        <createIndex indexName="FK_3e6kv5mrpkii2uruvqi7ex66f" tableName="leave_word">
+            <column name="lwtId"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-22">
+        <createIndex indexName="FK_SYSTEM_ROLE_RES_RES_ID" tableName="system_role_res">
+            <column name="res_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-23">
+        <createIndex indexName="FK_SYSTEM_ROLE_RES_ROLE_ID" tableName="system_role_res">
+            <column name="role_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-24">
+        <createIndex indexName="FK_SYSTME_USER_ROLE_ROLE_ID" tableName="system_user_role">
+            <column name="role_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-25">
+        <createIndex indexName="FK_SYSTME_USER_ROLE_USER_ID" tableName="system_user_role">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-26">
+        <createIndex indexName="FK_k1h1131b4uj8qpsivxll3m2vo" tableName="content">
+            <column name="columnId"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-27">
+        <createIndex indexName="FK_k4569jw8smav0a9o9ewriq0pt" tableName="cols">
+            <column name="colTypeId"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-28">
+        <createIndex indexName="FK_r5l8mupp8i3dkqye48l6ydwvy" tableName="comments">
+            <column name="contentId"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-29">
+        <createIndex indexName="FK_user_site_rol_ROLE_ID" tableName="user_site_role">
+            <column name="role_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-30">
+        <createIndex indexName="FK_user_site_role_SITE_ID" tableName="user_site_role">
+            <column name="site_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-31">
+        <createIndex indexName="FK_user_site_role_USER_ID" tableName="user_site_role">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-32">
+        <addForeignKeyConstraint baseColumnNames="lwtId" baseTableName="leave_word" constraintName="FK_3e6kv5mrpkii2uruvqi7ex66f" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="leave_word_type"/>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-33">
+        <addForeignKeyConstraint baseColumnNames="res_id" baseTableName="system_role_res" constraintName="FK_SYSTEM_ROLE_RES_RES_ID" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="system_res"/>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-34">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="system_role_res" constraintName="FK_SYSTEM_ROLE_RES_ROLE_ID" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="system_role"/>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-35">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="system_user_role" constraintName="FK_SYSTME_USER_ROLE_ROLE_ID" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="system_role"/>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-36">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="system_user_role" constraintName="FK_SYSTME_USER_ROLE_USER_ID" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="system_user"/>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-37">
+        <addForeignKeyConstraint baseColumnNames="contentId" baseTableName="comments" constraintName="FK_r5l8mupp8i3dkqye48l6ydwvy" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="contentId" referencedTableName="content"/>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-38">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="user_site_role" constraintName="FK_user_site_rol_ROLE_ID" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="system_role"/>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-39">
+        <addForeignKeyConstraint baseColumnNames="site_id" baseTableName="user_site_role" constraintName="FK_user_site_role_SITE_ID" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="siteId" referencedTableName="site"/>
+    </changeSet>
+    <changeSet author="zyw (generated)" id="1491746853219-40">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_site_role" constraintName="FK_user_site_role_USER_ID" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="system_user"/>
+    </changeSet>
+</databaseChangeLog>

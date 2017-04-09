@@ -98,6 +98,13 @@
         <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
 
+    <!-- 添加Liquibase数据迁移工具 -->
+    <bean class="liquibase.integration.spring.SpringLiquibase">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="changeLog" value="classpath:migrates/master.xml"/>
+        <property name="contexts" value="dev"/>
+    </bean>
+
     <bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
         <property name="config">
             <bean class="com.google.code.kaptcha.util.Config">
