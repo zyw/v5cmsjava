@@ -45,8 +45,8 @@ public class SystemRes {
     /**
      * 创建时间
      */
-    @Column(name = "createAt")
-    private Date createat;
+    @Column(name = "create_time")
+    private Date createTime;
 
     /**
      * @return id
@@ -231,18 +231,18 @@ public class SystemRes {
     /**
      * 获取创建时间
      *
-     * @return createAt - 创建时间
+     * @return create_time - 创建时间
      */
-    public Date getCreateat() {
-        return createat;
+    public Date getCreateTime() {
+        return createTime;
     }
 
     /**
      * 设置创建时间
      *
-     * @param createat 创建时间
+     * @param createTime 创建时间
      */
-    public void setCreateat(Date createat) {
-        this.createat = createat;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

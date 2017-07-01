@@ -338,7 +338,7 @@
             <column name="isParent" type="BIT(1)">
                 <constraints nullable="false"/>
             </column>
-            <column defaultValueComputed="CURRENT_TIMESTAMP" name="createAt" remarks="创建时间" type="datetime(6)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP"/>
         </createTable>
     </changeSet>
     <changeSet author="zyw (generated)" id="1491746853219-15">
@@ -356,7 +356,7 @@
             <column defaultValueNumeric="0" name="pid" type="BIGINT"/>
             <column name="des" type="VARCHAR(55)"/>
             <column defaultValueNumeric="1" name="available" remarks="1 可用 0 不可用" type="INT"/>
-            <column defaultValueComputed="CURRENT_TIMESTAMP" name="createAt" remarks="创建时间" type="datetime(6)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP"/>
         </createTable>
     </changeSet>
     <changeSet author="zyw (generated)" id="1491746853219-16">
@@ -402,7 +402,7 @@
             <column name="lastLoginTime" remarks="最后登录时间" type="datetime(6)"/>
             <column name="originalPic" remarks="头像" type="VARCHAR(200)"/>
             <column defaultValueNumeric="1" name="available" remarks="#1 不在线 2.封号状态" type="INT"/>
-            <column defaultValueComputed="CURRENT_TIMESTAMP" name="createAt" remarks="创建时间" type="datetime(6)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP"/>
         </createTable>
     </changeSet>
     <changeSet author="zyw (generated)" id="1491746853219-18">

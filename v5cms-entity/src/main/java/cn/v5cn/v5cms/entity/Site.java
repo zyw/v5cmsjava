@@ -65,7 +65,7 @@ public class Site {
     private String sitefooterinfo;
 
     /**
-     * 网站是否关闭 1关闭    0 开启
+     * 网站是否关闭 1 开启   0 关闭
      */
     private Integer isclosesite;
 
@@ -74,12 +74,6 @@ public class Site {
      */
     @Column(name = "themeName")
     private String themename;
-
-    /**
-     * 角色ID
-     */
-    @Transient
-    private Long roleId;
 
     /**
      * @return siteId
@@ -276,18 +270,18 @@ public class Site {
     }
 
     /**
-     * 获取网站是否关闭 1关闭    0 开启
+     * 获取网站是否关闭 1 开启   0 关闭
      *
-     * @return isclosesite - 网站是否关闭 1关闭    0 开启
+     * @return isclosesite - 网站是否关闭 1 开启   0 关闭
      */
     public Integer getIsclosesite() {
         return isclosesite;
     }
 
     /**
-     * 设置网站是否关闭 1关闭    0 开启
+     * 设置网站是否关闭 1 开启   0 关闭
      *
-     * @param isclosesite 网站是否关闭 1关闭    0 开启
+     * @param isclosesite 网站是否关闭 1 开启   0 关闭
      */
     public void setIsclosesite(Integer isclosesite) {
         this.isclosesite = isclosesite;
@@ -309,33 +303,5 @@ public class Site {
      */
     public void setThemename(String themename) {
         this.themename = themename;
-    }
-
-    public Long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
-
-    @Override
-    public String toString() {
-        return "Site{" +
-                "siteid=" + siteid +
-                ", sitename='" + sitename + '\'' +
-                ", domain='" + domain + '\'' +
-                ", protocol='" + protocol + '\'' +
-                ", sitedeputytitle='" + sitedeputytitle + '\'' +
-                ", sitekey='" + sitekey + '\'' +
-                ", sitedescribed='" + sitedescribed + '\'' +
-                ", createdate='" + createdate + '\'' +
-                ", siteicp='" + siteicp + '\'' +
-                ", sitestatisticcode='" + sitestatisticcode + '\'' +
-                ", sitefooterinfo='" + sitefooterinfo + '\'' +
-                ", isclosesite=" + isclosesite +
-                ", themename='" + themename + '\'' +
-                ", roleId=" + roleId +
-                '}';
     }
 }

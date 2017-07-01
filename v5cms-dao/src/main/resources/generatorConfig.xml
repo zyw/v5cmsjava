@@ -13,16 +13,16 @@
         </plugin>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/v5cms"
+                        connectionURL="jdbc:mysql://localhost:3306/v5cms2"
                         userId="root"
                         password="root">
         </jdbcConnection>
 
-        <javaModelGenerator targetPackage="cn.v5cn.v5cms.entity" targetProject="/Users/zyw/workspace/idea/v5cmsjava/v5cms-entity/src/main/java"/>
+        <javaModelGenerator targetPackage="cn.v5cn.v5cms.entity" targetProject="/Users/zhuyanwei/workspace/v5cmsjava/v5cms-entity/src/main/java"/>
 
-        <sqlMapGenerator targetPackage="cn.v5cn.v5cms.mapper"  targetProject="/Users/zyw/workspace/idea/v5cmsjava/v5cms-dao/src/main/resources"/>
+        <sqlMapGenerator targetPackage="cn.v5cn.v5cms.mapper"  targetProject="/Users/zhuyanwei/workspace/idea/v5cmsjava/v5cms-dao/src/main/resources"/>
 
-        <javaClientGenerator targetPackage="cn.v5cn.v5cms.dao" targetProject="/Users/zyw/workspace/idea/v5cmsjava/v5cms-dao/src/main/java" type="XMLMAPPER" />
+        <javaClientGenerator targetPackage="cn.v5cn.v5cms.dao" targetProject="/Users/zhuyanwei/workspace/idea/v5cmsjava/v5cms-dao/src/main/java" type="XMLMAPPER" />
 
         <table tableName="%" >
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>

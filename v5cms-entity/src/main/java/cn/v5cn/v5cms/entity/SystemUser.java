@@ -48,15 +48,15 @@ public class SystemUser {
     private String originalpic;
 
     /**
-     * #1 不在线 2.封号状态 
+     * #1 不在线 2.封号状态
      */
     private Integer available;
 
     /**
      * 创建时间
      */
-    @Column(name = "createAt")
-    private Date createat;
+    @Column(name = "create_time")
+    private Date createTime;
 
     /**
      * @return id
@@ -233,18 +233,18 @@ public class SystemUser {
     }
 
     /**
-     * 获取#1 不在线 2.封号状态 
+     * 获取#1 不在线 2.封号状态
      *
-     * @return available - #1 不在线 2.封号状态 
+     * @return available - #1 不在线 2.封号状态
      */
     public Integer getAvailable() {
         return available;
     }
 
     /**
-     * 设置#1 不在线 2.封号状态 
+     * 设置#1 不在线 2.封号状态
      *
-     * @param available #1 不在线 2.封号状态 
+     * @param available #1 不在线 2.封号状态
      */
     public void setAvailable(Integer available) {
         this.available = available;
@@ -253,18 +253,18 @@ public class SystemUser {
     /**
      * 获取创建时间
      *
-     * @return createAt - 创建时间
+     * @return create_time - 创建时间
      */
-    public Date getCreateat() {
-        return createat;
+    public Date getCreateTime() {
+        return createTime;
     }
 
     /**
      * 设置创建时间
      *
-     * @param createat 创建时间
+     * @param createTime 创建时间
      */
-    public void setCreateat(Date createat) {
-        this.createat = createat;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

@@ -209,7 +209,7 @@
             </activation>
             <properties>
                 <pom.jdbc.driverClassName>com.mysql.jdbc.Driver</pom.jdbc.driverClassName>
-                <pom.jdbc.url>jdbc:mysql://127.0.0.1:3306/v5cms?useUnicode=true&amp;characterEncoding=utf8</pom.jdbc.url>
+                <pom.jdbc.url>jdbc:mysql://127.0.0.1:3306/v5cms2?useUnicode=true&amp;characterEncoding=utf8</pom.jdbc.url>
                 <pom.jdbc.username>root</pom.jdbc.username>
                 <pom.jdbc.password>root</pom.jdbc.password>
             </properties>
