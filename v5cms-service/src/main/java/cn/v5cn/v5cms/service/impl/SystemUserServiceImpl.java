@@ -1,13 +1,19 @@
 package cn.v5cn.v5cms.service.impl;
 
 import cn.v5cn.v5cms.dao.SystemUserMapper;
+import cn.v5cn.v5cms.entity.SystemRes;
+import cn.v5cn.v5cms.entity.SystemRole;
+import cn.v5cn.v5cms.service.SystemResService;
+import cn.v5cn.v5cms.service.SystemRoleService;
 import cn.v5cn.v5cms.service.SystemUserService;
 import cn.v5cn.v5cms.entity.SystemUser;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by ZXF-PC1 on 2015/6/18.
@@ -17,6 +23,11 @@ public class SystemUserServiceImpl implements SystemUserService {
 
     @Autowired
     private SystemUserMapper systemUserMapper;
+
+    @Autowired
+    private SystemRoleService systemRoleService;
+    @Autowired
+    private SystemResService systemResService;
 
     @Override
     public SystemUser findByLoginName(String loginName) {
@@ -68,5 +79,24 @@ public class SystemUserServiceImpl implements SystemUserService {
             systemUsers.add(systemUser);
         }
 //        systemUserDao.delete(systemUsers);
+    }
+
+    @Override
+    public Set<String> findRoles(String userName) {
+        Set<String> result = Sets.newHashSet();
+        List<SystemRole> roles = systemRoleService.findRolesByUserName(userName);
+        roles.stream().forEach(role -> result.add(role.getName()));
+        return result;
+    }
+
+    @Override
+    public Set<String> findPermissions(String userName) {
+        Set<String> result = Sets.newHashSet();
+
+        List<SystemRes> permissions = systemResService.findPermissionsByUserName(userName);
+
+        permissions.stream().forEach(res -> result.add(res.getPermission()));
+
+        return result;
     }
 }

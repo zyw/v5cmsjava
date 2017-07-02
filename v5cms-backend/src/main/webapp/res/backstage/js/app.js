@@ -1194,21 +1194,22 @@
         },
 
         tooltip:function(options,callback){
-            options = _contentHeader(options);
+            //options = _contentHeader(options);
             var settings = $.extend({
                 content:"",
                 timeout:1200
             },options);
 
-            var d = dialog(settings).show();
+            /*var d = dialog(settings).show();
             setTimeout(function(){
                 d.close().remove();
                 callback();
-            },settings.timeout)
+            },settings.timeout)*/
+            layer.msg(settings.content, {icon: 2});
         },
 
         confirm:function(options){
-            options = _contentHeader(options);
+            //options = _contentHeader(options);
             var settings = $.extend({
                 title: '温馨提示',
                 content: '',
@@ -1217,7 +1218,16 @@
                 cancelValue: '取消',
                 cancel: function () {}
             },options);
-            dialog(settings).showModal();
+            //dialog(settings).showModal();
+            layer.confirm(
+                settings.content,
+                {
+                    icon:3,
+                    btn: [settings.okValue,settings.cancelValue],
+                    title:settings.title
+                },
+                settings.ok,
+                settings.cancel);
         },
         initFancybox: function () {
             jQuery(".fancybox-button").fancybox({

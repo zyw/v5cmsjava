@@ -21,7 +21,7 @@ public class SystemResServiceImpl implements SystemResService {
 
     @Override
     public List<SystemRes> findOrderByPidsAndId() {
-        return null;//systemResDao.findOrderByPidsAndId();
+        return systemResMapper.findOrderByPidsAndId();
     }
 
     @Override //ZTreeNode
@@ -42,5 +42,10 @@ public class SystemResServiceImpl implements SystemResService {
         }
         return treeNodes;*/
         return null;
+    }
+
+    @Override
+    public List<SystemRes> findPermissionsByUserName(String userName) {
+        return systemResMapper.findPermissionsByUserName(userName);
     }
 }

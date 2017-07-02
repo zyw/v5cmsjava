@@ -55,11 +55,17 @@
                         <#list reses as res>
                             <tr data-tt-id="${res.id }" <#if res.pid != 0>data-tt-parent-id="${res.pid }"</#if>>
                             <td>${res.name!""}</td>
-                            <td>${res.type!0}</td>
+                            <td>
+                                <#if res.type == 1>
+                                    <span class="badge bg-purple">菜单</span>
+                                <#else>
+                                    <span class="badge bg-aqua">按钮</span>
+                                </#if>
+                            </td>
                             <td>${res.url!""}</td>
                             <td>${res.permission!""}</td>
                             <td>
-                                <#if res.available == 1>
+                                <#if res.status == 1>
                                     <span class="badge bg-green">可用</span>
                                 <#else>
                                     <span class="badge bg-red">不可用</span>
@@ -110,6 +116,7 @@
                     url:url,
                     data:{columnId:resid},
                     success:function(data){
+                        layer.closeAll('dialog');
                         if(data.status == "1"){
                             $.v5cms.tooltip({icon:"succeed","content":data.message},function(){
                                 location.reload();
@@ -119,6 +126,7 @@
                         }
                     },
                     error:function(XMLHttpRequest, textStatus, errorThrown){
+                        layer.closeAll('dialog');
                         $.v5cms.tooltip({icon:"error","content":"删除资源信息出错，"+textStatus+"，"+errorThrown});
                     }
                 });

@@ -11,6 +11,12 @@
     <result column="pid" jdbcType="BIGINT" property="pid" />
     <result column="des" jdbcType="VARCHAR" property="des" />
     <result column="available" jdbcType="INTEGER" property="available" />
-    <result column="createAt" jdbcType="TIMESTAMP" property="createat" />
+    <result column="createAt" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
+
+  <select id="findRolesByUserName" resultMap="BaseResultMap" parameterType="string">
+    select sr.* from `system_user` su inner join
+    `system_user_role` sur on sur.`user_id` = su.id inner join system_role sr on sr.id=sur.`role_id` where su.`loginname`=#{userName}
+  </select>
+
 </mapper>

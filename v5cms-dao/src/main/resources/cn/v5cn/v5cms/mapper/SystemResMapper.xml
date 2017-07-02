@@ -14,9 +14,18 @@
     <result column="icon" jdbcType="VARCHAR" property="icon" />
     <result column="pids" jdbcType="VARCHAR" property="pids" />
     <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="available" jdbcType="INTEGER" property="available" />
+    <result column="available" jdbcType="INTEGER" property="status" />
     <result column="des" jdbcType="VARCHAR" property="des" />
     <result column="isParent" jdbcType="BIT" property="isparent" />
-    <result column="createAt" jdbcType="TIMESTAMP" property="createat" />
+    <result column="createAt" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
+  <select id="findPermissionsByUserName" resultMap="BaseResultMap" parameterType="string">
+    select sres.* from `system_user` su inner join `system_user_role` sur on sur.`user_id` = su.id
+    inner join system_role sr on sr.id=sur.`role_id` inner join system_role_res srr on srr.`role_id`=sr.id
+    inner join system_res sres on sres.id=srr.`res_id` where su.`loginname`=#{userName}
+  </select>
+
+  <select id="findOrderByPidsAndId" resultMap="BaseResultMap">
+    select * from system_res sr where 1=1 order by CONCAT(sr.pids,sr.id)
+  </select>
 </mapper>

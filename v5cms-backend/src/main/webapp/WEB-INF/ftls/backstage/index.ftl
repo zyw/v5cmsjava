@@ -60,6 +60,7 @@
                     </div>
                 </div>
                 <!-- ./col -->
+                <@shiro.hasPermission name="system:*">
                 <div class="col-lg-3 col-xs-6">
                     <!-- small box -->
                     <div class="small-box bg-yellow">
@@ -80,6 +81,7 @@
                         </a>
                     </div>
                 </div>
+                </@shiro.hasPermission>
                 <!-- ./col -->
                 <div class="col-lg-3 col-xs-6">
                     <!-- small box -->

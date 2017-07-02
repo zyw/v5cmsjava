@@ -35,7 +35,7 @@ public class SystemRes {
     /**
      * 1 可用 0 不可用
      */
-    private Integer available;
+    private Integer status;
 
     private String des;
 
@@ -185,19 +185,19 @@ public class SystemRes {
     /**
      * 获取1 可用 0 不可用
      *
-     * @return available - 1 可用 0 不可用
+     * @return status - 1 可用 0 不可用
      */
-    public Integer getAvailable() {
-        return available;
+    public Integer getStatus() {
+        return status;
     }
 
     /**
      * 设置1 可用 0 不可用
      *
-     * @param available 1 可用 0 不可用
+     * @param status 1 可用 0 不可用
      */
-    public void setAvailable(Integer available) {
-        this.available = available;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     /**

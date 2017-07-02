@@ -7,6 +7,8 @@
                    http://www.liquibase.org/xml/ns/dbchangelog
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
-    <include file="init/db.changelog.xml" relativeToChangelogFile="true"/>
-    <include file="update/update.system_res.available.column.xml" relativeToChangelogFile="true"/>
+    <changeSet id="1491746853219-41" author="zyw">
+        <renameColumn columnDataType="INT" tableName="system_res" oldColumnName="available" newColumnName="status"
+                      remarks="1 可用 0 不可用"/>
+    </changeSet>
 </databaseChangeLog>

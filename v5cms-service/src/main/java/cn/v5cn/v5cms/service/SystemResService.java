@@ -10,4 +10,7 @@ import java.util.List;
 public interface SystemResService {
     List<SystemRes> findOrderByPidsAndId();
     List<Object> buildTreeNode(Long parentId);
+
+    //MyBatis
+    List<SystemRes> findPermissionsByUserName(String userName);
 }

@@ -6,6 +6,7 @@ import cn.v5cn.v5cms.util.SystemConstant;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -23,8 +24,14 @@ public class V5CMSRealm extends AuthorizingRealm {
      * 设置权限
      * */
     @Override
-    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        return null;
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) {
+        String userName = (String) principal.getPrimaryPrincipal();
+        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+
+        //设置角色和权限
+        authorizationInfo.setRoles(systemUserService.findRoles(userName));
+        authorizationInfo.setStringPermissions(systemUserService.findPermissions(userName));
+        return authorizationInfo;
     }
 
     /**

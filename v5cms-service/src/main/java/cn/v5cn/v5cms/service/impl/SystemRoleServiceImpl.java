@@ -59,4 +59,9 @@ public class SystemRoleServiceImpl implements SystemRoleService {
         role = null;//systemRoleDao.save(role);
         return role.getId();
     }
+
+    @Override
+    public List<SystemRole> findRolesByUserName(String userName) {
+        return systemRoleMapper.findRolesByUserName(userName);
+    }
 }
