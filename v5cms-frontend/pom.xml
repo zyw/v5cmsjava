@@ -99,5 +99,39 @@
     </dependencies>
     <build>
         <finalName>v5cms-frontend</finalName>
+        <!-- 配置资源目录 -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat6-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <pom.jdbc.driverClassName>com.mysql.jdbc.Driver</pom.jdbc.driverClassName>
+                <pom.jdbc.url>jdbc:mysql://127.0.0.1:3306/v5cms?useUnicode=true&amp;characterEncoding=utf8</pom.jdbc.url>
+                <pom.jdbc.username>root</pom.jdbc.username>
+                <pom.jdbc.password>root</pom.jdbc.password>
+            </properties>
+        </profile>
+    </profiles>
 </project>

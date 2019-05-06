@@ -8,7 +8,7 @@ v5cms项目是使用java开发的多站点CMS系统，该系统使用MySQL数据
 - Shiro
 - FreeMarker
 
-**全端技术：**
+**前端技术：**
 - Bootstarp
 - ace
 - ueditor
